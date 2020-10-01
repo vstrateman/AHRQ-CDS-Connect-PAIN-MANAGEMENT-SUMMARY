@@ -9,7 +9,7 @@ export default class ExclusionBanner extends Component {
     };
   }
 
-  handleClose = () => {
+  handleClose = function() {
     this.setState({ displayed: false });
   }
 

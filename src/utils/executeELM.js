@@ -13,6 +13,7 @@ import r4OMTKDataELM from '../cql/r4/OMTKData.json';
 import r4OMTKLogicELM from '../cql/r4/OMTKLogic.json';
 import valueSetDB from '../cql/valueset-db.json';
 import medicationReferenceSolver from "./medicationReferenceSolver";
+var Promise = require('es6-promise').Promise;
 
 function executeELM(collector) {
   let client, release, library;

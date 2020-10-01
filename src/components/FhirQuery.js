@@ -9,7 +9,7 @@ export default class FhirQuery extends Component {
     };
   }
 
-  toggleShowHide = (event) => {
+  toggleShowHide = function(event) {
     event.preventDefault();
     this.setState({ displayed: !this.state.displayed });
   }

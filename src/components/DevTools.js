@@ -14,22 +14,22 @@ export default class DevTools extends Component {
     };
   }
 
-  toggleDevTools = (event) => {
+  toggleDevTools = function(event) {
     event.preventDefault();
     this.setState({ displayDevTools: !this.state.displayDevTools });
   }
 
-  toggleFhirQueries = (event) => {
+  toggleFhirQueries = function(event) {
     event.preventDefault();
     this.setState({ displayFhirQueries: !this.state.displayFhirQueries });
   }
 
-  toggleCQLResults = (event) => {
+  toggleCQLResults = function(event) {
     event.preventDefault();
     this.setState({ displayCQLResults: !this.state.displayCQLResults });
   }
 
-  toggleQRObsResults = (event) => {
+  toggleQRObsResults = function(event) {
       event.preventDefault();
       this.setState({ displayQRObsResults: !this.state.displayQRObsResults });
   }
@@ -44,7 +44,9 @@ export default class DevTools extends Component {
   }
 
   renderErrors() {
-    const errResponses = this.props.collector.filter(i => i.error);
+    const errResponses = this.props.collector.filter(function (i) {
+        return i.error;
+      });
 
     if (errResponses.length) {
       return (
@@ -60,7 +62,7 @@ export default class DevTools extends Component {
             </thead>
 
             <tbody>
-              {errResponses.map((er, i) => this.errorMessage(er, i))}
+              {errResponses.map(function(er, i) { return this.errorMessage(er, i)})}
             </tbody>
           </table>
         </div>
@@ -75,12 +77,12 @@ export default class DevTools extends Component {
       <div className="fhir-queries">
         <h4>FHIR Queries <button onClick={this.toggleFhirQueries}>[show/hide]</button></h4>
         <div style={{ display: this.state.displayFhirQueries ? 'block' : 'none' }}>
-          {this.props.collector.map((item, i) => {
-            const url = i === 0 ? item.url : item.url.slice(item.url.lastIndexOf('/') + 1);
-            return (
-              <FhirQuery key={i} url={url} data={item.data} />
-            );
-          })}
+          {this.props.collector.map(function (item, i) {
+              const url = i === 0 ? item.url : item.url.slice(item.url.lastIndexOf('/') + 1);
+              return (
+                <FhirQuery key={i} url={url} data={item.data} />
+              );
+            })}
         </div>
       </div>
     );
@@ -132,7 +134,7 @@ export default class DevTools extends Component {
 }
 
 DevTools.propTypes = {
-  collector: PropTypes.array.isRequired,
-  result: PropTypes.object.isRequired,
+  collector: PropTypes.array,
+  result: PropTypes.object,
   qrCollector: PropTypes.array
 };
