@@ -104,6 +104,9 @@ function doSearch(client, release, type, collector) {
   if(type === 'MedicationRequest'){
     uri = `${type}?_include=MedicationRequest:medication`;
   }
+  if(type === 'MedicationStatement'){
+    uri = `${type}?_include=MedicationStatement:medication`;
+  }
   return new Promise((resolve) => {
     const results = client.patient.request(uri, {
       pageLimit: 0, // unlimited pages
@@ -127,11 +130,13 @@ function processPage(uri, collector, resources) {
     if (bundle && bundle.link && bundle.link.some(l => l.relation === 'self' && l.url != null)) {
       url = bundle.link.find(l => l.relation === 'self').url;
     }
-    if(uri.startsWith('MedicationRequest')){
+    if(uri.startsWith('MedicationRequest') ||
+        uri.startsWith('MedicationStatement')){
       bundle.entry.forEach((medReqEntry) =>{
-        if(medReqEntry.resource.resourceType === 'MedicationRequest'
-            && medReqEntry.resource.medicationReference !== null
-            && medReqEntry.resource.medicationReference !== undefined){
+        if(((medReqEntry.resource.resourceType === 'MedicationRequest')
+            || (medReqEntry.resource.resourceType === 'MedicationStatement'))
+            && (medReqEntry.resource.medicationReference !== null)
+            && (medReqEntry.resource.medicationReference !== undefined)){
           let reference = medReqEntry.resource.medicationReference.reference;
           let referenceFound = false;
           for(let medRefEntry of bundle.entry){
@@ -143,9 +148,9 @@ function processPage(uri, collector, resources) {
           }
           if(!referenceFound) {
             medicationReferenceSolver(medReqEntry.resource.medicationReference.reference)
-                .then((response)=>{
-                  console.log(response);
-                  medReqEntry.resource.medicationCodeableConcept = response;
+                .then((code)=>{
+                  medReqEntry.resource.medicationReference = null;
+                  return medReqEntry.resource.medicationCodeableConcept = code[0];
                 });
           }
         }
