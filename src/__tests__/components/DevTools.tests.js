@@ -6,6 +6,6 @@ const component = shallowRender(DevTools, {
   result: {}
 });
 
-it('renders without crashing', () => {
-  expect(component).toExist();
-});
+it('renders without crashing', function () {
+    expect(component).toExist();
+  });

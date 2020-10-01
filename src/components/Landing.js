@@ -13,6 +13,9 @@ import Summary from './Summary';
 import Spinner from '../elements/Spinner';
 import executeExternalCDSCall from "../utils/executeExternalCDSHooksCall";
 import executeInternalCDSCall from "../utils/executeInternalCDSHooksCall";
+import '../helpers/polyfill';
+require('es6-promise').polyfill();
+require('fetch-everywhere');
 
 let uuid = 0;
 
@@ -135,10 +138,15 @@ export default class Landing extends Component {
             method: 'POST'
         };
 
-        fetch(`${endpoint}`, requestOptions)
-            .catch(err => {
-                console.log(err)
-            });
+        if(endpoint) {
+            console.log('endpoint:', endpoint);
+
+            fetch(endpoint, requestOptions)
+                .catch(err => {
+                    console.log(err)
+                });
+        }
+
     }
 
     processSummary(summary) {

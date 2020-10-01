@@ -10,7 +10,7 @@ export default class InclusionBanner extends Component {
     };
   }
 
-  handleClose = () => {
+  handleClose = function() {
     this.setState({ displayed: false });
   }
 
