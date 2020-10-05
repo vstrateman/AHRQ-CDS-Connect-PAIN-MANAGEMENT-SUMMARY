@@ -312,7 +312,7 @@ export default class Summary extends Component {
         let icon = '';
         let title = '';
         if (section === 'CDSHooksAssessment') {
-            title = `Recommendations`;
+            title = 'Recommendations';
         } else if (section === 'PertinentMedicalHistory') {
             icon = <MedicalHistoryIcon width="30" height="40" />;
             title = 'Pertinent Medical History (' + numMedicalHistoryEntries + ')';
