@@ -1,7 +1,7 @@
 import FHIR from 'fhirclient';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import tocbot from 'tocbot';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import executeElm from '../utils/executeELM';
 import sumit from '../helpers/sumit';
@@ -39,39 +39,39 @@ export default class Landing extends Component {
 
     componentDidMount() {
         executeElm(this.state.collector).then((result) => {
-            this.setState({loading: false});
-            const {sectionFlags, flaggedCount} = this.processSummary(result.Summary);
-            this.setState({result, sectionFlags, flaggedCount});
+            this.setState({ loading: false });
+            const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
+            this.setState({ result, sectionFlags, flaggedCount });
             return this.state.collector;
         })
-        .then((collector)=>{
-            if (process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'external') {
-                executeExternalCDSCall(collector)
-                    .then((cdsResult) => {
-                        this.setState({cdsCollector: cdsResult});
-                        return cdsResult;
-                    });
-            } else if(process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'internal'){
-                executeInternalCDSCall(10, this.state.cdsCollector)
-                    .then((cdsResult) => {
-                        this.setState({cdsCollector: cdsResult});
-                        return cdsResult;
-                    });
-            }
-        })
-            .then(()=>{
+            .then(function (collector) {
+                if (process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'external') {
+                    executeExternalCDSCall(collector)
+                        .then(function (cdsResult) {
+                            this.setState({ cdsCollector: cdsResult });
+                            return cdsResult;
+                        });
+                } else if (process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'internal') {
+                    executeInternalCDSCall(10, this.state.cdsCollector)
+                        .then(function (cdsResult) {
+                            this.setState({ cdsCollector: cdsResult });
+                            return cdsResult;
+                        });
+                }
+            })
+            .then(function () {
                 FHIR.oauth2.ready()
-                    .then(client => client.request("Questionnaire/mypain-questionnaire"))
-                    .then((questionnaire)=>{
+                    .then(function (client) { client.request("Questionnaire/mypain-questionnaire") })
+                    .then(function(questionnaire) {
                         console.log(questionnaire);
                         // TODO - loop through questionnaire and put linkIds and question text in map to use in display
                     })
                     .catch(console.error);
             })
-        .catch((err) => {
-            console.error(err);
-            this.setState({loading: false});
-        });
+            .catch(function (err) {
+                console.error(err);
+                this.setState({ loading: false });
+            });
     }
 
     componentDidUpdate() {
@@ -90,7 +90,7 @@ export default class Landing extends Component {
 
         if (this.state.result && this.state.result.Summary.Patient.Name) {
             const patientName = this.state.result.Summary.Patient.Name;
-            document.title = `Pain Management Summary - ${patientName}`;
+            document.title = 'Pain Management Summary - ' + patientName;
         }
     }
 
@@ -108,20 +108,24 @@ export default class Landing extends Component {
             delete cloneSections.Patient;
 
             // Build total number of entries for each subsection of the summary.
-            Object.keys(cloneSections).forEach((sectionKey, i) => {
-                applicationAnalytics.sections.push({section: sectionKey, subSections: []});
-                Object.keys(cloneSections[sectionKey]).forEach(subSectionKey => {
-                    const subSection = cloneSections[sectionKey][subSectionKey];
-                    let count;
-                    if (subSection instanceof Array) count = subSection.length;
-                    else if (subSection instanceof Object) count = 1;
-                    else count = 0;
-                    totalCount += count;
-                    applicationAnalytics.sections[i].subSections.push({
-                        subSection: subSectionKey, numEntries: count
-                    });
+            Object.keys(cloneSections).forEach(function (sectionKey, i) {
+                    applicationAnalytics.sections.push({ section: sectionKey, subSections: [] });
+                    Object.keys(cloneSections[sectionKey]).forEach(function (subSectionKey) {
+                            const subSection = cloneSections[sectionKey][subSectionKey];
+                            let count;
+                            if (subSection instanceof Array)
+                                count = subSection.length;
+                            else if (subSection instanceof Object)
+                                count = 1;
+
+                            else
+                                count = 0;
+                            totalCount += count;
+                            applicationAnalytics.sections[i].subSections.push({
+                                subSection: subSectionKey, numEntries: count
+                            });
+                        });
                 });
-            });
 
             applicationAnalytics.totalNumEntries = totalCount;
         }
@@ -131,20 +135,20 @@ export default class Landing extends Component {
         const requestOptions = {
             body: jsonBody,
             headers: {
-                'x-api-key': `${apikey}`,
+                'x-api-key': apikey,
                 'Content-Type': 'application/json',
                 'Content-Length': jsonBody.length
             },
             method: 'POST'
         };
 
-        if(endpoint) {
+        if (endpoint) {
             console.log('endpoint:', endpoint);
 
             fetch(endpoint, requestOptions)
-                .catch(err => {
-                    console.log(err)
-                });
+                .catch(function (err) {
+                        console.log(err);
+                    });
         }
 
     }
@@ -154,70 +158,74 @@ export default class Landing extends Component {
         const sectionKeys = Object.keys(summaryMap);
         let flaggedCount = 0;
 
-        sectionKeys.forEach((sectionKey, i) => { // for each section
-            sectionFlags[sectionKey] = {};
+        sectionKeys.forEach(function (sectionKey, i) {
+                sectionFlags[sectionKey] = {};
 
-            summaryMap[sectionKey].forEach((subSection) => { // for each sub section
-                const data = summary[subSection.dataKeySource][subSection.dataKey];
-                const entries = (Array.isArray(data) ? data : [data]).filter(r => r != null);
+                summaryMap[sectionKey].forEach(function (subSection) {
+                        const data = summary[subSection.dataKeySource][subSection.dataKey];
+                        const entries = (Array.isArray(data) ? data : [data]).filter(function (r) {
+                                return r != null;
+                            });
 
-                if (entries.length > 0) {
-                    sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries, entry) => {
-                        if (entry._id == null) {
-                            entry._id = generateUuid();
+                        if (entries.length > 0) {
+                            sectionFlags[sectionKey][subSection.dataKey] = entries.reduce(function (flaggedEntries, entry) {
+                                    if (entry._id == null) {
+                                        entry._id = generateUuid();
+                                    }
+
+                                    const entryFlag = flagit(entry, subSection, summary);
+
+                                    if (entryFlag) {
+                                        flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
+                                        flaggedCount += 1;
+                                    }
+
+                                    return flaggedEntries;
+                                }, []);
+                        } else {
+                            const sectionFlagged = flagit(null, subSection, summary);
+                            sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
+
+                            if (sectionFlagged) {
+                                flaggedCount += 1;
+                            }
                         }
-
-                        const entryFlag = flagit(entry, subSection, summary);
-
-                        if (entryFlag) {
-                            flaggedEntries.push({'entryId': entry._id, 'flagText': entryFlag});
-                            flaggedCount += 1;
-                        }
-
-                        return flaggedEntries;
-                    }, []);
-                } else {
-                    const sectionFlagged = flagit(null, subSection, summary);
-                    sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
-
-                    if (sectionFlagged) {
-                        flaggedCount += 1;
-                    }
-                }
+                    });
             });
-        });
 
         // Get the configured endpoint to use for POST for app analytics
-        fetch(`${process.env.PUBLIC_URL}/config.json`)
-            .then(response => response.json())
-            .then(config => {
+        fetch(process.env.PUBLIC_URL + '/config.json')
+            .then((response) => {
+                    return response.json();
+                })
+            .then((config) => {
                 // Only provide analytics if the endpoint has been set
                 if (config.analytics_endpoint) {
                     this.getAnalyticsData(config.analytics_endpoint, config.x_api_key, summary);
                 }
             })
-            .catch(err => {
+            .catch(function(err) {
                 console.log(err)
             });
 
-        return {sectionFlags, flaggedCount};
+        return { sectionFlags, flaggedCount };
     }
 
     render() {
         if (this.state.loading) {
-            return <Spinner/>;
+            return <Spinner />;
         }
 
         if (this.state.result == null) {
             return (
                 <div className="banner error">
-                    <FontAwesomeIcon icon="exclamation-circle" title="error"/> Error: See console for details.
+                    <FontAwesomeIcon icon="exclamation-circle" title="error" /> Error: See console for details.
                 </div>
             );
         }
 
         const summary = this.state.result.Summary;
-        const {sectionFlags, flaggedCount} = this.state;
+        const { sectionFlags, flaggedCount } = this.state;
         const numMedicalHistoryEntries = sumit(summary.PertinentMedicalHistory || {});
         const numPainEntries = sumit(summary.PainAssessments || {});
         const numTreatmentsEntries = sumit(summary.HistoricalTreatments || {});

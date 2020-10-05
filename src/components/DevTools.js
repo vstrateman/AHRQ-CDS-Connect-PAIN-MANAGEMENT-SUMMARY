@@ -12,6 +12,7 @@ export default class DevTools extends Component {
       displayCQLResults: false,
       displayQRObsResults: false
     };
+    this.errorMessage = this.errorMessage.bind(this)
   }
 
   toggleDevTools = function(event) {
@@ -62,7 +63,9 @@ export default class DevTools extends Component {
             </thead>
 
             <tbody>
-              {errResponses.map(function(er, i) { return this.errorMessage(er, i)})}
+              {errResponses.map((er, i) => { 
+                return this.errorMessage(er, i);
+                })}
             </tbody>
           </table>
         </div>

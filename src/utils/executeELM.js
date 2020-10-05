@@ -34,7 +34,7 @@ function executeELM(collector) {
     })
     // then gather all the patient's relevant resource instances and send them in a bundle to the next step
     .then((pt) => {
-      collector.push({ data: pt, url: `Patient/${pt.id}`});
+      collector.push({ data: pt, url: 'Patient/' + pt.id});
       let isFromOpiodRec = false;
       const requests = extractResourcesFromELM(library,isFromOpiodRec).map((name) => {
         if (name === 'Patient') {
@@ -101,12 +101,12 @@ function doSearch(client, release, type, collector) {
   updateSearchParams(params, release, type);
 
   const resources = [];
-  let uri = `${type}?${params}`;
+  let uri = type + '?' + params;
   if(type === 'MedicationRequest'){
-    uri = `${type}?_include=MedicationRequest:medication`;
+    uri = type + '?_include=MedicationRequest:medication';
   }
   if(type === 'MedicationStatement'){
-    uri = `${type}?_include=MedicationStatement:medication`;
+    uri = type + '?_include=MedicationStatement:medication';
   }
   return new Promise((resolve) => {
     const results = client.patient.request(uri, {
