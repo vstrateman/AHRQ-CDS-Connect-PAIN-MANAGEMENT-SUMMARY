@@ -14,55 +14,59 @@ import cqlfhir from "cql-exec-fhir";
 
 export default function executeInternalCDSCall(recommendationNumber, collector) {
     let client, release, cdsLibrary;
-    return new Promise((resolve) => {
-        // First get our authorized client and send the FHIR release to the next step
-        const results = FHIR.oauth2.ready().then((clientArg) => {
-            client = clientArg;
-            return client.getFhirRelease();
-        })
-            // then remember the release for later and get the release-specific library
-            .then((releaseNum) => {
-                release = releaseNum;
-                cdsLibrary = getCDSHooksLibrary(recommendationNumber);
+    return new Promise(function (resolve) {
+            // First get our authorized client and send the FHIR release to the next step
+            const results = FHIR.oauth2.ready().then(function (clientArg) {
+                client = clientArg;
+                return client.getFhirRelease();
             })
-            // then query the FHIR server for the patient, sending it to the next step
-            .then(() => {
-                return client.patient.read();
-            })
-            // then gather all the patient's relevant resource instances and send them in a bundle to the next step
-            .then((pt) => {
-                collector.push({data: pt, url: `Patient/${pt.id}`});
-                let isFromOpiodRec = true;
-                const requests = extractResourcesFromELM(cdsLibrary, isFromOpiodRec).map((name) => {
-                    if (name === 'Patient') {
-                        return [pt];
-                    }
-                    return doSearch(client, release, name, collector);
-                });
-                // Don't return until all the requests have been resolved
-                return Promise.all(requests).then((requestResults) => {
-                    const resources = [];
-                    requestResults.forEach(result => resources.push(...result));
-                    return {
-                        resourceType: "Bundle",
-                        entry: resources.map(r => ({resource: r}))
-                    };
-                });
-            })
-            // then execute the library and return the results (wrapped in a Promise)
-            .then((bundle) => {
-                const cdsPatientSource = getPatientSource(release);
-                const codeService = new cql.CodeService(valueSetDB);
-                const executor = new cql.Executor(cdsLibrary, codeService);
-                cdsPatientSource.loadBundles([bundle]);
-                const cdsExecutor = new cql.Executor(cdsLibrary, codeService)
-                const results = executor.exec(cdsPatientSource);
-                const cdsResults = cdsExecutor.exec(cdsPatientSource);
-                console.log(cdsResults.patientResults[Object.keys(results.patientResults)[0]]);
-                return results.patientResults[Object.keys(results.patientResults)[0]];
-            });
-        resolve(results);
-    });
+                // then remember the release for later and get the release-specific library
+                .then(function (releaseNum) {
+                        release = releaseNum;
+                        cdsLibrary = getCDSHooksLibrary(recommendationNumber);
+                    })
+                // then query the FHIR server for the patient, sending it to the next step
+                .then(function () {
+                        return client.patient.read();
+                    })
+                // then gather all the patient's relevant resource instances and send them in a bundle to the next step
+                .then(function (pt) {
+                    collector.push({ data: pt, url: 'Patient/' + pt.id });
+                    let isFromOpiodRec = true;
+                    const requests = extractResourcesFromELM(cdsLibrary, isFromOpiodRec).map(function (name) {
+                        if (name === 'Patient') {
+                            return [pt];
+                        }
+                        return doSearch(client, release, name, collector);
+                    });
+                    // Don't return until all the requests have been resolved
+                    return Promise.all(requests).then(function (requestResults) {
+                            const resources = [];
+                            requestResults.forEach(function (result) {
+                                    return resources.push(...result);
+                                });
+                            return {
+                                resourceType: "Bundle",
+                                entry: resources.map(function (r) {
+                                        return ({ resource: r });
+                                    })
+                            };
+                        });
+                })
+                // then execute the library and return the results (wrapped in a Promise)
+                .then(function (bundle) {
+                        const cdsPatientSource = getPatientSource(release);
+                        const codeService = new cql.CodeService(valueSetDB);
+                        const executor = new cql.Executor(cdsLibrary, codeService);
+                        cdsPatientSource.loadBundles([bundle]);
+                        const cdsExecutor = new cql.Executor(cdsLibrary, codeService);
+                        const results = executor.exec(cdsPatientSource);
+                        const cdsResults = cdsExecutor.exec(cdsPatientSource);
+                        console.log(cdsResults.patientResults[Object.keys(results.patientResults)[0]]);
+                        return results.patientResults[Object.keys(results.patientResults)[0]];
+                    });
+            resolve(results);
+        });
 }
 
 function getPatientSource(release) {
@@ -79,34 +83,40 @@ function doSearch(client, release, type, collector) {
     updateSearchParams(params, release, type);
 
     const resources = [];
-    const uri = `${type}?${params}`;
-    return new Promise((resolve) => {
-        const results = client.patient.request(uri, {
-            pageLimit: 0, // unlimited pages
-            onPage: processPage(uri, collector, resources)
-        }).then(() => {
-            return resources;
-        }).catch((error) => {
-            collector.push({error: error, url: uri, type: type, data: error});
-            // don't return the error as we want partial results if available
-            // (and we don't want to halt the Promis.all that wraps this)
-            return resources;
+    const uri = type + '?' + params;
+    return new Promise(function (resolve) {
+            const results = client.patient.request(uri, {
+                pageLimit: 0,
+                onPage: processPage(uri, collector, resources)
+            }).then(function () {
+                    return resources;
+                }).catch(function (error) {
+                    collector.push({ error: error, url: uri, type: type, data: error });
+                    // don't return the error as we want partial results if available
+                    // (and we don't want to halt the Promis.all that wraps this)
+                    return resources;
+                });
+            resolve(results);
         });
-        resolve(results);
-    });
 }
 
 function processPage(uri, collector, resources) {
-    return (bundle) => {
+    return function (bundle) {
         // Add to the collector
         let url = uri;
-        if (bundle && bundle.link && bundle.link.some(l => l.relation === 'self' && l.url != null)) {
-            url = bundle.link.find(l => l.relation === 'self').url;
+        if (bundle && bundle.link && bundle.link.some(function (l) {
+            return l.relation === 'self' && l.url != null;
+        })) {
+            url = bundle.link.find(function (l) {
+                return l.relation === 'self';
+            }).url;
         }
-        collector.push({url: url, data: bundle});
+        collector.push({ url: url, data: bundle });
         // Add to the resources
         if (bundle.entry) {
-            bundle.entry.forEach(e => resources.push(e.resource));
+            bundle.entry.forEach(function (e) {
+                return resources.push(e.resource);
+            });
         }
     }
 }

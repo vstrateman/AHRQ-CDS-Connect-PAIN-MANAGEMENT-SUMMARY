@@ -18,7 +18,7 @@ import RiskIcon from '../icons/RiskIcon';
 import InclusionBanner from './InclusionBanner';
 import ExclusionBanner from './ExclusionBanner';
 import InfoModal from './InfoModal';
-// import DevTools from './DevTools';
+import DevTools from './DevTools';
 
 export default class Summary extends Component {
     constructor() {
@@ -96,9 +96,9 @@ export default class Summary extends Component {
             <div className="table">
                 <div className="no-entries">
                     <FontAwesomeIcon
-                        className={`flag flag-no-entry ${flaggedClass}`}
+                        className={'flag flag-no-entry ' + flaggedClass}
                         icon="exclamation-circle"
-                        title={`flag: ${tooltip}`}
+                        title={'flag:' + tooltip}
                         data-tip={tooltip}
                         role="tooltip"
                         tabIndex={0}
@@ -129,9 +129,9 @@ export default class Summary extends Component {
                 accessor: (entry) => this.isEntryFlagged(section, subSection.dataKey, entry),
                 Cell: (props) =>
                     <FontAwesomeIcon
-                        className={`flag flag-entry ${props.value ? 'flagged' : ''}`}
+                        className={'flag flag-entry ' + (props.value ? 'flagged' : '')}
                         icon="exclamation-circle"
-                        title={props.value ? `flag: ${props.value}` : 'flag'}
+                        title={props.value ? 'flag: ' + props.value : 'flag'}
                         data-tip={props.value ? props.value : ''}
                         role="tooltip"
                         tabIndex={0}
@@ -270,7 +270,7 @@ export default class Summary extends Component {
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
                     <h3 id={subSection.dataKey} className="sub-section__header">
                         <FontAwesomeIcon
-                            className={`flag flag-nav ${flaggedClass}`}
+                            className={'flag flag-nav '+ flaggedClass}
                             icon={flagged ? 'exclamation-circle' : 'circle'}
                             title="flag"
                             tabIndex={0}
@@ -286,7 +286,7 @@ export default class Summary extends Component {
                                 <FontAwesomeIcon
                                     className='info-icon'
                                     icon="info-circle"
-                                    title={`more info: ${subSection.name}`}
+                                    title={'more info: ' + subSection.name}
                                     data-tip="more info"
                                     role="tooltip"
                                     tabIndex={0}
@@ -315,16 +315,16 @@ export default class Summary extends Component {
             title = `Recommendations`;
         } else if (section === 'PertinentMedicalHistory') {
             icon = <MedicalHistoryIcon width="30" height="40" />;
-            title = `Pertinent Medical History (${numMedicalHistoryEntries})`;
+            title = 'Pertinent Medical History (' + numMedicalHistoryEntries + ')';
         } else if (section === 'PainAssessments') {
             icon = <PainIcon width="35" height="35" />;
-            title = `Pain Assessments (${numPainEntries})`
+            title = 'Pain Assessments (' + numPainEntries + ')';
         } else if (section === 'HistoricalTreatments') {
             icon = <TreatmentsIcon width="36" height="38" />;
-            title = `Historical Pain-related Treatments (${numTreatmentsEntries})`
+            title = 'Historical Pain-related Treatments (' + numTreatmentsEntries + ')';
         } else if (section === 'RiskConsiderations') {
             icon = <RiskIcon width="35" height="34" />;
-            title = `Risk Considerations (${numRiskEntries})`;
+            title = 'Risk Considerations (' + numRiskEntries + ')';
         }// else if (section === 'SharedDecisionMaking') {
         //   title = `Shared Decision Making`;
         // }
@@ -336,7 +336,7 @@ export default class Summary extends Component {
 
                     <span className="span-class">
                         {title}
-                        <FontAwesomeIcon className={`flag flag-header ${flaggedClass}`} icon="exclamation-circle"
+                        <FontAwesomeIcon className={'flag flag-header ' + flaggedClass} icon="exclamation-circle"
                             title="flag" />
                     </span>
                 </div>
@@ -347,8 +347,7 @@ export default class Summary extends Component {
     };
 
     render() {
-        // const { summary, collector, qrCollector, result } = this.props;
-        const { summary } = this.props;
+        const { summary, collector, qrCollector, result, cdsCollector} = this.props;
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         if (!summary) {
             return null;
@@ -370,7 +369,7 @@ export default class Summary extends Component {
                     {!meetsInclusionCriteria && <InclusionBanner dismissible={meetsInclusionCriteria} />}
 
                     {meetsInclusionCriteria &&
-                        <main className="sections">
+                        <div className="sections">
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("CDSHooksAssessment")} open={true}>
                                 {this.renderSection("CDSHooksAssessment")}
                             </Collapsible>
@@ -391,7 +390,7 @@ export default class Summary extends Component {
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("RiskConsiderations")} open={true}>
                                 {this.renderSection("RiskConsiderations")}
                             </Collapsible>
-                        </main>
+                        </div>
                     }
 
                     <div className="cdc-disclaimer">
@@ -406,11 +405,12 @@ export default class Summary extends Component {
                         for additional information and prescribing guidance.
                     </div>
 
-                    {/* <DevTools
+                    <DevTools
                         collector={collector}
                         qrCollector={qrCollector}
                         result={result}
-                    /> */}
+                        cdsCollector={cdsCollector}
+                    />
 
                     <ReactTooltip className="summary-tooltip" />
 
