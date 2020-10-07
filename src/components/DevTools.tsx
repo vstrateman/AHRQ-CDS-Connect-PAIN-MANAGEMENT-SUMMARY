@@ -55,7 +55,7 @@ export default class DevTools extends Component<any, any> {
         <div className="cql-errors">
           <h4>{errResponses.length} Errors</h4>
 
-          <table id="cql-errors" data-border="1" width="100%">
+          <table id="cql-errors" data-border="1" data-width="100%">
             <thead>
               <tr>
                 <th>Resource</th>
