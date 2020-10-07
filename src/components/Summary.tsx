@@ -105,7 +105,7 @@ export default class Summary extends Component<any, any> {
                         icon="exclamation-circle"
                         title={'flag:' + tooltip}
                         data-tip={tooltip}
-                        role="tooltip"
+                        data-role="tooltip"
                         tabIndex={0}
                     />
                     no entries found
