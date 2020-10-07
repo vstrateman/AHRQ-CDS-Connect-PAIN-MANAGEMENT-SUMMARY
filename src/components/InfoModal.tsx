@@ -3,26 +3,29 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from 'react-table';
 
-export default class InfoModal extends Component {
+export default class InfoModal extends Component<any, any> {
+  elementsTableProps: { id: string; };
+  referencesTableProps: { id: string; };
+  static propTypes: { subSection: PropTypes.Requireable<object>; closeModal: PropTypes.Validator<(...args: any[]) => any>; };
 
-  constructor() {
-    super(...arguments);
+  constructor(props: any) {
+    super(props);
 
     this.elementsTableProps = { id: 'react__elements__table' };
     this.referencesTableProps = { id: 'react__references__table' };
   }
 
-  renderElements = function (elements) {
+  renderElements = (elements: any) => {
     const tableElements = elements.elements;
     const columns = [{
-      Header: function () { return <span className="col-header">Name</span> },
+      Header: () => { return <span className="col-header">Name</span> },
       accessor: 'name',
       minWidth: 225
     }, {
-      Header: function () { return <span className="col-header">Status</span> },
+      Header: () => { return <span className="col-header">Status</span> },
       accessor: 'status'
     }, {
-      Header: function () { return <span className="col-header">Lookback</span> },
+      Header: () => { return <span className="col-header">Lookback</span> },
       accessor: 'lookback'
     }];
     return (
@@ -36,30 +39,30 @@ export default class InfoModal extends Component {
           minRows={1}
           showPagination={false}
           resizable={false}
-          getProps={function() { return this.elementsTableProps }}
+          getProps={() => { return this.elementsTableProps }}
         />
       </div>
     );
   }
 
-  renderReferences = function (references) {
+  renderReferences = (references: any) => {
     const columns = [{
-      Header: function () { return <span className="col-header">Link</span> },
+      Header: () => { return <span className="col-header">Link</span> },
       accessor: 'urlLink',
       maxWidth: 50,
       sortable: false
     }, {
-      Header: function () { return <span className="col-header">Title</span> },
+      Header: () => { return <span className="col-header">Title</span> },
       accessor: 'title'
     }, {
-    Header: function() {  return <span className="col-header">Details</span>},
+    Header: () => {  return <span className="col-header">Details</span>},
       accessor: 'details'
     }];
 
     let data = references;
-    data.forEach(function (reference) {
+    data.forEach((reference: any) => {
         reference.urlLink = (
-          <a href={reference.url} src={reference.title} target="_blank"
+          <a href={reference.url} data-src={reference.title} target="_blank"
             rel="noopener noreferrer"><FontAwesomeIcon icon="link" title="link" /></a>
         );
       });
@@ -74,7 +77,7 @@ export default class InfoModal extends Component {
           minRows={1}
           showPagination={false}
           resizable={false}
-          getProps={function() {
+          getProps={() => {
             return this.referencesTableProps;
           }}
         />
@@ -84,8 +87,8 @@ export default class InfoModal extends Component {
 
   render() {
     const { subSection, closeModal } = this.props;
-    const elements = subSection.info.find((el) => el.type === "elements");
-    const references = subSection.info.filter((el) => el.type === "reference");
+    const elements = subSection.info.find((el: any) => el.type === "elements");
+    const references = subSection.info.filter((el: any) => el.type === "reference");
 
     return (
       <div className="info-modal">

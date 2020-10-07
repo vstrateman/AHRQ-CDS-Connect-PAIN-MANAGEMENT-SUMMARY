@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default class ExclusionBanner extends Component {
-  constructor() {
-    super(...arguments);
+export default class ExclusionBanner extends Component<any, any> {
+  constructor(props: any) {
+    super(props);
     this.state = {
       displayed: true
     };
   }
 
-  handleClose = function() {
+  handleClose = () => {
     this.setState({ displayed: false });
   }
 

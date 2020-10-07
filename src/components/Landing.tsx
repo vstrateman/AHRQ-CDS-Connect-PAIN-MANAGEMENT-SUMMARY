@@ -23,9 +23,11 @@ function generateUuid() {
     return ++uuid; // eslint-disable-line no-plusplus
 }
 
-export default class Landing extends Component {
-    constructor() {
-        super(...arguments);
+export default class Landing extends Component<any, any> {
+    tocInitialized: boolean;
+    summaryMapData: any = summaryMap;
+    constructor(props: any) {
+        super(props);
         this.state = {
             result: null,
             loading: true,
@@ -44,31 +46,31 @@ export default class Landing extends Component {
             this.setState({ result, sectionFlags, flaggedCount });
             return this.state.collector;
         })
-            .then(function (collector) {
+            .then((collector: any) => {
                 if (process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'external') {
                     executeExternalCDSCall(collector)
-                        .then(function (cdsResult) {
+                        .then((cdsResult: any) => {
                             this.setState({ cdsCollector: cdsResult });
                             return cdsResult;
                         });
                 } else if (process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'internal') {
                     executeInternalCDSCall(10, this.state.cdsCollector)
-                        .then(function (cdsResult) {
+                        .then((cdsResult: any) => {
                             this.setState({ cdsCollector: cdsResult });
                             return cdsResult;
                         });
                 }
             })
-            .then(function () {
+            .then(() => {
                 FHIR.oauth2.ready()
-                    .then(function (client) { client.request("Questionnaire/mypain-questionnaire") })
-                    .then(function(questionnaire) {
+                    .then((client: any) => { client.request("Questionnaire/mypain-questionnaire") })
+                    .then((questionnaire) => {
                         console.log(questionnaire);
                         // TODO - loop through questionnaire and put linkIds and question text in map to use in display
                     })
                     .catch(console.error);
             })
-            .catch(function (err) {
+            .catch((err: any) => {
                 console.error(err);
                 this.setState({ loading: false });
             });
@@ -94,9 +96,9 @@ export default class Landing extends Component {
         }
     }
 
-    getAnalyticsData(endpoint, apikey, summary) {
+    getAnalyticsData(endpoint: any, apikey: any, summary: any) {
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
-        const applicationAnalytics = {
+        const applicationAnalytics: any = {
             meetsInclusionCriteria
         };
 
@@ -132,7 +134,7 @@ export default class Landing extends Component {
 
         let jsonBody = JSON.stringify(applicationAnalytics);
 
-        const requestOptions = {
+        const requestOptions: any = {
             body: jsonBody,
             headers: {
                 'x-api-key': apikey,
@@ -153,22 +155,22 @@ export default class Landing extends Component {
 
     }
 
-    processSummary(summary) {
-        const sectionFlags = {};
-        const sectionKeys = Object.keys(summaryMap);
+    processSummary(summary: any) {
+        const sectionFlags: any = {};
+        const sectionKeys: any = Object.keys(this.summaryMapData);
         let flaggedCount = 0;
 
-        sectionKeys.forEach(function (sectionKey, i) {
+        sectionKeys.forEach((sectionKey: any, i: any) => {
                 sectionFlags[sectionKey] = {};
 
-                summaryMap[sectionKey].forEach(function (subSection) {
+                this.summaryMapData[sectionKey].forEach((subSection: any) => {
                         const data = summary[subSection.dataKeySource][subSection.dataKey];
-                        const entries = (Array.isArray(data) ? data : [data]).filter(function (r) {
+                        const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
                                 return r != null;
                             });
 
                         if (entries.length > 0) {
-                            sectionFlags[sectionKey][subSection.dataKey] = entries.reduce(function (flaggedEntries, entry) {
+                            sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
                                     if (entry._id == null) {
                                         entry._id = generateUuid();
                                     }
@@ -195,16 +197,16 @@ export default class Landing extends Component {
 
         // Get the configured endpoint to use for POST for app analytics
         fetch(process.env.PUBLIC_URL + '/config.json')
-            .then((response) => {
+            .then((response: any) => {
                     return response.json();
                 })
-            .then((config) => {
+            .then((config: any) => {
                 // Only provide analytics if the endpoint has been set
                 if (config.analytics_endpoint) {
                     this.getAnalyticsData(config.analytics_endpoint, config.x_api_key, summary);
                 }
             })
-            .catch(function(err) {
+            .catch((err: any) => {
                 console.log(err)
             });
 

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import FhirQuery from './FhirQuery';
 
-export default class DevTools extends Component {
-  constructor() {
-    super(...arguments);
+export default class DevTools extends Component<any, any> {
+  static propTypes: { collector: PropTypes.Requireable<any[]>; result: PropTypes.Requireable<object>; qrCollector: PropTypes.Requireable<any[]>; };
+  constructor(props: any) {
+    super(props);
     this.state = {
       displayDevTools: false,
       displayFhirQueries: false,
@@ -15,27 +16,27 @@ export default class DevTools extends Component {
     this.errorMessage = this.errorMessage.bind(this)
   }
 
-  toggleDevTools = function(event) {
+  toggleDevTools = (event: any) => {
     event.preventDefault();
     this.setState({ displayDevTools: !this.state.displayDevTools });
   }
 
-  toggleFhirQueries = function(event) {
+  toggleFhirQueries = (event: any) => {
     event.preventDefault();
     this.setState({ displayFhirQueries: !this.state.displayFhirQueries });
   }
 
-  toggleCQLResults = function(event) {
+  toggleCQLResults = (event: any) => {
     event.preventDefault();
     this.setState({ displayCQLResults: !this.state.displayCQLResults });
   }
 
-  toggleQRObsResults = function(event) {
+  toggleQRObsResults = (event: any) => {
       event.preventDefault();
       this.setState({ displayQRObsResults: !this.state.displayQRObsResults });
   }
 
-  errorMessage(er, i) {
+  errorMessage(er: any, i: any) {
     return (
       <tr key={i}>
         <td>{er.type}</td>
@@ -45,7 +46,7 @@ export default class DevTools extends Component {
   }
 
   renderErrors() {
-    const errResponses = this.props.collector.filter(function (i) {
+    const errResponses = this.props.collector.filter( (i:any) => {
         return i.error;
       });
 
@@ -54,7 +55,7 @@ export default class DevTools extends Component {
         <div className="cql-errors">
           <h4>{errResponses.length} Errors</h4>
 
-          <table id="cql-errors" border="1" width="100%">
+          <table id="cql-errors" data-border="1" width="100%">
             <thead>
               <tr>
                 <th>Resource</th>
@@ -63,7 +64,7 @@ export default class DevTools extends Component {
             </thead>
 
             <tbody>
-              {errResponses.map((er, i) => { 
+              {errResponses.map((er:any, i:any) => { 
                 return this.errorMessage(er, i);
                 })}
             </tbody>
@@ -80,7 +81,7 @@ export default class DevTools extends Component {
       <div className="fhir-queries">
         <h4>FHIR Queries <button onClick={this.toggleFhirQueries}>[show/hide]</button></h4>
         <div style={{ display: this.state.displayFhirQueries ? 'block' : 'none' }}>
-          {this.props.collector.map(function (item, i) {
+          {this.props.collector.map( (item: any, i: any) => {
               const url = i === 0 ? item.url : item.url.slice(item.url.lastIndexOf('/') + 1);
               return (
                 <FhirQuery key={i} url={url} data={item.data} />
