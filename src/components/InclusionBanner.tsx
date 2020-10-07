@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default class InclusionBanner extends Component {
-  constructor() {
-    super(...arguments);
+export default class InclusionBanner extends Component<any, any> {
+  static propTypes: { dismissible: PropTypes.Validator<boolean>; };
+  constructor(props: any) {
+    super(props);
     this.state = {
       displayed: true
     };
   }
 
-  handleClose = function() {
+  handleClose = () => {
     this.setState({ displayed: false });
   }
 

@@ -20,9 +20,14 @@ import ExclusionBanner from './ExclusionBanner';
 import InfoModal from './InfoModal';
 import DevTools from './DevTools';
 
-export default class Summary extends Component {
-    constructor() {
-        super(...arguments);
+export default class Summary extends Component<any, any> {
+    static propTypes: any;
+    subsectionTableProps: { id: string; };
+    formatitHelper: any = formatit;
+    sortitHelper: any = sortit;
+    summaryMapData: any = summaryMap;
+    constructor(props: any) {
+        super(props);
 
         this.state = {
             showModal: false,
@@ -37,7 +42,7 @@ export default class Summary extends Component {
     componentDidMount() {
     }
 
-    handleOpenModal = (modalSubSection, event) => {
+    handleOpenModal = (modalSubSection: any, event: any) => {
         //only open modal   on 'enter' or click
         if (event.keyCode === 13 || event.type === "click") {
             this.setState({ showModal: true, modalSubSection });
@@ -48,7 +53,7 @@ export default class Summary extends Component {
         this.setState({ showModal: false });
     }
 
-    isSectionFlagged(section) {
+    isSectionFlagged(section: any) {
         const { sectionFlags } = this.props;
         const subSections = Object.keys(sectionFlags[section]);
 
@@ -61,7 +66,7 @@ export default class Summary extends Component {
         return false;
     }
 
-    isSubsectionFlagged(section, subSection) {
+    isSubsectionFlagged(section: any, subSection: any) {
         const { sectionFlags } = this.props;
         if (sectionFlags[section][subSection] === true) {
             return true;
@@ -73,11 +78,11 @@ export default class Summary extends Component {
     }
 
     // if flagged, returns flag text, else returns false
-    isEntryFlagged(section, subSection, entry) {
+    isEntryFlagged(section: any, subSection: any, entry: any) {
         const { sectionFlags } = this.props;
 
         let flagged = false;
-        sectionFlags[section][subSection].forEach((flag) => {
+        sectionFlags[section][subSection].forEach((flag: any) => {
             if (flag.entryId === entry._id) {
                 flagged = flag.flagText;
             }
@@ -86,7 +91,7 @@ export default class Summary extends Component {
         return flagged;
     }
 
-    renderNoEntries(section, subSection) {
+    renderNoEntries(section: any, subSection: any) {
         const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
         const flaggedClass = flagged ? 'flagged' : '';
         const flagText = this.props.sectionFlags[section][subSection.dataKey];
@@ -100,7 +105,7 @@ export default class Summary extends Component {
                         icon="exclamation-circle"
                         title={'flag:' + tooltip}
                         data-tip={tooltip}
-                        role="tooltip"
+                        data-role="tooltip"
                         tabIndex={0}
                     />
                     no entries found
@@ -109,14 +114,14 @@ export default class Summary extends Component {
         );
     }
 
-    renderTable(table, entries, section, subSection, index) {
+    renderTable(table: any, entries: any, section: any, subSection: any, index: any) {
         // If a filter is provided, only render those things that have the filter field (or don't have it when it's negated)
         let filteredEntries = entries;
         if (table.filter && table.filter.length > 0) {
             // A filter starting with '!' is negated (looking for absence of that field)
             const negated = table.filter[0] === '!';
             const filter = negated ? table.filter.substring(1) : table.filter;
-            filteredEntries = entries.filter(e => negated ? e[filter] == null : e[filter] != null);
+            filteredEntries = entries.filter((e: any) => negated ? e[filter] == null : e[filter] != null);
         }
         if (filteredEntries.length === 0) return null;
 
@@ -126,8 +131,8 @@ export default class Summary extends Component {
             {
                 id: 'flagged',
                 Header: <span aria-label="flag"></span>,
-                accessor: (entry) => this.isEntryFlagged(section, subSection.dataKey, entry),
-                Cell: (props) =>
+                accessor: (entry: any) => this.isEntryFlagged(section, subSection.dataKey, entry),
+                Cell: (props: any) =>
                     <FontAwesomeIcon
                         className={'flag flag-entry ' + (props.value ? 'flagged' : '')}
                         icon="exclamation-circle"
@@ -145,15 +150,15 @@ export default class Summary extends Component {
         headers.forEach((header) => {
             const headerKey = table.headers[header];
 
-            const column = {
+            const column: any = {
                 id: header,
                 Header: () => <span className="col-header">{header}</span>,
-                accessor: (entry) => {
+                accessor: (entry: any) => {
                     let value = entry[headerKey];
                     if (headerKey.formatter) {
                         const { result } = this.props;
                         let formatterArguments = headerKey.formatterArguments || [];
-                        value = formatit[headerKey.formatter](result, entry[headerKey.key], ...formatterArguments);
+                        value = this.formatitHelper[headerKey.formatter](result, entry[headerKey.key], ...formatterArguments);
                     }
 
                     return value;
@@ -214,7 +219,7 @@ export default class Summary extends Component {
                     getTheadThProps={(state, rowInfo, column, instance) => {
                         return {
                             tabIndex: 0,
-                            onKeyPress: (e, handleOriginal) => {
+                            onKeyPress: (e: { which: number; stopPropagation: () => void; }, handleOriginal: any) => {
                                 if (e.which === 13) {
                                     instance.sortColumn(column);
                                     e.stopPropagation();
@@ -227,7 +232,7 @@ export default class Summary extends Component {
         );
     }
 
-    renderSection(section) {
+    renderSection(section: string) {
         if (section === 'CDSHooksAssessment' && this.state.result1) {
             return (
                 <div>
@@ -256,9 +261,9 @@ export default class Summary extends Component {
             )
         }
 
-        const sectionMap = summaryMap[section];
+        const sectionMap = this.summaryMapData[section];
 
-        return sectionMap.map((subSection) => {
+        return sectionMap.map((subSection: any) => {
             const data = this.props.summary[subSection.dataKeySource][subSection.dataKey];
             const entries = (Array.isArray(data) ? data : [data]).filter(r => r != null);
             const hasEntries = entries.length !== 0;
@@ -296,7 +301,7 @@ export default class Summary extends Component {
                     </h3>
 
                     {!hasEntries && this.renderNoEntries(section, subSection)}
-                    {hasEntries && subSection.tables.map((table, index) =>
+                    {hasEntries && subSection.tables.map((table: any, index: any) =>
                         this.renderTable(table, entries, section, subSection, index))
                     }
                 </div>
@@ -304,12 +309,12 @@ export default class Summary extends Component {
         });
     }
 
-    renderSectionHeader(section) {
+    renderSectionHeader(section: any) {
         const flagged = this.isSectionFlagged(section);
         const flaggedClass = flagged ? 'flagged' : '';
         const { numMedicalHistoryEntries, numPainEntries, numTreatmentsEntries, numRiskEntries } = this.props;
 
-        let icon = '';
+        let icon: any = '';
         let title = '';
         if (section === 'CDSHooksAssessment') {
             title = 'Recommendations';
@@ -397,7 +402,7 @@ export default class Summary extends Component {
                         Please see the
                         <a
                             href="https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm"
-                            alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
+                            data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
                             target="_blank"
                             rel="noopener noreferrer">
                             CDC Guideline for Prescribing Opioids for Chronic Pain
