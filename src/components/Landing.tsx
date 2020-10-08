@@ -101,7 +101,6 @@ export default class Landing extends Component<any, any> {
     }
 
     extractQuestionText(questionnaire: any){
-        console.log(questionnaire);
         let qTextMap = new Map();
         // TODO - loop through questionnaire and put linkIds and question text in map to use in display
         let qItems = questionnaire.item;
