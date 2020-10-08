@@ -7,7 +7,8 @@ import 'jest-enzyme';
 configure({ adapter: new Adapter() });
 
 // mock local storage
-global.window = {};
+// global.window = {};
+(window as any);
 // see: https://github.com/letsrock-today/mock-local-storage/issues/17
 Object.defineProperty(window, 'localStorage', {
   value: global.localStorage,

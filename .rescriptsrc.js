@@ -22,7 +22,7 @@ const addLaunch = function (config) {
   return edit(
     function (entries) {
       if (!Array.isArray(entries) || entries.filter(function (e) {
-          return e.endsWith(path.sep + 'index.js');
+          return e.endsWith(path.sep + 'index.tsx');
         }).length !== 1) {
         console.error('Cannot add launch.js to entry. Unexpected starting value for entry:', entries);
         return entries;
@@ -30,7 +30,7 @@ const addLaunch = function (config) {
       return {
         main: entries,
         launch: entries.map(function (e) {
-            return e.replace(/[\/\\]index.js$/, path.sep + 'launch.js');
+            return e.replace(/[\/\\]index.tsx$/, path.sep + 'launch.ts');
           })
       };
     },
