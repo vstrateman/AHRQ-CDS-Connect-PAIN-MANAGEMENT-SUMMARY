@@ -1,4 +1,13 @@
 {
+  "SharedDecisionMaking": [
+    {
+      "name": "Questionnaire Observations",
+      "dataKey": "QuestionnaireObservations",
+      "dataKeySource": "SharedDecisionMaking",
+      "info": [],
+      "tables": []
+    }
+  ],
   "CDSHooksAssessment": [
     {
       "name": "Requests And Responses",
@@ -213,8 +222,14 @@
         {
           "headers": {
             "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Score": {
+              "key": "Score",
+              "formatter": "quantityFormat"
+            },
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           }
         }
       ]
@@ -246,22 +261,36 @@
         {
           "headers": {
             "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
+            "Score": {
+              "key": "Score",
+              "formatter": "quantityFormat"
+            },
             "Question": {
               "key": "Questions",
               "formatter": "arrayFlatten",
-              "formatterArguments": ["Name", "Score", true],
+              "formatterArguments": [
+                "Name",
+                "Score",
+                true
+              ],
               "sortable": false,
               "minWidth": 200
             },
             "Question Score": {
               "key": "Questions",
               "formatter": "arrayFlatten",
-              "formatterArguments": ["Score", null, false],
+              "formatterArguments": [
+                "Score",
+                null,
+                false
+              ],
               "sortable": false,
               "minWidth": 150
             },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           }
         }
       ]
@@ -293,8 +322,14 @@
         {
           "headers": {
             "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Score": {
+              "key": "Score",
+              "formatter": "quantityFormat"
+            },
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           }
         }
       ]
@@ -323,8 +358,14 @@
           "headers": {
             "Name": "Name",
             "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
+            "Start": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "End": {
+              "key": "End",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -357,8 +398,14 @@
           "headers": {
             "Name": "Name",
             "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
+            "Start": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "End": {
+              "key": "End",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -391,7 +438,10 @@
           "headers": {
             "Name": "Name",
             "Type": "Type",
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -424,8 +474,14 @@
           "headers": {
             "Name": "Name",
             "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
+            "Start": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "End": {
+              "key": "End",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -469,8 +525,14 @@
         {
           "headers": {
             "Name": "Name",
-            "Result": { "key": "Result", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Result": {
+              "key": "Result",
+              "formatter": "quantityFormat"
+            },
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -507,9 +569,15 @@
         {
           "headers": {
             "Name": "Name",
-            "Result": { "key": "Result", "formatter": "quantityFormat" },
+            "Result": {
+              "key": "Result",
+              "formatter": "quantityFormat"
+            },
             "Interpretation": "Interpretation",
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -552,8 +620,14 @@
           "headers": {
             "Name": "Name",
             "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
+            "Start": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "End": {
+              "key": "End",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -600,8 +674,14 @@
           "headers": {
             "Name": "Name",
             "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
+            "Start": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "End": {
+              "key": "End",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -649,8 +729,14 @@
         {
           "headers": {
             "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Score": {
+              "key": "Score",
+              "formatter": "quantityFormat"
+            },
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           }
         }
       ]
