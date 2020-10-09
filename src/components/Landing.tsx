@@ -108,7 +108,7 @@ export default class Landing extends Component<any, any> {
             if(item.item === null || item.item === undefined){
                 qTextMap.set(item.linkId, item.prefix + ':' + item.text);
             }else{
-                if(item.linkId != null && item.linkId != undefined){
+                if(item.linkId !== null && item.linkId !== undefined){
                     if(item.prefix !== null && item.prefix !== undefined){
                         qTextMap.set(item.linkId, item.prefix + ':' + item.text);
 
