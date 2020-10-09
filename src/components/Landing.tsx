@@ -1,6 +1,5 @@
 import FHIR from 'fhirclient';
 import React, { Component } from 'react';
-import tocbot from 'tocbot';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import executeElm from '../utils/executeELM';
@@ -24,7 +23,6 @@ function generateUuid() {
 }
 
 export default class Landing extends Component<any, any> {
-    tocInitialized: boolean;
     summaryMapData: any = summaryMap;
     constructor(props: any) {
         super(props);
@@ -37,7 +35,6 @@ export default class Landing extends Component<any, any> {
             questionText: new Map()
         };
 
-        this.tocInitialized = false;
     }
 
     componentDidMount() {
@@ -81,18 +78,6 @@ export default class Landing extends Component<any, any> {
     }
 
     componentDidUpdate() {
-        if (!this.tocInitialized && !this.state.loading && this.state.result) {
-            tocbot.init({
-                tocSelector: '.summary__nav',           // where to render the table of contents
-                contentSelector: '.summary__display',   // where to grab the headings to build the table of contents
-                headingSelector: 'h2, h3',              // which headings to grab inside of the contentSelector element
-                positionFixedSelector: '.summary__nav', // element to add the positionFixedClass to
-                collapseDepth: 0,                       // how many heading levels should not be collpased
-                includeHtml: true                       // include the HTML markup from the heading node, not just the text
-            });
-
-            this.tocInitialized = true;
-        }
 
         if (this.state.result && this.state.result.Summary.Patient.Name) {
             const patientName = this.state.result.Summary.Patient.Name;
@@ -181,7 +166,6 @@ export default class Landing extends Component<any, any> {
         };
 
         if (endpoint) {
-            console.log('endpoint:', endpoint);
 
             fetch(endpoint, requestOptions)
                 .catch(function (err) {

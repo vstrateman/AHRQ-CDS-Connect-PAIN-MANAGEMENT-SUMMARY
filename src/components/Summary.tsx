@@ -6,7 +6,7 @@ import ReactTooltip from 'react-tooltip';
 import ReactTable from 'react-table';
 import ReactModal from 'react-modal';
 
-import summaryMap from './summary.json';
+import summaryMap from './summary_withSharedDecision.json';
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
 
@@ -330,9 +330,9 @@ export default class Summary extends Component<any, any> {
         } else if (section === 'RiskConsiderations') {
             icon = <RiskIcon width="35" height="34" />;
             title = 'Risk Considerations (' + numRiskEntries + ')';
-        }// else if (section === 'SharedDecisionMaking') {
-        //   title = `Shared Decision Making`;
-        // }
+        } else if (section === 'SharedDecisionMaking') {
+          title = `Shared Decision Making`;
+        }
 
         return (
             <h2 id={section} className="section__header">
@@ -360,9 +360,6 @@ export default class Summary extends Component<any, any> {
 
         return (
             <div className="summary">
-                <div className="summary__nav-wrapper">
-                    <nav className="summary__nav"></nav>
-                </div>
 
                 <div className="summary__display" id="maincontent">
                     <div className="summary__display-title">
