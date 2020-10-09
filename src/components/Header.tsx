@@ -17,9 +17,9 @@ export default class Header extends Component {
             <FontAwesomeIcon className="return-icon" icon="chevron-left" title="back" />
           </a> */}
 
-          <img className="header__logo-img" src={process.env.PUBLIC_URL + "/assets/images/cds-connect-logo.png"}
-            alt="cds connect logo" />
-          <span className="header__logo-text">CDS Connect</span>
+          {/* <img className="header__logo-img" src={process.env.PUBLIC_URL + "/assets/images/cds-connect-logo.png"}
+            alt="cds connect logo" /> */}
+          <span className="header__logo-text">PainManager</span>
         </div>
 
         <div className="header__summary">
