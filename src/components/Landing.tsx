@@ -41,7 +41,7 @@ export default class Landing extends Component<any, any> {
     }
 
     componentDidMount() {
-        executeElm(this.state.collector).then((result) => {
+        executeElm(this.state.collector).then((result: any) => {
             this.setState({ loading: false });
             const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
             this.setState({ result, sectionFlags, flaggedCount });

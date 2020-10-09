@@ -27,13 +27,15 @@ async function getValues(collector, opioidLibraryNumber) {
     let returnText = '';
     await createPrefetch(collector, opioidLibraryNumber)
         .then((prefetchData) => {
-            return fetch(url, {
-                method: 'POST',     // use GET for cds-services discovery call
-                body: prefetchData, // string or object  !!put back in for POST operation
+            let params: RequestInit = {
+                method: 'POST',
+                body: JSON.stringify(prefetchData),
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
+            }
+            let fetchUrl = JSON.stringify(url);
+            return fetch(fetchUrl, params)
                 .then(response => {return response.text();})
                 .then(response => {
                     console.log(response);
