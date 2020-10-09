@@ -352,7 +352,7 @@ export default class Summary extends Component<any, any> {
     };
 
     render() {
-        const { summary, collector, qrCollector, result, cdsCollector} = this.props;
+        const { summary, collector, qrCollector, result, cdsCollector, questionText} = this.props;
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         if (!summary) {
             return null;
@@ -415,6 +415,7 @@ export default class Summary extends Component<any, any> {
                         qrCollector={qrCollector}
                         result={result}
                         cdsCollector={cdsCollector}
+                        questionText={questionText}
                     />
 
                     <ReactTooltip className="summary-tooltip" />
@@ -441,6 +442,7 @@ Summary.propTypes = {
     collector: PropTypes.array,
     cdsCollector: PropTypes.array,
     qrCollector: PropTypes.array,
+    questionText: PropTypes.object,
     result: PropTypes.object,
     numMedicalHistoryEntries: PropTypes.number,
     numPainEntries: PropTypes.number,
