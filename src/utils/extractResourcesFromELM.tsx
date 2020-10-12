@@ -1,8 +1,9 @@
 function extractResourcesFromELM(elm, isFromOpiodRec) {
-  const resources = new Set();
+  const resources: any = new Set();
   if (elm && elm.source && elm.source.library && elm.source.library.statements && elm.source.library.statements.def) {
-    for (const expDef of Object.values(elm.source.library.statements.def)) {
-      extractResourcesFromExpression(resources, expDef.expression);
+    let expDef: any;
+    for (expDef of Object.values(elm.source.library.statements.def)) {
+      extractResourcesFromExpression(resources, expDef.expression!);
     }
   }
   if(isFromOpiodRec){

@@ -1,17 +1,17 @@
 // This script updates the valueset-db.json file with any changes from the CQL
 // library and/or changes in the value set definitions in VSAC.  It should be
 // called with the UMLS Username and Password as arguments.
-const fs = require('fs');
-const path = require('path');
-const temp = require('temp');
-const { Library, Repository } = require('cql-execution');
-const { CodeService } = require('cql-exec-vsac');
-const dstu2FactorsELM = require('../cql/dstu2/Factors_to_Consider_in_Managing_Chronic_Pain.json');
-const dstu2CommonsELM = require('../cql/dstu2/CDS_Connect_Commons_for_FHIRv102.json');
-const dstu2HelpersELM = require('../cql/dstu2/FHIRHelpers.json');
-const r4FactorsELM = require('../cql/r4/Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400.json');
-const r4CommonsELM = require('../cql/r4/CDS_Connect_Commons_for_FHIRv400.json');
-const r4HelpersELM = require('../cql/r4/FHIRHelpers.json');
+import fs from 'fs';
+import path from 'path';
+import temp from 'temp';
+import { Library, Repository } from 'cql-execution';
+import { CodeService } from 'cql-exec-vsac';
+import dstu2FactorsELM from '../cql/dstu2/Factors_to_Consider_in_Managing_Chronic_Pain.json';
+import dstu2CommonsELM from '../cql/dstu2/CDS_Connect_Commons_for_FHIRv102.json';
+import dstu2HelpersELM from '../cql/dstu2/FHIRHelpers.json';
+import r4FactorsELM from '../cql/r4/Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400.json';
+import r4CommonsELM from '../cql/r4/CDS_Connect_Commons_for_FHIRv400.json';
+import r4HelpersELM from '../cql/r4/FHIRHelpers.json';
 
 // First ensure a username and password are provided
 const [user, password] = process.argv.slice(2);
@@ -49,7 +49,7 @@ const r4Lib = new Library(r4FactorsELM, new Repository({
 console.log('Loading value sets from VSAC using account: ' + user);
 codeService.ensureValueSetsInLibrary(dstu2Lib, true, user, password)
   .then(function () {
-      return codeService.ensureValueSetsInLibrary(dstu3Lib, true, user, password);
+      return codeService.ensureValueSetsInLibrary(dstu2Lib, true, user, password);
     })
   .then(function () {
       return codeService.ensureValueSetsInLibrary(r4Lib, true, user, password);

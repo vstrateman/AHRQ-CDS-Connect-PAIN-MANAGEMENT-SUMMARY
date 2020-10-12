@@ -15,9 +15,10 @@ import valueSetDB from '../cql/valueset-db.json';
 import medicationReferenceSolver from "./medicationReferenceSolver";
 var Promise = require('es6-promise').Promise;
 
-function executeELM(collector) {
-  let client, release, library;
-  return new Promise((resolve) => {
+let cqlFhirModule: any = cqlfhir;
+function executeELM(collector: any) {
+  let client: any, release: any, library: any;
+  return new Promise((resolve: any) => {
     // First get our authorized client and send the FHIR release to the next step
     const results = FHIR.oauth2.ready().then((clientArg) => {
       client = clientArg;
@@ -33,7 +34,7 @@ function executeELM(collector) {
       return client.patient.read();
     })
     // then gather all the patient's relevant resource instances and send them in a bundle to the next step
-    .then((pt) => {
+    .then((pt: any) => {
       collector.push({ data: pt, url: 'Patient/' + pt.id});
       let isFromOpiodRec = false;
       const requests = extractResourcesFromELM(library,isFromOpiodRec).map((name) => {
@@ -43,9 +44,9 @@ function executeELM(collector) {
         return doSearch(client, release, name, collector);
       });
       // Don't return until all the requests have been resolved
-      return Promise.all(requests).then((requestResults) => {
-        const resources = [];
-        requestResults.forEach(result => resources.push(...result));
+      return Promise.all(requests).then((requestResults: any) => {
+        const resources: any[] = [];
+        requestResults.forEach((result) => {resources.push(...result)});
         return {
           resourceType: "Bundle",
           entry: resources.map(r => ({ resource: r }))
@@ -88,9 +89,9 @@ function getLibrary(release) {
 function getPatientSource(release) {
   switch(release) {
     case 2:
-      return cqlfhir.PatientSource.FHIRv102();
-    case 4:
-      return cqlfhir.PatientSource.FHIRv400();
+      return cqlFhirModule.PatientSource.FHIRv102();
+      case 4:
+        return cqlFhirModule.PatientSource.FHIRv400();
     default:
       throw new Error('Only FHIR DSTU2 and FHIR R4 servers are supported');
   }

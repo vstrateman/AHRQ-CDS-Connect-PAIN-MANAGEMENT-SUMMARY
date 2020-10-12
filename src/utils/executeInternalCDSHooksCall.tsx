@@ -40,9 +40,9 @@ export default function executeInternalCDSCall(recommendationNumber, collector) 
                         return doSearch(client, release, name, collector);
                     });
                     // Don't return until all the requests have been resolved
-                    return Promise.all(requests).then(function (requestResults) {
-                            const resources = [];
-                            requestResults.forEach(function (result) {
+                    return Promise.all(requests).then((requestResults) => {
+                            const resources: any[] = [];
+                            requestResults.forEach((result: any) => {
                                     return resources.push(...result);
                                 });
                             return {
