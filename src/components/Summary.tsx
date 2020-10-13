@@ -275,7 +275,7 @@ export default class Summary extends Component<any, any> {
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
                     <h3 id={subSection.dataKey} className="sub-section__header">
                         <FontAwesomeIcon
-                            className={'flag flag-nav '+ flaggedClass}
+                            className={'flag flag-nav ' + flaggedClass}
                             icon={flagged ? 'exclamation-circle' : 'circle'}
                             title="flag"
                             tabIndex={0}
@@ -316,22 +316,23 @@ export default class Summary extends Component<any, any> {
 
         let icon: any = '';
         let title = '';
-        if (section === 'CDSHooksAssessment') {
-            title = 'Recommendations';
-        } else if (section === 'PertinentMedicalHistory') {
+        // if (section === 'CDSHooksAssessment') {
+        //     title = 'Recommendations';
+        // } else 
+        if (section === 'PertinentMedicalHistory') {
             icon = <MedicalHistoryIcon width="30" height="40" />;
-            title = 'Pertinent Medical History (' + numMedicalHistoryEntries + ')';
-        } else if (section === 'PainAssessments') {
-            icon = <PainIcon width="35" height="35" />;
-            title = 'Pain Assessments (' + numPainEntries + ')';
+            title = 'Pertinent Conditions (' + numMedicalHistoryEntries + ')';
         } else if (section === 'HistoricalTreatments') {
             icon = <TreatmentsIcon width="36" height="38" />;
             title = 'Historical Pain-related Treatments (' + numTreatmentsEntries + ')';
+        } else if (section === 'PainAssessments') {
+            icon = <PainIcon width="35" height="35" />;
+            title = 'Pain Assessments (' + numPainEntries + ')';
         } else if (section === 'RiskConsiderations') {
             icon = <RiskIcon width="35" height="34" />;
             title = 'Risk Considerations (' + numRiskEntries + ')';
         } else if (section === 'SharedDecisionMaking') {
-          title = `Shared Decision Making`;
+            title = `Shared Decision Making`;
         }
 
         return (
@@ -352,7 +353,7 @@ export default class Summary extends Component<any, any> {
     };
 
     render() {
-        const { summary, collector, qrCollector, result, cdsCollector, questionText} = this.props;
+        const { summary, collector, qrCollector, result, cdsCollector, questionText } = this.props;
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         if (!summary) {
             return null;
@@ -372,21 +373,21 @@ export default class Summary extends Component<any, any> {
 
                     {meetsInclusionCriteria &&
                         <div className="sections">
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("CDSHooksAssessment")} open={true}>
+                            {/* <Collapsible tabIndex={0} trigger={this.renderSectionHeader("CDSHooksAssessment")} open={true}>
                                 {this.renderSection("CDSHooksAssessment")}
-                            </Collapsible>
+                            </Collapsible> */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PertinentMedicalHistory")}
                                 open={true}>
                                 {this.renderSection("PertinentMedicalHistory")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PainAssessments")} open={true}>
-                                {this.renderSection("PainAssessments")}
-                            </Collapsible>
-
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("HistoricalTreatments")}
                                 open={true}>
                                 {this.renderSection("HistoricalTreatments")}
+                            </Collapsible>
+
+                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PainAssessments")} open={true}>
+                                {this.renderSection("PainAssessments")}
                             </Collapsible>
 
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("RiskConsiderations")} open={true}>
