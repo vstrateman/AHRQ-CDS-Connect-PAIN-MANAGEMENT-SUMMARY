@@ -114,9 +114,23 @@ export default class Summary extends Component<any, any> {
         );
     }
 
+    createSharedDecisionEntries(entries: any){
+        entries.forEach((entry) =>{
+            let question = this.props.questionText.get(entry.LinkId);
+            if(question !== null && question !== undefined) {
+             //   entry.Answer = this.props.questionText.get(entry.LinkId) + entry.Answer;
+                entry.Question = this.props.questionText.get(entry.LinkId);
+            }
+        })
+        return entries;
+    }
+
     renderTable(table: any, entries: any, section: any, subSection: any, index: any) {
         // If a filter is provided, only render those things that have the filter field (or don't have it when it's negated)
         let filteredEntries = entries;
+        if((section === 'SharedDecisionMaking') && entries !== null && entries !== undefined && entries.length > 0) {
+            filteredEntries = this.createSharedDecisionEntries(entries);
+        }
         if (table.filter && table.filter.length > 0) {
             // A filter starting with '!' is negated (looking for absence of that field)
             const negated = table.filter[0] === '!';
@@ -269,18 +283,6 @@ export default class Summary extends Component<any, any> {
 
             const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
             const flaggedClass = flagged ? 'flagged' : '';
-            // if (section === 'SharedDecisionMaking') {
-            //     const questionTextMap = this.props.questionText;
-            //     return (
-            //         <div>
-            //             <blockquote>
-            //                 {questionTextMap.get(this.props.summary)}
-            //                 {this.}<br />
-            //             </blockquote>
-            //         </div>
-            //     )
-            // }
-
             return (
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
                     <h3 id={subSection.dataKey} className="sub-section__header">
