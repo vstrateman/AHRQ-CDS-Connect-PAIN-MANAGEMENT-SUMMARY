@@ -260,7 +260,6 @@ export default class Summary extends Component<any, any> {
                 </div>
             )
         }
-
         const sectionMap = this.summaryMapData[section];
 
         return sectionMap.map((subSection: any) => {
@@ -270,6 +269,17 @@ export default class Summary extends Component<any, any> {
 
             const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
             const flaggedClass = flagged ? 'flagged' : '';
+            // if (section === 'SharedDecisionMaking') {
+            //     const questionTextMap = this.props.questionText;
+            //     return (
+            //         <div>
+            //             <blockquote>
+            //                 {questionTextMap.get(this.props.summary)}
+            //                 {this.}<br />
+            //             </blockquote>
+            //         </div>
+            //     )
+            // }
 
             return (
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
@@ -330,9 +340,9 @@ export default class Summary extends Component<any, any> {
         } else if (section === 'RiskConsiderations') {
             icon = <RiskIcon width="35" height="34" />;
             title = 'Risk Considerations (' + numRiskEntries + ')';
-        }// else if (section === 'SharedDecisionMaking') {
-        //   title = `Shared Decision Making`;
-        // }
+        } else if (section === 'SharedDecisionMaking') {
+           title = `Shared Decision Making`;
+         }
 
         return (
             <h2 id={section} className="section__header">
@@ -394,6 +404,10 @@ export default class Summary extends Component<any, any> {
 
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("RiskConsiderations")} open={true}>
                                 {this.renderSection("RiskConsiderations")}
+                            </Collapsible>
+
+                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
+                                {this.renderSection("SharedDecisionMaking")}
                             </Collapsible>
                         </div>
                     }

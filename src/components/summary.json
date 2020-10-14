@@ -21,13 +21,13 @@
         {
           "headers": {
             "Name": "Answer",
-            "Status": "Status",
             "Recorded": {
               "key": "DateText",
               "formatter": "datishFormat"
             },
-            "LinkID": {
-              "key": "LinikId"
+            "LinkId": {
+              "key": "LinkId",
+              "formatter": "quantityFormat"
             }
           }
         }
