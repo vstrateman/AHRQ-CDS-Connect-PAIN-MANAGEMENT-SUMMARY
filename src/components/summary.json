@@ -20,14 +20,15 @@
       "tables": [
         {
           "headers": {
-            "Name": "Answer",
-            "Status": "Status",
+            "Question": "Question",
+            "Answer": "Answer",
+            "LinkId": {
+              "key": "LinkId",
+              "formatter": "quantityFormat"
+            },
             "Recorded": {
               "key": "DateText",
               "formatter": "datishFormat"
-            },
-            "LinkID": {
-              "key": "LinikId"
             }
           }
         }
