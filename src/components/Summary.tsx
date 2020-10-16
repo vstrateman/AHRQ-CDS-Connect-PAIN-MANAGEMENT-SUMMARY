@@ -433,19 +433,7 @@ export default class Summary extends Component<any, any> {
     }
 }
 
-// Summary.propTypes = {
-//     summary: PropTypes.object,
-//     sectionFlags: PropTypes.object,
-//     collector: PropTypes.array,
-//     cdsCollector: PropTypes.array,
-//     qrCollector: PropTypes.array,
-//     questionText: PropTypes.object,
-//     result: PropTypes.object,
-//     numMedicalHistoryEntries: PropTypes.number,
-//     numPainEntries: PropTypes.number,
-//     numTreatmentsEntries: PropTypes.number,
-//     numRiskEntries: PropTypes.number
-// };
+
 Summary.propTypes = {
     summary: PropTypes.object.isRequired,
     sectionFlags: PropTypes.object.isRequired,
