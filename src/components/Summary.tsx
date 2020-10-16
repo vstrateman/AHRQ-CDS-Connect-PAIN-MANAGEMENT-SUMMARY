@@ -6,17 +6,13 @@ import ReactTooltip from 'react-tooltip';
 import ReactTable from 'react-table';
 import ReactModal from 'react-modal';
 
-import summaryMap from './summary_withSharedDecision.json';
+import summaryMap from './summary_modified.json';
+// import summaryMap from './summary_withSharedDecision.json';
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
 
-import MedicalHistoryIcon from '../icons/MedicalHistoryIcon';
-import PainIcon from '../icons/PainIcon';
-import TreatmentsIcon from '../icons/TreatmentsIcon';
-import RiskIcon from '../icons/RiskIcon';
-
 import InclusionBanner from './InclusionBanner';
-import ExclusionBanner from './ExclusionBanner';
+// import ExclusionBanner from './ExclusionBanner';
 import InfoModal from './InfoModal';
 import DevTools from './DevTools';
 
@@ -72,8 +68,14 @@ export default class Summary extends Component<any, any> {
             return true;
         } else if (sectionFlags[section][subSection] === false) {
             return false;
-        } else {
+        } else if (sectionFlags[section][subSection] !== undefined && (sectionFlags[section][subSection] instanceof Array) && sectionFlags[section][subSection].length > 0){
+            // console.log('length: ', sectionFlags[section][subSection].length);
             return sectionFlags[section][subSection].length > 0;
+        } else if (typeof sectionFlags[section][subSection] === 'string'){
+            // console.log('string: ', sectionFlags[section][subSection])
+            return sectionFlags[section][subSection];
+        } else {
+            console.log('else: ', sectionFlags[section][subSection])
         }
     }
 
@@ -322,27 +324,16 @@ export default class Summary extends Component<any, any> {
     }
 
     renderSectionHeader(section: any) {
-        const flagged = this.isSectionFlagged(section);
-        const flaggedClass = flagged ? 'flagged' : '';
-        const { numMedicalHistoryEntries, numPainEntries, numTreatmentsEntries, numRiskEntries } = this.props;
 
-        let icon: any = '';
         let title = '';
-        // if (section === 'CDSHooksAssessment') {
-        //     title = 'Recommendations';
-        // } else 
         if (section === 'PertinentMedicalHistory') {
-            icon = <MedicalHistoryIcon width="30" height="40" />;
-            title = 'Pertinent Conditions (' + numMedicalHistoryEntries + ')';
+            title = 'Pertinent Conditions';
         } else if (section === 'HistoricalTreatments') {
-            icon = <TreatmentsIcon width="36" height="38" />;
-            title = 'Historical Pain-related Treatments (' + numTreatmentsEntries + ')';
+            title = 'Current Pertinent Treatments';
         } else if (section === 'PainAssessments') {
-            icon = <PainIcon width="35" height="35" />;
-            title = 'Pain Assessments (' + numPainEntries + ')';
+            title = 'Pain Assessments';
         } else if (section === 'RiskConsiderations') {
-            icon = <RiskIcon width="35" height="34" />;
-            title = 'Risk Considerations (' + numRiskEntries + ')';
+            title = 'Risk Considerations';
         } else if (section === 'SharedDecisionMaking') {
            title = `Shared Decision Making`;
          }
@@ -350,16 +341,13 @@ export default class Summary extends Component<any, any> {
         return (
             <h2 id={section} className="section__header">
                 <div className="section__header-title">
-                    {icon}
 
                     <span className="span-class">
                         {title}
-                        <FontAwesomeIcon className={'flag flag-header ' + flaggedClass} icon="exclamation-circle"
-                            title="flag" />
                     </span>
                 </div>
 
-                <FontAwesomeIcon className="chevron" icon="chevron-right" title="expand/collapse" />
+                <FontAwesomeIcon className="caret" icon="caret-right" title="expand/collapse" />
             </h2>
         );
     };
@@ -379,33 +367,28 @@ export default class Summary extends Component<any, any> {
                         Factors to Consider in Managing Chronic Pain
                     </div>
 
-                    {meetsInclusionCriteria && <ExclusionBanner />}
-
                     {!meetsInclusionCriteria && <InclusionBanner dismissible={meetsInclusionCriteria} />}
 
                     {meetsInclusionCriteria &&
                         <div className="sections">
-                            {/* <Collapsible tabIndex={0} trigger={this.renderSectionHeader("CDSHooksAssessment")} open={true}>
-                                {this.renderSection("CDSHooksAssessment")}
-                            </Collapsible> */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PertinentMedicalHistory")}
-                                open={true}>
+                                open={false}>
                                 {this.renderSection("PertinentMedicalHistory")}
                             </Collapsible>
 
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("HistoricalTreatments")}
-                                open={true}>
+                                open={false}>
                                 {this.renderSection("HistoricalTreatments")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PainAssessments")} open={true}>
+                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PainAssessments")} open={false}>
                                 {this.renderSection("PainAssessments")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("RiskConsiderations")} open={true}>
+                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("RiskConsiderations")} open={false}>
                                 {this.renderSection("RiskConsiderations")}
                             </Collapsible>
-
+                            {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
                                 {this.renderSection("SharedDecisionMaking")}
                             </Collapsible>
@@ -450,28 +433,28 @@ export default class Summary extends Component<any, any> {
     }
 }
 
-Summary.propTypes = {
-    summary: PropTypes.object,
-    sectionFlags: PropTypes.object,
-    collector: PropTypes.array,
-    cdsCollector: PropTypes.array,
-    qrCollector: PropTypes.array,
-    questionText: PropTypes.object,
-    result: PropTypes.object,
-    numMedicalHistoryEntries: PropTypes.number,
-    numPainEntries: PropTypes.number,
-    numTreatmentsEntries: PropTypes.number,
-    numRiskEntries: PropTypes.number
-};
 // Summary.propTypes = {
-//     summary: PropTypes.object.isRequired,
-//     sectionFlags: PropTypes.object.isRequired,
-//     collector: PropTypes.array.isRequired,
-//     cdsCollector: PropTypes.array.isRequired,
-//     qrCollector: PropTypes.array.isRequired,
-//     result: PropTypes.object.isRequired,
-//     numMedicalHistoryEntries: PropTypes.number.isRequired,
-//     numPainEntries: PropTypes.number.isRequired,
-//     numTreatmentsEntries: PropTypes.number.isRequired,
-//     numRiskEntries: PropTypes.number.isRequired
+//     summary: PropTypes.object,
+//     sectionFlags: PropTypes.object,
+//     collector: PropTypes.array,
+//     cdsCollector: PropTypes.array,
+//     qrCollector: PropTypes.array,
+//     questionText: PropTypes.object,
+//     result: PropTypes.object,
+//     numMedicalHistoryEntries: PropTypes.number,
+//     numPainEntries: PropTypes.number,
+//     numTreatmentsEntries: PropTypes.number,
+//     numRiskEntries: PropTypes.number
 // };
+Summary.propTypes = {
+    summary: PropTypes.object.isRequired,
+    sectionFlags: PropTypes.object.isRequired,
+    collector: PropTypes.array.isRequired,
+    cdsCollector: PropTypes.array.isRequired,
+    qrCollector: PropTypes.array.isRequired,
+    result: PropTypes.object.isRequired,
+    numMedicalHistoryEntries: PropTypes.number.isRequired,
+    numPainEntries: PropTypes.number.isRequired,
+    numTreatmentsEntries: PropTypes.number.isRequired,
+    numRiskEntries: PropTypes.number.isRequired
+};
