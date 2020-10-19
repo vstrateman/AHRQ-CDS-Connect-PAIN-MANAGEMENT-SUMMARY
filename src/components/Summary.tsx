@@ -283,17 +283,17 @@ export default class Summary extends Component<any, any> {
             const entries = (Array.isArray(data) ? data : [data]).filter(r => r != null);
             const hasEntries = entries.length !== 0;
 
-            const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
-            const flaggedClass = flagged ? 'flagged' : '';
+            // const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
+            // const flaggedClass = flagged ? 'flagged' : '';
             return (
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
                     <h3 id={subSection.dataKey} className="sub-section__header">
-                        <FontAwesomeIcon
+                        {/* <FontAwesomeIcon
                             className={'flag flag-nav ' + flaggedClass}
                             icon={flagged ? 'exclamation-circle' : 'circle'}
                             title="flag"
                             tabIndex={0}
-                        />
+                        /> */}
                         {subSection.name}
                         {subSection.info &&
                             <div
@@ -438,7 +438,7 @@ Summary.propTypes = {
     summary: PropTypes.object.isRequired,
     sectionFlags: PropTypes.object.isRequired,
     collector: PropTypes.array.isRequired,
-    cdsCollector: PropTypes.array.isRequired,
+    cdsCollector: PropTypes.array,
     qrCollector: PropTypes.array.isRequired,
     result: PropTypes.object.isRequired,
     numMedicalHistoryEntries: PropTypes.number.isRequired,
