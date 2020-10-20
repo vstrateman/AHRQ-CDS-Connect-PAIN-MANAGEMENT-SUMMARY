@@ -52,7 +52,7 @@ function createItemList(collector, hookId) {
             servicesJson.services.forEach((service) => {
                 if (service.id === hookId) {
                     let prefetch = service.prefetch;
-                    collector.forEach(entry => {
+                    collector.forEach((entry:any) => {
                         let resourceType = entry.url.substring(entry.url.lastIndexOf('/') + 1, entry.url.indexOf('?'));
                         if (!resourceType.includes('Patient') && entry.data.entry) {
                             for (let [key, value] of Object.entries(prefetch)) {
@@ -91,7 +91,7 @@ function getHeader(pt) {
 }
 
 function uuidv4() {
-    return JSON.stringify(1e7 + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c:any) =>
+    return JSON.stringify(1e7 + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c: any) =>
         // eslint-disable-next-line
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
