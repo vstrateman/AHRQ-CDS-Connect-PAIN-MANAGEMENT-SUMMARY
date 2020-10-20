@@ -6,12 +6,16 @@
 //   - Add back ...ByConcept functions for backwards compatibility w/ libraries that
 //     might expect them
 //   - Consider effectiveInstant in ObservationLookBack
-library CDS_Connect_Commons_for_FHIRv400 version '1.0.1'
+// - 1.0.2
+//   - Updated to FHIR 4.0.1 (note did not change library name to ...v401, potentially confusing
+//     but not sure the best approach, given the FHIR version is in the library name...)
+//   - Updated FHIRHelpers functions based on FHIR 4.0.1
+library CDS_Connect_Commons_for_FHIRv400 version '1.0.2'
 
-using FHIR version '4.0.0'
+using FHIR version '4.0.1'
 
 // Include the FHIRHelpers library for simplifying interacton w/ the FHIR data model
-include FHIRHelpers version '4.0.0' called FHIRHelpers
+include FHIRHelpers version '4.0.1' called FHIRHelpers
 
 codesystem "AIVERSTATUS": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-verification'
 codesystem "AICLINSTATUS": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical'
@@ -44,7 +48,46 @@ define function PeriodToInterval(period FHIR.Period):
   if period is null then
     null
   else
-    Interval[period."start".value, period."end".value]
+    if period."start" is null then
+      Interval(period."start".value, period."end".value]
+    else
+      Interval[period."start".value, period."end".value]
+
+/**
+ * Converts a FHIR Quantity to a CQL Interval.  FHIRHelpers provides a function for this, but
+ * FHIRHelpers provides several overloads of the ToInterval function, and the JavaScript CQL
+ * Execution Framework apparently does not handle this correctly.  Creating uniquely named
+ * functions here ensures safe execution.
+ * @param quantity - a FHIR Quantity
+ * @returns {System.Interval} a CQL Interval or null if null was passed in
+ */
+define function QuantityToInterval(quantity FHIR.Quantity):
+  if quantity is null then null else
+    case quantity.comparator.value
+      when '<' then
+        Interval[
+          null,
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity)
+        )
+      when '<=' then
+        Interval[
+          null,
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity)
+        ]
+      when '>=' then
+        Interval[
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity),
+          null
+        ]
+      when '>' then
+        Interval(
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity),
+          null
+        ]
+      else
+        Interval[FHIRHelpers.ToQuantity(quantity), FHIRHelpers.ToQuantity(quantity)]
+    end
+
 
 /**
  * Converts a FHIR Range to a CQL Interval.  FHIRHelpers provides a function for this, but
