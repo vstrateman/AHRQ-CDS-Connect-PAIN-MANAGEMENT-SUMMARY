@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import rpn from 'request-promise-native';
-import mkdirp from 'mkdirp';
+const fs = require('fs');
+const path = require('path');
+const rpn = require('request-promise-native');
+const mkdirp = require('mkdirp');
 
 const DUMP_TEST_PATIENT_JSON = true;
 
@@ -90,7 +90,7 @@ function upload(release, baseURL, patientPath) {
       resolveWithFullResponse: true,
       json: true
     }
-    let request = rpn(ptOptions);
+    const request = rpn(ptOptions);
     request.then(
       (success) => {
         console.log(stringResult(`${json.id}_patient`, success));
