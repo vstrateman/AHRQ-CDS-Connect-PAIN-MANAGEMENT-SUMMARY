@@ -90,7 +90,7 @@ function upload(release, baseURL, patientPath) {
       resolveWithFullResponse: true,
       json: true
     }
-    let request = rpn(ptOptions);
+    const request = rpn(ptOptions);
     request.then(
       (success) => {
         console.log(stringResult(`${json.id}_patient`, success));
