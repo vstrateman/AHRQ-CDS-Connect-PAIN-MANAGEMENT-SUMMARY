@@ -1,0 +1,1349 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,DisableListDemotion,DisableListPromotion,DisableMethodInvocation",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "PainManager",
+         "version" : "0.1.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.1"
+         }, {
+            "localIdentifier" : "C3F",
+            "path" : "CDS_Connect_Commons_for_FHIRv400",
+            "version" : "1.0.2"
+         }, {
+            "localIdentifier" : "F2C",
+            "path" : "Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400",
+            "version" : "1.0.1"
+         }, {
+            "localIdentifier" : "Cx",
+            "path" : "ChronicPainConcepts",
+            "version" : "2.0.0"
+         }, {
+            "localIdentifier" : "MMECalculator",
+            "path" : "MMECalculator",
+            "version" : "3.0.0"
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "name" : "LOINC",
+            "id" : "http://loinc.org",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "SNOMED-CT",
+            "id" : "http://snomed.info/sct",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "name" : "MyPAIN Questionnaire Codes",
+            "id" : "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "name" : "Questionnaire response Document code",
+            "id" : "74465-6",
+            "display" : "Questionnaire response Document",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         } ]
+      },
+      "concepts" : {
+         "def" : [ {
+            "name" : "Questionnaire response Document",
+            "display" : "Questionnaire response Document",
+            "accessLevel" : "Public",
+            "code" : [ {
+               "name" : "Questionnaire response Document code"
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "ActiveOpioidMedications",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "name" : "ActiveMedicationRequest",
+               "libraryName" : "C3F",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                  "codeProperty" : "medication",
+                  "codeComparator" : "in",
+                  "type" : "Retrieve",
+                  "codes" : {
+                     "name" : "Opioid Pain Medications",
+                     "libraryName" : "Cx",
+                     "type" : "ValueSetRef"
+                  }
+               } ]
+            }
+         }, {
+            "name" : "CurrentMME",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "name" : "TotalMME",
+               "libraryName" : "MMECalculator",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "ActiveOpioidMedications",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "name" : "ReportCurrentMME",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "List",
+               "element" : [ {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "IsNull",
+                        "operand" : {
+                           "name" : "CurrentMME",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  },
+                  "then" : {
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "name" : "Name",
+                           "type" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "name" : "Result",
+                           "type" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "name" : "Date",
+                           "type" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "else" : {
+                     "type" : "Query",
+                     "source" : [ {
+                        "alias" : "M",
+                        "expression" : {
+                           "name" : "CurrentMME",
+                           "type" : "ExpressionRef"
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "return" : {
+                        "expression" : {
+                           "type" : "Tuple",
+                           "element" : [ {
+                              "name" : "Name",
+                              "value" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "Current Milligram Morphine Equivalent",
+                                 "type" : "Literal"
+                              }
+                           }, {
+                              "name" : "Result",
+                              "value" : {
+                                 "type" : "ToString",
+                                 "operand" : {
+                                    "name" : "M",
+                                    "type" : "AliasRef"
+                                 }
+                              }
+                           }, {
+                              "name" : "Date",
+                              "value" : {
+                                 "type" : "ToString",
+                                 "operand" : {
+                                    "type" : "Today"
+                                 }
+                              }
+                           } ]
+                        }
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "name" : "ConceptTextOrCode",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Coalesce",
+               "operand" : [ {
+                  "type" : "Coalesce",
+                  "operand" : [ {
+                     "type" : "Query",
+                     "source" : [ {
+                        "alias" : "c2",
+                        "expression" : {
+                           "path" : "coding",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "c",
+                              "type" : "OperandRef"
+                           }
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "return" : {
+                        "expression" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "code",
+                              "scope" : "c2",
+                              "type" : "Property"
+                           }
+                        }
+                     }
+                  } ]
+               }, {
+                  "path" : "value",
+                  "type" : "Property",
+                  "source" : {
+                     "path" : "text",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "c",
+                        "type" : "OperandRef"
+                     }
+                  }
+               } ]
+            },
+            "operand" : [ {
+               "name" : "c",
+               "operandTypeSpecifier" : {
+                  "name" : "{http://hl7.org/fhir}CodeableConcept",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "name" : "ObservationValue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Coalesce",
+               "operand" : [ {
+                  "name" : "QuantityText",
+                  "libraryName" : "F2C",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "Obs",
+                           "type" : "OperandRef"
+                        }
+                     },
+                     "asTypeSpecifier" : {
+                        "name" : "{http://hl7.org/fhir}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }, {
+                  "type" : "ToString",
+                  "operand" : {
+                     "name" : "ToBoolean",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "Obs",
+                              "type" : "OperandRef"
+                           }
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{http://hl7.org/fhir}boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "ToString",
+                  "libraryName" : "FHIRHelpers",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "Obs",
+                           "type" : "OperandRef"
+                        }
+                     },
+                     "asTypeSpecifier" : {
+                        "name" : "{http://hl7.org/fhir}string",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }, {
+                  "name" : "ConceptText",
+                  "libraryName" : "F2C",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "Obs",
+                           "type" : "OperandRef"
+                        }
+                     },
+                     "asTypeSpecifier" : {
+                        "name" : "{http://hl7.org/fhir}CodeableConcept",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               } ]
+            },
+            "operand" : [ {
+               "name" : "Obs",
+               "operandTypeSpecifier" : {
+                  "name" : "{http://hl7.org/fhir}Observation",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "name" : "GetLinkId",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "IsNull",
+                     "operand" : {
+                        "name" : "Obs",
+                        "type" : "OperandRef"
+                     }
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Obs is null",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "IsNull",
+                        "operand" : {
+                           "type" : "Indexer",
+                           "operand" : [ {
+                              "path" : "extension",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Obs",
+                                 "type" : "OperandRef"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Obs.extension is null",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "IsNull",
+                           "operand" : {
+                              "path" : "url",
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "extension",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "Obs",
+                                       "type" : "OperandRef"
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
+                           }
+                        }
+                     },
+                     "then" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Obs.extension.url is null",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "type" : "If",
+                        "condition" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "IsNull",
+                              "operand" : {
+                                 "path" : "extension",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "type" : "Indexer",
+                                    "operand" : [ {
+                                       "path" : "extension",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "Obs",
+                                          "type" : "OperandRef"
+                                       }
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "0",
+                                       "type" : "Literal"
+                                    } ]
+                                 }
+                              }
+                           }
+                        },
+                        "then" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Obs.extension.extension is null",
+                           "type" : "Literal"
+                        },
+                        "else" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "As",
+                           "operand" : {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "type" : "Indexer",
+                                    "operand" : [ {
+                                       "path" : "extension",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "path" : "extension",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "name" : "Obs",
+                                                "type" : "OperandRef"
+                                             }
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "0",
+                                       "type" : "Literal"
+                                    } ]
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "Obs",
+               "operandTypeSpecifier" : {
+                  "name" : "{http://hl7.org/fhir}Observation",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "name" : "QuestionnaireObservations",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "name" : "Verified",
+               "libraryName" : "C3F",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "ObservationLookBack",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "dataType" : "{http://hl7.org/fhir}Observation",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+                     "codeProperty" : "code",
+                     "codeComparator" : "in",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "MyPAIN Questionnaire Codes",
+                        "type" : "ValueSetRef"
+                     }
+                  }, {
+                     "value" : 1,
+                     "unit" : "year",
+                     "type" : "Quantity"
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "ReportQuestionnaireObservations",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qo",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Answer",
+                        "value" : {
+                           "name" : "ObservationValue",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qo",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "DateText",
+                        "value" : {
+                           "name" : "ObservationDate",
+                           "libraryName" : "F2C",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qo",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "LinkId",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "extension",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "type" : "Indexer",
+                                       "operand" : [ {
+                                          "path" : "extension",
+                                          "scope" : "qo",
+                                          "type" : "Property"
+                                       }, {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "0",
+                                          "type" : "Literal"
+                                       } ]
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "name" : "ReportMyPAINSubmitDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "strict" : false,
+               "type" : "As",
+               "operand" : {
+                  "type" : "Null"
+               },
+               "asTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "name" : "ReportActivityGoals",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "strict" : false,
+               "type" : "As",
+               "operand" : {
+                  "type" : "Null"
+               },
+               "asTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "name" : "ReportActivityBarriers",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "strict" : false,
+               "type" : "As",
+               "operand" : {
+                  "type" : "Null"
+               },
+               "asTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "name" : "ReportPainLocations",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "List",
+               "element" : [ {
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "Location",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "PainYesNo",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "Description",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "ReportPainIntensityAndInterference",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "List",
+               "element" : [ {
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "Question",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "Response",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "ReportResourcesProvidedInMyPAIN",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "List",
+               "element" : [ {
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "Resource",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "ResourceUrl",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "ViewedOn",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "List",
+               "element" : [ {
+                  "type" : "Tuple",
+                  "element" : [ {
+                     "name" : "Treatment",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "Effectiveness",
+                     "value" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "ReportRecommendation3Text",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "Per CDC guidelines, before starting, and periodically during opioid therapy, clinicians should discuss with patients known risks and realistic benefits of opioid therapy and patient and clinician responsibilities for managing therapy (recommendation category: A, evidence type: 3).  [CDC Opioid Prescribing Guideline, Recommendation #3](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "ReportRecommendation5Text",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "GreaterOrEqual",
+                     "operand" : [ {
+                        "name" : "CurrentMME",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "type" : "ToQuantity",
+                        "operand" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "50",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Per CDC guidelines, when opioids are started, clinicians should prescribe the lowest effective dosage. Clinicians should use caution when prescribing opioids at any dosage, should carefully reassess evidence of individual benefits and risks when considering increasing dosage to â‰¥50 morphine milligram equivalents (MME)/day, and should avoid increasing dosage to â‰¥90 MME/day or carefully justify a decision to titrate dosage to â‰¥90 MME/day (recommendation category: A, evidence type: 3).\n\nFor MME/day of â‰¥ 50, CDC guidelines recommend incorporating into the management plan strategies to mitigate risk, including considering offering naloxone (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #5 and #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "name" : "ReportRecommendation8Text",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "Per CDC guidelines, before starting, and periodically during continuation of opioid therapy, clinicians should evaluate risk factors for opioid-related harms. Clinicians should incorporate into the management plan strategies to mitigate risk, including considering offering naloxone when factors that increase risk for opioid overdose, such as history of overdose, history of substance use disorder, higher opioid dosages (greater than or equal to [â‰¥] 50 morphine milligram equivalents [MME]/day), or concurrent benzodiazepine use, are present (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "ReportRecommendation10Text",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "Exists",
+                        "operand" : {
+                           "name" : "ReportUrineDrugScreens",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "**No urine drug screen within the past year**\n\nPatientâ€™s active medications include an opioid. Per CDC guidelines, when prescribing opioids for chronic pain, clinicians should use urine drug testing before starting opioid therapy and consider urine drug testing at least annually to assess for prescribed medications as well as other controlled prescription drugs and illicit drugs (recommendation category: B, evidence type: 4) [CDC Opioid Prescribing Guideline, Recommendation #10](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm).",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "name" : "ReportRecommendation11Text",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "And",
+                     "operand" : [ {
+                        "type" : "Exists",
+                        "operand" : {
+                           "name" : "ReportOpioidMedications",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "type" : "Exists",
+                        "operand" : {
+                           "name" : "ReportBenzodiazepineMedications",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Per CDC guidelines, avoid prescribing opioid pain medication and benzodiazepines concurrently whenever possible (recommendation category: A, evidence type: 3) [CDC Opioid Prescribing Guideline, Recommendation #11](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "name" : "Summary",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "Patient",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Name",
+                        "value" : {
+                           "type" : "Concatenate",
+                           "operand" : [ {
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "type" : "Combine",
+                                 "source" : {
+                                    "type" : "Query",
+                                    "source" : [ {
+                                       "alias" : "G",
+                                       "expression" : {
+                                          "type" : "Flatten",
+                                          "operand" : {
+                                             "type" : "Query",
+                                             "source" : [ {
+                                                "alias" : "$this",
+                                                "expression" : {
+                                                   "path" : "name",
+                                                   "type" : "Property",
+                                                   "source" : {
+                                                      "name" : "Patient",
+                                                      "type" : "ExpressionRef"
+                                                   }
+                                                }
+                                             } ],
+                                             "where" : {
+                                                "type" : "Not",
+                                                "operand" : {
+                                                   "type" : "IsNull",
+                                                   "operand" : {
+                                                      "path" : "given",
+                                                      "type" : "Property",
+                                                      "source" : {
+                                                         "name" : "$this",
+                                                         "type" : "AliasRef"
+                                                      }
+                                                   }
+                                                }
+                                             },
+                                             "return" : {
+                                                "distinct" : false,
+                                                "expression" : {
+                                                   "path" : "given",
+                                                   "type" : "Property",
+                                                   "source" : {
+                                                      "name" : "$this",
+                                                      "type" : "AliasRef"
+                                                   }
+                                                }
+                                             }
+                                          }
+                                       }
+                                    } ],
+                                    "relationship" : [ ],
+                                    "return" : {
+                                       "expression" : {
+                                          "path" : "value",
+                                          "scope" : "G",
+                                          "type" : "Property"
+                                       }
+                                    }
+                                 },
+                                 "separator" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : " ",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : " ",
+                                 "type" : "Literal"
+                              } ]
+                           }, {
+                              "type" : "Combine",
+                              "source" : {
+                                 "type" : "Query",
+                                 "source" : [ {
+                                    "alias" : "F",
+                                    "expression" : {
+                                       "type" : "Query",
+                                       "source" : [ {
+                                          "alias" : "$this",
+                                          "expression" : {
+                                             "path" : "name",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "name" : "Patient",
+                                                "type" : "ExpressionRef"
+                                             }
+                                          }
+                                       } ],
+                                       "where" : {
+                                          "type" : "Not",
+                                          "operand" : {
+                                             "type" : "IsNull",
+                                             "operand" : {
+                                                "path" : "family",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "name" : "$this",
+                                                   "type" : "AliasRef"
+                                                }
+                                             }
+                                          }
+                                       },
+                                       "return" : {
+                                          "distinct" : false,
+                                          "expression" : {
+                                             "path" : "family",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "name" : "$this",
+                                                "type" : "AliasRef"
+                                             }
+                                          }
+                                       }
+                                    }
+                                 } ],
+                                 "relationship" : [ ],
+                                 "return" : {
+                                    "expression" : {
+                                       "path" : "value",
+                                       "scope" : "F",
+                                       "type" : "Property"
+                                    }
+                                 }
+                              },
+                              "separator" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : " ",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Gender",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "gender",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Patient",
+                                 "type" : "ExpressionRef"
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "Age",
+                        "value" : {
+                           "precision" : "Year",
+                           "type" : "CalculateAge",
+                           "operand" : {
+                              "path" : "birthDate.value",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Patient",
+                                 "type" : "ExpressionRef"
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "MeetsInclusionCriteria",
+                        "value" : {
+                           "name" : "MeetsInclusionCriteria",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "PertinentConditions",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "ConditionsAssociatedWithChronicPain",
+                        "value" : {
+                           "name" : "ReportConditionsAssociatedWithChronicPain",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
+                        "value" : {
+                           "name" : "ReportRiskFactorsForOpioidRelatedHarms",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Recommendation8Text",
+                        "value" : {
+                           "name" : "ReportRecommendation8Text",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "CurrentPainTreatments",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "CurrentMME",
+                        "value" : {
+                           "name" : "ReportCurrentMME",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "MostRecentMME",
+                        "value" : {
+                           "name" : "ReportMostRecentMME",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "OpioidMedications",
+                        "value" : {
+                           "name" : "ReportOpioidMedications",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "NonOpioidMedications",
+                        "value" : {
+                           "name" : "ReportNonOpioidMedications",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "BenzodiazepineMedications",
+                        "value" : {
+                           "name" : "ReportBenzodiazepineMedications",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "NaloxoneMedications",
+                        "value" : {
+                           "name" : "ReportNaloxoneMedications",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "SelfReportedTreatementsFromMyPAIN",
+                        "value" : {
+                           "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Recommendation3Text",
+                        "value" : {
+                           "name" : "ReportRecommendation3Text",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Recommendation5Text",
+                        "value" : {
+                           "name" : "ReportRecommendation5Text",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Recommendation11Text",
+                        "value" : {
+                           "name" : "ReportRecommendation11Text",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "UrineDrugScreening",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "UrineDrugScreens",
+                        "value" : {
+                           "name" : "ReportUrineDrugScreens",
+                           "libraryName" : "F2C",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Recommendation10Text",
+                        "value" : {
+                           "name" : "ReportRecommendation10Text",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "SharedDecisionMaking",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "MyPAINSubmitDate",
+                        "value" : {
+                           "name" : "ReportMyPAINSubmitDate",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "ActivityGoals",
+                        "value" : {
+                           "name" : "ReportActivityGoals",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "ActivityBarriers",
+                        "value" : {
+                           "name" : "ReportActivityBarriers",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "PainLocations",
+                        "value" : {
+                           "name" : "ReportPainLocations",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "PainIntensityAndInterference",
+                        "value" : {
+                           "name" : "ReportPainIntensityAndInterference",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "ResourcesProvidedInMyPAIN",
+                        "value" : {
+                           "name" : "ReportResourcesProvidedInMyPAIN",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

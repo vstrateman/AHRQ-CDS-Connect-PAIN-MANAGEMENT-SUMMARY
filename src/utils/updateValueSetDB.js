@@ -9,10 +9,15 @@ const { CodeService } = require('cql-exec-vsac');
 const dstu2FactorsELM = require('../cql/dstu2/Factors_to_Consider_in_Managing_Chronic_Pain.json');
 const dstu2CommonsELM = require('../cql/dstu2/CDS_Connect_Commons_for_FHIRv102.json');
 const dstu2HelpersELM = require('../cql/dstu2/FHIRHelpers.json');
+const r4PainManagerELM = require('../cql/r4/PainManager.json');
 const r4FactorsELM = require('../cql/r4/Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400.json');
+const r4ConceptsELM = require('../cql/r4/ChronicPainConcepts-2.0.0.json');
 const r4CommonsELM = require('../cql/r4/CDS_Connect_Commons_for_FHIRv400.json');
 const r4HelpersELM = require('../cql/r4/FHIRHelpers.json');
-
+const r4OMTKDataELM = require('../cql/r4/OMTKData.json');
+const r4OMTKLogicELM = require('../cql/r4/OMTKLogic.json');
+const r4ConversionFactorsELM = require('../cql/r4/ConversionFactors.json');
+const r4MMECalculatorELM = require('../cql/r4/MMECalculator.json');
 
 // First ensure a username and password are provided
 const [user, password] = process.argv.slice(2);
@@ -37,9 +42,15 @@ const dstu2Lib = new Library(dstu2FactorsELM, new Repository({
   CDS_Connect_Commons_for_FHIRv102: dstu2CommonsELM,
   FHIRHelpers: dstu2HelpersELM
 }));
-const r4Lib = new Library(r4FactorsELM, new Repository({
+const r4Lib = new Library(r4PainManagerELM, new Repository({
+  Factors: r4FactorsELM,
+  Concepts: r4ConceptsELM,
   CDS_Connect_Commons_for_FHIRv400: r4CommonsELM,
-  FHIRHelpers: r4HelpersELM
+  FHIRHelpers: r4HelpersELM,
+  OMTKData: r4OMTKDataELM,
+  OMTKLogic: r4OMTKLogicELM,
+  ConversionFactors: r4ConversionFactorsELM,
+  MMECalculator: r4MMECalculatorELM
 }));
 
 // Then use the ensureValueSetsInLibrary function to analyze the Pain
@@ -92,5 +103,3 @@ codeService.ensureValueSetsInLibrary(dstu2Lib, true, user, password)
       console.error('Error updating valueset-db.json:', message);
       process.exit(1);
     });
-
-
