@@ -50,7 +50,7 @@ function upload(release, baseURL, patientPath) {
   console.log('bundle id                     tx status     entry statuses')
   console.log('-'.padEnd(80, '-'));
 
-  const requests: any[] = [];
+  const requests = [];
   for (const fileName of fs.readdirSync(patientPath)) {
     const file = path.join(patientPath, fileName);
     if (!file.endsWith('.json')) {
@@ -90,7 +90,7 @@ function upload(release, baseURL, patientPath) {
       resolveWithFullResponse: true,
       json: true
     }
-    let request: any = rpn(ptOptions);
+    let request = rpn(ptOptions);
     request.then(
       (success) => {
         console.log(stringResult(`${json.id}_patient`, success));
