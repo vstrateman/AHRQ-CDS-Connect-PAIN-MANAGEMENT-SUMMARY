@@ -2326,7 +2326,48 @@
         ]
       },
       "SharedDecisionMaking": {
-        "QuestionnaireObservations": []
+        "QuestionnaireObservations": [
+          {
+            "MyPAINSubmitDate": "2020-10-12T16:00:00.000+00:00",
+            "ActivityGoals":"I want to be able to walk to my mailbox free of pain. I’d like to get back to enjoying a walk in the neighborhood with my grandkids.",
+            "ActivityBarriers": "On a bad day, I have trouble putting on my clothes or getting a shower. I need to take care of my cat but have trouble just taking care of myself some days.",
+            "PainLocations": [{
+              "Location": "Neck",
+              "PainYesNo": "Y",
+              "Description":"burning"
+            },
+            {
+              "Location": "Back",
+              "PainYesNo": "Y",
+              "Description":"stabbing"
+            }
+            ],
+            "PainIntensityAndInterference":
+            [
+              {
+                "Question": "How intense was your pain at its worst?",
+                "Response": "Somewhat"
+              },
+              {
+                "Question": "How intense was your averagepain?",
+                "Response": "Somewhat"
+              }
+            ],
+            "ResourcesProvidedInMyPAIN":
+            [
+              {
+                "Resource": "ACPA four flat tires video",
+                "ResourceUrl": "https://www.youtube.com/embed/QWcr9J3MLfo",
+                "ViewedOn": "2020-10-12T15:00:00.000+00:00"
+              },
+              {
+                "Resource": "U.S. Pain Foundation website",
+                "ResourceUrl": "https://uspainfoundation.org/living-with-pain",
+                "ViewedOn": "2020-10-12T15:15:00.000+00:00"
+              }
+            ]
+          }
+        ]
       },
       "PertinentMedicalHistory": {
         "ConditionsAssociatedWithChronicPain": [
