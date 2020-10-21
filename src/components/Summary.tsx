@@ -7,7 +7,7 @@ import ReactTable from 'react-table';
 import ReactModal from 'react-modal';
 
 // import summaryMap from './summary.json';
-import summaryMap from './summary_withSharedDecision.json';
+import summaryMap from './summary_modified.json';
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
 
@@ -24,34 +24,10 @@ export default class Summary extends Component<any, any> {
     summaryMapData: any = summaryMap;
     constructor(props: any) {
         super(props);
-        props.summary['UrineDrugScreening'] = [
-            {
-                "Name": "Amphetamine",
-                "6/1/2020": "Negative",
-                "10/15/2020": "Negative"
-            },
-            {
-                "Name": "Benzodiazepine",
-                "6/1/2020": "Negative",
-                "10/15/2020": "Presumed Positive"
-            },
-            {
-                "Name": "Hydrocodone-Acetaminophen",
-                "6/1/2020": "Negative",
-                "10/15/2020": "Negative"
-            },
-            {
-                "Name": "Oxycodone",
-                "6/1/2020": "Negative",
-                "10/15/2020": "Negative"
-            }
-        ]
-        props.sectionFlags.RiskConsiderations['UrineDrugScreens'] = false;
         this.state = {
             showModal: false,
             modalSubSection: null
         };
-        console.log('props: ', props);
         this.subsectionTableProps = { id: 'react_sub-section__table' };
 
         ReactModal.setAppElement('body');
@@ -91,13 +67,10 @@ export default class Summary extends Component<any, any> {
         } else if (sectionFlags[section][subSection] === false) {
             return false;
         } else if (sectionFlags[section][subSection] !== undefined && (sectionFlags[section][subSection] instanceof Array) && sectionFlags[section][subSection].length > 0) {
-            // console.log('length: ', sectionFlags[section][subSection].length);
             return sectionFlags[section][subSection].length > 0;
         } else if (typeof sectionFlags[section][subSection] === 'string') {
-            // console.log('string: ', sectionFlags[section][subSection])
             return sectionFlags[section][subSection];
         } else {
-            console.log('else: ', sectionFlags[section][subSection])
         }
     }
 
@@ -377,8 +350,6 @@ export default class Summary extends Component<any, any> {
             title = 'Pertinent Conditions';
         } else if (section === 'HistoricalTreatments') {
             title = 'Current Pertinent Treatments';
-        } else if (section === 'PainAssessments') {
-            title = 'Pain Assessments';
         } else if (section === 'RiskConsiderations') {
             title = 'Urine Drug Screening';
         } else if (section === 'SharedDecisionMaking') {
@@ -426,10 +397,6 @@ export default class Summary extends Component<any, any> {
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("HistoricalTreatments")}
                                 open={false}>
                                 {this.renderSection("HistoricalTreatments")}
-                            </Collapsible>
-
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PainAssessments")} open={false}>
-                                {this.renderSection("PainAssessments")}
                             </Collapsible>
 
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("RiskConsiderations")} open={false}>

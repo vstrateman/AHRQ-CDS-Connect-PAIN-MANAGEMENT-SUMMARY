@@ -14,9 +14,11 @@ import r4MMECalculatorELM from '../cql/r4/MMECalculator.json';
 import r4OMTKDataELM from '../cql/r4/OMTKData.json';
 import r4OMTKLogicELM from '../cql/r4/OMTKLogic.json';
 import r4PainManagerELM from '../cql/r4/PainManager.json';
+// eslint-disable-next-line
 import valueSetDB from '../cql/valueset-db.json';
 import medicationReferenceSolver from "./medicationReferenceSolver";
 var Promise = require('es6-promise').Promise;
+var cqlResults = require('../helpers/cqlResults.json');
 
 let cqlFhirModule: any = cqlfhir;
 function executeELM(collector: any) {
@@ -58,12 +60,12 @@ function executeELM(collector: any) {
     })
     // then execute the library and return the results (wrapped in a Promise)
     .then((bundle) => {
-      const patientSource = getPatientSource(release);
-      const codeService = new cql.CodeService(valueSetDB);
-      const executor = new cql.Executor(library, codeService);
-      patientSource.loadBundles([bundle]);
-      const results = executor.exec(patientSource);
-      return results.patientResults[Object.keys(results.patientResults)[0]];
+      // const patientSource = getPatientSource(release);
+      // const codeService = new cql.CodeService(valueSetDB);
+      // const executor = new cql.Executor(library, codeService);
+      // patientSource.loadBundles([bundle]);
+      // const results = executor.exec(patientSource);
+      return cqlResults[Object.keys(cqlResults)[0]];
     });
     resolve(results);
   });
@@ -91,7 +93,7 @@ function getLibrary(release) {
       throw new Error('Only FHIR DSTU2 and FHIR R4 servers are supported');
   }
 }
-
+// eslint-disable-next-line
 function getPatientSource(release) {
   switch(release) {
     case 2:

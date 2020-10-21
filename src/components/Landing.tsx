@@ -15,6 +15,7 @@ import executeInternalCDSCall from "../utils/executeInternalCDSHooksCall";
 import '../helpers/polyfill';
 require('es6-promise').polyfill();
 require('fetch-everywhere');
+// var cqlResults = require('../helpers/cqlResults.json');
 
 let uuid = 0;
 
@@ -34,13 +35,15 @@ export default class Landing extends Component<any, any> {
             cdsCollector: [],
             questionText: new Map()
         };
-        console.log('landing state: ', this.state)
 
     }
 
     componentDidMount() {
         executeElm(this.state.collector).then((result: any) => {
+
             this.setState({ loading: false });
+            // console.log('result: ', result);
+            // console.log('cqlResults: ', cqlResults)
             const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
             this.setState({ result, sectionFlags, flaggedCount });
             return this.state.collector;
@@ -188,37 +191,36 @@ export default class Landing extends Component<any, any> {
                 sectionFlags[sectionKey] = {};
                 this.summaryMapData[sectionKey].forEach((subSection: any) => {
                     // console.log('type:', typeof summary[subSection.dataKeySource])
-                    console.log('data key source: ', subSection.dataKeySource, subSection.dataKey)
-                    // if(summary[subSection.dataKeySource][subSection.dataKey] && (summary[subSection.dataKeySource][subSection.dataKey].length > 0)) {
+                    if(summary[subSection.dataKeySource][subSection.dataKey] && (summary[subSection.dataKeySource][subSection.dataKey].length > 0)) {
 
-                    //     const data = summary[subSection.dataKeySource][subSection.dataKey];
-                    //     const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
-                    //             return r != null;
-                    //         });
-                    //         if (entries.length > 0) {
-                    //             sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
-                    //                     if (entry._id == null) {
-                    //                         entry._id = generateUuid();
-                    //                     }
+                        const data = summary[subSection.dataKeySource][subSection.dataKey];
+                        const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
+                                return r != null;
+                            });
+                            if (entries.length > 0) {
+                                sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
+                                        if (entry._id == null) {
+                                            entry._id = generateUuid();
+                                        }
         
-                    //                     const entryFlag = flagit(entry, subSection, summary);
+                                        const entryFlag = flagit(entry, subSection, summary);
         
-                    //                     if (entryFlag) {
-                    //                         flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
-                    //                         flaggedCount += 1;
-                    //                     }
+                                        if (entryFlag) {
+                                            flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
+                                            flaggedCount += 1;
+                                        }
         
-                    //                     return flaggedEntries;
-                    //                 }, []);
-                    //         } else {
-                    //             const sectionFlagged = flagit(null, subSection, summary);
-                    //             sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
+                                        return flaggedEntries;
+                                    }, []);
+                            } else {
+                                const sectionFlagged = flagit(null, subSection, summary);
+                                sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
         
-                    //             if (sectionFlagged) {
-                    //                 flaggedCount += 1;
-                    //             }
-                    //         }
-                    // }
+                                if (sectionFlagged) {
+                                    flaggedCount += 1;
+                                }
+                            }
+                    }
 
                     });
             });
