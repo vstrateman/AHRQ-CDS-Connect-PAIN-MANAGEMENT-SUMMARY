@@ -34526,4 +34526,244 @@
       },
       {
         "code": "191901005",
-        "system": "http://sn
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "724657002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "737336003",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "741063003",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "231458000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "10755041000119100",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "428219007",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "1081000119105",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191831000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228382007",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "86401000119104",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "85005007",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191913000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "15167005",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "723933008",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191891003",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191893000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "145121000119106",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "724713006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228427002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191900006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228443009",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "7200002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "425533007",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228377000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "268646008",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "703885002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191914006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "58727001",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "304605000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228444003",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "762504005",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "26416006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "70340006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191938005",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228417008",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "425841004",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "424848002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191932006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "425885002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "231472009",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228397005",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "74851005",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228381000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "86391000119101",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228438002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191849000",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "441668002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "105546006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "712543006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "268648009",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228399008",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228386005",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228373001",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "417284009",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228372006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191851001",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "11047881000119101",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "191877009",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "228410005",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  }
+}
