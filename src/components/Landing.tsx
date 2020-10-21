@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import executeElm from '../utils/executeELM';
 import sumit from '../helpers/sumit';
 import flagit from '../helpers/flagit';
-import summaryMap from './summary.json';
+import summaryMap from './summary_modified.json';
 
 import Header from './Header';
 import Summary from './Summary';
@@ -179,39 +179,43 @@ export default class Landing extends Component<any, any> {
         const sectionFlags: any = {};
         const sectionKeys: any = Object.keys(this.summaryMapData);
         let flaggedCount = 0;
-
+        console.log('summary: ', summary)
         sectionKeys.forEach((sectionKey: any, i: any) => {
                 sectionFlags[sectionKey] = {};
-
                 this.summaryMapData[sectionKey].forEach((subSection: any) => {
-                        const data = summary[subSection.dataKeySource][subSection.dataKey];
-                        const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
-                                return r != null;
-                            });
+                    // console.log('type:', typeof summary[subSection.dataKeySource])
+                    console.log('data key source: ', subSection.dataKeySource, subSection.dataKey)
+                    // if(summary[subSection.dataKeySource][subSection.dataKey] && (summary[subSection.dataKeySource][subSection.dataKey].length > 0)) {
 
-                        if (entries.length > 0) {
-                            sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
-                                    if (entry._id == null) {
-                                        entry._id = generateUuid();
-                                    }
+                    //     const data = summary[subSection.dataKeySource][subSection.dataKey];
+                    //     const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
+                    //             return r != null;
+                    //         });
+                    //         if (entries.length > 0) {
+                    //             sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
+                    //                     if (entry._id == null) {
+                    //                         entry._id = generateUuid();
+                    //                     }
+        
+                    //                     const entryFlag = flagit(entry, subSection, summary);
+        
+                    //                     if (entryFlag) {
+                    //                         flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
+                    //                         flaggedCount += 1;
+                    //                     }
+        
+                    //                     return flaggedEntries;
+                    //                 }, []);
+                    //         } else {
+                    //             const sectionFlagged = flagit(null, subSection, summary);
+                    //             sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
+        
+                    //             if (sectionFlagged) {
+                    //                 flaggedCount += 1;
+                    //             }
+                    //         }
+                    // }
 
-                                    const entryFlag = flagit(entry, subSection, summary);
-
-                                    if (entryFlag) {
-                                        flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
-                                        flaggedCount += 1;
-                                    }
-
-                                    return flaggedEntries;
-                                }, []);
-                        } else {
-                            const sectionFlagged = flagit(null, subSection, summary);
-                            sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
-
-                            if (sectionFlagged) {
-                                flaggedCount += 1;
-                            }
-                        }
                     });
             });
 
