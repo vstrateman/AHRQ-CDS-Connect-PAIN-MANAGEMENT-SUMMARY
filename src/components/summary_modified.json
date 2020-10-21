@@ -419,44 +419,6 @@
   ],
   "RiskConsiderations": [
     {
-      "name": "Most Recent MME",
-      "dataKey": "MostRecentMME",
-      "dataKeySource": "RiskConsiderations",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Most Recent MME queries the following elements:",
-          "elements": [
-            {
-              "name": "Morphine Milligram Equivalent (MME)",
-              "status": "final or amended",
-              "lookback": "most recent in past 6 months"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Result": { "key": "Result", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifGreaterThanOrEqualTo": {
-                  "header": "Result",
-                  "value": 50
-                }
-              },
-              "flagText": "Most recent MME assessment is 50+ MME/day"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "Urine Drug Screens",
       "dataKey": "UrineDrugScreens",
       "dataKeySource": "RiskConsiderations",
@@ -477,9 +439,8 @@
         {
           "headers": {
             "Name": "Name",
-            "Result": { "key": "Result", "formatter": "quantityFormat" },
-            "Interpretation": "Interpretation",
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Date": { "key": "Date", "formatter": "datishFormat" },
+            "Score": "Score"
           },
           "flags": [
             {
@@ -497,131 +458,6 @@
               "flagText": "Absence of urine drug screen and at least one opioid medication"
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "Benzodiazepine Medications",
-      "dataKey": "BenzodiazepineMedications",
-      "dataKeySource": "RiskConsiderations",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Benzodiazepine Medications queries the following elements:",
-          "elements": [
-            {
-              "name": "Benzodiazepine medication statements and orders",
-              "status": "any",
-              "lookback": "2 years"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifAnd": [
-                  "ifOneOrMore",
-                  {
-                    "ifOneOrMore": {
-                      "table": "OpioidMedications",
-                      "source": "HistoricalTreatments"
-                    }
-                  }
-                ]
-              },
-              "flagText": "Benzodiazepine medication and at least one opioid medication"
-            },
-            {
-              "flag": "ifOneOrMore",
-              "flagText": "Evidence of Benzodiazepine medication"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Naloxone Medications",
-      "dataKey": "NaloxoneMedications",
-      "dataKeySource": "RiskConsiderations",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Naloxone Medications queries the following elements:",
-          "elements": [
-            {
-              "name": "Naloxone medication statements and orders",
-              "status": "any",
-              "lookback": "n/a"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifAnd": [
-                  "ifNone",
-                  {
-                    "ifGreaterThanOrEqualTo": {
-                      "table": "MostRecentMME",
-                      "source": "RiskConsiderations",
-                      "header": "Result",
-                      "value": 50
-                    }
-                  }
-                ]
-              },
-              "flagText": "Absence of Naloxone medication and most recent MME assessment is 50+ MME/day"
-            },
-            {
-              "flag": "ifOneOrMore",
-              "flagText": "Evidence of Naloxone medication"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Risk Screenings Relevant to Pain Management",
-      "dataKey": "RiskScreeningsRelevantToPainManagement",
-      "dataKeySource": "RiskConsiderations",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Risk Screenings Relevant to Pain Management queries the following elements:",
-          "elements": [
-            {
-              "name": "Risk screenings relevant to pain management",
-              "status": "final or amended",
-              "lookback": "1 year"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
-          }
         }
       ]
     }

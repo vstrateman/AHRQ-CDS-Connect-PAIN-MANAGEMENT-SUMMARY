@@ -34,6 +34,7 @@ export default class Landing extends Component<any, any> {
             cdsCollector: [],
             questionText: new Map()
         };
+        console.log('landing state: ', this.state)
 
     }
 
@@ -78,6 +79,8 @@ export default class Landing extends Component<any, any> {
     }
 
     componentDidUpdate() {
+        
+        console.log('state: ', this.state)
 
         if (this.state.result && this.state.result.Summary.Patient.Name) {
             const patientName = this.state.result.Summary.Patient.Name;
@@ -118,6 +121,7 @@ export default class Landing extends Component<any, any> {
     }
 
     getAnalyticsData(endpoint: any, apikey: any, summary: any) {
+
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         const applicationAnalytics: any = {
             meetsInclusionCriteria

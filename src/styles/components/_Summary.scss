@@ -300,3 +300,11 @@ main {
 .summary-tooltip {
   font-size: 1em;
 }
+
+#UrineDrugScreens ~ div {
+  color: black;
+  .rt-thead .rt-tr .rt-th {
+    border-top: solid 2px black;
+    border-bottom: solid 2px black;
+  }
+}

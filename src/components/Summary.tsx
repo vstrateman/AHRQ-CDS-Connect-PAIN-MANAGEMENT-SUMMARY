@@ -6,8 +6,8 @@ import ReactTooltip from 'react-tooltip';
 import ReactTable from 'react-table';
 import ReactModal from 'react-modal';
 
-import summaryMap from './summary_modified.json';
-// import summaryMap from './summary_withSharedDecision.json';
+// import summaryMap from './summary.json';
+import summaryMap from './summary_withSharedDecision.json';
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
 
@@ -24,12 +24,34 @@ export default class Summary extends Component<any, any> {
     summaryMapData: any = summaryMap;
     constructor(props: any) {
         super(props);
-
+        props.summary['UrineDrugScreening'] = [
+            {
+                "Name": "Amphetamine",
+                "6/1/2020": "Negative",
+                "10/15/2020": "Negative"
+            },
+            {
+                "Name": "Benzodiazepine",
+                "6/1/2020": "Negative",
+                "10/15/2020": "Presumed Positive"
+            },
+            {
+                "Name": "Hydrocodone-Acetaminophen",
+                "6/1/2020": "Negative",
+                "10/15/2020": "Negative"
+            },
+            {
+                "Name": "Oxycodone",
+                "6/1/2020": "Negative",
+                "10/15/2020": "Negative"
+            }
+        ]
+        props.sectionFlags.RiskConsiderations['UrineDrugScreens'] = false;
         this.state = {
             showModal: false,
             modalSubSection: null
         };
-
+        console.log('props: ', props);
         this.subsectionTableProps = { id: 'react_sub-section__table' };
 
         ReactModal.setAppElement('body');
@@ -68,10 +90,10 @@ export default class Summary extends Component<any, any> {
             return true;
         } else if (sectionFlags[section][subSection] === false) {
             return false;
-        } else if (sectionFlags[section][subSection] !== undefined && (sectionFlags[section][subSection] instanceof Array) && sectionFlags[section][subSection].length > 0){
+        } else if (sectionFlags[section][subSection] !== undefined && (sectionFlags[section][subSection] instanceof Array) && sectionFlags[section][subSection].length > 0) {
             // console.log('length: ', sectionFlags[section][subSection].length);
             return sectionFlags[section][subSection].length > 0;
-        } else if (typeof sectionFlags[section][subSection] === 'string'){
+        } else if (typeof sectionFlags[section][subSection] === 'string') {
             // console.log('string: ', sectionFlags[section][subSection])
             return sectionFlags[section][subSection];
         } else {
@@ -82,13 +104,14 @@ export default class Summary extends Component<any, any> {
     // if flagged, returns flag text, else returns false
     isEntryFlagged(section: any, subSection: any, entry: any) {
         const { sectionFlags } = this.props;
-
         let flagged = false;
-        sectionFlags[section][subSection].forEach((flag: any) => {
-            if (flag.entryId === entry._id) {
-                flagged = flag.flagText;
-            }
-        });
+        if (sectionFlags[section][subSection]) {
+            sectionFlags[section][subSection].forEach((flag: any) => {
+                if (flag.entryId === entry._id) {
+                    flagged = flag.flagText;
+                }
+            });
+        }
 
         return flagged;
     }
@@ -116,11 +139,11 @@ export default class Summary extends Component<any, any> {
         );
     }
 
-    createSharedDecisionEntries(entries: any){
-        entries.forEach((entry) =>{
+    createSharedDecisionEntries(entries: any) {
+        entries.forEach((entry) => {
             let question = this.props.questionText.get(entry.LinkId);
-            if(question !== null && question !== undefined) {
-             //   entry.Answer = this.props.questionText.get(entry.LinkId) + entry.Answer;
+            if (question !== null && question !== undefined) {
+                //   entry.Answer = this.props.questionText.get(entry.LinkId) + entry.Answer;
                 entry.Question = this.props.questionText.get(entry.LinkId);
             }
         })
@@ -130,7 +153,7 @@ export default class Summary extends Component<any, any> {
     renderTable(table: any, entries: any, section: any, subSection: any, index: any) {
         // If a filter is provided, only render those things that have the filter field (or don't have it when it's negated)
         let filteredEntries = entries;
-        if((section === 'SharedDecisionMaking') && entries !== null && entries !== undefined && entries.length > 0) {
+        if ((section === 'SharedDecisionMaking') && entries !== null && entries !== undefined && entries.length > 0) {
             filteredEntries = this.createSharedDecisionEntries(entries);
         }
         if (table.filter && table.filter.length > 0) {
@@ -143,109 +166,133 @@ export default class Summary extends Component<any, any> {
 
         const headers = Object.keys(table.headers);
 
-        let columns = [
-            {
-                id: 'flagged',
-                Header: <span aria-label="flag"></span>,
-                accessor: (entry: any) => this.isEntryFlagged(section, subSection.dataKey, entry),
-                Cell: (props: any) =>
-                    <FontAwesomeIcon
-                        className={'flag flag-entry ' + (props.value ? 'flagged' : '')}
-                        icon="exclamation-circle"
-                        title={props.value ? 'flag: ' + props.value : 'flag'}
-                        data-tip={props.value ? props.value : ''}
-                        role="tooltip"
-                        tabIndex={0}
-                    />,
-                sortable: false,
-                width: 35,
-                minWidth: 35
-            }
-        ];
-
-        headers.forEach((header) => {
-            const headerKey = table.headers[header];
-
-            const column: any = {
-                id: header,
-                Header: () => <span className="col-header">{header}</span>,
-                accessor: (entry: any) => {
-                    let value = entry[headerKey];
-                    if (headerKey.formatter) {
-                        const { result } = this.props;
-                        let formatterArguments = headerKey.formatterArguments || [];
-                        value = this.formatitHelper[headerKey.formatter](result, entry[headerKey.key], ...formatterArguments);
-                    }
-
-                    return value;
-                },
-                sortable: headerKey.sortable !== false
-            };
-
-            if (column.sortable && headerKey.formatter) {
-                switch (headerKey.formatter) {
-                    case 'dateFormat':
-                    case 'dateAgeFormat':
-                        column.sortMethod = sortit.dateCompare;
-                        break;
-                    case 'datishFormat':
-                    case 'datishAgeFormat':
-                        column.sortMethod = sortit.datishCompare;
-                        break;
-                    case 'ageFormat':
-                        column.sortMethod = sortit.ageCompare;
-                        break;
-                    case 'quantityFormat':
-                        column.sortMethod = sortit.quantityCompare;
-                        break;
-                    default:
-                    // do nothing, rely on built-in sort
+        if (subSection.dataKey === "UrineDrugScreens") {
+            const data = filteredEntries;
+            const columns = Object.keys(filteredEntries[0]).map((key, id) => {
+                return {
+                    Header: key,
+                    accessor: key
                 }
-            }
+            });
+            return <div key={index}>
 
-            if (headerKey.minWidth != null) {
-                column.minWidth = headerKey.minWidth;
-            }
-
-            if (headerKey.maxWidth != null) {
-                column.maxWidth = headerKey.maxWidth;
-            }
-
-            columns.push(column);
-        });
-
-        //ReactTable needs an ID for aria-describedby
-        let tableID = subSection.name.replace(/ /g, "_") + "-table";
-        let customProps = { id: tableID };
-        //getTheadThProps solution courtesy of:
-        //https://spectrum.chat/react-table/general/is-there-a-way-to-activate-sort-via-onkeypress~66656e87-7f5c-4767-8b23-ddf35d73f8af
-        return (
-            <div key={index} className="table" role="table"
-                aria-label={subSection.name} aria-describedby={customProps.id}>
                 <ReactTable
-                    className="sub-section__table"
+                    className=""
+                    data={data}
                     columns={columns}
-                    data={filteredEntries}
                     minRows={1}
-                    showPagination={filteredEntries.length > 10}
+                    showPagination={data.length > 10}
                     pageSizeOptions={[10, 20, 50, 100]}
                     defaultPageSize={10}
                     resizable={false}
-                    getProps={() => customProps}
-                    getTheadThProps={(state, rowInfo, column, instance) => {
-                        return {
-                            tabIndex: 0,
-                            onKeyPress: (e: { which: number; stopPropagation: () => void; }, handleOriginal: any) => {
-                                if (e.which === 13) {
-                                    instance.sortColumn(column);
-                                    e.stopPropagation();
-                                }
-                            }
-                        };
-                    }}
                 />
             </div>
-        );
+        } else {
+            const columns = [
+                {
+                    id: 'flagged',
+                    Header: <span aria-label="flag"></span>,
+                    accessor: (entry: any) => this.isEntryFlagged(section, subSection.dataKey, entry),
+                    Cell: (props: any) =>
+                        <FontAwesomeIcon
+                            className={'flag flag-entry ' + (props.value ? 'flagged' : '')}
+                            icon="exclamation-circle"
+                            title={props.value ? 'flag: ' + props.value : 'flag'}
+                            data-tip={props.value ? props.value : ''}
+                            role="tooltip"
+                            tabIndex={0}
+                        />,
+                    sortable: false,
+                    width: 35,
+                    minWidth: 35
+                }
+            ];
+            headers.forEach((header) => {
+                const headerKey = table.headers[header];
+
+                const column: any = {
+                    id: header,
+                    Header: () => <span className="col-header">{header}</span>,
+                    accessor: (entry: any) => {
+                        let value = entry[headerKey];
+                        if (headerKey.formatter) {
+                            const { result } = this.props;
+                            let formatterArguments = headerKey.formatterArguments || [];
+                            value = this.formatitHelper[headerKey.formatter](result, entry[headerKey.key], ...formatterArguments);
+                        }
+
+                        return value;
+                    },
+                    sortable: headerKey.sortable !== false
+                };
+
+                if (column.sortable && headerKey.formatter) {
+                    switch (headerKey.formatter) {
+                        case 'dateFormat':
+                        case 'dateAgeFormat':
+                            column.sortMethod = sortit.dateCompare;
+                            break;
+                        case 'datishFormat':
+                        case 'datishAgeFormat':
+                            column.sortMethod = sortit.datishCompare;
+                            break;
+                        case 'ageFormat':
+                            column.sortMethod = sortit.ageCompare;
+                            break;
+                        case 'quantityFormat':
+                            column.sortMethod = sortit.quantityCompare;
+                            break;
+                        default:
+                        // do nothing, rely on built-in sort
+                    }
+                }
+
+                if (headerKey.minWidth != null) {
+                    column.minWidth = headerKey.minWidth;
+                }
+
+                if (headerKey.maxWidth != null) {
+                    column.maxWidth = headerKey.maxWidth;
+                }
+
+                columns.push(column);
+            });
+
+            //ReactTable needs an ID for aria-describedby
+            let tableID = subSection.name.replace(/ /g, "_") + "-table";
+            let customProps = { id: tableID };
+            //getTheadThProps solution courtesy of:
+            //https://spectrum.chat/react-table/general/is-there-a-way-to-activate-sort-via-onkeypress~66656e87-7f5c-4767-8b23-ddf35d73f8af
+            return (
+                <div key={index} className="table" role="table"
+                    aria-label={subSection.name} aria-describedby={customProps.id}>
+                    <ReactTable
+                        className="sub-section__table"
+                        columns={columns}
+                        data={filteredEntries}
+                        minRows={1}
+                        showPagination={filteredEntries.length > 10}
+                        pageSizeOptions={[10, 20, 50, 100]}
+                        defaultPageSize={10}
+                        resizable={false}
+                        getProps={() => customProps}
+                        getTheadThProps={(state, rowInfo, column, instance) => {
+                            return {
+                                tabIndex: 0,
+                                onKeyPress: (e: { which: number; stopPropagation: () => void; }, handleOriginal: any) => {
+                                    if (e.which === 13) {
+                                        instance.sortColumn(column);
+                                        e.stopPropagation();
+                                    }
+                                }
+                            };
+                        }}
+                    />
+                </div>
+            );
+        }
+
+
     }
 
     renderSection(section: string) {
@@ -283,17 +330,17 @@ export default class Summary extends Component<any, any> {
             const entries = (Array.isArray(data) ? data : [data]).filter(r => r != null);
             const hasEntries = entries.length !== 0;
 
-            // const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
-            // const flaggedClass = flagged ? 'flagged' : '';
+            const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
+            const flaggedClass = flagged ? 'flagged' : '';
             return (
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
                     <h3 id={subSection.dataKey} className="sub-section__header">
-                        {/* <FontAwesomeIcon
+                        <FontAwesomeIcon
                             className={'flag flag-nav ' + flaggedClass}
                             icon={flagged ? 'exclamation-circle' : 'circle'}
                             title="flag"
                             tabIndex={0}
-                        /> */}
+                        />
                         {subSection.name}
                         {subSection.info &&
                             <div
@@ -333,10 +380,10 @@ export default class Summary extends Component<any, any> {
         } else if (section === 'PainAssessments') {
             title = 'Pain Assessments';
         } else if (section === 'RiskConsiderations') {
-            title = 'Risk Considerations';
+            title = 'Urine Drug Screening';
         } else if (section === 'SharedDecisionMaking') {
-           title = `Shared Decision Making`;
-         }
+            title = `Shared Decision Making`;
+        }
 
         return (
             <h2 id={section} className="section__header">
