@@ -139,28 +139,33 @@ export default class Summary extends Component<any, any> {
 
         const headers = Object.keys(table.headers);
 
-        if (subSection.dataKey === "UrineDrugScreens") {
-            const data = filteredEntries;
-            const columns = Object.keys(filteredEntries[0]).map((key, id) => {
-                return {
-                    Header: key,
-                    accessor: key
-                }
-            });
-            return <div key={index}>
+        // if (subSection.dataKey === "UrineDrugScreens") {
+        //     console.log('drug screens: ', filteredEntries)
+        //     const data = filteredEntries;
+        //     const dates = filteredEntries.forEach(element => {
+        //         console.log('element: ',element)
+        //     });
+        //     const columns = Object.keys(filteredEntries[0]).map((key, id) => {
+        //         console.log('keys:', key)
+        //         return {
+        //             Header: key,
+        //             accessor: key
+        //         }
+        //     });
+        //     return <div key={index}>
 
-                <ReactTable
-                    className=""
-                    data={data}
-                    columns={columns}
-                    minRows={1}
-                    showPagination={data.length > 10}
-                    pageSizeOptions={[10, 20, 50, 100]}
-                    defaultPageSize={10}
-                    resizable={false}
-                />
-            </div>
-        } else {
+        //         <ReactTable
+        //             className=""
+        //             data={data}
+        //             columns={columns}
+        //             minRows={1}
+        //             showPagination={data.length > 10}
+        //             pageSizeOptions={[10, 20, 50, 100]}
+        //             defaultPageSize={10}
+        //             resizable={false}
+        //         />
+        //     </div>
+        // } else {
             const columns = [
                 {
                     id: 'flagged',
@@ -263,39 +268,39 @@ export default class Summary extends Component<any, any> {
                     />
                 </div>
             );
-        }
+        // }
 
 
     }
 
     renderSection(section: string) {
-        if (section === 'CDSHooksAssessment' && this.state.result1) {
-            return (
-                <div>
-                    <blockquote>
-                        {this.state.result1}<br />
-                    </blockquote>
-                </div>
-            )
-        }
-        if (section === 'CDSHooksAssessment' && this.state.result10) {
-            return (
-                <div>
-                    <blockquote>
-                        {this.state.result10}<br />
-                    </blockquote>
-                </div>
-            )
-        }
-        if (section === 'CDSHooksAssessment' && this.state.result11) {
-            return (
-                <div>
-                    <blockquote>
-                        {this.state.result11}<br />
-                    </blockquote>
-                </div>
-            )
-        }
+        // if (section === 'CDSHooksAssessment' && this.state.result1) {
+        //     return (
+        //         <div>
+        //             <blockquote>
+        //                 {this.state.result1}<br />
+        //             </blockquote>
+        //         </div>
+        //     )
+        // }
+        // if (section === 'CDSHooksAssessment' && this.state.result10) {
+        //     return (
+        //         <div>
+        //             <blockquote>
+        //                 {this.state.result10}<br />
+        //             </blockquote>
+        //         </div>
+        //     )
+        // }
+        // if (section === 'CDSHooksAssessment' && this.state.result11) {
+        //     return (
+        //         <div>
+        //             <blockquote>
+        //                 {this.state.result11}<br />
+        //             </blockquote>
+        //         </div>
+        //     )
+        // }
         const sectionMap = this.summaryMapData[section];
 
         return sectionMap.map((subSection: any) => {
@@ -350,7 +355,7 @@ export default class Summary extends Component<any, any> {
             title = 'Pertinent Conditions';
         } else if (section === 'HistoricalTreatments') {
             title = 'Current Pertinent Treatments';
-        } else if (section === 'RiskConsiderations') {
+        } else if (section === 'UrineDrugScreening') {
             title = 'Urine Drug Screening';
         } else if (section === 'SharedDecisionMaking') {
             title = `Shared Decision Making`;
@@ -399,8 +404,8 @@ export default class Summary extends Component<any, any> {
                                 {this.renderSection("HistoricalTreatments")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("RiskConsiderations")} open={false}>
-                                {this.renderSection("RiskConsiderations")}
+                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={false}>
+                                {this.renderSection("UrineDrugScreening")}
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>

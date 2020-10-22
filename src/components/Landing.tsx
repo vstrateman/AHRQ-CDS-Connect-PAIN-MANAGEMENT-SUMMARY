@@ -42,8 +42,6 @@ export default class Landing extends Component<any, any> {
         executeElm(this.state.collector).then((result: any) => {
 
             this.setState({ loading: false });
-            // console.log('result: ', result);
-            // console.log('cqlResults: ', cqlResults)
             const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
             this.setState({ result, sectionFlags, flaggedCount });
             return this.state.collector;
@@ -83,8 +81,6 @@ export default class Landing extends Component<any, any> {
 
     componentDidUpdate() {
         
-        console.log('state: ', this.state)
-
         if (this.state.result && this.state.result.Summary.Patient.Name) {
             const patientName = this.state.result.Summary.Patient.Name;
             document.title = 'Pain Management Summary - ' + patientName;
@@ -186,7 +182,6 @@ export default class Landing extends Component<any, any> {
         const sectionFlags: any = {};
         const sectionKeys: any = Object.keys(this.summaryMapData);
         let flaggedCount = 0;
-        console.log('summary: ', summary)
         sectionKeys.forEach((sectionKey: any, i: any) => {
                 sectionFlags[sectionKey] = {};
                 this.summaryMapData[sectionKey].forEach((subSection: any) => {

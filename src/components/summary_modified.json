@@ -183,8 +183,14 @@
         {
           "headers": {
             "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Score": {
+              "key": "Score",
+              "formatter": "quantityFormat"
+            },
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           }
         }
       ]
@@ -216,22 +222,36 @@
         {
           "headers": {
             "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
+            "Score": {
+              "key": "Score",
+              "formatter": "quantityFormat"
+            },
             "Question": {
               "key": "Questions",
               "formatter": "arrayFlatten",
-              "formatterArguments": ["Name", "Score", true],
+              "formatterArguments": [
+                "Name",
+                "Score",
+                true
+              ],
               "sortable": false,
               "minWidth": 200
             },
             "Question Score": {
               "key": "Questions",
               "formatter": "arrayFlatten",
-              "formatterArguments": ["Score", null, false],
+              "formatterArguments": [
+                "Score",
+                null,
+                false
+              ],
               "sortable": false,
               "minWidth": 150
             },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           }
         }
       ]
@@ -263,14 +283,58 @@
         {
           "headers": {
             "Name": "Name",
-            "Score": { "key": "Score", "formatter": "quantityFormat" },
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Score": {
+              "key": "Score",
+              "formatter": "quantityFormat"
+            },
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           }
         }
       ]
     }
   ],
   "HistoricalTreatments": [
+    {
+      "name": "Non-Opioids",
+      "dataKey": "NonOpioidMedications",
+      "dataKeySource": "HistoricalTreatments",
+      "info": [
+        {
+          "type": "elements",
+          "description": "Non-Opioid Medications queries the following elements:",
+          "elements": [
+            {
+              "name": "Non-opioid medication statements and orders",
+              "status": "any",
+              "lookback": "2 years"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "headers": {
+            "Name": "Name",
+            "Date Prescribed": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "Status": {
+              "key": "Status"
+            }
+          },
+          "flags": [
+            {
+              "flag": "ifNone",
+              "flagText": "Absence of non-opioid medications"
+            }
+          ]
+        }
+      ]
+    },
     {
       "name": "Opioid Medications",
       "dataKey": "OpioidMedications",
@@ -292,48 +356,19 @@
         {
           "headers": {
             "Name": "Name",
-            "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
+            "MME/Day": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "Date Prescribed": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
               "flag": "always",
-              "flagText": "Opioid medication"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Non-Opioid Medications",
-      "dataKey": "NonOpioidMedications",
-      "dataKeySource": "HistoricalTreatments",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Non-Opioid Medications queries the following elements:",
-          "elements": [
-            {
-              "name": "Non-opioid medication statements and orders",
-              "status": "any",
-              "lookback": "2 years"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
-          },
-          "flags": [
-            {
-              "flag": "ifNone",
-              "flagText": "Absence of non-opioid medications"
+              "flagText": "Opioids"
             }
           ]
         }
@@ -361,7 +396,10 @@
           "headers": {
             "Name": "Name",
             "Type": "Type",
-            "Date": { "key": "Date", "formatter": "datishFormat" }
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
@@ -371,57 +409,13 @@
           ]
         }
       ]
-    },
-    {
-      "name": "Stool Softeners and Laxatives",
-      "dataKey": "StoolSoftenersAndLaxatives",
-      "dataKeySource": "HistoricalTreatments",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Stool Softeners and Laxatives queries the following elements:",
-          "elements": [
-            {
-              "name": "Stool softeners / laxatives medication statements and orders",
-              "status": "any",
-              "lookback": "6 months"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": { "key": "Start", "formatter": "datishFormat" },
-            "End": { "key": "End", "formatter": "datishFormat" }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifAnd": [
-                  "ifNone",
-                  {
-                    "ifOneOrMore": {
-                      "table": "OpioidMedications",
-                      "source": "HistoricalTreatments"
-                    }
-                  }
-                ]
-              },
-              "flagText": "Absence of stool softeners/laxative with presence of at least one opioid medication"
-            }
-          ]
-        }
-      ]
     }
   ],
-  "RiskConsiderations": [
+  "UrineDrugScreening": [
     {
       "name": "Urine Drug Screens",
       "dataKey": "UrineDrugScreens",
-      "dataKeySource": "RiskConsiderations",
+      "dataKeySource": "UrineDrugScreening",
       "info": [
         {
           "type": "elements",
@@ -439,8 +433,11 @@
         {
           "headers": {
             "Name": "Name",
-            "Date": { "key": "Date", "formatter": "datishFormat" },
-            "Score": "Score"
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            },
+            "Result": "Interpretation"
           },
           "flags": [
             {
@@ -463,50 +460,50 @@
     }
   ],
   "SharedDecisionMaking": [
-  {
-    "name": "Sharing",
-    "dataKey": "Sharing",
-    "dataKeySource": "SharedDecisionMaking",
-    "info": [
-      {
-        "type": "elements",
-        "description": "Decision 1:",
-        "elements": [
-          {
-            "name": "Decision1",
-            "status": "final or amended",
-            "lookback": "most recent in past 6 months"
-          }
-        ]
-      }
-    ],
-    "tables": [
-      {
-        "headers": {
-          "Name": "Name",
-          "Result": {
-            "key": "Result",
-            "formatter": "quantityFormat"
-          },
-          "Date": {
-            "key": "Date",
-            "formatter": "datishFormat"
-          }
-        },
-        "flags": [
-          {
-            "flag": {
-              "ifGreaterThanOrEqualTo": {
-                "header": "Result",
-                "value": 50
-              }
+    {
+      "name": "Sharing",
+      "dataKey": "Sharing",
+      "dataKeySource": "SharedDecisionMaking",
+      "info": [
+        {
+          "type": "elements",
+          "description": "Decision 1:",
+          "elements": [
+            {
+              "name": "Decision1",
+              "status": "final or amended",
+              "lookback": "most recent in past 6 months"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "headers": {
+            "Name": "Name",
+            "Result": {
+              "key": "Result",
+              "formatter": "quantityFormat"
             },
-            "flagText": "Decision One"
-          }
-        ]
-      }
-    ]
-  },
+            "Date": {
+              "key": "Date",
+              "formatter": "datishFormat"
+            }
+          },
+          "flags": [
+            {
+              "flag": {
+                "ifGreaterThanOrEqualTo": {
+                  "header": "Result",
+                  "value": 50
+                }
+              },
+              "flagText": "Decision One"
+            }
+          ]
+        }
+      ]
+    },
     {
       "name": "Decisions",
       "dataKey": "Decisions",
@@ -551,5 +548,5 @@
         }
       ]
     }
-]
+  ]
 }
