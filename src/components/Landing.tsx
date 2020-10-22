@@ -253,7 +253,7 @@ export default class Landing extends Component<any, any> {
 
         const summary = this.state.result.Summary;
         const { sectionFlags, flaggedCount } = this.state;
-        const numMedicalHistoryEntries = sumit(summary.PertinentMedicalHistory || {});
+        const numMedicalHistoryEntries = sumit(summary.PertinentConditions || {});
         const numPainEntries = sumit(summary.PainAssessments || {});
         const numTreatmentsEntries = sumit(summary.HistoricalTreatments || {});
         const numRiskEntries =
