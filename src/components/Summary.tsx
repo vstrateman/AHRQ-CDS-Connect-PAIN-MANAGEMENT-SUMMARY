@@ -255,10 +255,10 @@ export default class Summary extends Component<any, any> {
 
             const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
             const flaggedClass = flagged ? 'flagged' : '';
-            let name;
+            let datatable;
 
             if (subSection.dataKey === 'OpioidMedications') {
-                name = (<div id={subSection.dataKey} className="sub-section__header">
+                datatable = (<div id={subSection.dataKey} className="sub-section__header">
                     <FontAwesomeIcon
                         className={'flag flag-nav ' + flaggedClass}
                         icon={flagged ? 'exclamation-circle' : 'circle'}
@@ -284,13 +284,13 @@ export default class Summary extends Component<any, any> {
                                     />
                                 </div>
                             }
-                        </h3> <div className="total-mme-link"> <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a><span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result}</span></div>
+                        </h3> <div className="total-mme-link"> <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a><span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result} mg/day</span></div>
                     </div>
 
 
                 </div>)
             } else {
-                name = (<div id={subSection.dataKey} className="sub-section__header">
+                datatable = (<div id={subSection.dataKey} className="sub-section__header">
                     <FontAwesomeIcon
                         className={'flag flag-nav ' + flaggedClass}
                         icon={flagged ? 'exclamation-circle' : 'circle'}
@@ -322,34 +322,7 @@ export default class Summary extends Component<any, any> {
 
             return (
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
-                    {name}
-                    {/* <h3 id={subSection.dataKey} className="sub-section__header">
-                        <FontAwesomeIcon
-                            className={'flag flag-nav ' + flaggedClass}
-                            icon={flagged ? 'exclamation-circle' : 'circle'}
-                            title="flag"
-                            tabIndex={0}
-                        />
-                        {name}
-
-                        {subSection.info &&
-                            <div
-                                onClick={(event) => this.handleOpenModal(subSection, event)}
-                                onKeyDown={(event) => this.handleOpenModal(subSection, event)}
-                                role="button"
-                                tabIndex={0}
-                                aria-label={subSection.name}>
-                                <FontAwesomeIcon
-                                    className='info-icon'
-                                    icon="info-circle"
-                                    title={'more info: ' + subSection.name}
-                                    data-tip="more info"
-                                    role="tooltip"
-                                    tabIndex={0}
-                                />
-                            </div>
-                        }
-                    </h3> */}
+                    {datatable}
 
                     {!hasEntries && this.renderNoEntries(section, subSection)}
                     {hasEntries && subSection.tables.map((table: any, index: any) =>

@@ -317,6 +317,10 @@
             "Date Prescribed": {
               "key": "Start",
               "formatter": "datishFormat"
+            },
+            "Status": {
+              "key": "Status",
+              "formatter": "datishAgeFormat"
             }
           },
           "flags": [
@@ -329,18 +333,18 @@
       ]
     },
     {
-      "name": "Non-Pharmacologic Treatments",
-      "dataKey": "NonPharmacologicTreatments",
+      "name": "Self-Reported Treatments From MyPAIN (past 6 months)",
+      "dataKey": "SelfReportedTreatmentsFromMyPAIN",
       "dataKeySource": "CurrentPertinentTreatments",
       "info": [
         {
           "type": "elements",
-          "description": "Non-Pharmacologic Treatments queries the following elements:",
+          "description": "Self-Reported Treatments From MyPAIN queries the following elements:",
           "elements": [
             {
-              "name": "Non-pharmacologic procedures",
+              "name": "Self-Reported Treatments From MyPAIN questionnaire",
               "status": "any",
-              "lookback": "2 years"
+              "lookback": "6 Months"
             }
           ]
         }
@@ -348,17 +352,14 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
+            "Treatment": "Treatment",
+            "Effectiveness": "Effectiveness"
+            
           },
           "flags": [
             {
               "flag": "ifNone",
-              "flagText": "Absence of non-pharmacologic treatments"
+              "flagText": "Absence of self-reported treatments from MyPAIN"
             }
           ]
         }

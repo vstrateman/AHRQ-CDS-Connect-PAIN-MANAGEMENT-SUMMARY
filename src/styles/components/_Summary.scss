@@ -254,7 +254,7 @@ main {
     font-size: 1em;
 }
 
-#UrineDrugScreens~div {
+#UrineDrugScreens~div,  #SelfReportedTreatmentsFromMyPAIN~div{
     color: black;
     .rt-thead .rt-tr .rt-th {
         border-top: solid 2px black;
@@ -274,5 +274,9 @@ main {
   }
   .total-mme-link {
     margin-left: 5%;
+    width: 100%;
+    span {
+      margin-left: 2%;
+    }
   }
 }

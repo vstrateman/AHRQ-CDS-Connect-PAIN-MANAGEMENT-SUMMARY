@@ -2356,14 +2356,14 @@
       "CurrentPertinentTreatments": {
         "CurrentMME": [
           { "Name":   "ConceptText(M.code)",
-            "Result": "QuantityText(M.value as FHIR.Quantity)",
-            "Date":   "ObservationDate(M)"
+            "Result": "40",
+            "Date":   "2019-04-15T16:02:00.000+00:00"
           }
         ],
         "MostRecentMME": [
           { "Name":   "ConceptText(M.code)",
-            "Result": "QuantityText(M.value as FHIR.Quantity)",
-            "Date":   "ObservationDate(M)"
+            "Result": "40",
+            "Date":   "2019-04-15T16:02:00.000+00:00"
           }
         ],
         "OpioidMedications": [
@@ -2418,7 +2418,32 @@
             "_id": 9
           }
         ],
-        "NonPharmacologicTreatments": []
+        "SelfReportedTreatmentsFromMyPAIN": [
+          {
+            "Treatment": "Physical Therapy",
+            "Effectiveness": "Sometimes"
+          },
+          {
+            "Treatment": "Chiropractic Treatment",
+            "Effectiveness": "Sometimes"
+          },
+          {
+            "Treatment": "Sleep Therapy",
+            "Effectiveness": "Always"
+          },
+          {
+            "Treatment": "Pain Relievers",
+            "Effectiveness": "Always"
+          },
+          {
+            "Treatment": "CBD Oil",
+            "Effectiveness": "Always"
+          },
+          {
+            "Treatment": "Cortisone Injections",
+            "Effectiveness": "Always"
+          }
+        ]
       },
       "RiskConsiderations": {
         "CurrentMME": [
