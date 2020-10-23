@@ -61,18 +61,6 @@ export default class Landing extends Component<any, any> {
                         });
                 }
             })
-            .then(() => {
-                FHIR.oauth2.ready()
-                    .then(client => client.request("Questionnaire/mypain-questionnaire"))
-                    .then((questionnaire)=>{
-                        return this.extractQuestionText(questionnaire);
-                    })
-                    .then((textMap) => {
-                        this.setState({questionText:textMap});
-                        return;
-                    })
-                    .catch(console.error);
-            })
             .catch((err: any) => {
                 console.error(err);
                 this.setState({ loading: false });
