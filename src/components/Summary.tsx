@@ -7,7 +7,7 @@ import ReactTable from 'react-table';
 import ReactModal from 'react-modal';
 
 // import summaryMap from './summary.json';
-import summaryMap from './summary_modified.json';
+import summaryMap from './summary.json';
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
 

@@ -1,89 +1,7 @@
 {
-  "SharedDecisionMaking": [
-    {
-      "name": "Questionnaire Observations",
-      "dataKey": "QuestionnaireObservations",
-      "dataKeySource": "SharedDecisionMaking",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Observations created from a QuestionnaireResponse",
-          "elements": [
-            {
-              "name": "Observations",
-              "status": "final",
-              "lookback": "most recent in past 1 year"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Question": "Question",
-            "Answer": "Answer",
-            "LinkId": {
-              "key": "LinkId",
-              "formatter": "quantityFormat"
-            },
-            "Recorded": {
-              "key": "DateText",
-              "formatter": "datishFormat"
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "CDSHooksAssessment": [
-    {
-      "name": "Requests And Responses",
-      "dataKey": "RequestsAndResponses",
-      "dataKeySource": "CDSHooksAssessment",
-      "info": [
-        {
-          "type": "elements",
-          "description": "What hooks are we doing:",
-          "elements": [
-            {
-              "name": "Hooky 1",
-              "status": "final or amended",
-              "lookback": "most recent in past 6 months"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Result": {
-              "key": "Result",
-              "formatter": "quantityFormat"
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifGreaterThanOrEqualTo": {
-                  "header": "Result",
-                  "value": 50
-                }
-              },
-              "flagText": "We hooked up"
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "PertinentMedicalHistory": [
     {
-      "name": "Conditions Associated with Chronic Pain",
+      "name": "CHRONIC PAIN CONDITIONS (past 12 months)",
       "dataKey": "ConditionsAssociatedWithChronicPain",
       "dataKeySource": "PertinentMedicalHistory",
       "info": [
@@ -102,28 +20,13 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
-            "Status": "Status",
-            "Start": {
-              "key": "Onset",
-              "formatter": "datishAgeFormat",
-              "minWidth": 150
-            },
-            "End": {
-              "key": "Abatement",
-              "formatter": "datishAgeFormat",
-              "minWidth": 150
-            },
-            "Recorded": {
-              "key": "DateRecorded",
-              "formatter": "datishFormat"
-            }
+            "Name": "Name"
           }
         }
       ]
     },
     {
-      "name": "Risk Factors for Opioid-related Harms",
+      "name": "CO-MORBID CONDITIONS INCREASING RISK WHEN USING OPIOIDS (past 12 months)",
       "dataKey": "RiskFactorsForOpioidRelatedHarms",
       "dataKeySource": "PertinentMedicalHistory",
       "info": [
@@ -182,22 +85,7 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
-            "Status": "Status",
-            "Start": {
-              "key": "Onset",
-              "formatter": "datishAgeFormat",
-              "minWidth": 150
-            },
-            "End": {
-              "key": "Abatement",
-              "formatter": "datishAgeFormat",
-              "minWidth": 150
-            },
-            "Recorded": {
-              "key": "DateRecorded",
-              "formatter": "datishFormat"
-            }
+            "Name": "Name"
           },
           "filter": "!Visit",
           "flags": [
@@ -362,51 +250,11 @@
       ]
     }
   ],
-  "HistoricalTreatments": [
+  "CurrentPertinentTreatments": [
     {
-      "name": "Opioid Medications",
-      "dataKey": "OpioidMedications",
-      "dataKeySource": "HistoricalTreatments",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Opioid Medications queries the following elements:",
-          "elements": [
-            {
-              "name": "Opioid medication statements and orders",
-              "status": "any",
-              "lookback": "2 years"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": {
-              "key": "Start",
-              "formatter": "datishFormat"
-            },
-            "End": {
-              "key": "End",
-              "formatter": "datishFormat"
-            }
-          },
-          "flags": [
-            {
-              "flag": "always",
-              "flagText": "Opioid medication"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Non-Opioid Medications",
+      "name": "Non-Opioids",
       "dataKey": "NonOpioidMedications",
-      "dataKeySource": "HistoricalTreatments",
+      "dataKeySource": "CurrentPertinentTreatments",
       "info": [
         {
           "type": "elements",
@@ -423,14 +271,13 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": {
+            "Medication": "Name",
+            "Date Prescribed": {
               "key": "Start",
               "formatter": "datishFormat"
             },
-            "End": {
-              "key": "End",
+            "Status": {
+              "key": "Status",
               "formatter": "datishFormat"
             }
           },
@@ -444,16 +291,16 @@
       ]
     },
     {
-      "name": "Non-Pharmacologic Treatments",
-      "dataKey": "NonPharmacologicTreatments",
-      "dataKeySource": "HistoricalTreatments",
+      "name": "Opioids",
+      "dataKey": "OpioidMedications",
+      "dataKeySource": "CurrentPertinentTreatments",
       "info": [
         {
           "type": "elements",
-          "description": "Non-Pharmacologic Treatments queries the following elements:",
+          "description": "Opioid Medications queries the following elements:",
           "elements": [
             {
-              "name": "Non-pharmacologic procedures",
+              "name": "Opioid medication statements and orders",
               "status": "any",
               "lookback": "2 years"
             }
@@ -463,35 +310,77 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Date": {
-              "key": "Date",
+            "Medication": "Name",
+            "MME/Day": {
+              "key": "Start",
               "formatter": "datishFormat"
+            },
+            "Date Prescribed": {
+              "key": "Start",
+              "formatter": "datishFormat"
+            },
+            "Status": {
+              "key": "Status",
+              "formatter": "datishAgeFormat"
             }
           },
           "flags": [
             {
-              "flag": "ifNone",
-              "flagText": "Absence of non-pharmacologic treatments"
+              "flag": "always",
+              "flagText": "Opioids"
             }
           ]
         }
       ]
     },
     {
-      "name": "Stool Softeners and Laxatives",
-      "dataKey": "StoolSoftenersAndLaxatives",
-      "dataKeySource": "HistoricalTreatments",
+      "name": "Self-Reported Treatments From MyPAIN (past 6 months)",
+      "dataKey": "SelfReportedTreatmentsFromMyPAIN",
+      "dataKeySource": "CurrentPertinentTreatments",
       "info": [
         {
           "type": "elements",
-          "description": "Stool Softeners and Laxatives queries the following elements:",
+          "description": "Self-Reported Treatments From MyPAIN queries the following elements:",
           "elements": [
             {
-              "name": "Stool softeners / laxatives medication statements and orders",
+              "name": "Self-Reported Treatments From MyPAIN questionnaire",
               "status": "any",
-              "lookback": "6 months"
+              "lookback": "6 Months"
+            }
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "headers": {
+            "Treatment": "Treatment",
+            "Effectiveness": "Effectiveness"
+            
+          },
+          "flags": [
+            {
+              "flag": "ifNone",
+              "flagText": "Absence of self-reported treatments from MyPAIN"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "UrineDrugScreening": [
+    {
+      "name": "Urine Drug Screens",
+      "dataKey": "UrineDrugScreens",
+      "dataKeySource": "UrineDrugScreening",
+      "info": [
+        {
+          "type": "elements",
+          "description": "Urine Drug Screens queries the following elements:",
+          "elements": [
+            {
+              "name": "Urine drug screen",
+              "status": "final or amended",
+              "lookback": "1 year"
             }
           ]
         }
@@ -500,15 +389,11 @@
         {
           "headers": {
             "Name": "Name",
-            "Type": "Type",
-            "Start": {
-              "key": "Start",
+            "Date": {
+              "key": "Date",
               "formatter": "datishFormat"
             },
-            "End": {
-              "key": "End",
-              "formatter": "datishFormat"
-            }
+            "Result": "Interpretation"
           },
           "flags": [
             {
@@ -518,30 +403,30 @@
                   {
                     "ifOneOrMore": {
                       "table": "OpioidMedications",
-                      "source": "HistoricalTreatments"
+                      "source": "CurrentPertinentTreatments"
                     }
                   }
                 ]
               },
-              "flagText": "Absence of stool softeners/laxative with presence of at least one opioid medication"
+              "flagText": "Absence of urine drug screen and at least one opioid medication"
             }
           ]
         }
       ]
     }
   ],
-  "RiskConsiderations": [
+  "SharedDecisionMaking": [
     {
-      "name": "Most Recent MME",
-      "dataKey": "MostRecentMME",
-      "dataKeySource": "RiskConsiderations",
+      "name": "Sharing",
+      "dataKey": "Sharing",
+      "dataKeySource": "SharedDecisionMaking",
       "info": [
         {
           "type": "elements",
-          "description": "Most Recent MME queries the following elements:",
+          "description": "Decision 1:",
           "elements": [
             {
-              "name": "Morphine Milligram Equivalent (MME)",
+              "name": "Decision1",
               "status": "final or amended",
               "lookback": "most recent in past 6 months"
             }
@@ -569,25 +454,25 @@
                   "value": 50
                 }
               },
-              "flagText": "Most recent MME assessment is 50+ MME/day"
+              "flagText": "Decision One"
             }
           ]
         }
       ]
     },
     {
-      "name": "Urine Drug Screens",
-      "dataKey": "UrineDrugScreens",
-      "dataKeySource": "RiskConsiderations",
+      "name": "Decisions",
+      "dataKey": "Decisions",
+      "dataKeySource": "SharedDecisionMaking",
       "info": [
         {
           "type": "elements",
-          "description": "Urine Drug Screens queries the following elements:",
+          "description": "Decision 1.2:",
           "elements": [
             {
-              "name": "Urine drug screen",
+              "name": "Decision1.2",
               "status": "final or amended",
-              "lookback": "1 year"
+              "lookback": "most recent in past 6 months"
             }
           ]
         }
@@ -600,7 +485,6 @@
               "key": "Result",
               "formatter": "quantityFormat"
             },
-            "Interpretation": "Interpretation",
             "Date": {
               "key": "Date",
               "formatter": "datishFormat"
@@ -609,162 +493,14 @@
           "flags": [
             {
               "flag": {
-                "ifAnd": [
-                  "ifNone",
-                  {
-                    "ifOneOrMore": {
-                      "table": "OpioidMedications",
-                      "source": "HistoricalTreatments"
-                    }
-                  }
-                ]
+                "ifGreaterThanOrEqualTo": {
+                  "header": "Result",
+                  "value": 50
+                }
               },
-              "flagText": "Absence of urine drug screen and at least one opioid medication"
+              "flagText": "Decision One"
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "Benzodiazepine Medications",
-      "dataKey": "BenzodiazepineMedications",
-      "dataKeySource": "RiskConsiderations",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Benzodiazepine Medications queries the following elements:",
-          "elements": [
-            {
-              "name": "Benzodiazepine medication statements and orders",
-              "status": "any",
-              "lookback": "2 years"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": {
-              "key": "Start",
-              "formatter": "datishFormat"
-            },
-            "End": {
-              "key": "End",
-              "formatter": "datishFormat"
-            }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifAnd": [
-                  "ifOneOrMore",
-                  {
-                    "ifOneOrMore": {
-                      "table": "OpioidMedications",
-                      "source": "HistoricalTreatments"
-                    }
-                  }
-                ]
-              },
-              "flagText": "Benzodiazepine medication and at least one opioid medication"
-            },
-            {
-              "flag": "ifOneOrMore",
-              "flagText": "Evidence of Benzodiazepine medication"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Naloxone Medications",
-      "dataKey": "NaloxoneMedications",
-      "dataKeySource": "RiskConsiderations",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Naloxone Medications queries the following elements:",
-          "elements": [
-            {
-              "name": "Naloxone medication statements and orders",
-              "status": "any",
-              "lookback": "n/a"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Type": "Type",
-            "Start": {
-              "key": "Start",
-              "formatter": "datishFormat"
-            },
-            "End": {
-              "key": "End",
-              "formatter": "datishFormat"
-            }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifAnd": [
-                  "ifNone",
-                  {
-                    "ifGreaterThanOrEqualTo": {
-                      "table": "MostRecentMME",
-                      "source": "RiskConsiderations",
-                      "header": "Result",
-                      "value": 50
-                    }
-                  }
-                ]
-              },
-              "flagText": "Absence of Naloxone medication and most recent MME assessment is 50+ MME/day"
-            },
-            {
-              "flag": "ifOneOrMore",
-              "flagText": "Evidence of Naloxone medication"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Risk Screenings Relevant to Pain Management",
-      "dataKey": "RiskScreeningsRelevantToPainManagement",
-      "dataKeySource": "RiskConsiderations",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Risk Screenings Relevant to Pain Management queries the following elements:",
-          "elements": [
-            {
-              "name": "Risk screenings relevant to pain management",
-              "status": "final or amended",
-              "lookback": "1 year"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Score": {
-              "key": "Score",
-              "formatter": "quantityFormat"
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
-          }
         }
       ]
     }

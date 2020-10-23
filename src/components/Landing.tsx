@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import executeElm from '../utils/executeELM';
 import sumit from '../helpers/sumit';
 import flagit from '../helpers/flagit';
-import summaryMap from './summary_modified.json';
+import summaryMap from './summary.json';
 
 import Header from './Header';
 import Summary from './Summary';
