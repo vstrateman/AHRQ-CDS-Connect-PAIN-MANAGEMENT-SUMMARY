@@ -1,50 +1,4 @@
 {
-  "CDSHooksAssessment": [
-    {
-      "name": "Requests And Responses",
-      "dataKey": "RequestsAndResponses",
-      "dataKeySource": "CDSHooksAssessment",
-      "info": [
-        {
-          "type": "elements",
-          "description": "What hooks are we doing:",
-          "elements": [
-            {
-              "name": "Hooky 1",
-              "status": "final or amended",
-              "lookback": "most recent in past 6 months"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Result": {
-              "key": "Result",
-              "formatter": "quantityFormat"
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
-          },
-          "flags": [
-            {
-              "flag": {
-                "ifGreaterThanOrEqualTo": {
-                  "header": "Result",
-                  "value": 50
-                }
-              },
-              "flagText": "We hooked up"
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "PertinentMedicalHistory": [
     {
       "name": "CHRONIC PAIN CONDITIONS (past 12 months)",
@@ -296,11 +250,11 @@
       ]
     }
   ],
-  "HistoricalTreatments": [
+  "CurrentPertinentTreatments": [
     {
       "name": "Non-Opioids",
       "dataKey": "NonOpioidMedications",
-      "dataKeySource": "HistoricalTreatments",
+      "dataKeySource": "CurrentPertinentTreatments",
       "info": [
         {
           "type": "elements",
@@ -336,9 +290,9 @@
       ]
     },
     {
-      "name": "Opioid Medications",
+      "name": "Opioids",
       "dataKey": "OpioidMedications",
-      "dataKeySource": "HistoricalTreatments",
+      "dataKeySource": "CurrentPertinentTreatments",
       "info": [
         {
           "type": "elements",
@@ -377,7 +331,7 @@
     {
       "name": "Non-Pharmacologic Treatments",
       "dataKey": "NonPharmacologicTreatments",
-      "dataKeySource": "HistoricalTreatments",
+      "dataKeySource": "CurrentPertinentTreatments",
       "info": [
         {
           "type": "elements",
@@ -447,7 +401,7 @@
                   {
                     "ifOneOrMore": {
                       "table": "OpioidMedications",
-                      "source": "HistoricalTreatments"
+                      "source": "CurrentPertinentTreatments"
                     }
                   }
                 ]

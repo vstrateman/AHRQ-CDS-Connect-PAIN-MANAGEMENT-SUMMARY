@@ -2353,7 +2353,19 @@
         "PainEnjoymentGeneralActivityAssessments": [],
         "STarTBackAssessments": []
       },
-      "HistoricalTreatments": {
+      "CurrentPertinentTreatments": {
+        "CurrentMME": [
+          { "Name":   "ConceptText(M.code)",
+            "Result": "QuantityText(M.value as FHIR.Quantity)",
+            "Date":   "ObservationDate(M)"
+          }
+        ],
+        "MostRecentMME": [
+          { "Name":   "ConceptText(M.code)",
+            "Result": "QuantityText(M.value as FHIR.Quantity)",
+            "Date":   "ObservationDate(M)"
+          }
+        ],
         "OpioidMedications": [
           {
             "Type": "Request",
@@ -2410,10 +2422,16 @@
       },
       "RiskConsiderations": {
         "CurrentMME": [
-          null
+          { "Name":   "ConceptText(M.code)",
+            "Result": "QuantityText(M.value as FHIR.Quantity)",
+            "Date":   "ObservationDate(M)"
+          }
         ],
         "MostRecentMME": [
-          null
+          { "Name":   "ConceptText(M.code)",
+            "Result": "QuantityText(M.value as FHIR.Quantity)",
+            "Date":   "ObservationDate(M)"
+          }
         ],
         "BenzodiazepineMedications": [],
         "NaloxoneMedications": [],

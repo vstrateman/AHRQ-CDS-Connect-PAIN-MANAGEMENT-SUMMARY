@@ -264,3 +264,15 @@ main {
         }
     }
 }
+
+#opioid-title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  .opioid-name {
+    display: flex;
+  }
+  .total-mme-link {
+    margin-left: 5%;
+  }
+}
