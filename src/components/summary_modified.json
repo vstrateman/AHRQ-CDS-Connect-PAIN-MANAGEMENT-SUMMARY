@@ -271,13 +271,14 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
+            "Medication": "Name",
             "Date Prescribed": {
               "key": "Start",
               "formatter": "datishFormat"
             },
             "Status": {
-              "key": "Status"
+              "key": "Status",
+              "formatter": "datishFormat"
             }
           },
           "flags": [
@@ -309,7 +310,7 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
+            "Medication": "Name",
             "MME/Day": {
               "key": "Start",
               "formatter": "datishFormat"

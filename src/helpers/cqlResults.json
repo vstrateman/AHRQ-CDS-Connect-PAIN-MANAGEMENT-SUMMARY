@@ -2388,7 +2388,7 @@
             "Name": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet",
             "Start": "2019-01-15T16:02:00.000+00:00",
             "End": null,
-            "Status": "active",
+            "Status": "inactive",
             "_id": 10
           },
           {
@@ -2396,7 +2396,7 @@
             "Name": "Oxycodone Hydrochloride 10 MG Oral Capsule",
             "Start": "2019-01-15T16:01:00.000+00:00",
             "End": null,
-            "Status": "active",
+            "Status": "inactive",
             "_id": 11
           }
         ],
@@ -2406,7 +2406,7 @@
             "Name": "Ibuprofen 800mg",
             "Start": "2019-04-15T16:02:00.000+00:00",
             "End": null,
-            "Status": "active",
+            "Status": "inactive",
             "_id": 8
           },
           {
@@ -2414,7 +2414,7 @@
             "Name": "Amoxicillin 75mg",
             "Start": "2019-01-15T16:01:00.000+00:00",
             "End": null,
-            "Status": "active",
+            "Status": "inactive",
             "_id": 9
           }
         ],
