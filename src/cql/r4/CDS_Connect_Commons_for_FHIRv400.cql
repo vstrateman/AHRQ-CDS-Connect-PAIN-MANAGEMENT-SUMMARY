@@ -27,12 +27,12 @@ code "Condition Confirmed code": 'confirmed' from "CONDVERSTATUS" display 'Confi
 code "Condition Active code": 'active' from "CONDCLINSTATUS" display 'Active'
 code "Condition Recurrence code": 'recurrence' from "CONDCLINSTATUS" display 'Recurrence'
 code "Condition Relapse code": 'relapse' from "CONDCLINSTATUS" display 'Relapse'
-concept "AllergyIntolerance Confirmed": { "AllergyIntolerance Confirmed code" } display 'Confirmed'
-concept "AllergyIntolerance Active": { "AllergyIntolerance Active code" } display 'Active'
-concept "Condition Confirmed": { "Condition Confirmed code" } display 'Confirmed'
-concept "Condition Active": { "Condition Active code" } display 'Active'
-concept "Condition Recurrence": { "Condition Recurrence code" } display 'Recurrence'
-concept "Condition Relapse": { "Condition Relapse code" } display 'Relapse'
+//concept "AllergyIntolerance Confirmed": { "AllergyIntolerance Confirmed code" } display 'Confirmed'
+//concept "AllergyIntolerance Active": { "AllergyIntolerance Active code" } display 'Active'
+//concept "Condition Confirmed": { "Condition Confirmed code" } display 'Confirmed'
+//concept "Condition Active": { "Condition Active code" } display 'Active'
+//concept "Condition Recurrence": { "Condition Recurrence code" } display 'Recurrence'
+//concept "Condition Relapse": { "Condition Relapse code" } display 'Relapse'
 
 // -------------------------------------------------- GENERAL ---------------------------------------------------------
 
@@ -228,7 +228,7 @@ define function ConditionsByConcept(Koncept System.Concept):
  * @returns {List<Condition>} a list of confirmed Conditions, or null if null was passed in
  */
 define function Confirmed(CondList List<Condition>):
-  CondList C where C.verificationStatus ~ "Condition Confirmed"
+  CondList C where C.verificationStatus ~ "Condition Confirmed code"
 
 /**
  * Conditions that are active. In FHIR R4, this is reflected by clinicalStatus: 'active' and the absence of any
@@ -240,7 +240,7 @@ define function Confirmed(CondList List<Condition>):
  */
 define function ActiveCondition(CondList List<Condition>):
   CondList C
-    where C.clinicalStatus ~ "Condition Active"
+    where C.clinicalStatus ~ "Condition Active code"
       and C.abatement is null
 
 /**
@@ -253,9 +253,9 @@ define function ActiveCondition(CondList List<Condition>):
  */
 define function ActiveOrRecurring(CondList List<Condition>):
   CondList C
-    where C.clinicalStatus ~ "Condition Active"
-      or C.clinicalStatus ~ "Condition Recurrence"
-      or C.clinicalStatus ~ "Condition Relapse"
+    where C.clinicalStatus ~ "Condition Active code"
+      or C.clinicalStatus ~ "Condition Recurrence code"
+      or C.clinicalStatus ~ "Condition Relapse code"
 
 /**
  * Conditions with an onset or recorded date in the specified "look back" period.  For example, pregnancy in
@@ -554,8 +554,8 @@ define function AllergyIntolerancesByConcept(Koncept System.Concept):
 */
 define function ActiveOrConfirmedAllergyIntolerance(AllergyIntolList List<AllergyIntolerance>):
   AllergyIntolList A
-    where A.clinicalStatus ~ "AllergyIntolerance Active"
-      or A.verificationStatus ~ "AllergyIntolerance Confirmed"
+    where A.clinicalStatus ~ "AllergyIntolerance Active code"
+      or A.verificationStatus ~ "AllergyIntolerance Confirmed code"
 
 // -------------------------------------------------------- GOALS ------------------------------------------------------
 

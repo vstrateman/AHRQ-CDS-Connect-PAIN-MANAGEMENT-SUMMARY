@@ -1,6 +1,4 @@
-import FHIR from 'fhirclient';
 import React, { Component } from 'react';
-import tocbot from 'tocbot';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import executeElm from '../utils/executeELM';
@@ -24,7 +22,6 @@ function generateUuid() {
 }
 
 export default class Landing extends Component<any, any> {
-    tocInitialized: boolean;
     summaryMapData: any = summaryMap;
     constructor(props: any) {
         super(props);
@@ -37,11 +34,11 @@ export default class Landing extends Component<any, any> {
             questionText: new Map()
         };
 
-        this.tocInitialized = false;
     }
 
     componentDidMount() {
         executeElm(this.state.collector).then((result: any) => {
+
             this.setState({ loading: false });
             const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
             this.setState({ result, sectionFlags, flaggedCount });
@@ -62,18 +59,6 @@ export default class Landing extends Component<any, any> {
                         });
                 }
             })
-            .then(() => {
-                FHIR.oauth2.ready()
-                    .then(client => client.request("Questionnaire/mypain-questionnaire"))
-                    .then((questionnaire)=>{
-                        return this.extractQuestionText(questionnaire);
-                    })
-                    .then((textMap) => {
-                        this.setState({questionText:textMap});
-                        return;
-                    })
-                    .catch(console.error);
-            })
             .catch((err: any) => {
                 console.error(err);
                 this.setState({ loading: false });
@@ -81,58 +66,15 @@ export default class Landing extends Component<any, any> {
     }
 
     componentDidUpdate() {
-        if (!this.tocInitialized && !this.state.loading && this.state.result) {
-            tocbot.init({
-                tocSelector: '.summary__nav',           // where to render the table of contents
-                contentSelector: '.summary__display',   // where to grab the headings to build the table of contents
-                headingSelector: 'h2, h3',              // which headings to grab inside of the contentSelector element
-                positionFixedSelector: '.summary__nav', // element to add the positionFixedClass to
-                collapseDepth: 0,                       // how many heading levels should not be collpased
-                includeHtml: true                       // include the HTML markup from the heading node, not just the text
-            });
-
-            this.tocInitialized = true;
-        }
-
+        
         if (this.state.result && this.state.result.Summary.Patient.Name) {
             const patientName = this.state.result.Summary.Patient.Name;
             document.title = 'Pain Management Summary - ' + patientName;
         }
     }
 
-    extractQuestionText(questionnaire: any){
-        let qTextMap = new Map();
-        // TODO - loop through questionnaire and put linkIds and question text in map to use in display
-        let qItems = questionnaire.item;
-        qItems.forEach(function(item: any){
-            if(item.item === null || item.item === undefined){
-                qTextMap.set(item.linkId, item.prefix + ':' + item.text);
-            }else{
-                if(item.linkId !== null && item.linkId !== undefined){
-                    if(item.prefix !== null && item.prefix !== undefined){
-                        qTextMap.set(item.linkId, item.prefix + ':' + item.text);
-
-                    }else{
-                        qTextMap.set(item.linkId, item.text);
-                    }
-                }
-                let itemItems = item.item;
-                itemItems.forEach(function(itemItem:any){
-                    if(itemItem.linkId!== null && itemItem.linkId !== undefined) {
-                        if(itemItem.prefix !== null && itemItem.prefix !== undefined){
-                            qTextMap.set(itemItem.linkId, itemItem.prefix + ':' + itemItem.text);
-                        }else {
-                            qTextMap.set(itemItem.linkId, itemItem.text);
-                        }
-                    }
-                });
-            }
-        });
-        return qTextMap;
-
-    }
-
     getAnalyticsData(endpoint: any, apikey: any, summary: any) {
+
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         const applicationAnalytics: any = {
             meetsInclusionCriteria
@@ -181,7 +123,6 @@ export default class Landing extends Component<any, any> {
         };
 
         if (endpoint) {
-            console.log('endpoint:', endpoint);
 
             fetch(endpoint, requestOptions)
                 .catch(function (err) {
@@ -195,39 +136,40 @@ export default class Landing extends Component<any, any> {
         const sectionFlags: any = {};
         const sectionKeys: any = Object.keys(this.summaryMapData);
         let flaggedCount = 0;
-
         sectionKeys.forEach((sectionKey: any, i: any) => {
                 sectionFlags[sectionKey] = {};
-
                 this.summaryMapData[sectionKey].forEach((subSection: any) => {
+                    if (summary[subSection.dataKeySource][subSection.dataKey] && (summary[subSection.dataKeySource][subSection.dataKey].length > 0)) {
+
                         const data = summary[subSection.dataKeySource][subSection.dataKey];
                         const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
                                 return r != null;
                             });
-
-                        if (entries.length > 0) {
-                            sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
-                                    if (entry._id == null) {
-                                        entry._id = generateUuid();
-                                    }
-
-                                    const entryFlag = flagit(entry, subSection, summary);
-
-                                    if (entryFlag) {
-                                        flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
-                                        flaggedCount += 1;
-                                    }
-
-                                    return flaggedEntries;
-                                }, []);
-                        } else {
-                            const sectionFlagged = flagit(null, subSection, summary);
-                            sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
-
-                            if (sectionFlagged) {
-                                flaggedCount += 1;
+                            if (entries.length > 0) {
+                                sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
+                                        if (entry._id == null) {
+                                            entry._id = generateUuid();
+                                        }
+        
+                                        const entryFlag = flagit(entry, subSection, summary);
+        
+                                        if (entryFlag) {
+                                            flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
+                                            flaggedCount += 1;
+                                        }
+        
+                                        return flaggedEntries;
+                                    }, []);
+                            } else {
+                                const sectionFlagged = flagit(null, subSection, summary);
+                                sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
+        
+                                if (sectionFlagged) {
+                                    flaggedCount += 1;
+                                }
                             }
-                        }
+                    }
+
                     });
             });
 
@@ -264,7 +206,7 @@ export default class Landing extends Component<any, any> {
 
         const summary = this.state.result.Summary;
         const { sectionFlags, flaggedCount } = this.state;
-        const numMedicalHistoryEntries = sumit(summary.PertinentMedicalHistory || {});
+        const numMedicalHistoryEntries = sumit(summary.PertinentConditions || {});
         const numPainEntries = sumit(summary.PainAssessments || {});
         const numTreatmentsEntries = sumit(summary.HistoricalTreatments || {});
         const numRiskEntries =

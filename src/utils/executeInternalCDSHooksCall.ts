@@ -72,7 +72,7 @@ export default function executeInternalCDSCall(recommendationNumber, collector) 
 function getPatientSource(release) {
     switch (release) {
         case 4:
-            return cqlfhir.PatientSource.FHIRv400();
+            return cqlfhir.PatientSource.FHIRv401();
         default:
             throw new Error('Only FHIR R4 servers are supported');
     }

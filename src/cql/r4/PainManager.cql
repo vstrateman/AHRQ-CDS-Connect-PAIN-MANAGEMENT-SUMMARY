@@ -35,9 +35,18 @@ include MMECalculator version '3.0.0' called MMECalculator
 codesystem "LOINC": 'http://loinc.org'
 codesystem "SNOMED-CT": 'http://snomed.info/sct'
 
-valueset "MyPAIN Questionnaire Codes": 'http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes'
+codesystem "MyPAIN Questionnaire Codes": 'http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes'
+
+valueset "MyPAIN All Questionnaire Codes": 'http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaire-codes'
+valueset "MyPAIN All QuestionnaireResponse Codes": 'http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaireresponse-codes'
 
 code "Questionnaire response Document code": '74465-6' from "LOINC" display 'Questionnaire response Document'
+code "painLocationOther": 'mpq-1053' from "MyPAIN Questionnaire Codes" display 'Other pain location'
+code "physicalTreatmentsOther": 'mpq-1054' from "MyPAIN Questionnaire Codes" display 'Other physical treatment'
+code "prescriptionOther": 'mpq-1057' from "MyPAIN Questionnaire Codes" display 'Other prescription treatment'
+code "newTreatmentOther": 'mpq-1059' from "MyPAIN Questionnaire Codes" display 'Other new treatment'
+code "painGoal": 'mpq-1036' from "MyPAIN Questionnaire Codes" display 'Pain Goal'
+code "goalBarriers": 'mpq-1037' from "MyPAIN Questionnaire Codes" display 'Goal Barriers'
 
 concept "Questionnaire response Document":
   { "Questionnaire response Document code" } display 'Questionnaire response Document'
@@ -53,17 +62,15 @@ define CurrentMME:
   MMECalculator.TotalMME(ActiveOpioidMedications)
 
 define ReportCurrentMME:
-{
-  if CurrentMME is null then
-    null
-    else
-      (CurrentMME) M
-      return {
-        Name: 'Current Milligram Morphine Equivalent',
-        Result: ToString(M),
-        Date: ToString(Today())
-      }
-}
+({
+  (CurrentMME) M
+    return {
+      Name: 'Current Milligram Morphine Equivalent',
+      Result: ToString(M),
+      Date: ToString(Today())
+    }
+}) C
+  where C is not null
 
 //********************  MyPAIN Questionnaire Observations  ********************************
 define function ConceptTextOrCode(c FHIR.CodeableConcept):
@@ -88,15 +95,25 @@ define function GetLinkId(Obs FHIR.Observation):
     else Obs.extension[0].extension[0].value.value
 
 define QuestionnaireObservations:
-  C3F.Verified(C3F.ObservationLookBack([Observation: "MyPAIN Questionnaire Codes"], 1 year))
+  C3F.Verified(C3F.ObservationLookBack([Observation: "MyPAIN All Questionnaire Codes"], 1 year))
+//  C3F.Verified(C3F.ObservationLookBack([Observation], 1 year))
 
-define ReportQuestionnaireObservations:
+/* define ReportQuestionnaireObservations:
   QuestionnaireObservations qo
     return {
       Answer: ObservationValue(qo),
       DateText: F2C.ObservationDate(qo),
       LinkId: qo.extension[0].extension[0].value.value
-    }
+    } */
+
+//TODO - eventually this needs to walk thru nested items beyond 2
+define function QuestionTextByLinkId(Obs FHIR.Observation):
+  ([Questionnaire] Q where Q.id = 'mypain-questionnaire') singleQ
+return (Coalesce(singleQ.item.item, singleQ.item)) QItem
+    where QItem.linkId = Obs.extension[0].extension[0].value as FHIR.string
+      return QItem.prefix
+
+
 
 /*
 MyPAINSubmitDate: ReportMyPAINSubmitDate,
@@ -109,49 +126,70 @@ ResourcesProvidedInMyPAIN: ReportResourcesProvidedInMyPAIN
 
 // NOTE: This should NOT use the QuestionnaireResponse, it should use the MyPAINSubmitDate Observation
 define ReportMyPAINSubmitDate:
-  null as DateTime // Date of the most recent MyPAIN Questionnaire Response
+(QuestionnaireObservations) qrOb
+  return F2C.DateTimeText(qrOb.effective as FHIR.dateTime)
 
 define ReportActivityGoals:
-  null as String // Text value of the most recent ActivityGoals Observation
+  (QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1036'
+    return qrOb.value
 
 define ReportActivityBarriers:
-  null as String // Text value of the most recent ActivityBarriers Observation
+(QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1037'
+  return qrOb.value
 
 // Data from the most recent PainLocation Observations
 define ReportPainLocations:
+(QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'Stabbing', 'Burning', 'Aching', 'Tingling', 'Prickling', 'Throbbing'}
+  or qrOb.code.coding[0].code.value = 'mpq-1053')//'painLocationOther') => doesn't work
+return
 {
   {
-    Location: null as String,
-    PainYesNo: null as Boolean,
-    Description: null as String
+    Location: qrOb.code.coding[0].display,
+    PainYesNo: true,
+    Description: ObservationValue(qrOb)
   }
 }
 
 // Data from the most recent PainIntensityAndInteference Observations
 define ReportPainIntensityAndInterference:
-{
-  {
-    Question: null as String,
-    Response: null as String
+  (QuestionnaireObservations) qrOb where ObservationValue(qrOb) in
+    {'Had no pain', 'Mild', 'Moderate', 'Severe', 'Very Severe', 'Not at all', 'A little bit', 'Somewhat', 'Quite a bit', 'Very much'}
+  return
+   {
+     {
+    Question: qrOb.code.coding[0].display,
+    Response: ObservationValue(qrOb)
   }
-}
+  }
+
+  define function GetResourceURL(linkId String):
+    case
+      when linkId = '12' then 'https://www.youtube.com/embed/QWcr9J3MLfo'
+      when linkId = '13' then 'https://uspainfoundation.org/living-with-pain/'
+      else null
+    end
+
 
 // Data from the most recent "resources viewed" Observations
 define ReportResourcesProvidedInMyPAIN:
-{
+(QuestionnaireObservations) qrOb where qrOb.extension[0].extension[0].value as FHIR.string in {'12', '13'}
+  return
   {
-    Resource: null as String,
-    ResourceUrl: null as String,
-    ViewedOn: null as DateTime
+    {
+      Resource: qrOb.value,
+      ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),//qrOb),
+      ViewedOn: qrOb.effective
+    }
   }
-}
 
 // Data from the most recent self reported MyPAIN observations
 define ReportSelfReportedTreatmentsFromMyPAIN:
+(QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'Never', 'Sometimes', 'Always'} or qrOb.code.coding[0].code.value in {'mpq-1054', 'mpq-1057', 'mpq-1059'})
+return
 {
   {
-    Treatment: null as String,
-    Effectiveness: null as String
+    Treatment: QuestionTextByLinkId(qrOb),
+    Effectiveness: ObservationValue(qrOb)
   }
 }
 
@@ -292,7 +330,7 @@ Activity Barriers
 */
 
 define Summary: {
-  Patient: {
+   Patient: {
     Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
     Gender: Patient.gender.value,
     Age: AgeInYears(),
@@ -303,14 +341,14 @@ define Summary: {
     CoMorbidConditionsIncreasingRiskWhenUsingOpioids: F2C.ReportRiskFactorsForOpioidRelatedHarms,
     Recommendation8Text: ReportRecommendation8Text
   },
-  CurrentPainTreatments: {
+  CurrentPertinentTreatments: {
     CurrentMME: ReportCurrentMME,
     MostRecentMME: F2C.ReportMostRecentMME,
     OpioidMedications: F2C.ReportOpioidMedications,
     NonOpioidMedications: F2C.ReportNonOpioidMedications,
     BenzodiazepineMedications: F2C.ReportBenzodiazepineMedications,
     NaloxoneMedications: F2C.ReportNaloxoneMedications,
-    SelfReportedTreatementsFromMyPAIN: ReportSelfReportedTreatmentsFromMyPAIN,
+    SelfReportedTreatmentsFromMyPAIN: ReportSelfReportedTreatmentsFromMyPAIN,
     Recommendation3Text: ReportRecommendation3Text,
     Recommendation5Text: ReportRecommendation5Text,
     Recommendation11Text: ReportRecommendation11Text
