@@ -302,11 +302,11 @@ main {
 
 .shared-decision-making-section {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     .sub-section {
-        // width: 50%;
-        .table {
+        width: 47%;
+        // .table {
             // width: 50%;
-        }
+        // }
     }
 }
