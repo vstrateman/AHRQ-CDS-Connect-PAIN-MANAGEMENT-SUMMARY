@@ -9,6 +9,7 @@ function extractResourcesFromELM(elm, isFromOpiodRec) {
   if(isFromOpiodRec){
     resources.add('MedicationRequest');
   }
+  resources.add('Questionnaire');
   return Array.from(resources);
 }
 

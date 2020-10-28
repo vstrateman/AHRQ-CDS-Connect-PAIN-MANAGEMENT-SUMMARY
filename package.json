@@ -38,7 +38,6 @@
     "react-table": "^6.11.4",
     "react-tooltip": "^3.11.6",
     "setprototypeof": "^1.2.0",
-    "tocbot": "^4.10.0",
     "ucum": "cmoesel/ucum.js#es5-friendly",
     "url-polyfill": "^1.1.10"
   },

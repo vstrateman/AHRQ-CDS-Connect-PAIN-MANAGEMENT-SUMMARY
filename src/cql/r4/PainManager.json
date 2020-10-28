@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorOptions" : "EnableDateRangeOptimization,DisableListDemotion,DisableListPromotion,DisableMethodInvocation",
+         "translatorOptions" : "",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -54,12 +54,20 @@
             "name" : "SNOMED-CT",
             "id" : "http://snomed.info/sct",
             "accessLevel" : "Public"
+         }, {
+            "name" : "MyPAIN Questionnaire Codes",
+            "id" : "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes",
+            "accessLevel" : "Public"
          } ]
       },
       "valueSets" : {
          "def" : [ {
-            "name" : "MyPAIN Questionnaire Codes",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes",
+            "name" : "MyPAIN All Questionnaire Codes",
+            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaire-codes",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "MyPAIN All QuestionnaireResponse Codes",
+            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaireresponse-codes",
             "accessLevel" : "Public"
          } ]
       },
@@ -71,6 +79,54 @@
             "accessLevel" : "Public",
             "codeSystem" : {
                "name" : "LOINC"
+            }
+         }, {
+            "name" : "painLocationOther",
+            "id" : "mpq-1053",
+            "display" : "Other pain location",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "physicalTreatmentsOther",
+            "id" : "mpq-1054",
+            "display" : "Other physical treatment",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "prescriptionOther",
+            "id" : "mpq-1057",
+            "display" : "Other prescription treatment",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "newTreatmentOther",
+            "id" : "mpq-1059",
+            "display" : "Other new treatment",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "painGoal",
+            "id" : "mpq-1036",
+            "display" : "Pain Goal",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "goalBarriers",
+            "id" : "mpq-1037",
+            "display" : "Goal Barriers",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
             }
          } ]
       },
@@ -140,90 +196,65 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "List",
-               "element" : [ {
-                  "type" : "If",
-                  "condition" : {
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "operand" : {
-                        "type" : "IsNull",
-                        "operand" : {
-                           "name" : "CurrentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }
-                  },
-                  "then" : {
-                     "type" : "As",
-                     "operand" : {
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "type" : "TupleTypeSpecifier",
-                        "element" : [ {
-                           "name" : "Name",
-                           "type" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "type" : "NamedTypeSpecifier"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "C",
+                  "expression" : {
+                     "type" : "List",
+                     "element" : [ {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "M",
+                           "expression" : {
+                              "name" : "CurrentMME",
+                              "type" : "ExpressionRef"
                            }
-                        }, {
-                           "name" : "Result",
-                           "type" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        }, {
-                           "name" : "Date",
-                           "type" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ]
-                     }
-                  },
-                  "else" : {
-                     "type" : "Query",
-                     "source" : [ {
-                        "alias" : "M",
-                        "expression" : {
-                           "name" : "CurrentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     } ],
-                     "relationship" : [ ],
-                     "return" : {
-                        "expression" : {
-                           "type" : "Tuple",
-                           "element" : [ {
-                              "name" : "Name",
-                              "value" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "Current Milligram Morphine Equivalent",
-                                 "type" : "Literal"
-                              }
-                           }, {
-                              "name" : "Result",
-                              "value" : {
-                                 "type" : "ToString",
-                                 "operand" : {
-                                    "name" : "M",
-                                    "type" : "AliasRef"
+                        } ],
+                        "relationship" : [ ],
+                        "return" : {
+                           "expression" : {
+                              "type" : "Tuple",
+                              "element" : [ {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "Current Milligram Morphine Equivalent",
+                                    "type" : "Literal"
                                  }
-                              }
-                           }, {
-                              "name" : "Date",
-                              "value" : {
-                                 "type" : "ToString",
-                                 "operand" : {
-                                    "type" : "Today"
+                              }, {
+                                 "name" : "Result",
+                                 "value" : {
+                                    "type" : "ToString",
+                                    "operand" : {
+                                       "name" : "M",
+                                       "type" : "AliasRef"
+                                    }
                                  }
-                              }
-                           } ]
+                              }, {
+                                 "name" : "Date",
+                                 "value" : {
+                                    "type" : "ToString",
+                                    "operand" : {
+                                       "type" : "Today"
+                                    }
+                                 }
+                              } ]
+                           }
                         }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Not",
+                  "operand" : {
+                     "type" : "IsNull",
+                     "operand" : {
+                        "name" : "C",
+                        "type" : "AliasRef"
                      }
                   }
-               } ]
+               }
             }
          }, {
             "name" : "ConceptTextOrCode",
@@ -565,7 +596,7 @@
                      "codeComparator" : "in",
                      "type" : "Retrieve",
                      "codes" : {
-                        "name" : "MyPAIN Questionnaire Codes",
+                        "name" : "MyPAIN All Questionnaire Codes",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -576,49 +607,107 @@
                } ]
             }
          }, {
-            "name" : "ReportQuestionnaireObservations",
+            "name" : "QuestionTextByLinkId",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "type" : "FunctionDef",
             "expression" : {
                "type" : "Query",
                "source" : [ {
-                  "alias" : "qo",
+                  "alias" : "singleQ",
                   "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
+                     "type" : "Query",
+                     "source" : [ {
+                        "alias" : "Q",
+                        "expression" : {
+                           "dataType" : "{http://hl7.org/fhir}Questionnaire",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/Questionnaire",
+                           "type" : "Retrieve"
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "type" : "Equal",
+                        "operand" : [ {
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "id",
+                              "scope" : "Q",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "mypain-questionnaire",
+                           "type" : "Literal"
+                        } ]
+                     }
                   }
                } ],
                "relationship" : [ ],
                "return" : {
                   "expression" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "Answer",
-                        "value" : {
-                           "name" : "ObservationValue",
-                           "type" : "FunctionRef",
+                     "type" : "Query",
+                     "source" : [ {
+                        "alias" : "QItem",
+                        "expression" : {
+                           "type" : "Coalesce",
                            "operand" : [ {
-                              "name" : "qo",
-                              "type" : "AliasRef"
+                              "type" : "Flatten",
+                              "operand" : {
+                                 "type" : "Query",
+                                 "source" : [ {
+                                    "alias" : "$this",
+                                    "expression" : {
+                                       "path" : "item",
+                                       "scope" : "singleQ",
+                                       "type" : "Property"
+                                    }
+                                 } ],
+                                 "where" : {
+                                    "type" : "Not",
+                                    "operand" : {
+                                       "type" : "IsNull",
+                                       "operand" : {
+                                          "path" : "item",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "name" : "$this",
+                                             "type" : "AliasRef"
+                                          }
+                                       }
+                                    }
+                                 },
+                                 "return" : {
+                                    "expression" : {
+                                       "path" : "item",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "$this",
+                                          "type" : "AliasRef"
+                                       }
+                                    }
+                                 }
+                              }
+                           }, {
+                              "path" : "item",
+                              "scope" : "singleQ",
+                              "type" : "Property"
                            } ]
                         }
-                     }, {
-                        "name" : "DateText",
-                        "value" : {
-                           "name" : "ObservationDate",
-                           "libraryName" : "F2C",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "name" : "qo",
-                              "type" : "AliasRef"
-                           } ]
-                        }
-                     }, {
-                        "name" : "LinkId",
-                        "value" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "type" : "Equal",
+                        "operand" : [ {
+                           "path" : "linkId",
+                           "scope" : "QItem",
+                           "type" : "Property"
+                        }, {
+                           "strict" : false,
+                           "type" : "As",
+                           "operand" : {
                               "path" : "value",
                               "type" : "Property",
                               "source" : {
@@ -630,8 +719,11 @@
                                        "type" : "Indexer",
                                        "operand" : [ {
                                           "path" : "extension",
-                                          "scope" : "qo",
-                                          "type" : "Property"
+                                          "type" : "Property",
+                                          "source" : {
+                                             "name" : "Obs",
+                                             "type" : "OperandRef"
+                                          }
                                        }, {
                                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "value" : "0",
@@ -644,25 +736,63 @@
                                     "type" : "Literal"
                                  } ]
                               }
+                           },
+                           "asTypeSpecifier" : {
+                              "name" : "{http://hl7.org/fhir}string",
+                              "type" : "NamedTypeSpecifier"
                            }
+                        } ]
+                     },
+                     "return" : {
+                        "expression" : {
+                           "path" : "prefix",
+                           "scope" : "QItem",
+                           "type" : "Property"
                         }
-                     } ]
+                     }
                   }
                }
-            }
+            },
+            "operand" : [ {
+               "name" : "Obs",
+               "operandTypeSpecifier" : {
+                  "name" : "{http://hl7.org/fhir}Observation",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
          }, {
             "name" : "ReportMyPAINSubmitDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "strict" : false,
-               "type" : "As",
-               "operand" : {
-                  "type" : "Null"
-               },
-               "asTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                  "type" : "NamedTypeSpecifier"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qrOb",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "name" : "DateTimeText",
+                     "libraryName" : "F2C",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "path" : "effective",
+                           "scope" : "qrOb",
+                           "type" : "Property"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{http://hl7.org/fhir}dateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
                }
             }
          }, {
@@ -670,14 +800,52 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "strict" : false,
-               "type" : "As",
-               "operand" : {
-                  "type" : "Null"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qrOb",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "path" : "value",
+                     "type" : "Property",
+                     "source" : {
+                        "path" : "code",
+                        "type" : "Property",
+                        "source" : {
+                           "type" : "Indexer",
+                           "operand" : [ {
+                              "path" : "coding",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "code",
+                                 "scope" : "qrOb",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "mpq-1036",
+                     "type" : "Literal"
+                  } ]
                },
-               "asTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
+               "return" : {
+                  "expression" : {
+                     "path" : "value",
+                     "scope" : "qrOb",
+                     "type" : "Property"
+                  }
                }
             }
          }, {
@@ -685,14 +853,52 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "strict" : false,
-               "type" : "As",
-               "operand" : {
-                  "type" : "Null"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qrOb",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "path" : "value",
+                     "type" : "Property",
+                     "source" : {
+                        "path" : "code",
+                        "type" : "Property",
+                        "source" : {
+                           "type" : "Indexer",
+                           "operand" : [ {
+                              "path" : "coding",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "code",
+                                 "scope" : "qrOb",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }
+                  }, {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "mpq-1037",
+                     "type" : "Literal"
+                  } ]
                },
-               "asTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
+               "return" : {
+                  "expression" : {
+                     "path" : "value",
+                     "scope" : "qrOb",
+                     "type" : "Property"
+                  }
                }
             }
          }, {
@@ -700,174 +906,553 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "List",
-               "element" : [ {
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "Location",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qrOb",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Or",
+                  "operand" : [ {
+                     "type" : "In",
+                     "operand" : [ {
+                        "name" : "ObservationValue",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "qrOb",
+                           "type" : "AliasRef"
+                        } ]
+                     }, {
+                        "type" : "List",
+                        "element" : [ {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Stabbing",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Burning",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Aching",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Tingling",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Prickling",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Throbbing",
+                           "type" : "Literal"
+                        } ]
+                     } ]
                   }, {
-                     "name" : "PainYesNo",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
+                     "type" : "Equal",
+                     "operand" : [ {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "code",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "Indexer",
+                              "operand" : [ {
+                                 "path" : "coding",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "code",
+                                    "scope" : "qrOb",
+                                    "type" : "Property"
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal"
+                              } ]
+                           }
                         }
-                     }
-                  }, {
-                     "name" : "Description",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "mpq-1053",
+                        "type" : "Literal"
+                     } ]
                   } ]
-               } ]
+               },
+               "return" : {
+                  "expression" : {
+                     "type" : "List",
+                     "element" : [ {
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "Location",
+                           "value" : {
+                              "path" : "display",
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
+                           }
+                        }, {
+                           "name" : "PainYesNo",
+                           "value" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal"
+                           }
+                        }, {
+                           "name" : "Description",
+                           "value" : {
+                              "name" : "ObservationValue",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "name" : "qrOb",
+                                 "type" : "AliasRef"
+                              } ]
+                           }
+                        } ]
+                     } ]
+                  }
+               }
             }
          }, {
             "name" : "ReportPainIntensityAndInterference",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "List",
-               "element" : [ {
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "Question",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qrOb",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "In",
+                  "operand" : [ {
+                     "name" : "ObservationValue",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "qrOb",
+                        "type" : "AliasRef"
+                     } ]
                   }, {
-                     "name" : "Response",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
+                     "type" : "List",
+                     "element" : [ {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Had no pain",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Mild",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Moderate",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Severe",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Very Severe",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Not at all",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "A little bit",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Somewhat",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Quite a bit",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Very much",
+                        "type" : "Literal"
+                     } ]
                   } ]
-               } ]
+               },
+               "return" : {
+                  "expression" : {
+                     "type" : "List",
+                     "element" : [ {
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "Question",
+                           "value" : {
+                              "path" : "display",
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
+                           }
+                        }, {
+                           "name" : "Response",
+                           "value" : {
+                              "name" : "ObservationValue",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "name" : "qrOb",
+                                 "type" : "AliasRef"
+                              } ]
+                           }
+                        } ]
+                     } ]
+                  }
+               }
             }
+         }, {
+            "name" : "GetResourceURL",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Case",
+               "caseItem" : [ {
+                  "when" : {
+                     "type" : "Equal",
+                     "operand" : [ {
+                        "name" : "linkId",
+                        "type" : "OperandRef"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "12",
+                        "type" : "Literal"
+                     } ]
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "https://www.youtube.com/embed/QWcr9J3MLfo",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "when" : {
+                     "type" : "Equal",
+                     "operand" : [ {
+                        "name" : "linkId",
+                        "type" : "OperandRef"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "13",
+                        "type" : "Literal"
+                     } ]
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "https://uspainfoundation.org/living-with-pain/",
+                     "type" : "Literal"
+                  }
+               } ],
+               "else" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "linkId",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
          }, {
             "name" : "ReportResourcesProvidedInMyPAIN",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "List",
-               "element" : [ {
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "Resource",
-                     "value" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qrOb",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "In",
+                  "operand" : [ {
+                     "name" : "ToString",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
                         "strict" : false,
                         "type" : "As",
                         "operand" : {
-                           "type" : "Null"
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "Indexer",
+                              "operand" : [ {
+                                 "path" : "extension",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "type" : "Indexer",
+                                    "operand" : [ {
+                                       "path" : "extension",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "0",
+                                       "type" : "Literal"
+                                    } ]
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal"
+                              } ]
+                           }
                         },
                         "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "name" : "{http://hl7.org/fhir}string",
                            "type" : "NamedTypeSpecifier"
                         }
-                     }
+                     } ]
                   }, {
-                     "name" : "ResourceUrl",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
-                  }, {
-                     "name" : "ViewedOn",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
+                     "type" : "List",
+                     "element" : [ {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "12",
+                        "type" : "Literal"
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "13",
+                        "type" : "Literal"
+                     } ]
                   } ]
-               } ]
+               },
+               "return" : {
+                  "expression" : {
+                     "type" : "List",
+                     "element" : [ {
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "Resource",
+                           "value" : {
+                              "path" : "value",
+                              "scope" : "qrOb",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "name" : "ResourceUrl",
+                           "value" : {
+                              "name" : "GetResourceURL",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "strict" : false,
+                                    "type" : "As",
+                                    "operand" : {
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "path" : "extension",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "type" : "Indexer",
+                                                "operand" : [ {
+                                                   "path" : "extension",
+                                                   "scope" : "qrOb",
+                                                   "type" : "Property"
+                                                }, {
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                   "value" : "0",
+                                                   "type" : "Literal"
+                                                } ]
+                                             }
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
+                                    },
+                                    "asTypeSpecifier" : {
+                                       "name" : "{http://hl7.org/fhir}string",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }, {
+                           "name" : "ViewedOn",
+                           "value" : {
+                              "path" : "effective",
+                              "scope" : "qrOb",
+                              "type" : "Property"
+                           }
+                        } ]
+                     } ]
+                  }
+               }
             }
          }, {
             "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "List",
-               "element" : [ {
-                  "type" : "Tuple",
-                  "element" : [ {
-                     "name" : "Treatment",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "qrOb",
+                  "expression" : {
+                     "name" : "QuestionnaireObservations",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Or",
+                  "operand" : [ {
+                     "type" : "In",
+                     "operand" : [ {
+                        "name" : "ObservationValue",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "qrOb",
+                           "type" : "AliasRef"
+                        } ]
+                     }, {
+                        "type" : "List",
+                        "element" : [ {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Never",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Sometimes",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Always",
+                           "type" : "Literal"
+                        } ]
+                     } ]
                   }, {
-                     "name" : "Effectiveness",
-                     "value" : {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Null"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
+                     "type" : "In",
+                     "operand" : [ {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "code",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "Indexer",
+                              "operand" : [ {
+                                 "path" : "coding",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "code",
+                                    "scope" : "qrOb",
+                                    "type" : "Property"
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal"
+                              } ]
+                           }
                         }
-                     }
+                     }, {
+                        "type" : "List",
+                        "element" : [ {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "mpq-1054",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "mpq-1057",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "mpq-1059",
+                           "type" : "Literal"
+                        } ]
+                     } ]
                   } ]
-               } ]
+               },
+               "return" : {
+                  "expression" : {
+                     "type" : "List",
+                     "element" : [ {
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "Treatment",
+                           "value" : {
+                              "name" : "QuestionTextByLinkId",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "name" : "qrOb",
+                                 "type" : "AliasRef"
+                              } ]
+                           }
+                        }, {
+                           "name" : "Effectiveness",
+                           "value" : {
+                              "name" : "ObservationValue",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "name" : "qrOb",
+                                 "type" : "AliasRef"
+                              } ]
+                           }
+                        } ]
+                     } ]
+                  }
+               }
             }
          }, {
             "name" : "ReportRecommendation3Text",
@@ -904,7 +1489,7 @@
                },
                "then" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Per CDC guidelines, when opioids are started, clinicians should prescribe the lowest effective dosage. Clinicians should use caution when prescribing opioids at any dosage, should carefully reassess evidence of individual benefits and risks when considering increasing dosage to â‰¥50 morphine milligram equivalents (MME)/day, and should avoid increasing dosage to â‰¥90 MME/day or carefully justify a decision to titrate dosage to â‰¥90 MME/day (recommendation category: A, evidence type: 3).\n\nFor MME/day of â‰¥ 50, CDC guidelines recommend incorporating into the management plan strategies to mitigate risk, including considering offering naloxone (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #5 and #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
+                  "value" : "Per CDC guidelines, when opioids are started, clinicians should prescribe the lowest effective dosage. Clinicians should use caution when prescribing opioids at any dosage, should carefully reassess evidence of individual benefits and risks when considering increasing dosage to ≥50 morphine milligram equivalents (MME)/day, and should avoid increasing dosage to ≥90 MME/day or carefully justify a decision to titrate dosage to ≥90 MME/day (recommendation category: A, evidence type: 3).\n\nFor MME/day of ≥ 50, CDC guidelines recommend incorporating into the management plan strategies to mitigate risk, including considering offering naloxone (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #5 and #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
                   "type" : "Literal"
                },
                "else" : {
@@ -921,7 +1506,7 @@
             "accessLevel" : "Public",
             "expression" : {
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "Per CDC guidelines, before starting, and periodically during continuation of opioid therapy, clinicians should evaluate risk factors for opioid-related harms. Clinicians should incorporate into the management plan strategies to mitigate risk, including considering offering naloxone when factors that increase risk for opioid overdose, such as history of overdose, history of substance use disorder, higher opioid dosages (greater than or equal to [â‰¥] 50 morphine milligram equivalents [MME]/day), or concurrent benzodiazepine use, are present (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
+               "value" : "Per CDC guidelines, before starting, and periodically during continuation of opioid therapy, clinicians should evaluate risk factors for opioid-related harms. Clinicians should incorporate into the management plan strategies to mitigate risk, including considering offering naloxone when factors that increase risk for opioid overdose, such as history of overdose, history of substance use disorder, higher opioid dosages (greater than or equal to [≥] 50 morphine milligram equivalents [MME]/day), or concurrent benzodiazepine use, are present (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
                "type" : "Literal"
             }
          }, {
@@ -947,7 +1532,7 @@
                },
                "then" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "**No urine drug screen within the past year**\n\nPatientâ€™s active medications include an opioid. Per CDC guidelines, when prescribing opioids for chronic pain, clinicians should use urine drug testing before starting opioid therapy and consider urine drug testing at least annually to assess for prescribed medications as well as other controlled prescription drugs and illicit drugs (recommendation category: B, evidence type: 4) [CDC Opioid Prescribing Guideline, Recommendation #10](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm).",
+                  "value" : "**No urine drug screen within the past year**\n\nPatient’s active medications include an opioid. Per CDC guidelines, when prescribing opioids for chronic pain, clinicians should use urine drug testing before starting opioid therapy and consider urine drug testing at least annually to assess for prescribed medications as well as other controlled prescription drugs and illicit drugs (recommendation category: B, evidence type: 4) [CDC Opioid Prescribing Guideline, Recommendation #10](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm).",
                   "type" : "Literal"
                },
                "else" : {
@@ -1051,7 +1636,6 @@
                                                 }
                                              },
                                              "return" : {
-                                                "distinct" : false,
                                                 "expression" : {
                                                    "path" : "given",
                                                    "type" : "Property",
@@ -1117,7 +1701,6 @@
                                           }
                                        },
                                        "return" : {
-                                          "distinct" : false,
                                           "expression" : {
                                              "path" : "family",
                                              "type" : "Property",
@@ -1209,7 +1792,7 @@
                      } ]
                   }
                }, {
-                  "name" : "CurrentPainTreatments",
+                  "name" : "CurrentPertinentTreatments",
                   "value" : {
                      "type" : "Tuple",
                      "element" : [ {
@@ -1254,7 +1837,7 @@
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "name" : "SelfReportedTreatementsFromMyPAIN",
+                        "name" : "SelfReportedTreatmentsFromMyPAIN",
                         "value" : {
                            "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
                            "type" : "ExpressionRef"

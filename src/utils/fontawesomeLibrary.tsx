@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faChevronLeft,
-  faChevronRight,
+  faCaretLeft,
+  faCaretRight,
   faCircle,
   faInfoCircle,
   faLink,
@@ -11,8 +11,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-  faChevronLeft,
-  faChevronRight,
+  faCaretLeft,
+  faCaretRight,
   faCircle,
   faInfoCircle,
   faLink,
