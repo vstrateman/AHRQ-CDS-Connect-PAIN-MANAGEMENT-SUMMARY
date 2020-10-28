@@ -105,7 +105,7 @@ function getPatientSource(release) {
         case 2:
             return cqlFhirModule.PatientSource.FHIRv102();
         case 4:
-            return cqlFhirModule.PatientSource.FHIRv400();
+            return cqlFhirModule.PatientSource.FHIRv401();
         default:
             throw new Error('Only FHIR DSTU2 and FHIR R4 servers are supported');
     }
