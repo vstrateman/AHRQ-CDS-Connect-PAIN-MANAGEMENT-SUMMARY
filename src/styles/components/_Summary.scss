@@ -177,8 +177,8 @@ main {
                         }
                         .rt-th:nth-child(2),
                         .rt-td:nth-child(2) {
-                            min-width: calc(100px + 20vw);
-                            max-width: calc(100px + 20vw);
+                            min-width: calc(30px + 20vw);
+                            max-width: calc(30px + 20vw);
                         }
                         .flag-entry {
                             font-size: 1em;
@@ -245,8 +245,8 @@ main {
         }
     }
     .ReactTable .rt-thead .rt-th .col-header {
-      border-bottom: none;
-      font-weight: 800;
+        border-bottom: none;
+        font-weight: 800;
     }
 }
 
@@ -254,7 +254,10 @@ main {
     font-size: 1em;
 }
 
-#UrineDrugScreens~div,  #SelfReportedTreatmentsFromMyPAIN~div{
+#UrineDrugScreens~div,
+#SelfReportedTreatmentsFromMyPAIN~div,
+#PainLocations~div,
+#PainIntensityAndInterference~div {
     color: black;
     .rt-thead .rt-tr .rt-th {
         border-top: solid 2px black;
@@ -266,17 +269,44 @@ main {
 }
 
 #opioid-title {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  .opioid-name {
     display: flex;
-  }
-  .total-mme-link {
-    margin-left: 5%;
     width: 100%;
-    span {
-      margin-left: 2%;
+    align-items: center;
+    .opioid-name {
+        display: flex;
     }
-  }
+    .total-mme-link {
+        margin-left: 5%;
+        width: 100%;
+        span {
+            margin-left: 2%;
+        }
+    }
+}
+
+// shared decision making section
+.shared-top-section {
+    margin: 20px
+}
+.activity-section {
+    display: flex;
+    justify-content: center;
+    &>div {
+        width: 50%;
+        padding: 0 10px;
+    }
+    .activity-goals {
+        border-right: 1px black solid;
+    }
+}
+
+.shared-decision-making-section {
+    display: flex;
+    justify-content: center;
+    .sub-section {
+        // width: 50%;
+        .table {
+            // width: 50%;
+        }
+    }
 }

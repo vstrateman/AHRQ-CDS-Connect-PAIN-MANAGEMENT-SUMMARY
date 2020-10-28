@@ -1,9 +1,9 @@
 {
-  "PertinentMedicalHistory": [
+  "PertinentConditions": [
     {
       "name": "CHRONIC PAIN CONDITIONS (past 12 months)",
       "dataKey": "ConditionsAssociatedWithChronicPain",
-      "dataKeySource": "PertinentMedicalHistory",
+      "dataKeySource": "PertinentConditions",
       "info": [
         {
           "type": "elements",
@@ -27,8 +27,8 @@
     },
     {
       "name": "CO-MORBID CONDITIONS INCREASING RISK WHEN USING OPIOIDS (past 12 months)",
-      "dataKey": "RiskFactorsForOpioidRelatedHarms",
-      "dataKeySource": "PertinentMedicalHistory",
+      "dataKey": "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
+      "dataKeySource": "PertinentConditions",
       "info": [
         {
           "type": "elements",
@@ -111,141 +111,6 @@
               "flagText": "Factor that may place the patient at risk for an opioid-related harm"
             }
           ]
-        }
-      ]
-    }
-  ],
-  "PainAssessments": [
-    {
-      "name": "Numeric Pain Intensity Assessments",
-      "dataKey": "NumericPainIntensityAssessments",
-      "dataKeySource": "PainAssessments",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Numeric Pain Intensity Assessments queries the following elements:",
-          "elements": [
-            {
-              "name": "Numeric pain intensity assessment",
-              "status": "final or amended",
-              "lookback": "2 years"
-            }
-          ]
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Score": {
-              "key": "Score",
-              "formatter": "quantityFormat"
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Pain Enjoyment General Activity (PEG) Assessments",
-      "dataKey": "PainEnjoymentGeneralActivityAssessments",
-      "dataKeySource": "PainAssessments",
-      "info": [
-        {
-          "type": "elements",
-          "description": "Pain Enjoyment General Activity (PEG) Assessments queries the following elements:",
-          "elements": [
-            {
-              "name": "Pain Enjoyment General Activity (PEG) Assessment",
-              "status": "final or amended",
-              "lookback": "2 years"
-            }
-          ]
-        },
-        {
-          "type": "reference",
-          "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2686775/",
-          "title": "Development and Initial Validation of the PEG, a Three-item Scale Assessing Pain Intensity and Interference",
-          "details": "The PEG is freely available in the public domain. Publications and reports should cite the original publication: Krebs EE, Lorenz KA, Bair MJ, Damush TA, Wu J, Sutherland JM, Asch SM, Kroenke K. Development and initial validation of the PEG, a 3-item scale assessing pain intensity and interference. Journal of General Internal Medicine. 2009 Jun;24:733-738."
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Score": {
-              "key": "Score",
-              "formatter": "quantityFormat"
-            },
-            "Question": {
-              "key": "Questions",
-              "formatter": "arrayFlatten",
-              "formatterArguments": [
-                "Name",
-                "Score",
-                true
-              ],
-              "sortable": false,
-              "minWidth": 200
-            },
-            "Question Score": {
-              "key": "Questions",
-              "formatter": "arrayFlatten",
-              "formatterArguments": [
-                "Score",
-                null,
-                false
-              ],
-              "sortable": false,
-              "minWidth": 150
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "STarT Back Assessments",
-      "dataKey": "STarTBackAssessments",
-      "dataKeySource": "PainAssessments",
-      "info": [
-        {
-          "type": "elements",
-          "description": "STarT Back Assessments queries the following elements:",
-          "elements": [
-            {
-              "name": "STarT Back Screening Tool",
-              "status": "final or amended",
-              "lookback": "2 years"
-            }
-          ]
-        },
-        {
-          "type": "reference",
-          "url": "https://www.keele.ac.uk/sbst/",
-          "title": "STarT Back",
-          "details": "Copyright (©2007) University of Keele. No license is required for non-commercial use.  If you would like to incorporate the tool in any way into commercial product materials, please contact Keele University for further advice."
-        }
-      ],
-      "tables": [
-        {
-          "headers": {
-            "Name": "Name",
-            "Score": {
-              "key": "Score",
-              "formatter": "quantityFormat"
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
-          }
         }
       ]
     }
@@ -417,8 +282,8 @@
   ],
   "SharedDecisionMaking": [
     {
-      "name": "Sharing",
-      "dataKey": "Sharing",
+      "name": "Pain Locations",
+      "dataKey": "PainLocations",
       "dataKeySource": "SharedDecisionMaking",
       "info": [
         {
@@ -436,15 +301,9 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
-            "Result": {
-              "key": "Result",
-              "formatter": "quantityFormat"
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
+            "Name": "Location",
+            "Pain Y/N": {"key":"PainYesNo", "formatter": "quantityFormat"},
+            "Description": "Description"
           },
           "flags": [
             {
@@ -461,16 +320,16 @@
       ]
     },
     {
-      "name": "Decisions",
-      "dataKey": "Decisions",
+      "name": "Pain Intensity And Interference",
+      "dataKey": "PainIntensityAndInterference",
       "dataKeySource": "SharedDecisionMaking",
       "info": [
         {
           "type": "elements",
-          "description": "Decision 1.2:",
+          "description": "Decision 1:",
           "elements": [
             {
-              "name": "Decision1.2",
+              "name": "Decision1",
               "status": "final or amended",
               "lookback": "most recent in past 6 months"
             }
@@ -480,15 +339,8 @@
       "tables": [
         {
           "headers": {
-            "Name": "Name",
-            "Result": {
-              "key": "Result",
-              "formatter": "quantityFormat"
-            },
-            "Date": {
-              "key": "Date",
-              "formatter": "datishFormat"
-            }
+            "Question": "Question",
+            "Response": "Response"
           },
           "flags": [
             {

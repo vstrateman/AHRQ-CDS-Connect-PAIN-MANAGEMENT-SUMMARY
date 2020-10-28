@@ -2265,53 +2265,139 @@
             "Date": "2020-06-06T16:00:00.000+00:00",
             "_id": 12
           }
-        ]
+        ],
+        "Recommendation10Text": ""
       },
       "SharedDecisionMaking": {
-        "QuestionnaireObservations": [
-          {
-            "MyPAINSubmitDate": "2020-10-12T16:00:00.000+00:00",
-            "ActivityGoals":"I want to be able to walk to my mailbox free of pain. I’d like to get back to enjoying a walk in the neighborhood with my grandkids.",
-            "ActivityBarriers": "On a bad day, I have trouble putting on my clothes or getting a shower. I need to take care of my cat but have trouble just taking care of myself some days.",
-            "PainLocations": [{
-              "Location": "Neck",
-              "PainYesNo": "Y",
-              "Description":"burning"
+        "MyPAINSubmitDate": "2020-10-21T13:52:02",
+        "ActivityGoals": "These are my goals for a pain-free environment.  Get up every morning and have a great day with no back spasms and no hip pain and no aches and pains throughout my whole body.",
+        "ActivityBarriers": "My barriers to a pain free life are 1.  It is impossible. 2. I am too lazy to exercise.  3. I am overweight.  4. I am too old to change now.",
+        "PainLocations": [
+            {
+                "Location": "What type of HEAD pain?",
+                "PainYesNo": true,
+                "Description": "Stabbing"
             },
             {
-              "Location": "Back",
-              "PainYesNo": "Y",
-              "Description":"stabbing"
+                "Location": "What type of HIPS pain?",
+                "PainYesNo": true,
+                "Description": "Tingling"
+            },
+            {
+                "Location": "What type of UPPER LEGS pain?",
+                "PainYesNo": true,
+                "Description": "Prickling"
+            },
+            {
+                "Location": "What type of KNEES pain?",
+                "PainYesNo": true,
+                "Description": "Throbbing"
+            },
+            {
+                "Location": "What type of LOWER LEGS pain?",
+                "PainYesNo": true,
+                "Description": "Stabbing"
+            },
+            {
+                "Location": "What type of FEET pain?",
+                "PainYesNo": true,
+                "Description": "Burning"
+            },
+            {
+                "Location": "What type of EVERYWHERE pain?",
+                "PainYesNo": true,
+                "Description": "Aching"
+            },
+            {
+                "Location": "Other, please describe",
+                "PainYesNo": true,
+                "Description": "pain location other"
+            },
+            {
+                "Location": "What type of NECK pain?",
+                "PainYesNo": true,
+                "Description": "Burning"
+            },
+            {
+                "Location": "What type of SHOULDERS pain?",
+                "PainYesNo": true,
+                "Description": "Aching"
+            },
+            {
+                "Location": "What type of ARMS pain?",
+                "PainYesNo": true,
+                "Description": "Tingling"
+            },
+            {
+                "Location": "What type of UPPER BACK pain?",
+                "PainYesNo": true,
+                "Description": "Prickling"
+            },
+            {
+                "Location": "What type of LOWER BACK pain?",
+                "PainYesNo": true,
+                "Description": "Throbbing"
+            },
+            {
+                "Location": "What type of HANDS pain?",
+                "PainYesNo": true,
+                "Description": "Stabbing"
+            },
+            {
+                "Location": "What type of ABDOMEN pain?",
+                "PainYesNo": true,
+                "Description": "Burning"
+            },
+            {
+                "Location": "What type of PELVIS pain?",
+                "PainYesNo": true,
+                "Description": "Aching"
             }
-            ],
-            "PainIntensityAndInterference":
-            [
-              {
+        ],
+        "PainIntensityAndInterference": [
+            {
                 "Question": "How intense was your pain at its worst?",
+                "Response": "Had no pain"
+            },
+            {
+                "Question": "How intense was your average pain?",
+                "Response": "Mild"
+            },
+            {
+                "Question": "What is your level of pain right now?",
+                "Response": "Moderate"
+            },
+            {
+                "Question": "How much did pain interfere with your day to day activities?",
+                "Response": "Not at all"
+            },
+            {
+                "Question": "How much did pain interfere with your work around the home?",
+                "Response": "A little bit"
+            },
+            {
+                "Question": "How much did pain interfere with your ability to participate in social activities?",
                 "Response": "Somewhat"
-              },
-              {
-                "Question": "How intense was your averagepain?",
-                "Response": "Somewhat"
-              }
-            ],
-            "ResourcesProvidedInMyPAIN":
-            [
-              {
+            },
+            {
+                "Question": "How much did pain interfere with your household chores?",
+                "Response": "Quite a bit"
+            }
+        ],
+        "ResourcesProvidedInMyPAIN": [
+            {
+                "Resource": "US Pain Foundation website",
+                "ResourceUrl": "https://uspainfoundation.org/living-with-pain/",
+                "ViewedOn": "2020-10-21T13:52:02-06:00"
+            },
+            {
                 "Resource": "ACPA four flat tires video",
                 "ResourceUrl": "https://www.youtube.com/embed/QWcr9J3MLfo",
-                "ViewedOn": "2020-10-12T15:00:00.000+00:00"
-              },
-              {
-                "Resource": "U.S. Pain Foundation website",
-                "ResourceUrl": "https://uspainfoundation.org/living-with-pain",
-                "ViewedOn": "2020-10-12T15:15:00.000+00:00"
-              }
-            ]
-          }
+                "ViewedOn": "2020-10-21T13:52:02-06:00"
+            }
         ]
-      },
-      "PertinentMedicalHistory": {
+    },
+      "PertinentConditions": {
         "ConditionsAssociatedWithChronicPain": [
           {
             "Name": "Fibromyalgia (disorder)",
@@ -2335,7 +2421,7 @@
             "_id": 6
           }
         ],
-        "RiskFactorsForOpioidRelatedHarms": [
+        "CoMorbidConditionsIncreasingRiskWhenUsingOpioids": [
           null,
           {
             "Name": "Moderate major depression (disorder)",
@@ -2346,24 +2432,22 @@
             "Visit": null,
             "_id": 7
           }
-        ]
-      },
-      "PainAssessments": {
-        "NumericPainIntensityAssessments": [],
-        "PainEnjoymentGeneralActivityAssessments": [],
-        "STarTBackAssessments": []
+        ],
+        "Recommendation8Text": "Per CDC guidelines, before starting, and periodically during continuation of opioid therapy, clinicians should evaluate risk factors for opioid-related harms. Clinicians should incorporate into the management plan strategies to mitigate risk, including considering offering naloxone when factors that increase risk for opioid overdose, such as history of overdose, history of substance use disorder, higher opioid dosages (greater than or equal to [?] 50 morphine milligram equivalents [MME]/day), or concurrent benzodiazepine use, are present (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)"
       },
       "CurrentPertinentTreatments": {
         "CurrentMME": [
-          { "Name":   "ConceptText(M.code)",
+          {
+            "Name": "Current Milligram Morphine Equivalent",
             "Result": "40",
-            "Date":   "2019-04-15T16:02:00.000+00:00"
+            "Date": "2019-04-15T16:02:00.000+00:00"
           }
         ],
         "MostRecentMME": [
-          { "Name":   "ConceptText(M.code)",
+          {
+            "Name": "Morphine Milligram Equivalent (MME)",
             "Result": "40",
-            "Date":   "2019-04-15T16:02:00.000+00:00"
+            "Date": "2019-04-15T16:02:00.000+00:00"
           }
         ],
         "OpioidMedications": [
@@ -2443,21 +2527,12 @@
             "Treatment": "Cortisone Injections",
             "Effectiveness": "Always"
           }
-        ]
+        ],
+        "Recommendation3Text": "ReportRecommendation3Text",
+        "Recommendation5Text": "ReportRecommendation5Text",
+        "Recommendation11Text": "ReportRecommendation11Text"
       },
       "RiskConsiderations": {
-        "CurrentMME": [
-          { "Name":   "ConceptText(M.code)",
-            "Result": "QuantityText(M.value as FHIR.Quantity)",
-            "Date":   "ObservationDate(M)"
-          }
-        ],
-        "MostRecentMME": [
-          { "Name":   "ConceptText(M.code)",
-            "Result": "QuantityText(M.value as FHIR.Quantity)",
-            "Date":   "ObservationDate(M)"
-          }
-        ],
         "BenzodiazepineMedications": [],
         "NaloxoneMedications": [],
         "RiskScreeningsRelevantToPainManagement": [

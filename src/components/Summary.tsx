@@ -119,9 +119,20 @@ export default class Summary extends Component<any, any> {
                 //   entry.Answer = this.props.questionText.get(entry.LinkId) + entry.Answer;
                 entry.Question = this.props.questionText.get(entry.LinkId);
             }
+            if (entry.Location && (entry.Location !== null)) {
+                let locationWord = entry.Location.match(/(\b[A-Z0-9][A-Z0-9]+|\b[A-Z]\b)/g);
+                if (locationWord !== null) {
+                    entry.Location = locationWord;
+                }
+            }
+            if (entry.PainYesNo && (entry.PainYesNo !== null) && (entry.PainYesNo === true)) {
+                entry.PainYesNo = 'Y'
+            }
         })
         return entries;
     }
+
+
 
     renderTable(table: any, entries: any, section: any, subSection: any, index: any) {
         // If a filter is provided, only render those things that have the filter field (or don't have it when it's negated)
@@ -221,9 +232,10 @@ export default class Summary extends Component<any, any> {
                     columns={columns}
                     data={filteredEntries}
                     minRows={1}
-                    showPagination={filteredEntries.length > 10}
-                    pageSizeOptions={[10, 20, 50, 100]}
-                    defaultPageSize={10}
+                    // showPagination={filteredEntries.length > 10}
+                    showPagination={false}
+                    // pageSizeOptions={[10, 20, 50, 100]}
+                    // defaultPageSize={10}
                     resizable={false}
                     getProps={() => customProps}
                     getTheadThProps={(state, rowInfo, column, instance) => {
@@ -247,8 +259,32 @@ export default class Summary extends Component<any, any> {
 
     renderSection(section: string) {
         const sectionMap = this.summaryMapData[section];
+        // if (section === "SharedDecisionMaking") {
+        //     let sharedDecisionSection = this.props.summary[section];
+        //     let submitDate = formatit.dateFormat(sharedDecisionSection.MyPAINSubmitDate, sharedDecisionSection.MyPAINSubmitDate);
+        //     console.log('submitDate', submitDate)
+        //     console.log('displays here:', sharedDecisionSection);
+        //     return (
+        //         <div>
+        //             <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p>
+
+        //             <div className="activity-section">
+        //                 <div className="activity-goals">
+        //                     <h3>ACTIVITY GOALS</h3>
+        //                     <div>{sharedDecisionSection.ActivityGoals}</div>
+        //                 </div>
+        //                 <div className="activity-barriers">
+        //                     <h3>ACTIVITY BARRIERS</h3>
+        //                     <div>{sharedDecisionSection.ActivityBarriers}</div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     )
+        // }
+
 
         return sectionMap.map((subSection: any) => {
+            // console.log('subSection: ', subSection);
             const data = this.props.summary[subSection.dataKeySource][subSection.dataKey];
             const entries = (Array.isArray(data) ? data : [data]).filter(r => r != null);
             const hasEntries = entries.length !== 0;
@@ -258,37 +294,38 @@ export default class Summary extends Component<any, any> {
             let datatable;
 
             if (subSection.dataKey === 'OpioidMedications') {
-                datatable = (<div id={subSection.dataKey} className="sub-section__header">
-                    <FontAwesomeIcon
-                        className={'flag flag-nav ' + flaggedClass}
-                        icon={flagged ? 'exclamation-circle' : 'circle'}
-                        title="flag"
-                        tabIndex={0}
-                    />
-                    <div id="opioid-title">
-                        <h3 className="opioid-name">{subSection.name}
-                            {subSection.info &&
-                                <div
-                                    onClick={(event) => this.handleOpenModal(subSection, event)}
-                                    onKeyDown={(event) => this.handleOpenModal(subSection, event)}
-                                    role="button"
-                                    tabIndex={0}
-                                    aria-label={subSection.name}>
-                                    <FontAwesomeIcon
-                                        className='info-icon'
-                                        icon="info-circle"
-                                        title={'more info: ' + subSection.name}
-                                        data-tip="more info"
-                                        role="tooltip"
+                datatable = (
+                    <div id={subSection.dataKey} className="sub-section__header">
+                        <FontAwesomeIcon
+                            className={'flag flag-nav ' + flaggedClass}
+                            icon={flagged ? 'exclamation-circle' : 'circle'}
+                            title="flag"
+                            tabIndex={0}
+                        />
+                        <div id="opioid-title">
+                            <h3 className="opioid-name">{subSection.name}
+                                {subSection.info &&
+                                    <div
+                                        onClick={(event) => this.handleOpenModal(subSection, event)}
+                                        onKeyDown={(event) => this.handleOpenModal(subSection, event)}
+                                        role="button"
                                         tabIndex={0}
-                                    />
-                                </div>
-                            }
-                        </h3> <div className="total-mme-link"> <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a><span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result} mg/day</span></div>
-                    </div>
+                                        aria-label={subSection.name}>
+                                        <FontAwesomeIcon
+                                            className='info-icon'
+                                            icon="info-circle"
+                                            title={'more info: ' + subSection.name}
+                                            data-tip="more info"
+                                            role="tooltip"
+                                            tabIndex={0}
+                                        />
+                                    </div>
+                                }
+                            </h3> <div className="total-mme-link"> <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a><span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result} mg/day</span></div>
+                        </div>
 
 
-                </div>)
+                    </div>)
             } else {
                 datatable = (<div id={subSection.dataKey} className="sub-section__header">
                     <FontAwesomeIcon
@@ -319,7 +356,6 @@ export default class Summary extends Component<any, any> {
                 </div>)
             }
 
-
             return (
                 <div key={subSection.dataKey} className="sub-section h3-wrapper">
                     {datatable}
@@ -336,7 +372,7 @@ export default class Summary extends Component<any, any> {
     renderSectionHeader(section: any) {
 
         let title = '';
-        if (section === 'PertinentMedicalHistory') {
+        if (section === 'PertinentConditions') {
             title = 'Pertinent Conditions';
         } else if (section === 'CurrentPertinentTreatments') {
             title = 'Current Pertinent Treatments';
@@ -363,6 +399,8 @@ export default class Summary extends Component<any, any> {
     render() {
         const { summary, collector, qrCollector, result, cdsCollector, questionText } = this.props;
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
+        let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
+        let submitDate = formatit.dateFormat(sharedDecisionSection.MyPAINSubmitDate, sharedDecisionSection.MyPAINSubmitDate);
         if (!summary) {
             return null;
         }
@@ -379,9 +417,9 @@ export default class Summary extends Component<any, any> {
 
                     {meetsInclusionCriteria &&
                         <div className="sections">
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PertinentMedicalHistory")}
+                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
                                 open={false}>
-                                {this.renderSection("PertinentMedicalHistory")}
+                                {this.renderSection("PertinentConditions")}
                             </Collapsible>
 
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
@@ -394,7 +432,23 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
-                                {this.renderSection("SharedDecisionMaking")}
+                                    <div className="shared-top-section">
+                                        <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p>
+
+                                        <div className="activity-section">
+                                            <div className="activity-goals">
+                                                <h3>ACTIVITY GOALS</h3>
+                                                <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div>
+                                            </div>
+                                            <div className="activity-barriers">
+                                                <h3>ACTIVITY BARRIERS</h3>
+                                                <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {<div className="shared-decision-making-section">
+                                    {this.renderSection("SharedDecisionMaking")}
+                                </div>}
                             </Collapsible>
                         </div>
                     }
