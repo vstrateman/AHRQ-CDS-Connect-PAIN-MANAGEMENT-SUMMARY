@@ -6328,6 +6328,11 @@
         "version": "2021"
       },
       {
+        "code": "G89.2",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
         "code": "G89.21",
         "system": "http://hl7.org/fhir/sid/icd-10-cm",
         "version": "2021"
@@ -6349,6 +6354,171 @@
       },
       {
         "code": "G89.4",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.0",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.1",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.10",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.11",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.12",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.2",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.3",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.30",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.31",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.32",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.4",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.5",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.50",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.51",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.52",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.6",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.7",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M16.9",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.0",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.1",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.10",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.11",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.12",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.2",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.3",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.30",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.31",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.32",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.4",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.5",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M17.9",
         "system": "http://hl7.org/fhir/sid/icd-10-cm",
         "version": "2021"
       },
@@ -6388,6 +6558,11 @@
         "version": "2021"
       },
       {
+        "code": "M25.55",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
         "code": "M25.551",
         "system": "http://hl7.org/fhir/sid/icd-10-cm",
         "version": "2021"
@@ -6399,6 +6574,11 @@
       },
       {
         "code": "M25.559",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "M25.56",
         "system": "http://hl7.org/fhir/sid/icd-10-cm",
         "version": "2021"
       },
@@ -7344,6 +7524,11 @@
       },
       {
         "code": "R39.82",
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021"
+      },
+      {
+        "code": "R52",
         "system": "http://hl7.org/fhir/sid/icd-10-cm",
         "version": "2021"
       }
@@ -22634,6 +22819,479 @@
   "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty": {
     "0.1.0": []
   },
+  "http://loinc.org/vs/LL1017-4": {
+    "0.1.0": [
+      {
+        "code": "LA6568-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13863-8",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13909-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13902-4",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13914-9",
+        "system": "http://loinc.org"
+      }
+    ]
+  },
+  "http://loinc.org/vs/LL1606-4": {
+    "0.1.0": [
+      {
+        "code": "LA15238-1",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15239-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15240-7",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15241-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15242-3",
+        "system": "http://loinc.org"
+      }
+    ]
+  },
+  "http://loinc.org/vs/LL2949-7": {
+    "0.1.0": [
+      {
+        "code": "LA13879-4",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6752-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6751-7",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6750-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13958-6",
+        "system": "http://loinc.org"
+      }
+    ]
+  },
+  "http://loinc.org/vs/LL2951-3": {
+    "0.1.0": [
+      {
+        "code": "LA131-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6752-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6751-7",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6750-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13958-6",
+        "system": "http://loinc.org"
+      }
+    ]
+  },
+  "http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaire-codes": {
+    "0.1.0": [
+      {
+        "code": "mpq-1008",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1009",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1010",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1011",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1012",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1013",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1014",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1015",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1016",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1054",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1017",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1018",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1019",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1055",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1020",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1021",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1022",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1056",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1057",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1023",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1024",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1025",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1026",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1027",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1058",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1028",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1029",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1059",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1030",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1031",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1032",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1060",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1033",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1034",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1035",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1036",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1038",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1039",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1040",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1041",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1042",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1043",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1044",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1045",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1046",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1047",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1048",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1049",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1050",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1051",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1052",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1053",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1061",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1062",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1063",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1064",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "mpq-1065",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes"
+      },
+      {
+        "code": "75262-6",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "75261-8",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "75260-0",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "61758-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "61769-6",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "61773-8",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "61775-3",
+        "system": "http://loinc.org"
+      }
+    ]
+  },
+  "http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaireresponse-codes": {
+    "0.1.0": [
+      {
+        "code": "27635008",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "36349006",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "55145008",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "29695002",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "162506004",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "786837007",
+        "system": "http://snomed.info/sct"
+      },
+      {
+        "code": "mpqr-1000"
+      },
+      {
+        "code": "mpqr-1001"
+      },
+      {
+        "code": "mpqr-1002"
+      },
+      {
+        "code": "LA13879-4",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6752-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6751-7",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6750-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13958-6",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA131-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6752-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6751-7",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6750-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13958-6",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA6568-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13863-8",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13909-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13902-4",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA13914-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15238-1",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15239-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15240-7",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15241-5",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "LA15242-3",
+        "system": "http://loinc.org"
+      }
+    ]
+  },
   "http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-questionnaire-codes": {
     "0.1.0": []
   },
@@ -30910,54 +31568,6 @@
       }
     ]
   },
-  "http://fhir.org/guides/cqf/cds4cpm/ValueSet/pain-assessments-intensity": {
-    "0.1.0": [
-      {
-        "code": "no-pain",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-intensity"
-      },
-      {
-        "code": "mild",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-intensity"
-      },
-      {
-        "code": "moderate",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-intensity"
-      },
-      {
-        "code": "severe",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-intensity"
-      },
-      {
-        "code": "very-severe",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-intensity"
-      }
-    ]
-  },
-  "http://fhir.org/guides/cqf/cds4cpm/ValueSet/pain-assessments-interference": {
-    "0.1.0": [
-      {
-        "code": "not-at-all",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-interference"
-      },
-      {
-        "code": "a-little-bit",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-interference"
-      },
-      {
-        "code": "somewhat",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-interference"
-      },
-      {
-        "code": "quite-a-bit",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-interference"
-      },
-      {
-        "code": "very-much",
-        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments-interference"
-      }
-    ]
-  },
   "http://fhir.org/guides/cqf/cds4cpm/ValueSet/pain-therapies": {
     "0.1.0": [
       {
@@ -31047,6 +31657,22 @@
       {
         "code": "other",
         "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/pain-assessments"
+      }
+    ]
+  },
+  "http://fhir.org/guides/cqf/cds4cpm/ValueSet/pain-types": {
+    "0.1.0": [
+      {
+        "code": "mpqr-1000",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaireresponse-codes"
+      },
+      {
+        "code": "mpqr-1001",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaireresponse-codes"
+      },
+      {
+        "code": "mpqr-1002",
+        "system": "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaireresponse-codes"
       }
     ]
   },
