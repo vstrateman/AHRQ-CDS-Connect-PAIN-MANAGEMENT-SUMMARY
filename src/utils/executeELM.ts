@@ -19,7 +19,7 @@ import valueSetDB from '../cql/valueset-db.json';
 import medicationReferenceSolver from "./medicationReferenceSolver";
 
 var Promise = require('es6-promise').Promise;
-var cqlResults = require('../helpers/cqlResults.json');
+// var cqlResults = require('../helpers/cqlResults.json');
 
 let cqlFhirModule: any = cqlfhir;
 
@@ -64,13 +64,13 @@ function executeELM(collector: any) {
             })
             // then execute the library and return the results (wrapped in a Promise)
             .then((bundle) => {
-                // const patientSource = getPatientSource(release);
-                // const codeService = new cql.CodeService(valueSetDB);
-                // const executor = new cql.Executor(library, codeService);
-                // patientSource.loadBundles([bundle]);
-                // const results = executor.exec(patientSource);
-                // return results.patientResults[Object.keys(results.patientResults)[0]];
-                return cqlResults[Object.keys(cqlResults)[0]];
+                const patientSource = getPatientSource(release);
+                const codeService = new cql.CodeService(valueSetDB);
+                const executor = new cql.Executor(library, codeService);
+                patientSource.loadBundles([bundle]);
+                const results = executor.exec(patientSource);
+                return results.patientResults[Object.keys(results.patientResults)[0]];
+                // return cqlResults[Object.keys(cqlResults)[0]];
             });
         resolve(results);
     });

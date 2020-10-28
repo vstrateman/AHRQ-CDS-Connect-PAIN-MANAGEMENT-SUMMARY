@@ -73,38 +73,6 @@ export default class Landing extends Component<any, any> {
         }
     }
 
-    // extractQuestionText(questionnaire: any){
-    //     let qTextMap = new Map();
-    //     // TODO - loop through questionnaire and put linkIds and question text in map to use in display
-    //     let qItems = questionnaire.item;
-    //     qItems.forEach(function(item: any){
-    //         if(item.item === null || item.item === undefined){
-    //             qTextMap.set(item.linkId, item.prefix + ':' + item.text);
-    //         }else{
-    //             if(item.linkId !== null && item.linkId !== undefined){
-    //                 if(item.prefix !== null && item.prefix !== undefined){
-    //                     qTextMap.set(item.linkId, item.prefix + ':' + item.text);
-
-    //                 }else{
-    //                     qTextMap.set(item.linkId, item.text);
-    //                 }
-    //             }
-    //             let itemItems = item.item;
-    //             itemItems.forEach(function(itemItem:any){
-    //                 if(itemItem.linkId!== null && itemItem.linkId !== undefined) {
-    //                     if(itemItem.prefix !== null && itemItem.prefix !== undefined){
-    //                         qTextMap.set(itemItem.linkId, itemItem.prefix + ':' + itemItem.text);
-    //                     }else {
-    //                         qTextMap.set(itemItem.linkId, itemItem.text);
-    //                     }
-    //                 }
-    //             });
-    //         }
-    //     });
-    //     return qTextMap;
-
-    // }
-
     getAnalyticsData(endpoint: any, apikey: any, summary: any) {
 
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
