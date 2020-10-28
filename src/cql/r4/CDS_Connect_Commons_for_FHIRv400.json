@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorOptions" : "EnableDateRangeOptimization,DisableListDemotion,DisableListPromotion,DisableMethodInvocation",
+         "translatorOptions" : "",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -97,51 +97,6 @@
             "codeSystem" : {
                "name" : "CONDCLINSTATUS"
             }
-         } ]
-      },
-      "concepts" : {
-         "def" : [ {
-            "name" : "AllergyIntolerance Confirmed",
-            "display" : "Confirmed",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "AllergyIntolerance Confirmed code"
-            } ]
-         }, {
-            "name" : "AllergyIntolerance Active",
-            "display" : "Active",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "AllergyIntolerance Active code"
-            } ]
-         }, {
-            "name" : "Condition Confirmed",
-            "display" : "Confirmed",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Confirmed code"
-            } ]
-         }, {
-            "name" : "Condition Active",
-            "display" : "Active",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Active code"
-            } ]
-         }, {
-            "name" : "Condition Recurrence",
-            "display" : "Recurrence",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Recurrence code"
-            } ]
-         }, {
-            "name" : "Condition Relapse",
-            "display" : "Relapse",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Relapse code"
-            } ]
          } ]
       },
       "statements" : {
@@ -1246,8 +1201,11 @@
                         "type" : "Property"
                      } ]
                   }, {
-                     "name" : "Condition Confirmed",
-                     "type" : "ConceptRef"
+                     "type" : "ToConcept",
+                     "operand" : {
+                        "name" : "Condition Confirmed code",
+                        "type" : "CodeRef"
+                     }
                   } ]
                }
             },
@@ -1290,8 +1248,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "Condition Active",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "Condition Active code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   }, {
                      "type" : "IsNull",
@@ -1344,8 +1305,11 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "name" : "Condition Active",
-                           "type" : "ConceptRef"
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "Condition Active code",
+                              "type" : "CodeRef"
+                           }
                         } ]
                      }, {
                         "type" : "Equivalent",
@@ -1359,8 +1323,11 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "name" : "Condition Recurrence",
-                           "type" : "ConceptRef"
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "Condition Recurrence code",
+                              "type" : "CodeRef"
+                           }
                         } ]
                      } ]
                   }, {
@@ -1375,8 +1342,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "Condition Relapse",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "Condition Relapse code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                }
@@ -2848,8 +2818,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "AllergyIntolerance Active",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "AllergyIntolerance Active code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   }, {
                      "type" : "Equivalent",
@@ -2863,8 +2836,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "AllergyIntolerance Confirmed",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "AllergyIntolerance Confirmed code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                }
