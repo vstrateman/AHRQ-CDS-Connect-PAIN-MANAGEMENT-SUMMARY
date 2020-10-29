@@ -16,6 +16,8 @@ export default class InfoModal extends Component<any, any> {
   }
 
   renderElements = (elements: any) => {
+    console.log('this.props', this.props);
+    console.log('elements: ', elements)
     const tableElements = elements.elements;
     const columns = [{
       Header: () => { return <span className="col-header">Name</span> },
@@ -28,6 +30,28 @@ export default class InfoModal extends Component<any, any> {
       Header: () => { return <span className="col-header">Lookback</span> },
       accessor: 'lookback'
     }];
+    if (this.props.subSection.dataKey === "OpioidMedications") {
+      if(this.props.subSection.recommendationText) {
+        return (
+          <div className="element" role="table"
+            aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
+            <p>{this.props.subSection.recommendationText}</p>
+            
+          </div>
+        );  
+      }
+    }
+    if (this.props.subSection.dataKey === "CoMorbidConditionsIncreasingRiskWhenUsingOpioids") {
+      if(this.props.subSection.recommendationText) {
+        return (
+          <div className="element" role="table"
+            aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
+            <p>{this.props.subSection.recommendationText}</p>
+            
+          </div>
+        );  
+      }
+    }
     return (
       <div className="element" role="table"
         aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>

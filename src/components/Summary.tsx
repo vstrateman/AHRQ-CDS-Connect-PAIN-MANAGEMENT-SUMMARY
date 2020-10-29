@@ -94,7 +94,24 @@ export default class Summary extends Component<any, any> {
         const flaggedClass = flagged ? 'flagged' : '';
         const flagText = this.props.sectionFlags[section][subSection.dataKey];
         const tooltip = flagged ? flagText : '';
-
+        if(section === 'UrineDrugScreening' && (this.props.summary['UrineDrugScreening'].UrineDrugScreens.length === 0 )) {
+            return (
+                <div className="table">
+                    <div className="no-entries">
+                        <FontAwesomeIcon
+                            className={'flag flag-no-entry ' + flaggedClass}
+                            icon="exclamation-circle"
+                            title={'flag:' + tooltip}
+                            data-tip={tooltip}
+                            data-role="tooltip"
+                            tabIndex={0}
+                        />
+                        {this.props.summary['UrineDrugScreening'].Recommendation10Text}
+                    </div>
+                </div>
+            );
+        }
+        
         return (
             <div className="table">
                 <div className="no-entries">
@@ -259,28 +276,6 @@ export default class Summary extends Component<any, any> {
 
     renderSection(section: string) {
         const sectionMap = this.summaryMapData[section];
-        // if (section === "SharedDecisionMaking") {
-        //     let sharedDecisionSection = this.props.summary[section];
-        //     let submitDate = formatit.dateFormat(sharedDecisionSection.MyPAINSubmitDate, sharedDecisionSection.MyPAINSubmitDate);
-        //     console.log('submitDate', submitDate)
-        //     console.log('displays here:', sharedDecisionSection);
-        //     return (
-        //         <div>
-        //             <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p>
-
-        //             <div className="activity-section">
-        //                 <div className="activity-goals">
-        //                     <h3>ACTIVITY GOALS</h3>
-        //                     <div>{sharedDecisionSection.ActivityGoals}</div>
-        //                 </div>
-        //                 <div className="activity-barriers">
-        //                     <h3>ACTIVITY BARRIERS</h3>
-        //                     <div>{sharedDecisionSection.ActivityBarriers}</div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     )
-        // }
 
 
         return sectionMap.map((subSection: any) => {
@@ -292,8 +287,16 @@ export default class Summary extends Component<any, any> {
             const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
             const flaggedClass = flagged ? 'flagged' : '';
             let datatable;
-
+            if(subSection.dataKey === "CoMorbidConditionsIncreasingRiskWhenUsingOpioids") {
+                subSection.recommendationText = this.props.summary.PertinentConditions.Recommendation8Text;
+            }
             if (subSection.dataKey === 'OpioidMedications') {
+                if(this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result >= 50) {
+                    subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
+                } else if ((this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result < 50) || (this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result === null)) {
+                    subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation3Text;
+                }
+                console.log('section', this.props)
                 datatable = (
                     <div id={subSection.dataKey} className="sub-section__header">
                         <FontAwesomeIcon
@@ -398,9 +401,15 @@ export default class Summary extends Component<any, any> {
 
     render() {
         const { summary, collector, qrCollector, result, cdsCollector, questionText } = this.props;
-        const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
+        // const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
+        const meetsInclusionCriteria = true;
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
-        let submitDate = formatit.dateFormat(sharedDecisionSection.MyPAINSubmitDate, sharedDecisionSection.MyPAINSubmitDate);
+        let submitDate;
+        if(sharedDecisionSection.MyPAINSubmitDate.length > 0) {
+            submitDate = this.formatitHelper('dateFormat', sharedDecisionSection.MyPAINSubmitDate);
+        } else {
+            submitDate = '';
+        }
         if (!summary) {
             return null;
         }
@@ -432,18 +441,19 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
+                                
                                     <div className="shared-top-section">
-                                        <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p>
+                                        {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
 
                                         <div className="activity-section">
-                                            <div className="activity-goals">
+                                            {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-goals">
                                                 <h3>ACTIVITY GOALS</h3>
                                                 <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div>
-                                            </div>
-                                            <div className="activity-barriers">
+                                            </div> : ''}
+                                            {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-barriers">
                                                 <h3>ACTIVITY BARRIERS</h3>
                                                 <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div>
-                                            </div>
+                                            </div> : ''}
                                         </div>
                                     </div>
                                 {<div className="shared-decision-making-section">
