@@ -94,7 +94,7 @@ export default class Summary extends Component<any, any> {
         const flaggedClass = flagged ? 'flagged' : '';
         const flagText = this.props.sectionFlags[section][subSection.dataKey];
         const tooltip = flagged ? flagText : '';
-        if(section === 'UrineDrugScreening' && (this.props.summary['UrineDrugScreening'].UrineDrugScreens.length === 0 )) {
+        if (section === 'UrineDrugScreening' && (this.props.summary['UrineDrugScreening'].UrineDrugScreens.length === 0)) {
             return (
                 <div className="table">
                     <div className="no-entries">
@@ -111,7 +111,7 @@ export default class Summary extends Component<any, any> {
                 </div>
             );
         }
-        
+
         return (
             <div className="table">
                 <div className="no-entries">
@@ -287,16 +287,17 @@ export default class Summary extends Component<any, any> {
             const flagged = this.isSubsectionFlagged(section, subSection.dataKey);
             const flaggedClass = flagged ? 'flagged' : '';
             let datatable;
-            if(subSection.dataKey === "CoMorbidConditionsIncreasingRiskWhenUsingOpioids") {
+            if (subSection.dataKey === "CoMorbidConditionsIncreasingRiskWhenUsingOpioids") {
                 subSection.recommendationText = this.props.summary.PertinentConditions.Recommendation8Text;
             }
             if (subSection.dataKey === 'OpioidMedications') {
-                if(this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result >= 50) {
+                if (this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result >= 50) {
                     subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
                 } else if ((this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result < 50) || (this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result === null)) {
                     subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation3Text;
+                } else if ((this.props.summary.CurrentPertinentTreatments.OpioidMedications.length > 0) && (this.props.summary.CurrentPertinentTreatments.BenzodiazepineMedications.length > 0)) {
+                    subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation11Text;
                 }
-                console.log('section', this.props)
                 datatable = (
                     <div id={subSection.dataKey} className="sub-section__header">
                         <FontAwesomeIcon
@@ -324,7 +325,11 @@ export default class Summary extends Component<any, any> {
                                         />
                                     </div>
                                 }
-                            </h3> <div className="total-mme-link"> <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a><span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result} mg/day</span></div>
+                            </h3>
+                            <div className="total-mme-link">
+                                <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
+                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"} mg/day</span>
+                            </div>
                         </div>
 
 
@@ -405,7 +410,7 @@ export default class Summary extends Component<any, any> {
         const meetsInclusionCriteria = true;
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
         let submitDate;
-        if(sharedDecisionSection.MyPAINSubmitDate.length > 0) {
+        if (sharedDecisionSection.MyPAINSubmitDate.length > 0) {
             submitDate = this.formatitHelper('dateFormat', sharedDecisionSection.MyPAINSubmitDate);
         } else {
             submitDate = '';
@@ -441,21 +446,21 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
-                                
-                                    <div className="shared-top-section">
-                                        {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
 
-                                        <div className="activity-section">
-                                            {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-goals">
-                                                <h3>ACTIVITY GOALS</h3>
-                                                <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div>
-                                            </div> : ''}
-                                            {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-barriers">
-                                                <h3>ACTIVITY BARRIERS</h3>
-                                                <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div>
-                                            </div> : ''}
-                                        </div>
+                                <div className="shared-top-section">
+                                    {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
+
+                                    <div className="activity-section">
+                                        {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-goals">
+                                            <h3>ACTIVITY GOALS</h3>
+                                            <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div>
+                                        </div> : ''}
+                                        {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-barriers">
+                                            <h3>ACTIVITY BARRIERS</h3>
+                                            <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div>
+                                        </div> : ''}
                                     </div>
+                                </div>
                                 {<div className="shared-decision-making-section">
                                     {this.renderSection("SharedDecisionMaking")}
                                 </div>}
