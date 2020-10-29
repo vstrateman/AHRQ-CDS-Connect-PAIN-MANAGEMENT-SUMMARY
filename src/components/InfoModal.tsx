@@ -1,3 +1,4 @@
+import Markdown from 'markdown-to-jsx';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,7 +34,7 @@ export default class InfoModal extends Component<any, any> {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
-            <p>{this.props.subSection.recommendationText}</p>
+            <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
             
           </div>
         );  
@@ -44,7 +45,7 @@ export default class InfoModal extends Component<any, any> {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
-            <p>{this.props.subSection.recommendationText}</p>
+            <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
             
           </div>
         );  
