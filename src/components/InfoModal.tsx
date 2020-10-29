@@ -16,8 +16,6 @@ export default class InfoModal extends Component<any, any> {
   }
 
   renderElements = (elements: any) => {
-    console.log('this.props', this.props);
-    console.log('elements: ', elements)
     const tableElements = elements.elements;
     const columns = [{
       Header: () => { return <span className="col-header">Name</span> },
