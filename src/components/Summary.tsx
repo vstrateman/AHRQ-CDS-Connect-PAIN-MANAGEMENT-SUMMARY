@@ -411,7 +411,7 @@ export default class Summary extends Component<any, any> {
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
         let submitDate;
         if (sharedDecisionSection.MyPAINSubmitDate.length > 0) {
-            submitDate = this.formatitHelper('dateFormat', sharedDecisionSection.MyPAINSubmitDate);
+            submitDate = this.formatitHelper.datishFormat('dateFormat', sharedDecisionSection.MyPAINSubmitDate);
         } else {
             submitDate = '';
         }
