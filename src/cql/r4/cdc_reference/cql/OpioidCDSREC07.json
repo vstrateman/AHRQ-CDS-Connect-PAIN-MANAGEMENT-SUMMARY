@@ -1,74 +1,8 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorOptions" : "EnableDateRangeOptimization,DisableListDemotion,DisableListPromotion,DisableMethodInvocation",
+         "translatorOptions" : "",
          "type" : "CqlToElmInfo"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 61,
-         "startChar" : 20,
-         "endLine" : 61,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 85,
-         "startChar" : 20,
-         "endLine" : 85,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 108,
-         "startChar" : 20,
-         "endLine" : 108,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 131,
-         "startChar" : 20,
-         "endLine" : 131,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 165,
-         "startChar" : 101,
-         "endLine" : 165,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 188,
-         "startChar" : 101,
-         "endLine" : 188,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
       } ],
       "identifier" : {
          "id" : "OpioidCDSREC07",
@@ -377,57 +311,68 @@
                            "dataType" : "{http://hl7.org/fhir}Encounter",
                            "codeProperty" : "type",
                            "codeComparator" : "in",
-                           "dateProperty" : "period",
                            "type" : "Retrieve",
                            "codes" : {
                               "name" : "Office Visit",
                               "libraryName" : "Common",
                               "type" : "ValueSetRef"
-                           },
-                           "dateRange" : {
-                              "type" : "Interval",
-                              "low" : {
-                                 "type" : "ToDateTime",
-                                 "operand" : {
-                                    "path" : "low",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "Encounter Interval",
-                                       "type" : "ExpressionRef"
-                                    }
-                                 }
-                              },
-                              "lowClosedExpression" : {
-                                 "path" : "lowClosed",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "Encounter Interval",
-                                    "type" : "ExpressionRef"
-                                 }
-                              },
-                              "high" : {
-                                 "type" : "ToDateTime",
-                                 "operand" : {
-                                    "path" : "high",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "Encounter Interval",
-                                       "type" : "ExpressionRef"
-                                    }
-                                 }
-                              },
-                              "highClosedExpression" : {
-                                 "path" : "highClosed",
+                           }
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "type" : "IncludedIn",
+                        "operand" : [ {
+                           "name" : "ToInterval",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "period",
+                              "scope" : "AmbulatoryEncounter",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "type" : "Interval",
+                           "low" : {
+                              "type" : "ToDateTime",
+                              "operand" : {
+                                 "path" : "low",
                                  "type" : "Property",
                                  "source" : {
                                     "name" : "Encounter Interval",
                                     "type" : "ExpressionRef"
                                  }
                               }
+                           },
+                           "lowClosedExpression" : {
+                              "path" : "lowClosed",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Encounter Interval",
+                                 "type" : "ExpressionRef"
+                              }
+                           },
+                           "high" : {
+                              "type" : "ToDateTime",
+                              "operand" : {
+                                 "path" : "high",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "Encounter Interval",
+                                    "type" : "ExpressionRef"
+                                 }
+                              }
+                           },
+                           "highClosedExpression" : {
+                              "path" : "highClosed",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Encounter Interval",
+                                 "type" : "ExpressionRef"
+                              }
                            }
-                        }
-                     } ],
-                     "relationship" : [ ]
+                        } ]
+                     }
                   }
                } ]
             }

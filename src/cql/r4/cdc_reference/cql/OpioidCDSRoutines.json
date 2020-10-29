@@ -1,74 +1,8 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorOptions" : "EnableDateRangeOptimization,DisableListDemotion,DisableListPromotion,DisableMethodInvocation",
+         "translatorOptions" : "",
          "type" : "CqlToElmInfo"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 61,
-         "startChar" : 20,
-         "endLine" : 61,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 85,
-         "startChar" : 20,
-         "endLine" : 85,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 108,
-         "startChar" : 20,
-         "endLine" : 108,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 131,
-         "startChar" : 20,
-         "endLine" : 131,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 165,
-         "startChar" : 101,
-         "endLine" : 165,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 188,
-         "startChar" : 101,
-         "endLine" : 188,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
       } ],
       "identifier" : {
          "id" : "OpioidCDSRoutines",
@@ -247,14 +181,72 @@
                         "dataType" : "{http://hl7.org/fhir}ServiceRequest",
                         "codeProperty" : "code",
                         "codeComparator" : "in",
-                        "dateProperty" : "authoredOn",
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Therapies indicating end of life care",
                            "libraryName" : "Common",
                            "type" : "ValueSetRef"
-                        },
-                        "dateRange" : {
+                        }
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "type" : "And",
+                     "operand" : [ {
+                        "type" : "And",
+                        "operand" : [ {
+                           "type" : "In",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "status",
+                                 "scope" : "SR",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "List",
+                              "element" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "active",
+                                 "type" : "Literal"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "completed",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        }, {
+                           "type" : "Not",
+                           "operand" : {
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "path" : "intent",
+                                 "scope" : "SR",
+                                 "type" : "Property"
+                              }, {
+                                 "asType" : "{http://hl7.org/fhir}RequestIntent",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "type" : "Null"
+                                 }
+                              } ]
+                           }
+                        } ]
+                     }, {
+                        "precision" : "Day",
+                        "type" : "In",
+                        "operand" : [ {
+                           "name" : "ToDateTime",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "authoredOn",
+                              "scope" : "SR",
+                              "type" : "Property"
+                           } ]
+                        }, {
                            "type" : "Interval",
                            "low" : {
                               "type" : "ToDateTime",
@@ -294,51 +286,7 @@
                                  "type" : "ExpressionRef"
                               }
                            }
-                        }
-                     }
-                  } ],
-                  "relationship" : [ ],
-                  "where" : {
-                     "type" : "And",
-                     "operand" : [ {
-                        "type" : "In",
-                        "operand" : [ {
-                           "name" : "ToString",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "status",
-                              "scope" : "SR",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "List",
-                           "element" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "active",
-                              "type" : "Literal"
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "completed",
-                              "type" : "Literal"
-                           } ]
                         } ]
-                     }, {
-                        "type" : "Not",
-                        "operand" : {
-                           "type" : "Equal",
-                           "operand" : [ {
-                              "path" : "intent",
-                              "scope" : "SR",
-                              "type" : "Property"
-                           }, {
-                              "asType" : "{http://hl7.org/fhir}RequestIntent",
-                              "type" : "As",
-                              "operand" : {
-                                 "type" : "Null"
-                              }
-                           } ]
-                        }
                      } ]
                   }
                }
@@ -880,41 +828,59 @@
                      "dataType" : "{http://hl7.org/fhir}MedicationStatement",
                      "codeProperty" : "medication",
                      "codeComparator" : "in",
-                     "dateProperty" : "effective",
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Opioid analgesics with ambulatory misuse potential",
                         "libraryName" : "Common",
                         "type" : "ValueSetRef"
-                     },
-                     "dateRange" : {
-                        "name" : "Report Inclusion Period",
-                        "type" : "ExpressionRef"
                      }
                   }
                } ],
                "relationship" : [ ],
                "where" : {
-                  "type" : "In",
+                  "type" : "And",
                   "operand" : [ {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
+                     "type" : "In",
                      "operand" : [ {
-                        "path" : "status",
-                        "scope" : "Statement",
-                        "type" : "Property"
+                        "name" : "ToString",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "status",
+                           "scope" : "Statement",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "type" : "List",
+                        "element" : [ {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "active",
+                           "type" : "Literal"
+                        }, {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "completed",
+                           "type" : "Literal"
+                        } ]
                      } ]
                   }, {
-                     "type" : "List",
-                     "element" : [ {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "active",
-                        "type" : "Literal"
+                     "precision" : "Day",
+                     "type" : "IncludedIn",
+                     "operand" : [ {
+                        "name" : "ToInterval",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}Period",
+                           "type" : "As",
+                           "operand" : {
+                              "path" : "effective",
+                              "scope" : "Statement",
+                              "type" : "Property"
+                           }
+                        } ]
                      }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "completed",
-                        "type" : "Literal"
+                        "name" : "Report Inclusion Period",
+                        "type" : "ExpressionRef"
                      } ]
                   } ]
                }
@@ -949,35 +915,49 @@
                      "dataType" : "{http://hl7.org/fhir}MedicationDispense",
                      "codeProperty" : "medication",
                      "codeComparator" : "in",
-                     "dateProperty" : "whenHandedOver",
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Opioid analgesics with ambulatory misuse potential",
                         "libraryName" : "Common",
                         "type" : "ValueSetRef"
-                     },
-                     "dateRange" : {
-                        "name" : "Prescription/Dispense Inclusion Period",
-                        "type" : "ExpressionRef"
                      }
                   }
                } ],
                "relationship" : [ ],
                "where" : {
-                  "type" : "Equal",
+                  "type" : "And",
                   "operand" : [ {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
+                     "precision" : "Day",
+                     "type" : "In",
                      "operand" : [ {
-                        "path" : "status",
-                        "scope" : "OpioidDispense",
-                        "type" : "Property"
+                        "name" : "ToDateTime",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "whenHandedOver",
+                           "scope" : "OpioidDispense",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "name" : "Prescription/Dispense Inclusion Period",
+                        "type" : "ExpressionRef"
                      } ]
                   }, {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "completed",
-                     "type" : "Literal"
+                     "type" : "Equal",
+                     "operand" : [ {
+                        "name" : "ToString",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "status",
+                           "scope" : "OpioidDispense",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "completed",
+                        "type" : "Literal"
+                     } ]
                   } ]
                }
             }

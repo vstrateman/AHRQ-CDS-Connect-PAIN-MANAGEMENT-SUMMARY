@@ -417,40 +417,185 @@
                }
             } ]
          }, {
-            "name" : "ToDoseFormConversionFactor",
+            "name" : "ToDoseFormDosesPerDayConversionFactor",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
             "expression" : {
-               "type" : "ToDecimal",
-               "operand" : {
-                  "type" : "Indexer",
-                  "operand" : [ {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "P",
+                  "expression" : {
+                     "name" : "propertyValue",
+                     "type" : "OperandRef"
+                  }
+               } ],
+               "let" : [ {
+                  "identifier" : "components",
+                  "expression" : {
                      "type" : "Split",
                      "stringToSplit" : {
                         "path" : "value",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "propertyValue",
-                           "type" : "OperandRef"
-                        }
+                        "scope" : "P",
+                        "type" : "Property"
                      },
                      "separator" : {
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : ":",
+                        "value" : "@",
                         "type" : "Literal"
                      }
-                  }, {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Multiply",
+                     "operand" : [ {
+                        "type" : "Divide",
+                        "operand" : [ {
+                           "type" : "ToDecimal",
+                           "operand" : {
+                              "type" : "Indexer",
+                              "operand" : [ {
+                                 "name" : "components",
+                                 "type" : "QueryLetRef"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal"
+                              } ]
+                           }
+                        }, {
+                           "name" : "dosesPerDay",
+                           "type" : "OperandRef"
+                        } ]
+                     }, {
+                        "type" : "ToDecimal",
+                        "operand" : {
+                           "type" : "Indexer",
+                           "operand" : [ {
+                              "type" : "Split",
+                              "stringToSplit" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "name" : "components",
+                                    "type" : "QueryLetRef"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              },
+                              "separator" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : ":",
+                                 "type" : "Literal"
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     } ]
+                  }
                }
             },
             "operand" : [ {
                "name" : "propertyValue",
                "operandTypeSpecifier" : {
                   "name" : "{http://hl7.org/fhir}string",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "name" : "dosesPerDay",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "name" : "ToDoseFormConversionFactor",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Greater",
+                     "operand" : [ {
+                        "type" : "PositionOf",
+                        "pattern" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "@",
+                           "type" : "Literal"
+                        },
+                        "string" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "propertyValue",
+                              "type" : "OperandRef"
+                           }
+                        }
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     } ]
+                  }
+               },
+               "then" : {
+                  "name" : "ToDoseFormDosesPerDayConversionFactor",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "name" : "propertyValue",
+                     "type" : "OperandRef"
+                  }, {
+                     "name" : "dosesPerDay",
+                     "type" : "OperandRef"
+                  } ]
+               },
+               "else" : {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "type" : "Indexer",
+                     "operand" : [ {
+                        "type" : "Split",
+                        "stringToSplit" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "propertyValue",
+                              "type" : "OperandRef"
+                           }
+                        },
+                        "separator" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : ":",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     } ]
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "propertyValue",
+               "operandTypeSpecifier" : {
+                  "name" : "{http://hl7.org/fhir}string",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "name" : "dosesPerDay",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
@@ -748,6 +893,9 @@
                                              "scope" : "DFCF",
                                              "type" : "Property"
                                           }
+                                       }, {
+                                          "name" : "dosesPerDay",
+                                          "type" : "OperandRef"
                                        } ]
                                     }
                                  }
@@ -798,6 +946,12 @@
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
+            }, {
+               "name" : "dosesPerDay",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "type" : "NamedTypeSpecifier"
+               }
             } ]
          }, {
             "name" : "GetConversionFactor",
@@ -817,6 +971,9 @@
                      "type" : "OperandRef"
                   }, {
                      "name" : "doseFormCode",
+                     "type" : "OperandRef"
+                  }, {
+                     "name" : "dosesPerDay",
                      "type" : "OperandRef"
                   } ]
                }, {
@@ -895,35 +1052,51 @@
                         "type" : "Literal"
                      },
                      "then" : {
-                        "type" : "ToDecimal",
-                        "operand" : {
-                           "type" : "Case",
-                           "caseItem" : [ {
-                              "when" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "type" : "ToInteger",
-                                    "operand" : {
-                                       "path" : "code",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "doseFormCode",
-                                          "type" : "OperandRef"
-                                       }
+                        "type" : "Case",
+                        "caseItem" : [ {
+                           "when" : {
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "type" : "ToInteger",
+                                 "operand" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "doseFormCode",
+                                       "type" : "OperandRef"
                                     }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "316987",
-                                    "type" : "Literal"
-                                 } ]
-                              },
-                              "then" : {
+                                 }
+                              }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "12600",
+                                 "value" : "316987",
                                  "type" : "Literal"
-                              }
-                           } ],
-                           "else" : {
+                              } ]
+                           },
+                           "then" : {
+                              "type" : "Multiply",
+                              "operand" : [ {
+                                 "type" : "Divide",
+                                 "operand" : [ {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "0.14285714",
+                                    "type" : "Literal"
+                                 }, {
+                                    "name" : "dosesPerDay",
+                                    "type" : "OperandRef"
+                                 } ]
+                              }, {
+                                 "type" : "ToDecimal",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "12600",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           }
+                        } ],
+                        "else" : {
+                           "type" : "ToDecimal",
+                           "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "30",
                               "type" : "Literal"
@@ -1046,179 +1219,201 @@
                         "type" : "Literal"
                      },
                      "then" : {
-                        "type" : "ToDecimal",
-                        "operand" : {
-                           "type" : "Case",
-                           "caseItem" : [ {
-                              "when" : {
-                                 "type" : "In",
-                                 "operand" : [ {
-                                    "type" : "ToInteger",
-                                    "operand" : {
-                                       "path" : "code",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "doseFormCode",
-                                          "type" : "OperandRef"
-                                       }
+                        "type" : "Case",
+                        "caseItem" : [ {
+                           "when" : {
+                              "type" : "In",
+                              "operand" : [ {
+                                 "type" : "ToInteger",
+                                 "operand" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "doseFormCode",
+                                       "type" : "OperandRef"
                                     }
+                                 }
+                              }, {
+                                 "type" : "List",
+                                 "element" : [ {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "970789",
+                                    "type" : "Literal"
                                  }, {
-                                    "type" : "List",
-                                    "element" : [ {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "970789",
-                                       "type" : "Literal"
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "317007",
-                                       "type" : "Literal"
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "316992",
-                                       "type" : "Literal"
-                                    } ]
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "317007",
+                                    "type" : "Literal"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "316992",
+                                    "type" : "Literal"
                                  } ]
-                              },
-                              "then" : {
+                              } ]
+                           },
+                           "then" : {
+                              "type" : "ToDecimal",
+                              "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "130",
                                  "type" : "Literal"
                               }
-                           }, {
-                              "when" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "type" : "ToInteger",
-                                    "operand" : {
-                                       "path" : "code",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "doseFormCode",
-                                          "type" : "OperandRef"
-                                       }
+                           }
+                        }, {
+                           "when" : {
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "type" : "ToInteger",
+                                 "operand" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "doseFormCode",
+                                       "type" : "OperandRef"
                                     }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "858080",
-                                    "type" : "Literal"
-                                 } ]
-                              },
-                              "then" : {
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "858080",
+                                 "type" : "Literal"
+                              } ]
+                           },
+                           "then" : {
+                              "type" : "ToDecimal",
+                              "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "180",
                                  "type" : "Literal"
                               }
-                           }, {
-                              "when" : {
-                                 "type" : "In",
-                                 "operand" : [ {
-                                    "type" : "ToInteger",
-                                    "operand" : {
-                                       "path" : "code",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "doseFormCode",
-                                          "type" : "OperandRef"
-                                       }
+                           }
+                        }, {
+                           "when" : {
+                              "type" : "In",
+                              "operand" : [ {
+                                 "type" : "ToInteger",
+                                 "operand" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "doseFormCode",
+                                       "type" : "OperandRef"
                                     }
+                                 }
+                              }, {
+                                 "type" : "List",
+                                 "element" : [ {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "126542",
+                                    "type" : "Literal"
                                  }, {
-                                    "type" : "List",
-                                    "element" : [ {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "126542",
-                                       "type" : "Literal"
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "346163",
-                                       "type" : "Literal"
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "1797831",
-                                       "type" : "Literal"
-                                    } ]
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "346163",
+                                    "type" : "Literal"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1797831",
+                                    "type" : "Literal"
                                  } ]
-                              },
-                              "then" : {
+                              } ]
+                           },
+                           "then" : {
+                              "type" : "ToDecimal",
+                              "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "160",
                                  "type" : "Literal"
                               }
-                           }, {
-                              "when" : {
-                                 "type" : "Equal",
+                           }
+                        }, {
+                           "when" : {
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "type" : "ToInteger",
+                                 "operand" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "doseFormCode",
+                                       "type" : "OperandRef"
+                                    }
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "316987",
+                                 "type" : "Literal"
+                              } ]
+                           },
+                           "then" : {
+                              "type" : "Multiply",
+                              "operand" : [ {
+                                 "type" : "Divide",
                                  "operand" : [ {
-                                    "type" : "ToInteger",
-                                    "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                    "value" : "0.33333333",
+                                    "type" : "Literal"
+                                 }, {
+                                    "name" : "dosesPerDay",
+                                    "type" : "OperandRef"
+                                 } ]
+                              }, {
+                                 "type" : "ToDecimal",
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "7200",
+                                    "type" : "Literal"
+                                 }
+                              } ]
+                           }
+                        } ],
+                        "else" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Message",
+                              "source" : {
+                                 "type" : "Null"
+                              },
+                              "condition" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "value" : "true",
+                                 "type" : "Literal"
+                              },
+                              "code" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "OMTKLogic.GetConversionFactor.UnknownDoseForm",
+                                 "type" : "Literal"
+                              },
+                              "severity" : {
+                                 "name" : "ErrorLevel",
+                                 "type" : "ParameterRef"
+                              },
+                              "message" : {
+                                 "type" : "Concatenate",
+                                 "operand" : [ {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "Unknown dose form code ",
+                                       "type" : "Literal"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
+                                    } ]
+                                 }, {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
                                        "path" : "code",
                                        "type" : "Property",
                                        "source" : {
                                           "name" : "doseFormCode",
                                           "type" : "OperandRef"
                                        }
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "316987",
-                                    "type" : "Literal"
-                                 } ]
-                              },
-                              "then" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "7200",
-                                 "type" : "Literal"
-                              }
-                           } ],
-                           "else" : {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "type" : "As",
-                              "operand" : {
-                                 "type" : "Message",
-                                 "source" : {
-                                    "type" : "Null"
-                                 },
-                                 "condition" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "value" : "true",
-                                    "type" : "Literal"
-                                 },
-                                 "code" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "OMTKLogic.GetConversionFactor.UnknownDoseForm",
-                                    "type" : "Literal"
-                                 },
-                                 "severity" : {
-                                    "name" : "ErrorLevel",
-                                    "type" : "ParameterRef"
-                                 },
-                                 "message" : {
-                                    "type" : "Concatenate",
-                                    "operand" : [ {
-                                       "type" : "Coalesce",
-                                       "operand" : [ {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : "Unknown dose form code ",
-                                          "type" : "Literal"
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : "",
-                                          "type" : "Literal"
-                                       } ]
                                     }, {
-                                       "type" : "Coalesce",
-                                       "operand" : [ {
-                                          "path" : "code",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "name" : "doseFormCode",
-                                             "type" : "OperandRef"
-                                          }
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : "",
-                                          "type" : "Literal"
-                                       } ]
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
                                     } ]
-                                 }
+                                 } ]
                               }
                            }
                         }
@@ -1958,6 +2153,12 @@
                "name" : "doseFormCode",
                "operandTypeSpecifier" : {
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "name" : "dosesPerDay",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier"
                }
             } ]

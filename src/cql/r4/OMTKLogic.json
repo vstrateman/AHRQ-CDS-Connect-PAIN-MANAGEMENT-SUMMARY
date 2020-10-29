@@ -53,6 +53,52 @@
       },
       "statements" : {
          "def" : [ {
+            "name" : "Msg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "code",
+                  "value" : {
+                     "name" : "code",
+                     "type" : "OperandRef"
+                  }
+               }, {
+                  "name" : "errorLevel",
+                  "value" : {
+                     "name" : "errorLevel",
+                     "type" : "OperandRef"
+                  }
+               }, {
+                  "name" : "message",
+                  "value" : {
+                     "name" : "message",
+                     "type" : "OperandRef"
+                  }
+               } ]
+            },
+            "operand" : [ {
+               "name" : "code",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "name" : "errorLevel",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "name" : "message",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
             "name" : "ToUCUM",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -155,6 +201,132 @@
                            } ]
                         } ]
                      }
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "unit",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "name" : "ToUCUM_Msg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "U",
+                  "expression" : {
+                     "name" : "unit",
+                     "type" : "OperandRef"
+                  }
+               } ],
+               "let" : [ {
+                  "identifier" : "result",
+                  "expression" : {
+                     "name" : "ToUCUM",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "U",
+                        "type" : "AliasRef"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "result",
+                        "value" : {
+                           "name" : "result",
+                           "type" : "QueryLetRef"
+                        }
+                     }, {
+                        "name" : "message",
+                        "value" : {
+                           "type" : "If",
+                           "condition" : {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "name" : "result",
+                                    "type" : "QueryLetRef"
+                                 }
+                              }
+                           },
+                           "then" : {
+                              "name" : "Msg",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "OMTKLogic.ToUCUM.UnknownUnit",
+                                 "type" : "Literal"
+                              }, {
+                                 "name" : "ErrorLevel",
+                                 "type" : "ParameterRef"
+                              }, {
+                                 "type" : "Concatenate",
+                                 "operand" : [ {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "Unknown unit",
+                                       "type" : "Literal"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
+                                    } ]
+                                 }, {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
+                                       "name" : "unit",
+                                       "type" : "OperandRef"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
+                                    } ]
+                                 } ]
+                              } ]
+                           },
+                           "else" : {
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "type" : "TupleTypeSpecifier",
+                                 "element" : [ {
+                                    "name" : "code",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "errorLevel",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "message",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ]
+                              }
+                           }
+                        }
+                     } ]
                   }
                }
             },
@@ -1152,6 +1324,145 @@
                }
             } ]
          }, {
+            "name" : "ToDaily_Msg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "F",
+                  "expression" : {
+                     "name" : "frequency",
+                     "type" : "OperandRef"
+                  }
+               } ],
+               "let" : [ {
+                  "identifier" : "result",
+                  "expression" : {
+                     "name" : "ToDaily",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "frequency",
+                        "type" : "OperandRef"
+                     }, {
+                        "name" : "period",
+                        "type" : "OperandRef"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "result",
+                        "value" : {
+                           "name" : "result",
+                           "type" : "QueryLetRef"
+                        }
+                     }, {
+                        "name" : "message",
+                        "value" : {
+                           "type" : "If",
+                           "condition" : {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "name" : "result",
+                                    "type" : "QueryLetRef"
+                                 }
+                              }
+                           },
+                           "then" : {
+                              "name" : "Msg",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "OMTKLogic.ToDaily.UnknownUnit",
+                                 "type" : "Literal"
+                              }, {
+                                 "name" : "ErrorLevel",
+                                 "type" : "ParameterRef"
+                              }, {
+                                 "type" : "Concatenate",
+                                 "operand" : [ {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "Unknown unit ",
+                                       "type" : "Literal"
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
+                                    } ]
+                                 }, {
+                                    "type" : "Coalesce",
+                                    "operand" : [ {
+                                       "path" : "unit",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "period",
+                                          "type" : "OperandRef"
+                                       }
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "",
+                                       "type" : "Literal"
+                                    } ]
+                                 } ]
+                              } ]
+                           },
+                           "else" : {
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "type" : "TupleTypeSpecifier",
+                                 "element" : [ {
+                                    "name" : "code",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "errorLevel",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "message",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ]
+                              }
+                           }
+                        }
+                     } ]
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "frequency",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "name" : "period",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
             "name" : "GetIngredients",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1834,15 +2145,28 @@
                      } ]
                   },
                   "then" : {
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "type" : "Null"
-                     },
-                     "asTypeSpecifier" : {
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "result",
+                        "value" : {
+                           "strict" : false,
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           },
+                           "asTypeSpecifier" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }, {
+                        "name" : "description",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Missing doses per day, dose quantity, and/or strength",
+                           "type" : "Literal"
+                        }
+                     } ]
                   }
                }, {
                   "when" : {
@@ -1895,69 +2219,259 @@
                         }
                      },
                      "then" : {
-                        "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "Instance",
-                        "element" : [ {
-                           "name" : "value",
-                           "value" : {
-                              "type" : "Multiply",
-                              "operand" : [ {
-                                 "type" : "Multiply",
-                                 "operand" : [ {
-                                    "name" : "dosesPerDay",
-                                    "type" : "OperandRef"
-                                 }, {
-                                    "path" : "value",
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "dailyDose",
+                           "expression" : {
+                              "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "Instance",
+                              "element" : [ {
+                                 "name" : "value",
+                                 "value" : {
+                                    "type" : "Multiply",
+                                    "operand" : [ {
+                                       "type" : "Multiply",
+                                       "operand" : [ {
+                                          "name" : "dosesPerDay",
+                                          "type" : "OperandRef"
+                                       }, {
+                                          "path" : "value",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "name" : "doseQuantity",
+                                             "type" : "OperandRef"
+                                          }
+                                       } ]
+                                    }, {
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "strength",
+                                          "type" : "OperandRef"
+                                       }
+                                    } ]
+                                 }
+                              }, {
+                                 "name" : "unit",
+                                 "value" : {
+                                    "path" : "unit",
                                     "type" : "Property",
                                     "source" : {
-                                       "name" : "doseQuantity",
+                                       "name" : "strength",
                                        "type" : "OperandRef"
                                     }
-                                 } ]
-                              }, {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "strength",
-                                    "type" : "OperandRef"
                                  }
                               } ]
                            }
-                        }, {
-                           "name" : "unit",
-                           "value" : {
-                              "path" : "unit",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "strength",
-                                 "type" : "OperandRef"
-                              }
+                        } ],
+                        "relationship" : [ ],
+                        "return" : {
+                           "expression" : {
+                              "type" : "Tuple",
+                              "element" : [ {
+                                 "name" : "result",
+                                 "value" : {
+                                    "name" : "dailyDose",
+                                    "type" : "AliasRef"
+                                 }
+                              }, {
+                                 "name" : "description",
+                                 "value" : {
+                                    "type" : "Concatenate",
+                                    "operand" : [ {
+                                       "type" : "Concatenate",
+                                       "operand" : [ {
+                                          "type" : "Coalesce",
+                                          "operand" : [ {
+                                             "type" : "Concatenate",
+                                             "operand" : [ {
+                                                "type" : "Coalesce",
+                                                "operand" : [ {
+                                                   "type" : "Concatenate",
+                                                   "operand" : [ {
+                                                      "type" : "Coalesce",
+                                                      "operand" : [ {
+                                                         "type" : "Concatenate",
+                                                         "operand" : [ {
+                                                            "type" : "Coalesce",
+                                                            "operand" : [ {
+                                                               "type" : "Concatenate",
+                                                               "operand" : [ {
+                                                                  "type" : "Coalesce",
+                                                                  "operand" : [ {
+                                                                     "type" : "Concatenate",
+                                                                     "operand" : [ {
+                                                                        "type" : "Coalesce",
+                                                                        "operand" : [ {
+                                                                           "type" : "Concatenate",
+                                                                           "operand" : [ {
+                                                                              "type" : "Coalesce",
+                                                                              "operand" : [ {
+                                                                                 "name" : "GetIngredientName",
+                                                                                 "type" : "FunctionRef",
+                                                                                 "operand" : [ {
+                                                                                    "name" : "ingredientCode",
+                                                                                    "type" : "OperandRef"
+                                                                                 } ]
+                                                                              }, {
+                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "value" : "",
+                                                                                 "type" : "Literal"
+                                                                              } ]
+                                                                           }, {
+                                                                              "type" : "Coalesce",
+                                                                              "operand" : [ {
+                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "value" : " patch: ",
+                                                                                 "type" : "Literal"
+                                                                              }, {
+                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "value" : "",
+                                                                                 "type" : "Literal"
+                                                                              } ]
+                                                                           } ]
+                                                                        }, {
+                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "value" : "",
+                                                                           "type" : "Literal"
+                                                                        } ]
+                                                                     }, {
+                                                                        "type" : "Coalesce",
+                                                                        "operand" : [ {
+                                                                           "type" : "ToString",
+                                                                           "operand" : {
+                                                                              "path" : "value",
+                                                                              "type" : "Property",
+                                                                              "source" : {
+                                                                                 "name" : "doseQuantity",
+                                                                                 "type" : "OperandRef"
+                                                                              }
+                                                                           }
+                                                                        }, {
+                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "value" : "",
+                                                                           "type" : "Literal"
+                                                                        } ]
+                                                                     } ]
+                                                                  }, {
+                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "value" : "",
+                                                                     "type" : "Literal"
+                                                                  } ]
+                                                               }, {
+                                                                  "type" : "Coalesce",
+                                                                  "operand" : [ {
+                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "value" : " * ",
+                                                                     "type" : "Literal"
+                                                                  }, {
+                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "value" : "",
+                                                                     "type" : "Literal"
+                                                                  } ]
+                                                               } ]
+                                                            }, {
+                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "value" : "",
+                                                               "type" : "Literal"
+                                                            } ]
+                                                         }, {
+                                                            "type" : "Coalesce",
+                                                            "operand" : [ {
+                                                               "type" : "ToString",
+                                                               "operand" : {
+                                                                  "name" : "dosesPerDay",
+                                                                  "type" : "OperandRef"
+                                                               }
+                                                            }, {
+                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "value" : "",
+                                                               "type" : "Literal"
+                                                            } ]
+                                                         } ]
+                                                      }, {
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : "",
+                                                         "type" : "Literal"
+                                                      } ]
+                                                   }, {
+                                                      "type" : "Coalesce",
+                                                      "operand" : [ {
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : "/d * ",
+                                                         "type" : "Literal"
+                                                      }, {
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : "",
+                                                         "type" : "Literal"
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "value" : "",
+                                                   "type" : "Literal"
+                                                } ]
+                                             }, {
+                                                "type" : "Coalesce",
+                                                "operand" : [ {
+                                                   "type" : "ToString",
+                                                   "operand" : {
+                                                      "name" : "strength",
+                                                      "type" : "OperandRef"
+                                                   }
+                                                }, {
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "value" : "",
+                                                   "type" : "Literal"
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : "",
+                                             "type" : "Literal"
+                                          } ]
+                                       }, {
+                                          "type" : "Coalesce",
+                                          "operand" : [ {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : " = ",
+                                             "type" : "Literal"
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : "",
+                                             "type" : "Literal"
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "type" : "ToString",
+                                       "operand" : {
+                                          "name" : "dailyDose",
+                                          "type" : "AliasRef"
+                                       }
+                                    } ]
+                                 }
+                              } ]
                            }
-                        } ]
+                        }
                      },
                      "else" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Message",
-                           "source" : {
-                              "type" : "Null"
-                           },
-                           "condition" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal"
-                           },
-                           "code" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "OMTKLogic.GetDailyDoseDescription.UnknownPatchIngredient",
-                              "type" : "Literal"
-                           },
-                           "severity" : {
-                              "name" : "ErrorLevel",
-                              "type" : "ParameterRef"
-                           },
-                           "message" : {
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "result",
+                           "value" : {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        }, {
+                           "name" : "description",
+                           "value" : {
                               "type" : "Concatenate",
                               "operand" : [ {
                                  "type" : "Coalesce",
@@ -2031,7 +2545,7 @@
                                  } ]
                               } ]
                            }
-                        }
+                        } ]
                      }
                   }
                }, {
@@ -2058,35 +2572,129 @@
                      } ]
                   },
                   "then" : {
-                     "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "type" : "Instance",
-                     "element" : [ {
-                        "name" : "value",
-                        "value" : {
-                           "type" : "Multiply",
-                           "operand" : [ {
-                              "name" : "dosesPerDay",
-                              "type" : "OperandRef"
+                     "type" : "Query",
+                     "source" : [ {
+                        "alias" : "dailyDose",
+                        "expression" : {
+                           "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "Instance",
+                           "element" : [ {
+                              "name" : "value",
+                              "value" : {
+                                 "type" : "Multiply",
+                                 "operand" : [ {
+                                    "name" : "dosesPerDay",
+                                    "type" : "OperandRef"
+                                 }, {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "doseQuantity",
+                                       "type" : "OperandRef"
+                                    }
+                                 } ]
+                              }
                            }, {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "doseQuantity",
-                                 "type" : "OperandRef"
+                              "name" : "unit",
+                              "value" : {
+                                 "path" : "unit",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "doseQuantity",
+                                    "type" : "OperandRef"
+                                 }
                               }
                            } ]
                         }
-                     }, {
-                        "name" : "unit",
-                        "value" : {
-                           "path" : "unit",
-                           "type" : "Property",
-                           "source" : {
-                              "name" : "doseQuantity",
-                              "type" : "OperandRef"
-                           }
+                     } ],
+                     "relationship" : [ ],
+                     "return" : {
+                        "expression" : {
+                           "type" : "Tuple",
+                           "element" : [ {
+                              "name" : "result",
+                              "value" : {
+                                 "name" : "dailyDose",
+                                 "type" : "AliasRef"
+                              }
+                           }, {
+                              "name" : "description",
+                              "value" : {
+                                 "type" : "Concatenate",
+                                 "operand" : [ {
+                                    "type" : "Concatenate",
+                                    "operand" : [ {
+                                       "type" : "Concatenate",
+                                       "operand" : [ {
+                                          "type" : "Concatenate",
+                                          "operand" : [ {
+                                             "type" : "Concatenate",
+                                             "operand" : [ {
+                                                "type" : "Concatenate",
+                                                "operand" : [ {
+                                                   "type" : "Concatenate",
+                                                   "operand" : [ {
+                                                      "type" : "Concatenate",
+                                                      "operand" : [ {
+                                                         "name" : "GetIngredientName",
+                                                         "type" : "FunctionRef",
+                                                         "operand" : [ {
+                                                            "name" : "ingredientCode",
+                                                            "type" : "OperandRef"
+                                                         } ]
+                                                      }, {
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : " ",
+                                                         "type" : "Literal"
+                                                      } ]
+                                                   }, {
+                                                      "name" : "GetDoseFormName",
+                                                      "type" : "FunctionRef",
+                                                      "operand" : [ {
+                                                         "name" : "doseFormCode",
+                                                         "type" : "OperandRef"
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "value" : ": ",
+                                                   "type" : "Literal"
+                                                } ]
+                                             }, {
+                                                "type" : "ToString",
+                                                "operand" : {
+                                                   "name" : "dosesPerDay",
+                                                   "type" : "OperandRef"
+                                                }
+                                             } ]
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : "/d * ",
+                                             "type" : "Literal"
+                                          } ]
+                                       }, {
+                                          "type" : "ToString",
+                                          "operand" : {
+                                             "name" : "doseQuantity",
+                                             "type" : "OperandRef"
+                                          }
+                                       } ]
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : " = ",
+                                       "type" : "Literal"
+                                    } ]
+                                 }, {
+                                    "type" : "ToString",
+                                    "operand" : {
+                                       "name" : "dailyDose",
+                                       "type" : "AliasRef"
+                                    }
+                                 } ]
+                              }
+                           } ]
                         }
-                     } ]
+                     }
                   }
                }, {
                   "when" : {
@@ -2143,385 +2751,69 @@
                      } ]
                   },
                   "then" : {
-                     "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "type" : "Instance",
-                     "element" : [ {
-                        "name" : "value",
-                        "value" : {
-                           "type" : "Multiply",
-                           "operand" : [ {
-                              "type" : "Multiply",
-                              "operand" : [ {
-                                 "name" : "dosesPerDay",
-                                 "type" : "OperandRef"
-                              }, {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "doseQuantity",
-                                    "type" : "OperandRef"
-                                 }
-                              } ]
-                           }, {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "strength",
-                                 "type" : "OperandRef"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "unit",
-                        "value" : {
-                           "name" : "StripPer",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "unit",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "strength",
-                                 "type" : "OperandRef"
-                              }
-                           } ]
-                        }
-                     } ]
-                  }
-               } ],
-               "else" : {
-                  "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                  "type" : "Instance",
-                  "element" : [ {
-                     "name" : "value",
-                     "value" : {
-                        "type" : "Multiply",
-                        "operand" : [ {
-                           "type" : "Multiply",
-                           "operand" : [ {
-                              "name" : "dosesPerDay",
-                              "type" : "OperandRef"
-                           }, {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "doseQuantity",
-                                 "type" : "OperandRef"
-                              }
-                           } ]
-                        }, {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "name" : "strength",
-                              "type" : "OperandRef"
-                           }
-                        } ]
-                     }
-                  }, {
-                     "name" : "unit",
-                     "value" : {
-                        "name" : "StripPer",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "path" : "unit",
-                           "type" : "Property",
-                           "source" : {
-                              "name" : "strength",
-                              "type" : "OperandRef"
-                           }
-                        } ]
-                     }
-                  } ]
-               }
-            },
-            "operand" : [ {
-               "name" : "ingredientCode",
-               "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}Code",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "name" : "strength",
-               "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "name" : "doseFormCode",
-               "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}Code",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "name" : "doseQuantity",
-               "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "name" : "dosesPerDay",
-               "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "name" : "GetDailyDoseDescription",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "expression" : {
-               "type" : "Case",
-               "caseItem" : [ {
-                  "when" : {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "type" : "ToInteger",
-                        "operand" : {
-                           "path" : "code",
-                           "type" : "Property",
-                           "source" : {
-                              "name" : "doseFormCode",
-                              "type" : "OperandRef"
-                           }
-                        }
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "316987",
-                        "type" : "Literal"
-                     } ]
-                  },
-                  "then" : {
-                     "type" : "If",
-                     "condition" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "In",
-                           "operand" : [ {
-                              "type" : "ToInteger",
-                              "operand" : {
-                                 "path" : "code",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "ingredientCode",
-                                    "type" : "OperandRef"
-                                 }
-                              }
-                           }, {
-                              "type" : "List",
-                              "element" : [ {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "1819",
-                                 "type" : "Literal"
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "4337",
-                                 "type" : "Literal"
-                              } ]
-                           } ]
-                        }
-                     },
-                     "then" : {
-                        "type" : "Concatenate",
-                        "operand" : [ {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Coalesce",
-                              "operand" : [ {
-                                 "type" : "Concatenate",
+                     "type" : "Query",
+                     "source" : [ {
+                        "alias" : "dailyDose",
+                        "expression" : {
+                           "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "Instance",
+                           "element" : [ {
+                              "name" : "value",
+                              "value" : {
+                                 "type" : "Multiply",
                                  "operand" : [ {
-                                    "type" : "Coalesce",
+                                    "type" : "Multiply",
                                     "operand" : [ {
-                                       "type" : "Concatenate",
-                                       "operand" : [ {
-                                          "type" : "Coalesce",
-                                          "operand" : [ {
-                                             "type" : "Concatenate",
-                                             "operand" : [ {
-                                                "type" : "Coalesce",
-                                                "operand" : [ {
-                                                   "type" : "Concatenate",
-                                                   "operand" : [ {
-                                                      "type" : "Coalesce",
-                                                      "operand" : [ {
-                                                         "type" : "Concatenate",
-                                                         "operand" : [ {
-                                                            "type" : "Coalesce",
-                                                            "operand" : [ {
-                                                               "type" : "Concatenate",
-                                                               "operand" : [ {
-                                                                  "type" : "Coalesce",
-                                                                  "operand" : [ {
-                                                                     "name" : "GetIngredientName",
-                                                                     "type" : "FunctionRef",
-                                                                     "operand" : [ {
-                                                                        "name" : "ingredientCode",
-                                                                        "type" : "OperandRef"
-                                                                     } ]
-                                                                  }, {
-                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                     "value" : "",
-                                                                     "type" : "Literal"
-                                                                  } ]
-                                                               }, {
-                                                                  "type" : "Coalesce",
-                                                                  "operand" : [ {
-                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                     "value" : " patch: ",
-                                                                     "type" : "Literal"
-                                                                  }, {
-                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                     "value" : "",
-                                                                     "type" : "Literal"
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                               "value" : "",
-                                                               "type" : "Literal"
-                                                            } ]
-                                                         }, {
-                                                            "type" : "Coalesce",
-                                                            "operand" : [ {
-                                                               "type" : "ToString",
-                                                               "operand" : {
-                                                                  "path" : "value",
-                                                                  "type" : "Property",
-                                                                  "source" : {
-                                                                     "name" : "doseQuantity",
-                                                                     "type" : "OperandRef"
-                                                                  }
-                                                               }
-                                                            }, {
-                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                               "value" : "",
-                                                               "type" : "Literal"
-                                                            } ]
-                                                         } ]
-                                                      }, {
-                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                         "value" : "",
-                                                         "type" : "Literal"
-                                                      } ]
-                                                   }, {
-                                                      "type" : "Coalesce",
-                                                      "operand" : [ {
-                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                         "value" : " * ",
-                                                         "type" : "Literal"
-                                                      }, {
-                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                         "value" : "",
-                                                         "type" : "Literal"
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                   "value" : "",
-                                                   "type" : "Literal"
-                                                } ]
-                                             }, {
-                                                "type" : "Coalesce",
-                                                "operand" : [ {
-                                                   "type" : "ToString",
-                                                   "operand" : {
-                                                      "name" : "dosesPerDay",
-                                                      "type" : "OperandRef"
-                                                   }
-                                                }, {
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                   "value" : "",
-                                                   "type" : "Literal"
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : "",
-                                             "type" : "Literal"
-                                          } ]
-                                       }, {
-                                          "type" : "Coalesce",
-                                          "operand" : [ {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : "/d * ",
-                                             "type" : "Literal"
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : "",
-                                             "type" : "Literal"
-                                          } ]
-                                       } ]
+                                       "name" : "dosesPerDay",
+                                       "type" : "OperandRef"
                                     }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : "",
-                                       "type" : "Literal"
-                                    } ]
-                                 }, {
-                                    "type" : "Coalesce",
-                                    "operand" : [ {
-                                       "type" : "ToString",
-                                       "operand" : {
-                                          "name" : "strength",
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "doseQuantity",
                                           "type" : "OperandRef"
                                        }
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : "",
-                                       "type" : "Literal"
                                     } ]
+                                 }, {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "strength",
+                                       "type" : "OperandRef"
+                                    }
                                  } ]
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "",
-                                 "type" : "Literal"
-                              } ]
+                              }
                            }, {
-                              "type" : "Coalesce",
-                              "operand" : [ {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " = ",
-                                 "type" : "Literal"
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "",
-                                 "type" : "Literal"
-                              } ]
+                              "name" : "unit",
+                              "value" : {
+                                 "name" : "StripPer",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "unit",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "strength",
+                                       "type" : "OperandRef"
+                                    }
+                                 } ]
+                              }
                            } ]
-                        }, {
-                           "type" : "ToString",
-                           "operand" : {
-                              "name" : "dailyDose",
-                              "type" : "OperandRef"
-                           }
-                        } ]
-                     },
-                     "else" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}String",
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "Message",
-                           "source" : {
-                              "type" : "Null"
-                           },
-                           "condition" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal"
-                           },
-                           "code" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "OMTKLogic.GetDailyDoseDescription.UnknownPatchIngredient",
-                              "type" : "Literal"
-                           },
-                           "severity" : {
-                              "name" : "ErrorLevel",
-                              "type" : "ParameterRef"
-                           },
-                           "message" : {
-                              "type" : "Concatenate",
-                              "operand" : [ {
-                                 "type" : "Coalesce",
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "return" : {
+                        "expression" : {
+                           "type" : "Tuple",
+                           "element" : [ {
+                              "name" : "result",
+                              "value" : {
+                                 "name" : "dailyDose",
+                                 "type" : "AliasRef"
+                              }
+                           }, {
+                              "name" : "description",
+                              "value" : {
+                                 "type" : "Concatenate",
                                  "operand" : [ {
                                     "type" : "Concatenate",
                                     "operand" : [ {
@@ -2531,9 +2823,68 @@
                                           "operand" : [ {
                                              "type" : "Coalesce",
                                              "operand" : [ {
-                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                "value" : "Unknown patch ingredient: ",
-                                                "type" : "Literal"
+                                                "type" : "Concatenate",
+                                                "operand" : [ {
+                                                   "type" : "Concatenate",
+                                                   "operand" : [ {
+                                                      "type" : "Concatenate",
+                                                      "operand" : [ {
+                                                         "type" : "Concatenate",
+                                                         "operand" : [ {
+                                                            "type" : "Concatenate",
+                                                            "operand" : [ {
+                                                               "type" : "Concatenate",
+                                                               "operand" : [ {
+                                                                  "type" : "Concatenate",
+                                                                  "operand" : [ {
+                                                                     "name" : "GetIngredientName",
+                                                                     "type" : "FunctionRef",
+                                                                     "operand" : [ {
+                                                                        "name" : "ingredientCode",
+                                                                        "type" : "OperandRef"
+                                                                     } ]
+                                                                  }, {
+                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "value" : " ",
+                                                                     "type" : "Literal"
+                                                                  } ]
+                                                               }, {
+                                                                  "name" : "GetDoseFormName",
+                                                                  "type" : "FunctionRef",
+                                                                  "operand" : [ {
+                                                                     "name" : "doseFormCode",
+                                                                     "type" : "OperandRef"
+                                                                  } ]
+                                                               } ]
+                                                            }, {
+                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "value" : ": ",
+                                                               "type" : "Literal"
+                                                            } ]
+                                                         }, {
+                                                            "type" : "ToString",
+                                                            "operand" : {
+                                                               "name" : "dosesPerDay",
+                                                               "type" : "OperandRef"
+                                                            }
+                                                         } ]
+                                                      }, {
+                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "value" : "/d * ",
+                                                         "type" : "Literal"
+                                                      } ]
+                                                   }, {
+                                                      "type" : "ToString",
+                                                      "operand" : {
+                                                         "name" : "doseQuantity",
+                                                         "type" : "OperandRef"
+                                                      }
+                                                   } ]
+                                                }, {
+                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "value" : " * ",
+                                                   "type" : "Literal"
+                                                } ]
                                              }, {
                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                 "value" : "",
@@ -2542,10 +2893,9 @@
                                           }, {
                                              "type" : "Coalesce",
                                              "operand" : [ {
-                                                "path" : "code",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "ingredientCode",
+                                                "type" : "ToString",
+                                                "operand" : {
+                                                   "name" : "strength",
                                                    "type" : "OperandRef"
                                                 }
                                              }, {
@@ -2563,7 +2913,7 @@
                                        "type" : "Coalesce",
                                        "operand" : [ {
                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : ":",
+                                          "value" : " = ",
                                           "type" : "Literal"
                                        }, {
                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -2572,135 +2922,81 @@
                                        } ]
                                     } ]
                                  }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "",
-                                    "type" : "Literal"
-                                 } ]
-                              }, {
-                                 "type" : "Coalesce",
-                                 "operand" : [ {
-                                    "path" : "display",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "ingredientCode",
-                                       "type" : "OperandRef"
+                                    "type" : "ToString",
+                                    "operand" : {
+                                       "name" : "dailyDose",
+                                       "type" : "AliasRef"
                                     }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "",
-                                    "type" : "Literal"
                                  } ]
-                              } ]
-                           }
+                              }
+                           } ]
                         }
                      }
                   }
-               }, {
-                  "when" : {
-                     "type" : "In",
-                     "operand" : [ {
-                        "path" : "unit",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "doseQuantity",
-                           "type" : "OperandRef"
-                        }
-                     }, {
-                        "type" : "List",
+               } ],
+               "else" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "dailyDose",
+                     "expression" : {
+                        "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "Instance",
                         "element" : [ {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mg",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "ug",
-                           "type" : "Literal"
-                        } ]
-                     } ]
-                  },
-                  "then" : {
-                     "type" : "Concatenate",
-                     "operand" : [ {
-                        "type" : "Concatenate",
-                        "operand" : [ {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Concatenate",
+                           "name" : "value",
+                           "value" : {
+                              "type" : "Multiply",
                               "operand" : [ {
-                                 "type" : "Concatenate",
+                                 "type" : "Multiply",
                                  "operand" : [ {
-                                    "type" : "Concatenate",
-                                    "operand" : [ {
-                                       "type" : "Concatenate",
-                                       "operand" : [ {
-                                          "type" : "Concatenate",
-                                          "operand" : [ {
-                                             "name" : "GetIngredientName",
-                                             "type" : "FunctionRef",
-                                             "operand" : [ {
-                                                "name" : "ingredientCode",
-                                                "type" : "OperandRef"
-                                             } ]
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : " ",
-                                             "type" : "Literal"
-                                          } ]
-                                       }, {
-                                          "name" : "GetDoseFormName",
-                                          "type" : "FunctionRef",
-                                          "operand" : [ {
-                                             "name" : "doseFormCode",
-                                             "type" : "OperandRef"
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : ": ",
-                                       "type" : "Literal"
-                                    } ]
+                                    "name" : "dosesPerDay",
+                                    "type" : "OperandRef"
                                  }, {
-                                    "type" : "ToString",
-                                    "operand" : {
-                                       "name" : "dosesPerDay",
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "doseQuantity",
                                        "type" : "OperandRef"
                                     }
                                  } ]
                               }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "/d * ",
-                                 "type" : "Literal"
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "strength",
+                                    "type" : "OperandRef"
+                                 }
                               } ]
-                           }, {
-                              "type" : "ToString",
-                              "operand" : {
-                                 "name" : "doseQuantity",
-                                 "type" : "OperandRef"
-                              }
-                           } ]
+                           }
                         }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : " = ",
-                           "type" : "Literal"
+                           "name" : "unit",
+                           "value" : {
+                              "name" : "StripPer",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "unit",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "strength",
+                                    "type" : "OperandRef"
+                                 }
+                              } ]
+                           }
                         } ]
-                     }, {
-                        "type" : "ToString",
-                        "operand" : {
-                           "name" : "dailyDose",
-                           "type" : "OperandRef"
-                        }
-                     } ]
-                  }
-               } ],
-               "else" : {
-                  "type" : "Concatenate",
-                  "operand" : [ {
-                     "type" : "Concatenate",
-                     "operand" : [ {
-                        "type" : "Concatenate",
-                        "operand" : [ {
-                           "type" : "Concatenate",
-                           "operand" : [ {
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "return" : {
+                     "expression" : {
+                        "type" : "Tuple",
+                        "element" : [ {
+                           "name" : "result",
+                           "value" : {
+                              "name" : "dailyDose",
+                              "type" : "AliasRef"
+                           }
+                        }, {
+                           "name" : "description",
+                           "value" : {
                               "type" : "Concatenate",
                               "operand" : [ {
                                  "type" : "Concatenate",
@@ -2713,73 +3009,85 @@
                                           "operand" : [ {
                                              "type" : "Concatenate",
                                              "operand" : [ {
-                                                "name" : "GetIngredientName",
-                                                "type" : "FunctionRef",
+                                                "type" : "Concatenate",
                                                 "operand" : [ {
-                                                   "name" : "ingredientCode",
-                                                   "type" : "OperandRef"
+                                                   "type" : "Concatenate",
+                                                   "operand" : [ {
+                                                      "type" : "Concatenate",
+                                                      "operand" : [ {
+                                                         "type" : "Concatenate",
+                                                         "operand" : [ {
+                                                            "name" : "GetIngredientName",
+                                                            "type" : "FunctionRef",
+                                                            "operand" : [ {
+                                                               "name" : "ingredientCode",
+                                                               "type" : "OperandRef"
+                                                            } ]
+                                                         }, {
+                                                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                            "value" : " ",
+                                                            "type" : "Literal"
+                                                         } ]
+                                                      }, {
+                                                         "name" : "GetDoseFormName",
+                                                         "type" : "FunctionRef",
+                                                         "operand" : [ {
+                                                            "name" : "doseFormCode",
+                                                            "type" : "OperandRef"
+                                                         } ]
+                                                      } ]
+                                                   }, {
+                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "value" : ": ",
+                                                      "type" : "Literal"
+                                                   } ]
+                                                }, {
+                                                   "type" : "ToString",
+                                                   "operand" : {
+                                                      "name" : "dosesPerDay",
+                                                      "type" : "OperandRef"
+                                                   }
                                                 } ]
                                              }, {
                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                "value" : " ",
+                                                "value" : "/d * ",
                                                 "type" : "Literal"
                                              } ]
                                           }, {
-                                             "name" : "GetDoseFormName",
-                                             "type" : "FunctionRef",
-                                             "operand" : [ {
-                                                "name" : "doseFormCode",
+                                             "type" : "ToString",
+                                             "operand" : {
+                                                "name" : "doseQuantity",
                                                 "type" : "OperandRef"
-                                             } ]
+                                             }
                                           } ]
                                        }, {
                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : ": ",
+                                          "value" : " * ",
                                           "type" : "Literal"
                                        } ]
                                     }, {
                                        "type" : "ToString",
                                        "operand" : {
-                                          "name" : "dosesPerDay",
+                                          "name" : "strength",
                                           "type" : "OperandRef"
                                        }
                                     } ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "/d * ",
+                                    "value" : " = ",
                                     "type" : "Literal"
                                  } ]
                               }, {
                                  "type" : "ToString",
                                  "operand" : {
-                                    "name" : "doseQuantity",
-                                    "type" : "OperandRef"
+                                    "name" : "dailyDose",
+                                    "type" : "AliasRef"
                                  }
                               } ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : " * ",
-                              "type" : "Literal"
-                           } ]
-                        }, {
-                           "type" : "ToString",
-                           "operand" : {
-                              "name" : "strength",
-                              "type" : "OperandRef"
                            }
                         } ]
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : " = ",
-                        "type" : "Literal"
-                     } ]
-                  }, {
-                     "type" : "ToString",
-                     "operand" : {
-                        "name" : "dailyDose",
-                        "type" : "OperandRef"
                      }
-                  } ]
+                  }
                }
             },
             "operand" : [ {
@@ -2810,12 +3118,6 @@
                "name" : "dosesPerDay",
                "operandTypeSpecifier" : {
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "name" : "dailyDose",
-               "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
@@ -2951,35 +3253,6 @@
                               } ]
                            }
                         }, {
-                           "identifier" : "dailyDoseDescription",
-                           "expression" : {
-                              "name" : "GetDailyDoseDescription",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "path" : "ingredientCode",
-                                 "scope" : "I",
-                                 "type" : "Property"
-                              }, {
-                                 "path" : "strength",
-                                 "scope" : "I",
-                                 "type" : "Property"
-                              }, {
-                                 "path" : "doseFormCode",
-                                 "scope" : "I",
-                                 "type" : "Property"
-                              }, {
-                                 "name" : "adjustedDoseQuantity",
-                                 "type" : "QueryLetRef"
-                              }, {
-                                 "path" : "dosesPerDay",
-                                 "scope" : "M",
-                                 "type" : "Property"
-                              }, {
-                                 "name" : "dailyDose",
-                                 "type" : "QueryLetRef"
-                              } ]
-                           }
-                        }, {
                            "identifier" : "factor",
                            "expression" : {
                               "name" : "GetConversionFactor",
@@ -2990,11 +3263,19 @@
                                  "scope" : "I",
                                  "type" : "Property"
                               }, {
-                                 "name" : "dailyDose",
-                                 "type" : "QueryLetRef"
+                                 "path" : "result",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "dailyDose",
+                                    "type" : "QueryLetRef"
+                                 }
                               }, {
                                  "path" : "doseFormCode",
                                  "scope" : "I",
+                                 "type" : "Property"
+                              }, {
+                                 "path" : "dosesPerDay",
+                                 "scope" : "M",
                                  "type" : "Property"
                               } ]
                            }
@@ -3047,8 +3328,12 @@
                               }, {
                                  "name" : "dailyDose",
                                  "value" : {
-                                    "name" : "dailyDose",
-                                    "type" : "QueryLetRef"
+                                    "path" : "result",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "dailyDose",
+                                       "type" : "QueryLetRef"
+                                    }
                                  }
                               }, {
                                  "name" : "dailyDoseDescription",
@@ -3057,8 +3342,12 @@
                                     "operand" : [ {
                                        "type" : "Coalesce",
                                        "operand" : [ {
-                                          "name" : "dailyDoseDescription",
-                                          "type" : "QueryLetRef"
+                                          "path" : "description",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "name" : "dailyDose",
+                                             "type" : "QueryLetRef"
+                                          }
                                        }, {
                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                           "value" : "",
@@ -3112,8 +3401,12 @@
                                              "path" : "value",
                                              "type" : "Property",
                                              "source" : {
-                                                "name" : "dailyDose",
-                                                "type" : "QueryLetRef"
+                                                "path" : "result",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "name" : "dailyDose",
+                                                   "type" : "QueryLetRef"
+                                                }
                                              }
                                           }, {
                                              "name" : "factor",

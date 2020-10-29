@@ -1,74 +1,8 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorOptions" : "EnableDateRangeOptimization,DisableListDemotion,DisableListPromotion,DisableMethodInvocation",
+         "translatorOptions" : "",
          "type" : "CqlToElmInfo"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 61,
-         "startChar" : 20,
-         "endLine" : 61,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 85,
-         "startChar" : 20,
-         "endLine" : 85,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 108,
-         "startChar" : 20,
-         "endLine" : 108,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 131,
-         "startChar" : 20,
-         "endLine" : 131,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 165,
-         "startChar" : 101,
-         "endLine" : 165,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 188,
-         "startChar" : 101,
-         "endLine" : 188,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
       } ],
       "identifier" : {
          "id" : "OpioidCDSREC11PatientView",

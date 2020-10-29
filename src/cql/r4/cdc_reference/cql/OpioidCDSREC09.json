@@ -1,74 +1,8 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorOptions" : "EnableDateRangeOptimization,DisableListDemotion,DisableListPromotion,DisableMethodInvocation",
+         "translatorOptions" : "",
          "type" : "CqlToElmInfo"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 61,
-         "startChar" : 20,
-         "endLine" : 61,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 85,
-         "startChar" : 20,
-         "endLine" : 85,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 108,
-         "startChar" : 20,
-         "endLine" : 108,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 131,
-         "startChar" : 20,
-         "endLine" : 131,
-         "endChar" : 102,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 165,
-         "startChar" : 101,
-         "endLine" : 165,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "OpioidCDSCommon",
-         "libraryVersion" : "2.0.0",
-         "startLine" : 188,
-         "startChar" : 101,
-         "endLine" : 188,
-         "endChar" : 146,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
       } ],
       "identifier" : {
          "id" : "OpioidCDSREC09",
@@ -222,14 +156,49 @@
                                  "dataType" : "{http://hl7.org/fhir}Procedure",
                                  "codeProperty" : "code",
                                  "codeComparator" : "in",
-                                 "dateProperty" : "performed",
                                  "type" : "Retrieve",
                                  "codes" : {
                                     "name" : "PDMP review procedure",
                                     "libraryName" : "Common",
                                     "type" : "ValueSetRef"
-                                 },
-                                 "dateRange" : {
+                                 }
+                              }
+                           } ],
+                           "relationship" : [ ],
+                           "where" : {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "name" : "ToString",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "status",
+                                       "scope" : "P",
+                                       "type" : "Property"
+                                    } ]
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "completed",
+                                    "type" : "Literal"
+                                 } ]
+                              }, {
+                                 "type" : "IncludedIn",
+                                 "operand" : [ {
+                                    "name" : "ToInterval",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "asType" : "{http://hl7.org/fhir}Period",
+                                       "type" : "As",
+                                       "operand" : {
+                                          "path" : "performed",
+                                          "scope" : "P",
+                                          "type" : "Property"
+                                       }
+                                    } ]
+                                 }, {
                                     "type" : "Interval",
                                     "low" : {
                                        "type" : "ToDateTime",
@@ -269,25 +238,7 @@
                                           "type" : "ExpressionRef"
                                        }
                                     }
-                                 }
-                              }
-                           } ],
-                           "relationship" : [ ],
-                           "where" : {
-                              "type" : "Equivalent",
-                              "operand" : [ {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "operand" : [ {
-                                    "path" : "status",
-                                    "scope" : "P",
-                                    "type" : "Property"
                                  } ]
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "completed",
-                                 "type" : "Literal"
                               } ]
                            }
                         }
