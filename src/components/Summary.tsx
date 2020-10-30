@@ -316,14 +316,14 @@ export default class Summary extends Component<any, any> {
                                         role="button"
                                         tabIndex={0}
                                         aria-label={subSection.name}>
-                                        <FontAwesomeIcon
+                                        {subSection.recommendationText ? <FontAwesomeIcon
                                             className='info-icon'
                                             icon="info-circle"
                                             title={'more info: ' + subSection.name}
                                             data-tip="more info"
                                             role="tooltip"
                                             tabIndex={0}
-                                        />
+                                        /> : ''}
                                     </div>
                                 }
                             </h3>
@@ -352,14 +352,14 @@ export default class Summary extends Component<any, any> {
                             role="button"
                             tabIndex={0}
                             aria-label={subSection.name}>
-                            <FontAwesomeIcon
+                            {subSection.recommendationText ? <FontAwesomeIcon
                                 className='info-icon'
                                 icon="info-circle"
                                 title={'more info: ' + subSection.name}
                                 data-tip="more info"
                                 role="tooltip"
                                 tabIndex={0}
-                            />
+                            /> : ''}
                         </div>
                     }
                 </div>)
