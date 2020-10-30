@@ -160,7 +160,7 @@ main {
                 &__header {
                     display: flex;
                     align-items: center;
-                    padding: 10px 40px 0;
+                    // padding: 10px 40px 0;
                     font-weight: 600;
                     .flag-nav {
                         display: none;
@@ -170,16 +170,6 @@ main {
                     padding-bottom: 20px;
                     .sub-section__table {
                         border: 0;
-                        .rt-th:first-child,
-                        .rt-td:first-child {
-                            max-width: 35px;
-                            padding: 0;
-                        }
-                        .rt-th:nth-child(2),
-                        .rt-td:nth-child(2) {
-                            min-width: calc(30px + 20vw);
-                            max-width: calc(30px + 20vw);
-                        }
                         .flag-entry {
                             font-size: 1em;
                             margin-left: 16px;
