@@ -1,3 +1,4 @@
+import Markdown from 'markdown-to-jsx';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -106,7 +107,7 @@ export default class Summary extends Component<any, any> {
                             data-role="tooltip"
                             tabIndex={0}
                         />
-                        {this.props.summary['UrineDrugScreening'].Recommendation10Text}
+                        <Markdown>{this.props.summary['UrineDrugScreening'].Recommendation10Text}</Markdown>
                     </div>
                 </div>
             );
