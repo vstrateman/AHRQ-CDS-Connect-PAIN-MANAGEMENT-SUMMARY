@@ -12,6 +12,7 @@ import Spinner from '../elements/Spinner';
 import executeExternalCDSCall from "../utils/executeExternalCDSHooksCall";
 import executeInternalCDSCall from "../utils/executeInternalCDSHooksCall";
 import '../helpers/polyfill';
+import { Hook, Console, Decode } from 'console-feed'
 require('es6-promise').polyfill();
 require('fetch-everywhere');
 
@@ -31,7 +32,8 @@ export default class Landing extends Component<any, any> {
             collector: [],
             qrCollector: [],
             cdsCollector: [],
-            questionText: new Map()
+            questionText: new Map(),
+            logs: []
         };
 
     }
@@ -43,6 +45,8 @@ export default class Landing extends Component<any, any> {
             const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
             this.setState({ result, sectionFlags, flaggedCount });
             return this.state.collector;
+        }, (error) => {
+            console.error('Error: ', error);
         })
             .then((collector: any) => {
                 if (process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'external') {
@@ -50,23 +54,29 @@ export default class Landing extends Component<any, any> {
                         .then((cdsResult: any) => {
                             this.setState({ cdsCollector: cdsResult });
                             return cdsResult;
+                        }, (error) => {
+                            console.error('Error: ', error);
                         });
                 } else if (process.env.REACT_APP_CDS_MODE && process.env.REACT_APP_CDS_MODE.toLowerCase() === 'internal') {
                     executeInternalCDSCall(10, this.state.cdsCollector)
                         .then((cdsResult: any) => {
                             this.setState({ cdsCollector: cdsResult });
                             return cdsResult;
+                        }, (error) => {
+                            console.error('Error: ', error);
                         });
                 }
             })
             .catch((err: any) => {
-                console.error(err);
-                this.setState({ loading: false });
+                console.error('Error: ', err);
             });
+        Hook(window.console, log => {
+            this.setState(({ logs }) => ({ logs: [...logs, Decode(log)] }))
+        })
     }
 
     componentDidUpdate() {
-        
+
         if (this.state.result && this.state.result.Summary.Patient.Name) {
             const patientName = this.state.result.Summary.Patient.Name;
             document.title = 'Pain Management Summary - ' + patientName;
@@ -89,23 +99,23 @@ export default class Landing extends Component<any, any> {
 
             // Build total number of entries for each subsection of the summary.
             Object.keys(cloneSections).forEach(function (sectionKey, i) {
-                    applicationAnalytics.sections.push({ section: sectionKey, subSections: [] });
-                    Object.keys(cloneSections[sectionKey]).forEach(function (subSectionKey) {
-                            const subSection = cloneSections[sectionKey][subSectionKey];
-                            let count;
-                            if (subSection instanceof Array)
-                                count = subSection.length;
-                            else if (subSection instanceof Object)
-                                count = 1;
+                applicationAnalytics.sections.push({ section: sectionKey, subSections: [] });
+                Object.keys(cloneSections[sectionKey]).forEach(function (subSectionKey) {
+                    const subSection = cloneSections[sectionKey][subSectionKey];
+                    let count;
+                    if (subSection instanceof Array)
+                        count = subSection.length;
+                    else if (subSection instanceof Object)
+                        count = 1;
 
-                            else
-                                count = 0;
-                            totalCount += count;
-                            applicationAnalytics.sections[i].subSections.push({
-                                subSection: subSectionKey, numEntries: count
-                            });
-                        });
+                    else
+                        count = 0;
+                    totalCount += count;
+                    applicationAnalytics.sections[i].subSections.push({
+                        subSection: subSectionKey, numEntries: count
+                    });
                 });
+            });
 
             applicationAnalytics.totalNumEntries = totalCount;
         }
@@ -125,9 +135,9 @@ export default class Landing extends Component<any, any> {
         if (endpoint) {
 
             fetch(endpoint, requestOptions)
-                .catch(function (err) {
-                        console.log(err);
-                    });
+                .catch((err) => {
+                    console.error('Error: ', err);
+                });
         }
 
     }
@@ -137,47 +147,49 @@ export default class Landing extends Component<any, any> {
         const sectionKeys: any = Object.keys(this.summaryMapData);
         let flaggedCount = 0;
         sectionKeys.forEach((sectionKey: any, i: any) => {
-                sectionFlags[sectionKey] = {};
-                this.summaryMapData[sectionKey].forEach((subSection: any) => {
-                    if (summary[subSection.dataKeySource][subSection.dataKey] && (summary[subSection.dataKeySource][subSection.dataKey].length > 0)) {
+            sectionFlags[sectionKey] = {};
+            this.summaryMapData[sectionKey].forEach((subSection: any) => {
+                if (summary[subSection.dataKeySource][subSection.dataKey] && (summary[subSection.dataKeySource][subSection.dataKey].length > 0)) {
 
-                        const data = summary[subSection.dataKeySource][subSection.dataKey];
-                        const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
-                                return r != null;
-                            });
-                            if (entries.length > 0) {
-                                sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
-                                        if (entry._id == null) {
-                                            entry._id = generateUuid();
-                                        }
-        
-                                        const entryFlag = flagit(entry, subSection, summary);
-        
-                                        if (entryFlag) {
-                                            flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
-                                            flaggedCount += 1;
-                                        }
-        
-                                        return flaggedEntries;
-                                    }, []);
-                            } else {
-                                const sectionFlagged = flagit(null, subSection, summary);
-                                sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
-        
-                                if (sectionFlagged) {
-                                    flaggedCount += 1;
-                                }
-                            }
-                    }
-
+                    const data = summary[subSection.dataKeySource][subSection.dataKey];
+                    const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
+                        return r != null;
                     });
+                    if (entries.length > 0) {
+                        sectionFlags[sectionKey][subSection.dataKey] = entries.reduce((flaggedEntries: any, entry: any) => {
+                            if (entry._id == null) {
+                                entry._id = generateUuid();
+                            }
+
+                            const entryFlag = flagit(entry, subSection, summary);
+
+                            if (entryFlag) {
+                                flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
+                                flaggedCount += 1;
+                            }
+
+                            return flaggedEntries;
+                        }, []);
+                    } else {
+                        const sectionFlagged = flagit(null, subSection, summary);
+                        sectionFlags[sectionKey][subSection.dataKey] = sectionFlagged;
+
+                        if (sectionFlagged) {
+                            flaggedCount += 1;
+                        }
+                    }
+                }
+
+            }, (error) => {
+                console.error('Error: ',error)
             });
+        });
 
         // Get the configured endpoint to use for POST for app analytics
         fetch(process.env.PUBLIC_URL + '/config.json')
             .then((response: any) => {
-                    return response.json();
-                })
+                return response.json();
+            })
             .then((config: any) => {
                 // Only provide analytics if the endpoint has been set
                 if (config.analytics_endpoint) {
@@ -185,7 +197,7 @@ export default class Landing extends Component<any, any> {
                 }
             })
             .catch((err: any) => {
-                console.log(err)
+                console.error('Error: ',err)
             });
 
         return { sectionFlags, flaggedCount };
@@ -197,11 +209,26 @@ export default class Landing extends Component<any, any> {
         }
 
         if (this.state.result == null) {
-            return (
-                <div className="banner error">
-                    <FontAwesomeIcon icon="exclamation-circle" title="error" /> Error: See console for details.
-                </div>
-            );
+
+
+            if ((!process.env.NODE_ENV || process.env.NODE_ENV === 'development')) {
+                return (
+                    <div>
+                        <div className="banner error">
+                            <FontAwesomeIcon icon="exclamation-circle" title="error" /> Error: Please see below.
+                        </div>
+                        <div style={{ backgroundColor: '#242424', textAlign: 'left' }}>
+                            <Console logs={this.state.logs} variant="dark" />
+                        </div>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="banner error">
+                        <FontAwesomeIcon icon="exclamation-circle" title="error" /> Error: See console for details.
+                    </div>
+                );
+            }
         }
 
         const summary = this.state.result.Summary;
