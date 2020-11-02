@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Header extends Component {
   static propTypes: any;
   render() {
-    // const {
-    //   patientName, patientAge, patientGender, totalEntries, numFlaggedEntries, meetsInclusionCriteria
-    // }: any = this.props;
 
     return (
       <header className="header">

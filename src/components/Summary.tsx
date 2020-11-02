@@ -9,6 +9,7 @@ import ReactModal from 'react-modal';
 
 // import summaryMap from './summary.json';
 import summaryMap from './summary.json';
+import pkg from '../../package.json'
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
 
@@ -18,6 +19,7 @@ import InfoModal from './InfoModal';
 import DevTools from './DevTools';
 
 export default class Summary extends Component<any, any> {
+    appVersion = pkg.version;
     static propTypes: any;
     subsectionTableProps: { id: string; };
     formatitHelper: any = formatit;
@@ -32,6 +34,7 @@ export default class Summary extends Component<any, any> {
         this.subsectionTableProps = { id: 'react_sub-section__table' };
 
         ReactModal.setAppElement('body');
+        console.log(`You are running version ${this.appVersion} of the PainManager Application`);
     }
 
     componentDidMount() {

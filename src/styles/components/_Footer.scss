@@ -1,0 +1,12 @@
+Footer {
+    width: 100%;
+    background: $color-blue;
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    p {
+        font-size: large;
+        padding-left: 20px;
+    }
+}

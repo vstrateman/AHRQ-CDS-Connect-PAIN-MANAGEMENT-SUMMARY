@@ -6,7 +6,6 @@ import sumit from '../helpers/sumit';
 import flagit from '../helpers/flagit';
 import summaryMap from './summary.json';
 
-import Header from './Header';
 import Summary from './Summary';
 import Spinner from '../elements/Spinner';
 import executeExternalCDSCall from "../utils/executeExternalCDSHooksCall";
@@ -213,7 +212,7 @@ export default class Landing extends Component<any, any> {
 
             if ((!process.env.NODE_ENV || process.env.NODE_ENV === 'development')) {
                 return (
-                    <div>
+                    <div className="error-page">
                         <div className="banner error">
                             <FontAwesomeIcon icon="exclamation-circle" title="error" /> Error: Please see below.
                         </div>
@@ -232,27 +231,27 @@ export default class Landing extends Component<any, any> {
         }
 
         const summary = this.state.result.Summary;
-        const { sectionFlags, flaggedCount } = this.state;
+        const { sectionFlags } = this.state;
         const numMedicalHistoryEntries = sumit(summary.PertinentConditions || {});
         const numPainEntries = sumit(summary.PainAssessments || {});
         const numTreatmentsEntries = sumit(summary.HistoricalTreatments || {});
         const numRiskEntries =
             sumit(summary.RiskConsiderations || {}) +
             sumit(summary.MiscellaneousItems || {}); // TODO: update when CQL updates
-        const totalEntries = numMedicalHistoryEntries + numPainEntries + numTreatmentsEntries + numRiskEntries;
+        // const totalEntries = numMedicalHistoryEntries + numPainEntries + numTreatmentsEntries + numRiskEntries;
 
         return (
             <div className="landing">
                 <div id="skiptocontent"><a href="#maincontent">skip to main content</a></div>
 
-                <Header
+                {/* <Header
                     patientName={summary.Patient.Name}
                     patientAge={summary.Patient.Age}
                     patientGender={summary.Patient.Gender}
                     totalEntries={totalEntries}
                     numFlaggedEntries={flaggedCount}
                     meetsInclusionCriteria={summary.Patient.MeetsInclusionCriteria}
-                />
+                /> */}
 
                 <Summary
                     summary={summary}
