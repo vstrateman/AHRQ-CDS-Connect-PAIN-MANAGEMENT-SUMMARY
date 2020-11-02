@@ -492,7 +492,6 @@ export default class Summary extends Component<any, any> {
                         questionText={questionText}
                     />
 
-                    <h3>PainManager v{this.appVersion}</h3>
                     <ReactTooltip className="summary-tooltip" />
 
                     <ReactModal
