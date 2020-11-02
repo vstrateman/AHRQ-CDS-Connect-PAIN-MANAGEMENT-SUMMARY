@@ -30,15 +30,21 @@ function executeELM(collector: any) {
         const results = FHIR.oauth2.ready().then((clientArg) => {
             client = clientArg;
             return client.getFhirRelease();
+        }, (error) => {
+            console.log('Error: ', error);
         })
             // then remember the release for later and get the release-specific library
             .then((releaseNum) => {
                 release = releaseNum;
                 library = getLibrary(release);
+            }, (error) => {
+                console.error('Error: ', error);
             })
             // then query the FHIR server for the patient, sending it to the next step
             .then(() => {
                 return client.patient.read();
+            }, (error) => {
+                console.error('Error: ', error);
             })
             // then gather all the patient's relevant resource instances and send them in a bundle to the next step
             .then((pt: any) => {
@@ -61,6 +67,8 @@ function executeELM(collector: any) {
                         entry: resources.map(r => ({resource: r}))
                     };
                 });
+            }, (error) => {
+                console.error('Patient error:', error);
             })
             // then execute the library and return the results (wrapped in a Promise)
             .then((bundle) => {
@@ -71,6 +79,8 @@ function executeELM(collector: any) {
                 const results = executor.exec(patientSource);
                 return results.patientResults[Object.keys(results.patientResults)[0]];
                 // return cqlResults[Object.keys(cqlResults)[0]];
+            }, (error) => {
+                console.error('Bundle Error: ', error);
             });
         resolve(results);
     });
