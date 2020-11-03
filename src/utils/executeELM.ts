@@ -5,15 +5,14 @@ import extractResourcesFromELM from './extractResourcesFromELM';
 import dstu2FactorsELM from '../cql/dstu2/Factors_to_Consider_in_Managing_Chronic_Pain.json'
 import dstu2CommonsELM from '../cql/dstu2/CDS_Connect_Commons_for_FHIRv102.json';
 import dstu2HelpersELM from '../cql/dstu2/FHIRHelpers.json';
-import r4FactorsELM from '../cql/r4/Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400.json';
 import r4CommonsELM from '../cql/r4/CDS_Connect_Commons_for_FHIRv400.json';
-import r4ConceptsELM from '../cql/r4/ChronicPainConcepts-2.0.0.json';
 import r4HelpersELM from '../cql/r4/FHIRHelpers.json';
 import r4ConversionFactorsELM from '../cql/r4/ConversionFactors.json';
 import r4MMECalculatorELM from '../cql/r4/MMECalculator.json';
 import r4OMTKDataELM from '../cql/r4/OMTKData.json';
 import r4OMTKLogicELM from '../cql/r4/OMTKLogic.json';
-import r4PainManagerELM from '../cql/r4/PainManager.json';
+import r4PainManagerELM from '../cql/r4/PainManagerAll.json';
+
 // eslint-disable-next-line
 import valueSetDB from '../cql/valueset-db.json';
 import medicationReferenceSolver from "./medicationReferenceSolver";
@@ -96,8 +95,6 @@ function getLibrary(release) {
         case 4:
             return new cql.Library(r4PainManagerELM, new cql.Repository({
                 CDS_Connect_Commons_for_FHIRv400: r4CommonsELM,
-                Factors: r4FactorsELM,
-                Concepts: r4ConceptsELM,
                 FHIRHelpers: r4HelpersELM,
                 ConversionFactors: r4ConversionFactorsELM,
                 MMECalculator: r4MMECalculatorELM,
