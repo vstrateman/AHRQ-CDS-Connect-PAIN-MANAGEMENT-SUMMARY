@@ -1083,36 +1083,6 @@ define ReportRiskScreeningsRelevantToPainManagement:
 // returned as user-friendly text representations, but a robust user interface (UI) should be implemented to
 // display the data to the user in a friendly manner.  See the Pain Management Summary SMART on FHIR application as
 // an example of how to integrate this summary into an EHR using modern web UI technologies.
-define Summary: {
-  Patient: {
-    Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
-    Gender: Patient.gender.value,
-    Age: AgeInYears(),
-    MeetsInclusionCriteria: MeetsInclusionCriteria
-  },
-  PertinentMedicalHistory: {
-    ConditionsAssociatedWithChronicPain: ReportConditionsAssociatedWithChronicPain,
-    RiskFactorsForOpioidRelatedHarms: ReportRiskFactorsForOpioidRelatedHarms
-  },
-  PainAssessments: {
-    NumericPainIntensityAssessments: ReportNumericPainIntensityAssessments,
-    PainEnjoymentGeneralActivityAssessments: ReportPainEnjoymentGeneralActivityAssessments,
-    STarTBackAssessments: ReportSTarTBackAssessments
-  },
-  HistoricalTreatments: {
-    OpioidMedications: ReportOpioidMedications,
-    NonOpioidMedications: ReportNonOpioidMedications,
-    NonPharmacologicTreatments: ReportNonPharmacologicTreatments,
-    StoolSoftenersAndLaxatives: ReportStoolSoftenersAndLaxatives
-  },
-  RiskConsiderations: {
-    MostRecentMME: ReportMostRecentMME,
-    UrineDrugScreens: ReportUrineDrugScreens,
-    BenzodiazepineMedications: ReportBenzodiazepineMedications,
-    NaloxoneMedications: ReportNaloxoneMedications,
-    RiskScreeningsRelevantToPainManagement: ReportRiskScreeningsRelevantToPainManagement
-  }
-}
 
 //****************************************************************************************
 
@@ -1443,7 +1413,7 @@ Activity Barriers
 
 */
 
-define Summary0: {
+define Summary: {
    Patient: {
     Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
     Gender: Patient.gender.value,
@@ -1478,103 +1448,5 @@ define Summary0: {
     PainLocations: ReportPainLocations,
     PainIntensityAndInterference: ReportPainIntensityAndInterference,
     ResourcesProvidedInMyPAIN: ReportResourcesProvidedInMyPAIN
-  }
-}
-
-//// Summary 1: Just Patient
-
-define Summary1: {
-   Patient: {
-    Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
-    Gender: Patient.gender.value,
-    Age: AgeInYears(),
-    MeetsInclusionCriteria: true
-  }
-}
-
-//// Summary 2:
-
-define Summary2: {
-   Patient: {
-    Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
-    Gender: Patient.gender.value,
-    Age: AgeInYears(),
-    MeetsInclusionCriteria: MeetsInclusionCriteria
-  }
-}
-
-//// Summary 3:
-
-define Summary3: {
-   Patient: {
-    Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
-    Gender: Patient.gender.value,
-    Age: AgeInYears(),
-    MeetsInclusionCriteria: MeetsInclusionCriteria
-  },
-  PertinentConditions: {
-    ConditionsAssociatedWithChronicPain: ReportConditionsAssociatedWithChronicPain,
-    CoMorbidConditionsIncreasingRiskWhenUsingOpioids: ReportRiskFactorsForOpioidRelatedHarms,
-    Recommendation8Text: ReportRecommendation8Text
-  }
-}
-
-/// Summary 4:
-
-define Summary4: {
-   Patient: {
-    Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
-    Gender: Patient.gender.value,
-    Age: AgeInYears(),
-    MeetsInclusionCriteria: MeetsInclusionCriteria
-  },
-  PertinentConditions: {
-    ConditionsAssociatedWithChronicPain: ReportConditionsAssociatedWithChronicPain,
-    CoMorbidConditionsIncreasingRiskWhenUsingOpioids: ReportRiskFactorsForOpioidRelatedHarms,
-    Recommendation8Text: ReportRecommendation8Text
-  },
-  CurrentPertinentTreatments: {
-    CurrentMME: ReportCurrentMME,
-    MostRecentMME: ReportMostRecentMME,
-    OpioidMedications: ReportOpioidMedications,
-    NonOpioidMedications: ReportNonOpioidMedications,
-    BenzodiazepineMedications: ReportBenzodiazepineMedications,
-    NaloxoneMedications: ReportNaloxoneMedications,
-    SelfReportedTreatmentsFromMyPAIN: ReportSelfReportedTreatmentsFromMyPAIN,
-    Recommendation3Text: ReportRecommendation3Text,
-    Recommendation5Text: ReportRecommendation5Text,
-    Recommendation11Text: ReportRecommendation11Text
-  }
-}
-
-//// Summary 5
-
-define Summary5: {
-   Patient: {
-    Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
-    Gender: Patient.gender.value,
-    Age: AgeInYears(),
-    MeetsInclusionCriteria: MeetsInclusionCriteria
-  },
-  PertinentConditions: {
-    ConditionsAssociatedWithChronicPain: ReportConditionsAssociatedWithChronicPain,
-    CoMorbidConditionsIncreasingRiskWhenUsingOpioids: ReportRiskFactorsForOpioidRelatedHarms,
-    Recommendation8Text: ReportRecommendation8Text
-  },
-  CurrentPertinentTreatments: {
-    CurrentMME: ReportCurrentMME,
-    MostRecentMME: ReportMostRecentMME,
-    OpioidMedications: ReportOpioidMedications,
-    NonOpioidMedications: ReportNonOpioidMedications,
-    BenzodiazepineMedications: ReportBenzodiazepineMedications,
-    NaloxoneMedications: ReportNaloxoneMedications,
-    SelfReportedTreatmentsFromMyPAIN: ReportSelfReportedTreatmentsFromMyPAIN,
-    Recommendation3Text: ReportRecommendation3Text,
-    Recommendation5Text: ReportRecommendation5Text,
-    Recommendation11Text: ReportRecommendation11Text
-  },
-  UrineDrugScreening: {
-    UrineDrugScreens: ReportUrineDrugScreens,
-    Recommendation10Text: ReportRecommendation10Text
   }
 }
