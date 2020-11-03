@@ -100,3 +100,11 @@ valueset "Urine drug screen for pain management": 'http://fhir.org/guides/cdc/op
 // Empty
 // Replaces the "Stool softeners and laxatives": '2.16.840.1.113762.1.4.1032.44' from F2C
 valueset "Stool softeners and laxatives": 'http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty'
+
+//******************************************************************************
+// Additional concepts introduced in the CDS4CPM Setting
+// We should add these to the "Conditions associated with chronic pain"
+//******************************************************************************
+
+// [CDS4CPM chronic pain conditions](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.96/expansion)
+valueset "CDS4CPM chronic pain conditions": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.96'

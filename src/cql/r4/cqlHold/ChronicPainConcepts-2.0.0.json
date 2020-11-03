@@ -111,6 +111,10 @@
             "name" : "Stool softeners and laxatives",
             "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
             "accessLevel" : "Public"
+         }, {
+            "name" : "CDS4CPM chronic pain conditions",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.96",
+            "accessLevel" : "Public"
          } ]
       }
    }

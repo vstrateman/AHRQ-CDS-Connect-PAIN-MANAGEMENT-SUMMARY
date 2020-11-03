@@ -5,8 +5,8 @@
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
-         "id" : "PainManagerAll",
-         "version" : "0.1.0"
+         "id" : "Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400",
+         "version" : "1.0.1"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -32,9 +32,9 @@
             "path" : "FHIRHelpers",
             "version" : "4.0.1"
          }, {
-            "localIdentifier" : "MMECalculator",
-            "path" : "MMECalculator",
-            "version" : "3.0.0"
+            "localIdentifier" : "Cx",
+            "path" : "ChronicPainConcepts",
+            "version" : "2.0.0"
          } ]
       },
       "parameters" : {
@@ -58,115 +58,8 @@
             "id" : "http://snomed.info/sct",
             "accessLevel" : "Public"
          }, {
-            "name" : "MyPAIN Questionnaire Codes",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/CodeSystem/mypain-questionnaire-codes",
-            "accessLevel" : "Public"
-         }, {
             "name" : "LOCAL",
             "id" : "http://cds.ahrq.gov/cdsconnect/pms",
-            "accessLevel" : "Public"
-         } ]
-      },
-      "valueSets" : {
-         "def" : [ {
-            "name" : "Conditions associated with chronic pain",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.95",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Opioid Pain Medications",
-            "id" : "http://fhir.org/guides/cdc/opioid-cds/ValueSet/opioids",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Adjuvant Analgesic Medications",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Major Depression",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Depression Diagnosis ICD9",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Anxiety",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.94",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Anxiety Disorders ICD9",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Substance use disorder",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Substance Abuse",
-            "id" : "http://fhir.org/guides/cdc/opioid-cds/ValueSet/substance-abuse",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Suicide Attempt",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Sleep-disordered breathing",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.93",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Kidney Failure",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1028",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Chronic Liver Disease",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1035",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Liver Disease",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.42",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Pregnancy",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Pregnancy (New ICD10 codes published in 2018 or later)",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.74",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Non opioid pain medications",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.73",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Non pharmacologic treatments for chronic pain",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Risk assessments relevant to pain management",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Benzodiazepine medications",
-            "id" : "http://fhir.org/guides/cdc/opioid-cds/ValueSet/benzodiazepine-medications",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Naloxone medications",
-            "id" : "http://fhir.org/guides/cdc/opioid-cds/ValueSet/naloxone-medications",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Urine drug screen for pain management",
-            "id" : "http://fhir.org/guides/cdc/opioid-cds/ValueSet/drug-urine-screening",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "Stool softeners and laxatives",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/empty",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "MyPAIN All Questionnaire Codes",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaire-codes",
-            "accessLevel" : "Public"
-         }, {
-            "name" : "MyPAIN All QuestionnaireResponse Codes",
-            "id" : "http://fhir.org/guides/cqf/cds4cpm/ValueSet/mypain-all-questionnaireresponse-codes",
             "accessLevel" : "Public"
          } ]
       },
@@ -354,62 +247,6 @@
             "accessLevel" : "Public",
             "codeSystem" : {
                "name" : "LOCAL"
-            }
-         }, {
-            "name" : "Questionnaire response Document code",
-            "id" : "74465-6",
-            "display" : "Questionnaire response Document",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "LOINC"
-            }
-         }, {
-            "name" : "painLocationOther",
-            "id" : "mpq-1053",
-            "display" : "Other pain location",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "MyPAIN Questionnaire Codes"
-            }
-         }, {
-            "name" : "physicalTreatmentsOther",
-            "id" : "mpq-1054",
-            "display" : "Other physical treatment",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "MyPAIN Questionnaire Codes"
-            }
-         }, {
-            "name" : "prescriptionOther",
-            "id" : "mpq-1057",
-            "display" : "Other prescription treatment",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "MyPAIN Questionnaire Codes"
-            }
-         }, {
-            "name" : "newTreatmentOther",
-            "id" : "mpq-1059",
-            "display" : "Other new treatment",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "MyPAIN Questionnaire Codes"
-            }
-         }, {
-            "name" : "painGoal",
-            "id" : "mpq-1036",
-            "display" : "Pain Goal",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "MyPAIN Questionnaire Codes"
-            }
-         }, {
-            "name" : "goalBarriers",
-            "id" : "mpq-1037",
-            "display" : "Goal Barriers",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "MyPAIN Questionnaire Codes"
             }
          } ]
       },
@@ -2001,6 +1838,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Conditions associated with chronic pain",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   } ]
@@ -2041,6 +1879,7 @@
                            "type" : "Retrieve",
                            "codes" : {
                               "name" : "Opioid Pain Medications",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         }, {
@@ -2067,6 +1906,7 @@
                            "type" : "Retrieve",
                            "codes" : {
                               "name" : "Opioid Pain Medications",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         }, {
@@ -2101,6 +1941,7 @@
                            "type" : "Retrieve",
                            "codes" : {
                               "name" : "Adjuvant Analgesic Medications",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         }, {
@@ -2127,6 +1968,7 @@
                            "type" : "Retrieve",
                            "codes" : {
                               "name" : "Adjuvant Analgesic Medications",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         }, {
@@ -2282,6 +2124,7 @@
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Major Depression",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -2302,6 +2145,7 @@
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Depression Diagnosis ICD9",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -2330,6 +2174,7 @@
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Anxiety",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -2350,6 +2195,7 @@
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Anxiety Disorders ICD9",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -2374,6 +2220,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Substance use disorder",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   } ]
@@ -2389,6 +2236,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Substance Abuse",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   } ]
@@ -2410,6 +2258,7 @@
                   "type" : "Retrieve",
                   "codes" : {
                      "name" : "Suicide Attempt",
+                     "libraryName" : "Cx",
                      "type" : "ValueSetRef"
                   }
                } ]
@@ -2434,6 +2283,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Sleep-disordered breathing",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   } ]
@@ -2459,6 +2309,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Kidney Failure",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   } ]
@@ -2486,6 +2337,7 @@
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Chronic Liver Disease",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -2506,6 +2358,7 @@
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Liver Disease",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -2538,6 +2391,7 @@
                            "type" : "Retrieve",
                            "codes" : {
                               "name" : "Pregnancy",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         } ]
@@ -2549,6 +2403,7 @@
                         "type" : "Retrieve",
                         "codes" : {
                            "name" : "Pregnancy (New ICD10 codes published in 2018 or later)",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -2760,6 +2615,7 @@
                                                       },
                                                       "valueset" : {
                                                          "name" : "Major Depression",
+                                                         "libraryName" : "Cx",
                                                          "type" : "ValueSetRef"
                                                       }
                                                    }, {
@@ -2775,6 +2631,7 @@
                                                       },
                                                       "valueset" : {
                                                          "name" : "Depression Diagnosis ICD9",
+                                                         "libraryName" : "Cx",
                                                          "type" : "ValueSetRef"
                                                       }
                                                    } ]
@@ -2791,6 +2648,7 @@
                                                    },
                                                    "valueset" : {
                                                       "name" : "Anxiety",
+                                                      "libraryName" : "Cx",
                                                       "type" : "ValueSetRef"
                                                    }
                                                 } ]
@@ -2807,6 +2665,7 @@
                                                 },
                                                 "valueset" : {
                                                    "name" : "Anxiety Disorders ICD9",
+                                                   "libraryName" : "Cx",
                                                    "type" : "ValueSetRef"
                                                 }
                                              } ]
@@ -2823,6 +2682,7 @@
                                              },
                                              "valueset" : {
                                                 "name" : "Substance use disorder",
+                                                "libraryName" : "Cx",
                                                 "type" : "ValueSetRef"
                                              }
                                           } ]
@@ -2839,6 +2699,7 @@
                                           },
                                           "valueset" : {
                                              "name" : "Substance Abuse",
+                                             "libraryName" : "Cx",
                                              "type" : "ValueSetRef"
                                           }
                                        } ]
@@ -2855,6 +2716,7 @@
                                        },
                                        "valueset" : {
                                           "name" : "Suicide Attempt",
+                                          "libraryName" : "Cx",
                                           "type" : "ValueSetRef"
                                        }
                                     } ]
@@ -2871,6 +2733,7 @@
                                     },
                                     "valueset" : {
                                        "name" : "Sleep-disordered breathing",
+                                       "libraryName" : "Cx",
                                        "type" : "ValueSetRef"
                                     }
                                  } ]
@@ -2887,6 +2750,7 @@
                                  },
                                  "valueset" : {
                                     "name" : "Kidney Failure",
+                                    "libraryName" : "Cx",
                                     "type" : "ValueSetRef"
                                  }
                               } ]
@@ -2903,6 +2767,7 @@
                               },
                               "valueset" : {
                                  "name" : "Chronic Liver Disease",
+                                 "libraryName" : "Cx",
                                  "type" : "ValueSetRef"
                               }
                            } ]
@@ -2919,6 +2784,7 @@
                            },
                            "valueset" : {
                               "name" : "Liver Disease",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         } ]
@@ -3125,6 +2991,7 @@
                                                 },
                                                 "valueset" : {
                                                    "name" : "Major Depression",
+                                                   "libraryName" : "Cx",
                                                    "type" : "ValueSetRef"
                                                 }
                                              }, {
@@ -3140,6 +3007,7 @@
                                                 },
                                                 "valueset" : {
                                                    "name" : "Depression Diagnosis ICD9",
+                                                   "libraryName" : "Cx",
                                                    "type" : "ValueSetRef"
                                                 }
                                              } ]
@@ -3156,6 +3024,7 @@
                                              },
                                              "valueset" : {
                                                 "name" : "Anxiety",
+                                                "libraryName" : "Cx",
                                                 "type" : "ValueSetRef"
                                              }
                                           } ]
@@ -3172,6 +3041,7 @@
                                           },
                                           "valueset" : {
                                              "name" : "Anxiety Disorders ICD9",
+                                             "libraryName" : "Cx",
                                              "type" : "ValueSetRef"
                                           }
                                        } ]
@@ -3188,6 +3058,7 @@
                                        },
                                        "valueset" : {
                                           "name" : "Substance use disorder",
+                                          "libraryName" : "Cx",
                                           "type" : "ValueSetRef"
                                        }
                                     } ]
@@ -3204,6 +3075,7 @@
                                     },
                                     "valueset" : {
                                        "name" : "Substance Abuse",
+                                       "libraryName" : "Cx",
                                        "type" : "ValueSetRef"
                                     }
                                  } ]
@@ -3220,6 +3092,7 @@
                                  },
                                  "valueset" : {
                                     "name" : "Suicide Attempt",
+                                    "libraryName" : "Cx",
                                     "type" : "ValueSetRef"
                                  }
                               } ]
@@ -3236,6 +3109,7 @@
                               },
                               "valueset" : {
                                  "name" : "Sleep-disordered breathing",
+                                 "libraryName" : "Cx",
                                  "type" : "ValueSetRef"
                               }
                            } ]
@@ -3252,6 +3126,7 @@
                            },
                            "valueset" : {
                               "name" : "Kidney Failure",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         } ]
@@ -3268,6 +3143,7 @@
                         },
                         "valueset" : {
                            "name" : "Chronic Liver Disease",
+                           "libraryName" : "Cx",
                            "type" : "ValueSetRef"
                         }
                      } ]
@@ -3284,6 +3160,7 @@
                      },
                      "valueset" : {
                         "name" : "Liver Disease",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   } ]
@@ -3650,26 +3527,14 @@
                         }, {
                            "name" : "Onset",
                            "value" : {
-                              "type" : "ToString",
+                              "strict" : false,
+                              "type" : "As",
                               "operand" : {
-                                 "type" : "Add",
-                                 "operand" : [ {
-                                    "name" : "ToDate",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "birthDate",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "Patient",
-                                          "type" : "ExpressionRef"
-                                       }
-                                    } ]
-                                 }, {
-                                    "value" : 65,
-                                    "unit" : "years",
-                                    "type" : "Quantity"
-                                 } ]
+                                 "type" : "Null"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
                               }
                            }
                         }, {
@@ -4575,6 +4440,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Opioid Pain Medications",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -4604,6 +4470,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Opioid Pain Medications",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -4860,6 +4727,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Non opioid pain medications",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -4889,6 +4757,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Non opioid pain medications",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -5145,6 +5014,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Non pharmacologic treatments for chronic pain",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -5262,6 +5132,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Non pharmacologic treatments for chronic pain",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -5376,6 +5247,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Stool softeners and laxatives",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -5405,6 +5277,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Stool softeners and laxatives",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -5779,6 +5652,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Urine drug screen for pain management",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -5925,6 +5799,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Benzodiazepine medications",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -5954,6 +5829,7 @@
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Benzodiazepine medications",
+                        "libraryName" : "Cx",
                         "type" : "ValueSetRef"
                      }
                   }, {
@@ -6206,6 +6082,7 @@
                   "type" : "Retrieve",
                   "codes" : {
                      "name" : "Naloxone medications",
+                     "libraryName" : "Cx",
                      "type" : "ValueSetRef"
                   }
                } ]
@@ -6226,6 +6103,7 @@
                   "type" : "Retrieve",
                   "codes" : {
                      "name" : "Naloxone medications",
+                     "libraryName" : "Cx",
                      "type" : "ValueSetRef"
                   }
                } ]
@@ -6481,6 +6359,7 @@
                            "type" : "Retrieve",
                            "codes" : {
                               "name" : "Risk assessments relevant to pain management",
+                              "libraryName" : "Cx",
                               "type" : "ValueSetRef"
                            }
                         }, {
@@ -6922,2891 +6801,6 @@
                         "name" : "RiskScreeningsRelevantToPainManagement",
                         "value" : {
                            "name" : "ReportRiskScreeningsRelevantToPainManagement",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "ActiveOpioidMedications",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "name" : "ActiveMedicationRequest",
-               "libraryName" : "C3F",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                  "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
-                  "codeProperty" : "medication",
-                  "codeComparator" : "in",
-                  "type" : "Retrieve",
-                  "codes" : {
-                     "name" : "Opioid Pain Medications",
-                     "type" : "ValueSetRef"
-                  }
-               } ]
-            }
-         }, {
-            "name" : "CurrentMME",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "name" : "TotalMME",
-               "libraryName" : "MMECalculator",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "name" : "ActiveOpioidMedications",
-                  "type" : "ExpressionRef"
-               } ]
-            }
-         }, {
-            "name" : "ReportCurrentMME",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "C",
-                  "expression" : {
-                     "type" : "List",
-                     "element" : [ {
-                        "type" : "Query",
-                        "source" : [ {
-                           "alias" : "M",
-                           "expression" : {
-                              "name" : "CurrentMME",
-                              "type" : "ExpressionRef"
-                           }
-                        } ],
-                        "relationship" : [ ],
-                        "return" : {
-                           "expression" : {
-                              "type" : "Tuple",
-                              "element" : [ {
-                                 "name" : "Name",
-                                 "value" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "Current Milligram Morphine Equivalent",
-                                    "type" : "Literal"
-                                 }
-                              }, {
-                                 "name" : "Result",
-                                 "value" : {
-                                    "type" : "ToString",
-                                    "operand" : {
-                                       "name" : "M",
-                                       "type" : "AliasRef"
-                                    }
-                                 }
-                              }, {
-                                 "name" : "Date",
-                                 "value" : {
-                                    "type" : "ToString",
-                                    "operand" : {
-                                       "type" : "Today"
-                                    }
-                                 }
-                              } ]
-                           }
-                        }
-                     } ]
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "Not",
-                  "operand" : {
-                     "type" : "IsNull",
-                     "operand" : {
-                        "name" : "C",
-                        "type" : "AliasRef"
-                     }
-                  }
-               }
-            }
-         }, {
-            "name" : "ConceptTextOrCode",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "expression" : {
-               "type" : "Coalesce",
-               "operand" : [ {
-                  "type" : "Coalesce",
-                  "operand" : [ {
-                     "type" : "Query",
-                     "source" : [ {
-                        "alias" : "c2",
-                        "expression" : {
-                           "path" : "coding",
-                           "type" : "Property",
-                           "source" : {
-                              "name" : "c",
-                              "type" : "OperandRef"
-                           }
-                        }
-                     } ],
-                     "relationship" : [ ],
-                     "return" : {
-                        "expression" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "code",
-                              "scope" : "c2",
-                              "type" : "Property"
-                           }
-                        }
-                     }
-                  } ]
-               }, {
-                  "path" : "value",
-                  "type" : "Property",
-                  "source" : {
-                     "path" : "text",
-                     "type" : "Property",
-                     "source" : {
-                        "name" : "c",
-                        "type" : "OperandRef"
-                     }
-                  }
-               } ]
-            },
-            "operand" : [ {
-               "name" : "c",
-               "operandTypeSpecifier" : {
-                  "name" : "{http://hl7.org/fhir}CodeableConcept",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "name" : "ObservationValue",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "expression" : {
-               "type" : "Coalesce",
-               "operand" : [ {
-                  "name" : "QuantityText",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "path" : "value",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "Obs",
-                           "type" : "OperandRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "name" : "{http://hl7.org/fhir}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  } ]
-               }, {
-                  "type" : "ToString",
-                  "operand" : {
-                     "name" : "ToBoolean",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "name" : "Obs",
-                              "type" : "OperandRef"
-                           }
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{http://hl7.org/fhir}boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "ToString",
-                  "libraryName" : "FHIRHelpers",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "path" : "value",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "Obs",
-                           "type" : "OperandRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "name" : "{http://hl7.org/fhir}string",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  } ]
-               }, {
-                  "name" : "ConceptText",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "path" : "value",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "Obs",
-                           "type" : "OperandRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "name" : "{http://hl7.org/fhir}CodeableConcept",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  } ]
-               } ]
-            },
-            "operand" : [ {
-               "name" : "Obs",
-               "operandTypeSpecifier" : {
-                  "name" : "{http://hl7.org/fhir}Observation",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "name" : "GetLinkId",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "expression" : {
-               "type" : "If",
-               "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "IsNull",
-                     "operand" : {
-                        "name" : "Obs",
-                        "type" : "OperandRef"
-                     }
-                  }
-               },
-               "then" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Obs is null",
-                  "type" : "Literal"
-               },
-               "else" : {
-                  "type" : "If",
-                  "condition" : {
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "operand" : {
-                        "type" : "IsNull",
-                        "operand" : {
-                           "type" : "Indexer",
-                           "operand" : [ {
-                              "path" : "extension",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Obs",
-                                 "type" : "OperandRef"
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "0",
-                              "type" : "Literal"
-                           } ]
-                        }
-                     }
-                  },
-                  "then" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Obs.extension is null",
-                     "type" : "Literal"
-                  },
-                  "else" : {
-                     "type" : "If",
-                     "condition" : {
-                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "As",
-                        "operand" : {
-                           "type" : "IsNull",
-                           "operand" : {
-                              "path" : "url",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "extension",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "Obs",
-                                       "type" : "OperandRef"
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           }
-                        }
-                     },
-                     "then" : {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Obs.extension.url is null",
-                        "type" : "Literal"
-                     },
-                     "else" : {
-                        "type" : "If",
-                        "condition" : {
-                           "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "As",
-                           "operand" : {
-                              "type" : "IsNull",
-                              "operand" : {
-                                 "path" : "extension",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "path" : "extension",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "Obs",
-                                          "type" : "OperandRef"
-                                       }
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
-                              }
-                           }
-                        },
-                        "then" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Obs.extension.extension is null",
-                           "type" : "Literal"
-                        },
-                        "else" : {
-                           "asType" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "As",
-                           "operand" : {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "path" : "extension",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "type" : "Indexer",
-                                          "operand" : [ {
-                                             "path" : "extension",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "Obs",
-                                                "type" : "OperandRef"
-                                             }
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                             "value" : "0",
-                                             "type" : "Literal"
-                                          } ]
-                                       }
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            "operand" : [ {
-               "name" : "Obs",
-               "operandTypeSpecifier" : {
-                  "name" : "{http://hl7.org/fhir}Observation",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "name" : "QuestionnaireObservations",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "name" : "Verified",
-               "libraryName" : "C3F",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "name" : "ObservationLookBack",
-                  "libraryName" : "C3F",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "dataType" : "{http://hl7.org/fhir}Observation",
-                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
-                     "codeProperty" : "code",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "MyPAIN All Questionnaire Codes",
-                        "type" : "ValueSetRef"
-                     }
-                  }, {
-                     "value" : 1,
-                     "unit" : "year",
-                     "type" : "Quantity"
-                  } ]
-               } ]
-            }
-         }, {
-            "name" : "QuestionTextByLinkId",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "singleQ",
-                  "expression" : {
-                     "type" : "Query",
-                     "source" : [ {
-                        "alias" : "Q",
-                        "expression" : {
-                           "dataType" : "{http://hl7.org/fhir}Questionnaire",
-                           "templateId" : "http://hl7.org/fhir/StructureDefinition/Questionnaire",
-                           "type" : "Retrieve"
-                        }
-                     } ],
-                     "relationship" : [ ],
-                     "where" : {
-                        "type" : "Equal",
-                        "operand" : [ {
-                           "name" : "ToString",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "id",
-                              "scope" : "Q",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mypain-questionnaire",
-                           "type" : "Literal"
-                        } ]
-                     }
-                  }
-               } ],
-               "relationship" : [ ],
-               "return" : {
-                  "expression" : {
-                     "type" : "Query",
-                     "source" : [ {
-                        "alias" : "QItem",
-                        "expression" : {
-                           "type" : "Coalesce",
-                           "operand" : [ {
-                              "type" : "Flatten",
-                              "operand" : {
-                                 "type" : "Query",
-                                 "source" : [ {
-                                    "alias" : "$this",
-                                    "expression" : {
-                                       "path" : "item",
-                                       "scope" : "singleQ",
-                                       "type" : "Property"
-                                    }
-                                 } ],
-                                 "where" : {
-                                    "type" : "Not",
-                                    "operand" : {
-                                       "type" : "IsNull",
-                                       "operand" : {
-                                          "path" : "item",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "name" : "$this",
-                                             "type" : "AliasRef"
-                                          }
-                                       }
-                                    }
-                                 },
-                                 "return" : {
-                                    "expression" : {
-                                       "path" : "item",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "$this",
-                                          "type" : "AliasRef"
-                                       }
-                                    }
-                                 }
-                              }
-                           }, {
-                              "path" : "item",
-                              "scope" : "singleQ",
-                              "type" : "Property"
-                           } ]
-                        }
-                     } ],
-                     "relationship" : [ ],
-                     "where" : {
-                        "type" : "Equal",
-                        "operand" : [ {
-                           "path" : "linkId",
-                           "scope" : "QItem",
-                           "type" : "Property"
-                        }, {
-                           "strict" : false,
-                           "type" : "As",
-                           "operand" : {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "extension",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "path" : "extension",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "name" : "Obs",
-                                             "type" : "OperandRef"
-                                          }
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           },
-                           "asTypeSpecifier" : {
-                              "name" : "{http://hl7.org/fhir}string",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ]
-                     },
-                     "return" : {
-                        "expression" : {
-                           "path" : "prefix",
-                           "scope" : "QItem",
-                           "type" : "Property"
-                        }
-                     }
-                  }
-               }
-            },
-            "operand" : [ {
-               "name" : "Obs",
-               "operandTypeSpecifier" : {
-                  "name" : "{http://hl7.org/fhir}Observation",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "name" : "ReportMyPAINSubmitDate",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "qrOb",
-                  "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "return" : {
-                  "expression" : {
-                     "name" : "DateTimeText",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "path" : "effective",
-                           "scope" : "qrOb",
-                           "type" : "Property"
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{http://hl7.org/fhir}dateTime",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ]
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportActivityGoals",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "qrOb",
-                  "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "Equal",
-                  "operand" : [ {
-                     "path" : "value",
-                     "type" : "Property",
-                     "source" : {
-                        "path" : "code",
-                        "type" : "Property",
-                        "source" : {
-                           "type" : "Indexer",
-                           "operand" : [ {
-                              "path" : "coding",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "code",
-                                 "scope" : "qrOb",
-                                 "type" : "Property"
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "0",
-                              "type" : "Literal"
-                           } ]
-                        }
-                     }
-                  }, {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "mpq-1036",
-                     "type" : "Literal"
-                  } ]
-               },
-               "return" : {
-                  "expression" : {
-                     "path" : "value",
-                     "scope" : "qrOb",
-                     "type" : "Property"
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportActivityBarriers",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "qrOb",
-                  "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "Equal",
-                  "operand" : [ {
-                     "path" : "value",
-                     "type" : "Property",
-                     "source" : {
-                        "path" : "code",
-                        "type" : "Property",
-                        "source" : {
-                           "type" : "Indexer",
-                           "operand" : [ {
-                              "path" : "coding",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "code",
-                                 "scope" : "qrOb",
-                                 "type" : "Property"
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "0",
-                              "type" : "Literal"
-                           } ]
-                        }
-                     }
-                  }, {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "mpq-1037",
-                     "type" : "Literal"
-                  } ]
-               },
-               "return" : {
-                  "expression" : {
-                     "path" : "value",
-                     "scope" : "qrOb",
-                     "type" : "Property"
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportPainLocations",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "qrOb",
-                  "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "Or",
-                  "operand" : [ {
-                     "type" : "In",
-                     "operand" : [ {
-                        "name" : "ObservationValue",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "name" : "qrOb",
-                           "type" : "AliasRef"
-                        } ]
-                     }, {
-                        "type" : "List",
-                        "element" : [ {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Stabbing",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Burning",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Aching",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Tingling",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Prickling",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Throbbing",
-                           "type" : "Literal"
-                        } ]
-                     } ]
-                  }, {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "path" : "value",
-                        "type" : "Property",
-                        "source" : {
-                           "path" : "code",
-                           "type" : "Property",
-                           "source" : {
-                              "type" : "Indexer",
-                              "operand" : [ {
-                                 "path" : "coding",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "code",
-                                    "scope" : "qrOb",
-                                    "type" : "Property"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
-                              } ]
-                           }
-                        }
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "mpq-1053",
-                        "type" : "Literal"
-                     } ]
-                  } ]
-               },
-               "return" : {
-                  "expression" : {
-                     "type" : "List",
-                     "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Location",
-                           "value" : {
-                              "path" : "display",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "coding",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "code",
-                                       "scope" : "qrOb",
-                                       "type" : "Property"
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           }
-                        }, {
-                           "name" : "PainYesNo",
-                           "value" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "name" : "Description",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportPainIntensityAndInterference",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "qrOb",
-                  "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "In",
-                  "operand" : [ {
-                     "name" : "ObservationValue",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
-                        "name" : "qrOb",
-                        "type" : "AliasRef"
-                     } ]
-                  }, {
-                     "type" : "List",
-                     "element" : [ {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Had no pain",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Mild",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Moderate",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Severe",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Very Severe",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Not at all",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "A little bit",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Somewhat",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Quite a bit",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Very much",
-                        "type" : "Literal"
-                     } ]
-                  } ]
-               },
-               "return" : {
-                  "expression" : {
-                     "type" : "List",
-                     "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Question",
-                           "value" : {
-                              "path" : "display",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "coding",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "code",
-                                       "scope" : "qrOb",
-                                       "type" : "Property"
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           }
-                        }, {
-                           "name" : "Response",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            }
-         }, {
-            "name" : "GetResourceURL",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "expression" : {
-               "type" : "Case",
-               "caseItem" : [ {
-                  "when" : {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "name" : "linkId",
-                        "type" : "OperandRef"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "12",
-                        "type" : "Literal"
-                     } ]
-                  },
-                  "then" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "https://www.youtube.com/embed/QWcr9J3MLfo",
-                     "type" : "Literal"
-                  }
-               }, {
-                  "when" : {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "name" : "linkId",
-                        "type" : "OperandRef"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "13",
-                        "type" : "Literal"
-                     } ]
-                  },
-                  "then" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "https://uspainfoundation.org/living-with-pain/",
-                     "type" : "Literal"
-                  }
-               } ],
-               "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "Null"
-                  }
-               }
-            },
-            "operand" : [ {
-               "name" : "linkId",
-               "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "name" : "ReportResourcesProvidedInMyPAIN",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "qrOb",
-                  "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "In",
-                  "operand" : [ {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
-                        "strict" : false,
-                        "type" : "As",
-                        "operand" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "type" : "Indexer",
-                              "operand" : [ {
-                                 "path" : "extension",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "path" : "extension",
-                                       "scope" : "qrOb",
-                                       "type" : "Property"
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
-                              } ]
-                           }
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{http://hl7.org/fhir}string",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ]
-                  }, {
-                     "type" : "List",
-                     "element" : [ {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "12",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "13",
-                        "type" : "Literal"
-                     } ]
-                  } ]
-               },
-               "return" : {
-                  "expression" : {
-                     "type" : "List",
-                     "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Resource",
-                           "value" : {
-                              "path" : "value",
-                              "scope" : "qrOb",
-                              "type" : "Property"
-                           }
-                        }, {
-                           "name" : "ResourceUrl",
-                           "value" : {
-                              "name" : "GetResourceURL",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "operand" : [ {
-                                    "strict" : false,
-                                    "type" : "As",
-                                    "operand" : {
-                                       "path" : "value",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "type" : "Indexer",
-                                          "operand" : [ {
-                                             "path" : "extension",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "type" : "Indexer",
-                                                "operand" : [ {
-                                                   "path" : "extension",
-                                                   "scope" : "qrOb",
-                                                   "type" : "Property"
-                                                }, {
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                   "value" : "0",
-                                                   "type" : "Literal"
-                                                } ]
-                                             }
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                             "value" : "0",
-                                             "type" : "Literal"
-                                          } ]
-                                       }
-                                    },
-                                    "asTypeSpecifier" : {
-                                       "name" : "{http://hl7.org/fhir}string",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 } ]
-                              } ]
-                           }
-                        }, {
-                           "name" : "ViewedOn",
-                           "value" : {
-                              "path" : "effective",
-                              "scope" : "qrOb",
-                              "type" : "Property"
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "qrOb",
-                  "expression" : {
-                     "name" : "QuestionnaireObservations",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "Or",
-                  "operand" : [ {
-                     "type" : "In",
-                     "operand" : [ {
-                        "name" : "ObservationValue",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "name" : "qrOb",
-                           "type" : "AliasRef"
-                        } ]
-                     }, {
-                        "type" : "List",
-                        "element" : [ {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Never",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sometimes",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Always",
-                           "type" : "Literal"
-                        } ]
-                     } ]
-                  }, {
-                     "type" : "In",
-                     "operand" : [ {
-                        "path" : "value",
-                        "type" : "Property",
-                        "source" : {
-                           "path" : "code",
-                           "type" : "Property",
-                           "source" : {
-                              "type" : "Indexer",
-                              "operand" : [ {
-                                 "path" : "coding",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "code",
-                                    "scope" : "qrOb",
-                                    "type" : "Property"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
-                              } ]
-                           }
-                        }
-                     }, {
-                        "type" : "List",
-                        "element" : [ {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mpq-1054",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mpq-1057",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mpq-1059",
-                           "type" : "Literal"
-                        } ]
-                     } ]
-                  } ]
-               },
-               "return" : {
-                  "expression" : {
-                     "type" : "List",
-                     "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Treatment",
-                           "value" : {
-                              "name" : "QuestionTextByLinkId",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        }, {
-                           "name" : "Effectiveness",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportRecommendation3Text",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "Per CDC guidelines, before starting, and periodically during opioid therapy, clinicians should discuss with patients known risks and realistic benefits of opioid therapy and patient and clinician responsibilities for managing therapy (recommendation category: A, evidence type: 3).  [CDC Opioid Prescribing Guideline, Recommendation #3](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
-               "type" : "Literal"
-            }
-         }, {
-            "name" : "ReportRecommendation5Text",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "If",
-               "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "GreaterOrEqual",
-                     "operand" : [ {
-                        "name" : "CurrentMME",
-                        "type" : "ExpressionRef"
-                     }, {
-                        "type" : "ToQuantity",
-                        "operand" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "50",
-                           "type" : "Literal"
-                        }
-                     } ]
-                  }
-               },
-               "then" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Per CDC guidelines, when opioids are started, clinicians should prescribe the lowest effective dosage. Clinicians should use caution when prescribing opioids at any dosage, should carefully reassess evidence of individual benefits and risks when considering increasing dosage to ≥50 morphine milligram equivalents (MME)/day, and should avoid increasing dosage to ≥90 MME/day or carefully justify a decision to titrate dosage to ≥90 MME/day (recommendation category: A, evidence type: 3).\n\nFor MME/day of ≥ 50, CDC guidelines recommend incorporating into the management plan strategies to mitigate risk, including considering offering naloxone (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #5 and #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
-                  "type" : "Literal"
-               },
-               "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "Null"
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportRecommendation8Text",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "Per CDC guidelines, before starting, and periodically during continuation of opioid therapy, clinicians should evaluate risk factors for opioid-related harms. Clinicians should incorporate into the management plan strategies to mitigate risk, including considering offering naloxone when factors that increase risk for opioid overdose, such as history of overdose, history of substance use disorder, higher opioid dosages (greater than or equal to [≥] 50 morphine milligram equivalents [MME]/day), or concurrent benzodiazepine use, are present (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
-               "type" : "Literal"
-            }
-         }, {
-            "name" : "ReportRecommendation10Text",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "If",
-               "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "Not",
-                     "operand" : {
-                        "type" : "Exists",
-                        "operand" : {
-                           "name" : "ReportUrineDrugScreens",
-                           "type" : "ExpressionRef"
-                        }
-                     }
-                  }
-               },
-               "then" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "**No urine drug screen within the past year**\n\nPatient’s active medications include an opioid. Per CDC guidelines, when prescribing opioids for chronic pain, clinicians should use urine drug testing before starting opioid therapy and consider urine drug testing at least annually to assess for prescribed medications as well as other controlled prescription drugs and illicit drugs (recommendation category: B, evidence type: 4) [CDC Opioid Prescribing Guideline, Recommendation #10](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm).",
-                  "type" : "Literal"
-               },
-               "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "Null"
-                  }
-               }
-            }
-         }, {
-            "name" : "ReportRecommendation11Text",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "If",
-               "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "And",
-                     "operand" : [ {
-                        "type" : "Exists",
-                        "operand" : {
-                           "name" : "ReportOpioidMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "type" : "Exists",
-                        "operand" : {
-                           "name" : "ReportBenzodiazepineMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               },
-               "then" : {
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Per CDC guidelines, avoid prescribing opioid pain medication and benzodiazepines concurrently whenever possible (recommendation category: A, evidence type: 3) [CDC Opioid Prescribing Guideline, Recommendation #11](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)",
-                  "type" : "Literal"
-               },
-               "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "Null"
-                  }
-               }
-            }
-         }, {
-            "name" : "Summary0",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Tuple",
-               "element" : [ {
-                  "name" : "Patient",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "Name",
-                        "value" : {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Concatenate",
-                              "operand" : [ {
-                                 "type" : "Combine",
-                                 "source" : {
-                                    "type" : "Query",
-                                    "source" : [ {
-                                       "alias" : "G",
-                                       "expression" : {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "path" : "name",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "Patient",
-                                                      "type" : "ExpressionRef"
-                                                   }
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "given",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "given",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    } ],
-                                    "relationship" : [ ],
-                                    "return" : {
-                                       "expression" : {
-                                          "path" : "value",
-                                          "scope" : "G",
-                                          "type" : "Property"
-                                       }
-                                    }
-                                 },
-                                 "separator" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : " ",
-                                    "type" : "Literal"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "type" : "Combine",
-                              "source" : {
-                                 "type" : "Query",
-                                 "source" : [ {
-                                    "alias" : "F",
-                                    "expression" : {
-                                       "type" : "Query",
-                                       "source" : [ {
-                                          "alias" : "$this",
-                                          "expression" : {
-                                             "path" : "name",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "Patient",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          }
-                                       } ],
-                                       "where" : {
-                                          "type" : "Not",
-                                          "operand" : {
-                                             "type" : "IsNull",
-                                             "operand" : {
-                                                "path" : "family",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       },
-                                       "return" : {
-                                          "expression" : {
-                                             "path" : "family",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "$this",
-                                                "type" : "AliasRef"
-                                             }
-                                          }
-                                       }
-                                    }
-                                 } ],
-                                 "relationship" : [ ],
-                                 "return" : {
-                                    "expression" : {
-                                       "path" : "value",
-                                       "scope" : "F",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              },
-                              "separator" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "Gender",
-                        "value" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "gender",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "Age",
-                        "value" : {
-                           "precision" : "Year",
-                           "type" : "CalculateAge",
-                           "operand" : {
-                              "path" : "birthDate.value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "MeetsInclusionCriteria",
-                        "value" : {
-                           "name" : "MeetsInclusionCriteria",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "PertinentConditions",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "ConditionsAssociatedWithChronicPain",
-                        "value" : {
-                           "name" : "ReportConditionsAssociatedWithChronicPain",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
-                        "value" : {
-                           "name" : "ReportRiskFactorsForOpioidRelatedHarms",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation8Text",
-                        "value" : {
-                           "name" : "ReportRecommendation8Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "CurrentPertinentTreatments",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "CurrentMME",
-                        "value" : {
-                           "name" : "ReportCurrentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "MostRecentMME",
-                        "value" : {
-                           "name" : "ReportMostRecentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "OpioidMedications",
-                        "value" : {
-                           "name" : "ReportOpioidMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "NonOpioidMedications",
-                        "value" : {
-                           "name" : "ReportNonOpioidMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "BenzodiazepineMedications",
-                        "value" : {
-                           "name" : "ReportBenzodiazepineMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "NaloxoneMedications",
-                        "value" : {
-                           "name" : "ReportNaloxoneMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "SelfReportedTreatmentsFromMyPAIN",
-                        "value" : {
-                           "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation3Text",
-                        "value" : {
-                           "name" : "ReportRecommendation3Text",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation5Text",
-                        "value" : {
-                           "name" : "ReportRecommendation5Text",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation11Text",
-                        "value" : {
-                           "name" : "ReportRecommendation11Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "UrineDrugScreening",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "UrineDrugScreens",
-                        "value" : {
-                           "name" : "ReportUrineDrugScreens",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation10Text",
-                        "value" : {
-                           "name" : "ReportRecommendation10Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "SharedDecisionMaking",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "MyPAINSubmitDate",
-                        "value" : {
-                           "name" : "ReportMyPAINSubmitDate",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "ActivityGoals",
-                        "value" : {
-                           "name" : "ReportActivityGoals",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "ActivityBarriers",
-                        "value" : {
-                           "name" : "ReportActivityBarriers",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "PainLocations",
-                        "value" : {
-                           "name" : "ReportPainLocations",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "PainIntensityAndInterference",
-                        "value" : {
-                           "name" : "ReportPainIntensityAndInterference",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "ResourcesProvidedInMyPAIN",
-                        "value" : {
-                           "name" : "ReportResourcesProvidedInMyPAIN",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Summary1",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Tuple",
-               "element" : [ {
-                  "name" : "Patient",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "Name",
-                        "value" : {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Concatenate",
-                              "operand" : [ {
-                                 "type" : "Combine",
-                                 "source" : {
-                                    "type" : "Query",
-                                    "source" : [ {
-                                       "alias" : "G",
-                                       "expression" : {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "path" : "name",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "Patient",
-                                                      "type" : "ExpressionRef"
-                                                   }
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "given",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "given",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    } ],
-                                    "relationship" : [ ],
-                                    "return" : {
-                                       "expression" : {
-                                          "path" : "value",
-                                          "scope" : "G",
-                                          "type" : "Property"
-                                       }
-                                    }
-                                 },
-                                 "separator" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : " ",
-                                    "type" : "Literal"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "type" : "Combine",
-                              "source" : {
-                                 "type" : "Query",
-                                 "source" : [ {
-                                    "alias" : "F",
-                                    "expression" : {
-                                       "type" : "Query",
-                                       "source" : [ {
-                                          "alias" : "$this",
-                                          "expression" : {
-                                             "path" : "name",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "Patient",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          }
-                                       } ],
-                                       "where" : {
-                                          "type" : "Not",
-                                          "operand" : {
-                                             "type" : "IsNull",
-                                             "operand" : {
-                                                "path" : "family",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       },
-                                       "return" : {
-                                          "expression" : {
-                                             "path" : "family",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "$this",
-                                                "type" : "AliasRef"
-                                             }
-                                          }
-                                       }
-                                    }
-                                 } ],
-                                 "relationship" : [ ],
-                                 "return" : {
-                                    "expression" : {
-                                       "path" : "value",
-                                       "scope" : "F",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              },
-                              "separator" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "Gender",
-                        "value" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "gender",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "Age",
-                        "value" : {
-                           "precision" : "Year",
-                           "type" : "CalculateAge",
-                           "operand" : {
-                              "path" : "birthDate.value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "MeetsInclusionCriteria",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal"
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Summary2",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Tuple",
-               "element" : [ {
-                  "name" : "Patient",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "Name",
-                        "value" : {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Concatenate",
-                              "operand" : [ {
-                                 "type" : "Combine",
-                                 "source" : {
-                                    "type" : "Query",
-                                    "source" : [ {
-                                       "alias" : "G",
-                                       "expression" : {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "path" : "name",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "Patient",
-                                                      "type" : "ExpressionRef"
-                                                   }
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "given",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "given",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    } ],
-                                    "relationship" : [ ],
-                                    "return" : {
-                                       "expression" : {
-                                          "path" : "value",
-                                          "scope" : "G",
-                                          "type" : "Property"
-                                       }
-                                    }
-                                 },
-                                 "separator" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : " ",
-                                    "type" : "Literal"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "type" : "Combine",
-                              "source" : {
-                                 "type" : "Query",
-                                 "source" : [ {
-                                    "alias" : "F",
-                                    "expression" : {
-                                       "type" : "Query",
-                                       "source" : [ {
-                                          "alias" : "$this",
-                                          "expression" : {
-                                             "path" : "name",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "Patient",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          }
-                                       } ],
-                                       "where" : {
-                                          "type" : "Not",
-                                          "operand" : {
-                                             "type" : "IsNull",
-                                             "operand" : {
-                                                "path" : "family",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       },
-                                       "return" : {
-                                          "expression" : {
-                                             "path" : "family",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "$this",
-                                                "type" : "AliasRef"
-                                             }
-                                          }
-                                       }
-                                    }
-                                 } ],
-                                 "relationship" : [ ],
-                                 "return" : {
-                                    "expression" : {
-                                       "path" : "value",
-                                       "scope" : "F",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              },
-                              "separator" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "Gender",
-                        "value" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "gender",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "Age",
-                        "value" : {
-                           "precision" : "Year",
-                           "type" : "CalculateAge",
-                           "operand" : {
-                              "path" : "birthDate.value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "MeetsInclusionCriteria",
-                        "value" : {
-                           "name" : "MeetsInclusionCriteria",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Summary3",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Tuple",
-               "element" : [ {
-                  "name" : "Patient",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "Name",
-                        "value" : {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Concatenate",
-                              "operand" : [ {
-                                 "type" : "Combine",
-                                 "source" : {
-                                    "type" : "Query",
-                                    "source" : [ {
-                                       "alias" : "G",
-                                       "expression" : {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "path" : "name",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "Patient",
-                                                      "type" : "ExpressionRef"
-                                                   }
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "given",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "given",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    } ],
-                                    "relationship" : [ ],
-                                    "return" : {
-                                       "expression" : {
-                                          "path" : "value",
-                                          "scope" : "G",
-                                          "type" : "Property"
-                                       }
-                                    }
-                                 },
-                                 "separator" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : " ",
-                                    "type" : "Literal"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "type" : "Combine",
-                              "source" : {
-                                 "type" : "Query",
-                                 "source" : [ {
-                                    "alias" : "F",
-                                    "expression" : {
-                                       "type" : "Query",
-                                       "source" : [ {
-                                          "alias" : "$this",
-                                          "expression" : {
-                                             "path" : "name",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "Patient",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          }
-                                       } ],
-                                       "where" : {
-                                          "type" : "Not",
-                                          "operand" : {
-                                             "type" : "IsNull",
-                                             "operand" : {
-                                                "path" : "family",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       },
-                                       "return" : {
-                                          "expression" : {
-                                             "path" : "family",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "$this",
-                                                "type" : "AliasRef"
-                                             }
-                                          }
-                                       }
-                                    }
-                                 } ],
-                                 "relationship" : [ ],
-                                 "return" : {
-                                    "expression" : {
-                                       "path" : "value",
-                                       "scope" : "F",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              },
-                              "separator" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "Gender",
-                        "value" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "gender",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "Age",
-                        "value" : {
-                           "precision" : "Year",
-                           "type" : "CalculateAge",
-                           "operand" : {
-                              "path" : "birthDate.value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "MeetsInclusionCriteria",
-                        "value" : {
-                           "name" : "MeetsInclusionCriteria",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "PertinentConditions",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "ConditionsAssociatedWithChronicPain",
-                        "value" : {
-                           "name" : "ReportConditionsAssociatedWithChronicPain",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
-                        "value" : {
-                           "name" : "ReportRiskFactorsForOpioidRelatedHarms",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation8Text",
-                        "value" : {
-                           "name" : "ReportRecommendation8Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Summary4",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Tuple",
-               "element" : [ {
-                  "name" : "Patient",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "Name",
-                        "value" : {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Concatenate",
-                              "operand" : [ {
-                                 "type" : "Combine",
-                                 "source" : {
-                                    "type" : "Query",
-                                    "source" : [ {
-                                       "alias" : "G",
-                                       "expression" : {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "path" : "name",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "Patient",
-                                                      "type" : "ExpressionRef"
-                                                   }
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "given",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "given",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    } ],
-                                    "relationship" : [ ],
-                                    "return" : {
-                                       "expression" : {
-                                          "path" : "value",
-                                          "scope" : "G",
-                                          "type" : "Property"
-                                       }
-                                    }
-                                 },
-                                 "separator" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : " ",
-                                    "type" : "Literal"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "type" : "Combine",
-                              "source" : {
-                                 "type" : "Query",
-                                 "source" : [ {
-                                    "alias" : "F",
-                                    "expression" : {
-                                       "type" : "Query",
-                                       "source" : [ {
-                                          "alias" : "$this",
-                                          "expression" : {
-                                             "path" : "name",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "Patient",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          }
-                                       } ],
-                                       "where" : {
-                                          "type" : "Not",
-                                          "operand" : {
-                                             "type" : "IsNull",
-                                             "operand" : {
-                                                "path" : "family",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       },
-                                       "return" : {
-                                          "expression" : {
-                                             "path" : "family",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "$this",
-                                                "type" : "AliasRef"
-                                             }
-                                          }
-                                       }
-                                    }
-                                 } ],
-                                 "relationship" : [ ],
-                                 "return" : {
-                                    "expression" : {
-                                       "path" : "value",
-                                       "scope" : "F",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              },
-                              "separator" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "Gender",
-                        "value" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "gender",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "Age",
-                        "value" : {
-                           "precision" : "Year",
-                           "type" : "CalculateAge",
-                           "operand" : {
-                              "path" : "birthDate.value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "MeetsInclusionCriteria",
-                        "value" : {
-                           "name" : "MeetsInclusionCriteria",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "PertinentConditions",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "ConditionsAssociatedWithChronicPain",
-                        "value" : {
-                           "name" : "ReportConditionsAssociatedWithChronicPain",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
-                        "value" : {
-                           "name" : "ReportRiskFactorsForOpioidRelatedHarms",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation8Text",
-                        "value" : {
-                           "name" : "ReportRecommendation8Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "CurrentPertinentTreatments",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "CurrentMME",
-                        "value" : {
-                           "name" : "ReportCurrentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "MostRecentMME",
-                        "value" : {
-                           "name" : "ReportMostRecentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "OpioidMedications",
-                        "value" : {
-                           "name" : "ReportOpioidMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "NonOpioidMedications",
-                        "value" : {
-                           "name" : "ReportNonOpioidMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "BenzodiazepineMedications",
-                        "value" : {
-                           "name" : "ReportBenzodiazepineMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "NaloxoneMedications",
-                        "value" : {
-                           "name" : "ReportNaloxoneMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "SelfReportedTreatmentsFromMyPAIN",
-                        "value" : {
-                           "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation3Text",
-                        "value" : {
-                           "name" : "ReportRecommendation3Text",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation5Text",
-                        "value" : {
-                           "name" : "ReportRecommendation5Text",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation11Text",
-                        "value" : {
-                           "name" : "ReportRecommendation11Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Summary5",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Tuple",
-               "element" : [ {
-                  "name" : "Patient",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "Name",
-                        "value" : {
-                           "type" : "Concatenate",
-                           "operand" : [ {
-                              "type" : "Concatenate",
-                              "operand" : [ {
-                                 "type" : "Combine",
-                                 "source" : {
-                                    "type" : "Query",
-                                    "source" : [ {
-                                       "alias" : "G",
-                                       "expression" : {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "path" : "name",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "Patient",
-                                                      "type" : "ExpressionRef"
-                                                   }
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "given",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "given",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }
-                                    } ],
-                                    "relationship" : [ ],
-                                    "return" : {
-                                       "expression" : {
-                                          "path" : "value",
-                                          "scope" : "G",
-                                          "type" : "Property"
-                                       }
-                                    }
-                                 },
-                                 "separator" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : " ",
-                                    "type" : "Literal"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "type" : "Combine",
-                              "source" : {
-                                 "type" : "Query",
-                                 "source" : [ {
-                                    "alias" : "F",
-                                    "expression" : {
-                                       "type" : "Query",
-                                       "source" : [ {
-                                          "alias" : "$this",
-                                          "expression" : {
-                                             "path" : "name",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "Patient",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          }
-                                       } ],
-                                       "where" : {
-                                          "type" : "Not",
-                                          "operand" : {
-                                             "type" : "IsNull",
-                                             "operand" : {
-                                                "path" : "family",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       },
-                                       "return" : {
-                                          "expression" : {
-                                             "path" : "family",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "name" : "$this",
-                                                "type" : "AliasRef"
-                                             }
-                                          }
-                                       }
-                                    }
-                                 } ],
-                                 "relationship" : [ ],
-                                 "return" : {
-                                    "expression" : {
-                                       "path" : "value",
-                                       "scope" : "F",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              },
-                              "separator" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "Gender",
-                        "value" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "gender",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "Age",
-                        "value" : {
-                           "precision" : "Year",
-                           "type" : "CalculateAge",
-                           "operand" : {
-                              "path" : "birthDate.value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "MeetsInclusionCriteria",
-                        "value" : {
-                           "name" : "MeetsInclusionCriteria",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "PertinentConditions",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "ConditionsAssociatedWithChronicPain",
-                        "value" : {
-                           "name" : "ReportConditionsAssociatedWithChronicPain",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
-                        "value" : {
-                           "name" : "ReportRiskFactorsForOpioidRelatedHarms",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation8Text",
-                        "value" : {
-                           "name" : "ReportRecommendation8Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "CurrentPertinentTreatments",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "CurrentMME",
-                        "value" : {
-                           "name" : "ReportCurrentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "MostRecentMME",
-                        "value" : {
-                           "name" : "ReportMostRecentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "OpioidMedications",
-                        "value" : {
-                           "name" : "ReportOpioidMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "NonOpioidMedications",
-                        "value" : {
-                           "name" : "ReportNonOpioidMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "BenzodiazepineMedications",
-                        "value" : {
-                           "name" : "ReportBenzodiazepineMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "NaloxoneMedications",
-                        "value" : {
-                           "name" : "ReportNaloxoneMedications",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "SelfReportedTreatmentsFromMyPAIN",
-                        "value" : {
-                           "name" : "ReportSelfReportedTreatmentsFromMyPAIN",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation3Text",
-                        "value" : {
-                           "name" : "ReportRecommendation3Text",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation5Text",
-                        "value" : {
-                           "name" : "ReportRecommendation5Text",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation11Text",
-                        "value" : {
-                           "name" : "ReportRecommendation11Text",
-                           "type" : "ExpressionRef"
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "UrineDrugScreening",
-                  "value" : {
-                     "type" : "Tuple",
-                     "element" : [ {
-                        "name" : "UrineDrugScreens",
-                        "value" : {
-                           "name" : "ReportUrineDrugScreens",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "Recommendation10Text",
-                        "value" : {
-                           "name" : "ReportRecommendation10Text",
                            "type" : "ExpressionRef"
                         }
                      } ]

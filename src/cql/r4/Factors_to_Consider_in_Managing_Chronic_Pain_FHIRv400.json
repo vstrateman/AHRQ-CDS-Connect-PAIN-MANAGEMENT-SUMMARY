@@ -3527,14 +3527,26 @@
                         }, {
                            "name" : "Onset",
                            "value" : {
-                              "strict" : false,
-                              "type" : "As",
+                              "type" : "ToString",
                               "operand" : {
-                                 "type" : "Null"
-                              },
-                              "asTypeSpecifier" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}String",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "Add",
+                                 "operand" : [ {
+                                    "name" : "ToDate",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "birthDate",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "Patient",
+                                          "type" : "ExpressionRef"
+                                       }
+                                    } ]
+                                 }, {
+                                    "value" : 65,
+                                    "unit" : "years",
+                                    "type" : "Quantity"
+                                 } ]
                               }
                            }
                         }, {
