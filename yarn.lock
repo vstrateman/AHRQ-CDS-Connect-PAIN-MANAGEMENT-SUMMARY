@@ -3711,13 +3711,6 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
-cql-exec-fhir@^1.3.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/cql-exec-fhir/-/cql-exec-fhir-1.4.1.tgz#b261ea1479c26850a5badc6a6994fdec38456243"
-  integrity sha512-OvfPDS7SSZs5K4JoyM1BkCn6Eb3SbzxyRXUzmhorEqorh0oaoztBREL9PrXEkBS/2yHwozh8qOW2NGhuE136ug==
-  dependencies:
-    xml2js "~0.4.19"
-
 cql-exec-vsac@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/cql-exec-vsac/-/cql-exec-vsac-1.1.1.tgz#2ba2e9cae923f896292c86148fe6668ecc0afef4"
@@ -12536,7 +12529,7 @@ xml-name-validator@^3.0.0:
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
   integrity sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==
 
-xml2js@^0.4.23, xml2js@~0.4.19:
+xml2js@^0.4.23:
   version "0.4.23"
   resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.23.tgz#a0c69516752421eb2ac758ee4d4ccf58843eac66"
   integrity sha512-ySPiMjM0+pLDftHgXY4By0uswI3SPKLDw/i3UXbnO8M/p28zqexCUoPmQFrYD+/1BzhGJSs2i1ERWKJAtiLrug==

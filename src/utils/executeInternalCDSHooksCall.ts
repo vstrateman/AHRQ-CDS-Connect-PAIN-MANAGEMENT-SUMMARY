@@ -10,7 +10,7 @@ import CDS_Commons_Config from '../cql/r4/cdc_reference/json/OpioidCDSCommonConf
 import CDS_Routines from '../cql/r4/cdc_reference/json/OpioidCDSRoutines.json';
 import rec10PatientView from '../cql/r4/cdc_reference/json/OpioidCDSREC10PatientView.json';
 import rec11PatientView from '../cql/r4/cdc_reference/json/OpioidCDSREC11PatientView.json';
-import cqlfhir from "cql-exec-fhir";
+import cqlfhir from "../helpers/cql-exec-fhir";
 
 export default function executeInternalCDSCall(recommendationNumber, collector) {
     let client, release, cdsLibrary;
@@ -72,7 +72,7 @@ export default function executeInternalCDSCall(recommendationNumber, collector) 
 function getPatientSource(release) {
     switch (release) {
         case 4:
-            return cqlfhir.PatientSource.FHIRv401();
+            return cqlfhir.PatientSource['FHIRv401()'];
         default:
             throw new Error('Only FHIR R4 servers are supported');
     }
