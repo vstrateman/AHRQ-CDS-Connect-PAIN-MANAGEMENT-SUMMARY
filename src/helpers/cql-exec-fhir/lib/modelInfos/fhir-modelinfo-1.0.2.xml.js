@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; // eslint-disable-line
 
 // This file exists so that these FHIR modelinfos can also be used in a browser where Node's 'fs' module isn't
 // available.

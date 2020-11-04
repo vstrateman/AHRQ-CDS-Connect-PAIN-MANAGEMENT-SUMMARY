@@ -1,3 +1,3 @@
-'use strict';
+'use strict'; // eslint-disable-line
 
 module.exports = require('./fhir');

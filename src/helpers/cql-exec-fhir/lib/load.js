@@ -1,5 +1,3 @@
-'use strict';
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -182,7 +180,7 @@ var ClassInfo = function () {
     this._name = xml.$.name;
     this._identifier = xml.$.identifier;
     this._label = xml.$.label;
-    this._isRetrievable = xml.$.retrievable == 'true';
+    this._isRetrievable = xml.$.retrievable == 'true'; // eslint-disable-line
     this._primaryCodePath = xml.$.primaryCodePath;
     this._baseTypeSpecifier = getTypeSpecifierFromXML(xml, 'base');
     this._modelInfo = modelInfo;
@@ -265,7 +263,7 @@ var ClassInfo = function () {
             var name = el.slice(0, i);
             var potential = this.findElement(name, false);
             if (potential != null && potential.typeSpecifier && potential.typeSpecifier.isChoice) {
-              var _ret = function () {
+              var _ret = function () { // eslint-disable-line no-loop-func
                 var explicitType = el.slice(i);
                 var typeMatchesChoice = potential.typeSpecifier.choices.find(function (c) {
                   return c.name === explicitType || c.name === '' + explicitType[0].toLowerCase() + explicitType.slice(1);
@@ -329,7 +327,7 @@ var ClassElement = function () {
 
     this._name = xml.$.name;
     this._typeSpecifier = getTypeSpecifierFromXML(xml, '', 'element');
-    this._isProhibited = xml.$.prohibited == 'true';
+    this._isProhibited = xml.$.prohibited == 'true'; // eslint-disable-line
     this._isOneBased = xml.$.oneBased === 'true';
     this._modelInfo = modelInfo;
   }

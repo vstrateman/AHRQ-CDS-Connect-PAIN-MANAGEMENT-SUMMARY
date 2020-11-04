@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict'; // eslint-disable-line
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -35,7 +35,7 @@ var FHIRWrapper = function () {
       // If the FHIR resource specifies a type and a target type is specified, verify they are compatible
       if (fhirResourceType && fhirJson.resourceType) {
         var currentClass = this._modelInfo.findClass(fhirJson.resourceType);
-        if (!this._typeCastIsAllowed(currentClass, targetClass)) throw 'Incompatible types: FHIR resourceType is ' + fhirJson.resourceType + ' which cannot be cast as ' + fhirResourceType;
+        if (!this._typeCastIsAllowed(currentClass, targetClass)) throw 'Incompatible types: FHIR resourceType is ' + fhirJson.resourceType + ' which cannot be cast as ' + fhirResourceType; // eslint-disable-line no-throw-literal
       }
 
       return new FHIRObject(fhirJson, targetClass, this._modelInfo);
@@ -511,7 +511,7 @@ function toSystemObject(data, name) {
     return data;
   }
 
-  switch (name) {
+  switch (name) { // eslint-disable-line
     case 'Boolean':
     case 'Decimal':
     case 'Integer':
