@@ -1,0 +1,2550 @@
+{
+  "5c41cecf-cf81-434f-9da7-e24e5a99dbc2": {
+    "Patient": {
+      "name": [
+        {
+          "family": {
+            "value": "Jackson"
+          },
+          "given": [
+            {
+              "value": "Brenda"
+            }
+          ]
+        }
+      ],
+      "gender": {
+        "value": "female"
+      },
+      "birthDate": {
+        "value": "1956-10-14"
+      },
+      "text": {
+        "status": {
+          "value": "generated"
+        }
+      },
+      "id": {
+        "value": "5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+      },
+      "meta": {
+        "versionId": {
+          "value": "1"
+        },
+        "lastUpdated": {
+          "value": "2020-10-09T19:24:07.852+00:00"
+        },
+        "source": {
+          "value": "#ezhMKLQIvDKZUdv4"
+        }
+      }
+    },
+    "Is18orOlder": true,
+    "ConditionsAssociatedWithChronicPain": [
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://snomed.info/sct"
+              },
+              "code": {
+                "value": "203082005"
+              },
+              "display": {
+                "value": "Fibromyalgia (disorder)"
+              }
+            }
+          ],
+          "text": {
+            "value": "Fibromyalgia (disorder)"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2013-04-05T16:00:00.000+00:00"
+        },
+        "recordedDate": {
+          "value": "2013-04-05T00:00:00.000+00:00"
+        },
+        "id": {
+          "value": "e3188656-8ebe-494b-a15b-39e6497ab147"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://hl7.org/fhir/sid/icd-10-cm"
+              },
+              "code": {
+                "value": "M54.5"
+              },
+              "display": {
+                "value": "Low back pain"
+              }
+            }
+          ],
+          "text": {
+            "value": "Low back pain"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2008-11-12T16:00:00.000+00:00"
+        },
+        "recordedDate": {
+          "value": "2008-11-12T00:00:00.000+00:00"
+        },
+        "id": {
+          "value": "20f61c6d-b588-41c0-af09-8280524aa2d0"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://snomed.info/sct"
+              },
+              "code": {
+                "value": "202725007"
+              },
+              "display": {
+                "value": "Lumbar post-laminectomy syndrome (disorder)"
+              }
+            }
+          ],
+          "text": {
+            "value": "Lumbar post-laminectomy syndrome (disorder)"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2012-02-01T16:00:00.000+00:00"
+        },
+        "recordedDate": {
+          "value": "2012-02-16T00:00:00.000+00:00"
+        },
+        "id": {
+          "value": "0ed2fb39-daae-4a1f-9e6f-8416670f3b16"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      }
+    ],
+    "HasConditionAssociatedWithChronicPain": true,
+    "HasRecentOpioidPainMedication": false,
+    "HasRecentAdjuvantAnalgesicMedication": false,
+    "MeetsInclusionCriteria": true,
+    "ReportConditionsAssociatedWithChronicPain": [
+      {
+        "Name": "Fibromyalgia (disorder)",
+        "Status": "active",
+        "Onset": "2013-04-05T16:00:00.000+00:00",
+        "DateRecorded": "2013-04-05T00:00:00.000+00:00",
+        "_id": 4
+      },
+      {
+        "Name": "Lumbar post-laminectomy syndrome (disorder)",
+        "Status": "active",
+        "Onset": "2012-02-01T16:00:00.000+00:00",
+        "DateRecorded": "2012-02-16T00:00:00.000+00:00",
+        "_id": 5
+      },
+      {
+        "Name": "Low back pain",
+        "Status": "active",
+        "Onset": "2008-11-12T16:00:00.000+00:00",
+        "DateRecorded": "2008-11-12T00:00:00.000+00:00",
+        "_id": 6
+      }
+    ],
+    "DepressionConditions": [
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://snomed.info/sct"
+              },
+              "code": {
+                "value": "832007"
+              },
+              "display": {
+                "value": "Moderate major depression (disorder)"
+              }
+            }
+          ],
+          "text": {
+            "value": "Moderate major depression (disorder)"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2016-12-02T16:00:00.000+00:00"
+        },
+        "id": {
+          "value": "7283d007-f805-405d-9edc-7ac7e045e468"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      }
+    ],
+    "AnxietyConditions": [],
+    "SubstanceUseDisorderConditions": [],
+    "SuicideAttemptConditions": [],
+    "SleepDisorderedBreathingConditions": [],
+    "RenalDysfunctionConditions": [],
+    "HepaticDysfunctionConditions": [],
+    "PregnancyConditions": [],
+    "PregnancyObservations": [],
+    "MostRecentPregnancyObservation": null,
+    "MostRecentPregnancyObservationIsPositive": false,
+    "Is65orOlder": false,
+    "ConditionRiskFactorsForOpioidRelatedHarms": [
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://snomed.info/sct"
+              },
+              "code": {
+                "value": "832007"
+              },
+              "display": {
+                "value": "Moderate major depression (disorder)"
+              }
+            }
+          ],
+          "text": {
+            "value": "Moderate major depression (disorder)"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2016-12-02T16:00:00.000+00:00"
+        },
+        "id": {
+          "value": "7283d007-f805-405d-9edc-7ac7e045e468"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      }
+    ],
+    "EncounterRiskFactorsForOpioidRelatedHarms": [],
+    "ReportConditionRiskFactorsForOpioidRelatedHarms": [
+      {
+        "Name": "Moderate major depression (disorder)",
+        "Status": "active",
+        "Onset": "2016-12-02T16:00:00.000+00:00",
+        "DateRecorded": null,
+        "Abatement": null,
+        "Visit": null,
+        "_id": 7
+      }
+    ],
+    "ReportEncounterRiskFactorsForOpioidRelatedHarms": [],
+    "ReportMostRecentPositivePregnancyObservation": [
+      null
+    ],
+    "ReportOlderThan65": [
+      null
+    ],
+    "ReportRiskFactorsForOpioidRelatedHarms": [
+      null,
+      {
+        "Name": "Moderate major depression (disorder)",
+        "Status": "active",
+        "Onset": "2016-12-02T16:00:00.000+00:00",
+        "DateRecorded": null,
+        "Abatement": null,
+        "Visit": null,
+        "_id": 7
+      }
+    ],
+    "NumericPainIntensityAssessments": [],
+    "ReportNumericPainIntensityAssessments": [],
+    "PainEnjoymentGeneralActivityAssessments": [],
+    "ReportPainEnjoymentGeneralActivityAssessments": [],
+    "STarTBackAssessments": [],
+    "ReportSTarTBackAssessments": [],
+    "OpioidMedicationRequests": [
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-04-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "47ad6f27-a5cf-4f82-8e9e-5c63b2b33325"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-01-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "56e7d126-4242-4ec5-b1b5-00ab059cd60e"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-04-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "57de612f-2429-4663-a2f6-e09f43182231"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-01-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "9c6bc0da-f516-4b31-bfef-7515cf6c0321"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      }
+    ],
+    "OpioidMedicationStatements": [],
+    "ReportOpioidMedicationRequests": [
+      {
+        "Type": "Request",
+        "Name": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet",
+        "Start": "2019-04-15T16:02:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 8
+      },
+      {
+        "Type": "Request",
+        "Name": "Oxycodone Hydrochloride 10 MG Oral Capsule",
+        "Start": "2019-04-15T16:01:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 9
+      },
+      {
+        "Type": "Request",
+        "Name": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet",
+        "Start": "2019-01-15T16:02:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 10
+      },
+      {
+        "Type": "Request",
+        "Name": "Oxycodone Hydrochloride 10 MG Oral Capsule",
+        "Start": "2019-01-15T16:01:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 11
+      }
+    ],
+    "ReportOpioidMedicationStatements": [],
+    "ReportOpioidMedications": [
+      {
+        "Type": "Request",
+        "Name": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet",
+        "Start": "2019-04-15T16:02:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 8
+      },
+      {
+        "Type": "Request",
+        "Name": "Oxycodone Hydrochloride 10 MG Oral Capsule",
+        "Start": "2019-04-15T16:01:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 9
+      },
+      {
+        "Type": "Request",
+        "Name": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet",
+        "Start": "2019-01-15T16:02:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 10
+      },
+      {
+        "Type": "Request",
+        "Name": "Oxycodone Hydrochloride 10 MG Oral Capsule",
+        "Start": "2019-01-15T16:01:00.000+00:00",
+        "End": null,
+        "Status": "active",
+        "_id": 11
+      }
+    ],
+    "NonOpioidMedicationRequests": [],
+    "NonOpioidMedicationStatements": [],
+    "ReportNonOpioidMedicationRequests": [],
+    "ReportNonOpioidMedicationStatements": [],
+    "ReportNonOpioidMedications": [],
+    "NonPharmacologicTreatmentProcedures": [],
+    "ReportNonPharmacologicTreatmentProcedures": [],
+    "NonPharmacologicTreatmentServiceRequests": [],
+    "ReportNonPharmacologicTreatmentServiceRequests": [],
+    "ReportNonPharmacologicTreatments": [],
+    "StoolSoftenersAndLaxativesRequests": [],
+    "StoolSoftenersAndLaxativesStatements": [],
+    "ReportStoolSoftenersAndLaxativesRequests": [],
+    "ReportStoolSoftenersAndLaxativesStatements": [],
+    "ReportStoolSoftenersAndLaxatives": [],
+    "MostRecentMME": null,
+    "ReportMostRecentMME": [
+      null
+    ],
+    "ActiveOpioidMedications": [
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-04-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "47ad6f27-a5cf-4f82-8e9e-5c63b2b33325"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-01-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "56e7d126-4242-4ec5-b1b5-00ab059cd60e"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-10-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "47bc1d05-1041-4691-9039-2a6e258d2185"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-07-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "246c61e8-4846-4b9f-b10c-6dfe9d596558"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-04-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "929a914c-16e8-4994-936a-3f1f43ddbfec"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-01-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "0a196165-ff44-40d7-bb66-b542e8e6ebc3"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2017-10-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "c60c2d6d-e19b-4cd2-93f1-6d1cc29efd72"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2017-07-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "5bad6780-b32e-48cc-a9e5-f8e1202fcb41"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2017-04-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "c16c7b91-0545-4e56-b7fa-323a017ee0c5"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2017-01-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "d37ba2f4-048f-4160-86ae-8846579652f5"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049593"
+              },
+              "display": {
+                "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+              }
+            }
+          ],
+          "text": {
+            "value": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2016-10-15T16:02:00.000+00:00"
+        },
+        "id": {
+          "value": "23ac598d-d687-4c3b-8845-9f529e500acf"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-04-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "57de612f-2429-4663-a2f6-e09f43182231"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2019-01-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "9c6bc0da-f516-4b31-bfef-7515cf6c0321"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-10-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "20f04037-b4ed-46ac-9222-c11f1e54580f"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-07-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "3e14d51b-58d8-4e7a-b9e3-26893e5604d2"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-04-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "7f4125ed-083c-4071-b02f-eff58f209dce"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2018-01-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "bf8db44f-735a-4624-8e5f-d0b583455c8c"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2017-10-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "ffc8eb65-0b29-4029-85b4-ab4df2a43360"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2017-07-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "fdb413e1-6c40-4ce4-b9e5-8654daf6cc4f"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "status": {
+          "value": "active"
+        },
+        "intent": {
+          "value": "order"
+        },
+        "doNotPerform": {
+          "value": false
+        },
+        "medication": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://www.nlm.nih.gov/research/umls/rxnorm"
+              },
+              "code": {
+                "value": "1049717"
+              },
+              "display": {
+                "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+              }
+            }
+          ],
+          "text": {
+            "value": "Oxycodone Hydrochloride 10 MG Oral Capsule"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "authoredOn": {
+          "value": "2017-04-15T16:01:00.000+00:00"
+        },
+        "id": {
+          "value": "e5fd7923-1317-47ad-a27e-53a8c1d5bc2a"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      }
+    ],
+    "CurrentMME": null,
+    "ReportCurrentMME": [
+      null
+    ],
+    "BenzodiazepineMedicationRequests": [],
+    "BenzodiazepineMedicationStatements": [],
+    "ReportBenzodiazepineMedicationRequests": [],
+    "ReportBenzodiazepineMedicationStatements": [],
+    "ReportBenzodiazepineMedications": [],
+    "NaloxoneMedicationRequests": [],
+    "NaloxoneMedicationStatements": [],
+    "ReportNaloxoneMedicationRequests": [],
+    "ReportNaloxoneMedicationStatements": [],
+    "ReportNaloxoneMedications": [],
+    "RiskScreeningsRelevantToPainManagement": [
+      {
+        "status": {
+          "value": "final"
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": {
+                  "value": "http://hl7.org/fhir/observation-category"
+                },
+                "code": {
+                  "value": "survey"
+                }
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://loinc.org"
+              },
+              "code": {
+                "value": "44261-6"
+              },
+              "display": {
+                "value": "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]"
+              }
+            }
+          ],
+          "text": {
+            "value": "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "issued": {
+          "value": "2020-10-02T16:00:00.000+00:00"
+        },
+        "value": {
+          "value": {
+            "value": 18
+          }
+        },
+        "interpretation": [
+          {
+            "text": {
+              "value": "Moderately severe depression"
+            }
+          }
+        ],
+        "id": {
+          "value": "6cfc5a92-f73d-4079-b83a-8a5580acdf9b"
+        },
+        "meta": {
+          "versionId": {
+            "value": "2"
+          },
+          "lastUpdated": {
+            "value": "2020-10-21T14:47:53.542+00:00"
+          },
+          "source": {
+            "value": "#pPQk9NLCj4fuhTCQ"
+          }
+        }
+      }
+    ],
+    "ReportRiskScreeningsRelevantToPainManagement": [
+      {
+        "Name": "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] [Range: 0-27]",
+        "Score": "18",
+        "Interpretation": "Moderately severe depression",
+        "Date": "2020-10-02T16:00:00.000+00:00",
+        "_id": 13
+      }
+    ],
+    "RequestsAndResponses": [
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://snomed.info/sct"
+              },
+              "code": {
+                "value": "203082005"
+              },
+              "display": {
+                "value": "Fibromyalgia (disorder)"
+              }
+            }
+          ],
+          "text": {
+            "value": "Fibromyalgia (disorder)"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2013-04-05T16:00:00.000+00:00"
+        },
+        "recordedDate": {
+          "value": "2013-04-05T00:00:00.000+00:00"
+        },
+        "id": {
+          "value": "e3188656-8ebe-494b-a15b-39e6497ab147"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://hl7.org/fhir/sid/icd-10-cm"
+              },
+              "code": {
+                "value": "M54.5"
+              },
+              "display": {
+                "value": "Low back pain"
+              }
+            }
+          ],
+          "text": {
+            "value": "Low back pain"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2008-11-12T16:00:00.000+00:00"
+        },
+        "recordedDate": {
+          "value": "2008-11-12T00:00:00.000+00:00"
+        },
+        "id": {
+          "value": "20f61c6d-b588-41c0-af09-8280524aa2d0"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      },
+      {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+              },
+              "code": {
+                "value": "active"
+              },
+              "display": {
+                "value": "Active"
+              }
+            }
+          ],
+          "text": {
+            "value": "Active"
+          }
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+              },
+              "code": {
+                "value": "confirmed"
+              },
+              "display": {
+                "value": "Confirmed"
+              }
+            }
+          ],
+          "text": {
+            "value": "Confirmed"
+          }
+        },
+        "code": {
+          "coding": [
+            {
+              "system": {
+                "value": "http://snomed.info/sct"
+              },
+              "code": {
+                "value": "202725007"
+              },
+              "display": {
+                "value": "Lumbar post-laminectomy syndrome (disorder)"
+              }
+            }
+          ],
+          "text": {
+            "value": "Lumbar post-laminectomy syndrome (disorder)"
+          }
+        },
+        "subject": {
+          "reference": {
+            "value": "Patient/5c41cecf-cf81-434f-9da7-e24e5a99dbc2"
+          }
+        },
+        "onset": {
+          "value": "2012-02-01T16:00:00.000+00:00"
+        },
+        "recordedDate": {
+          "value": "2012-02-16T00:00:00.000+00:00"
+        },
+        "id": {
+          "value": "0ed2fb39-daae-4a1f-9e6f-8416670f3b16"
+        },
+        "meta": {
+          "versionId": {
+            "value": "1"
+          },
+          "lastUpdated": {
+            "value": "2020-10-20T21:04:13.015+00:00"
+          },
+          "source": {
+            "value": "#I5hzkhOVzaMYjLgH"
+          }
+        }
+      }
+    ],
+    "ReportRequestsAndResponses": [
+      {
+        "Name": "Fibromyalgia (disorder)",
+        "Status": "active",
+        "Onset": "2013-04-05T16:00:00.000+00:00",
+        "DateRecorded": "2013-04-05T00:00:00.000+00:00",
+        "_id": 1
+      },
+      {
+        "Name": "Lumbar post-laminectomy syndrome (disorder)",
+        "Status": "active",
+        "Onset": "2012-02-01T16:00:00.000+00:00",
+        "DateRecorded": "2012-02-16T00:00:00.000+00:00",
+        "_id": 2
+      },
+      {
+        "Name": "Low back pain",
+        "Status": "active",
+        "Onset": "2008-11-12T16:00:00.000+00:00",
+        "DateRecorded": "2008-11-12T00:00:00.000+00:00",
+        "_id": 3
+      }
+    ],
+    "QuestionnaireObservations": [],
+    "ReportQuestionnaireObservations": [],
+    "Summary": {
+      "Patient": {
+        "Name": "Brenda Jackson",
+        "Gender": "female",
+        "Age": 64,
+        "MeetsInclusionCriteria": true
+      },
+      "CDSHooksAssessment": {
+        "RequestsAndResponses": [
+          {
+            "Name": "Fibromyalgia (disorder)",
+            "Status": "active",
+            "Onset": "2013-04-05T16:00:00.000+00:00",
+            "DateRecorded": "2013-04-05T00:00:00.000+00:00",
+            "_id": 1
+          },
+          {
+            "Name": "Lumbar post-laminectomy syndrome (disorder)",
+            "Status": "active",
+            "Onset": "2012-02-01T16:00:00.000+00:00",
+            "DateRecorded": "2012-02-16T00:00:00.000+00:00",
+            "_id": 2
+          },
+          {
+            "Name": "Low back pain",
+            "Status": "active",
+            "Onset": "2008-11-12T16:00:00.000+00:00",
+            "DateRecorded": "2008-11-12T00:00:00.000+00:00",
+            "_id": 3
+          }
+        ]
+      },
+      "UrineDrugScreening": {
+        "UrineDrugScreens": [
+          {
+            "Name": "Amphetamine",
+            "Result": "2500 ng/mL",
+            "Interpretation": "Negative",
+            "Date": "2020-06-01T16:00:00.000+00:00",
+            "_id": 12
+          },
+          {
+            "Name": "Amphetamine",
+            "Result": "2500 ng/mL",
+            "Interpretation": "Presumed Positive",
+            "Date": "2020-10-15T16:00:00.000+00:00",
+            "_id": 12
+          },
+          {
+            "Name": "Opiates [Presence] in Urine by Screen method",
+            "Result": "2500 ng/mL",
+            "Interpretation": "Negative",
+            "Date": "2020-10-15T16:00:00.000+00:00",
+            "_id": 12
+          },
+          {
+            "Name": "Opiates [Presence] in Urine by Screen method",
+            "Result": "2500 ng/mL",
+            "Interpretation": "Negative",
+            "Date": "2020-06-06T16:00:00.000+00:00",
+            "_id": 12
+          }
+        ],
+        "Recommendation10Text": ""
+      },
+      "SharedDecisionMaking": {
+        "MyPAINSubmitDate": "2020-10-21T13:52:02",
+        "ActivityGoals": "These are my goals for a pain-free environment.  Get up every morning and have a great day with no back spasms and no hip pain and no aches and pains throughout my whole body.",
+        "ActivityBarriers": "My barriers to a pain free life are 1.  It is impossible. 2. I am too lazy to exercise.  3. I am overweight.  4. I am too old to change now.",
+        "PainLocations": [
+            {
+                "Location": "What type of HEAD pain?",
+                "PainYesNo": true,
+                "Description": "Stabbing"
+            },
+            {
+                "Location": "What type of HIPS pain?",
+                "PainYesNo": true,
+                "Description": "Tingling"
+            },
+            {
+                "Location": "What type of UPPER LEGS pain?",
+                "PainYesNo": true,
+                "Description": "Prickling"
+            },
+            {
+                "Location": "What type of KNEES pain?",
+                "PainYesNo": true,
+                "Description": "Throbbing"
+            },
+            {
+                "Location": "What type of LOWER LEGS pain?",
+                "PainYesNo": true,
+                "Description": "Stabbing"
+            },
+            {
+                "Location": "What type of FEET pain?",
+                "PainYesNo": true,
+                "Description": "Burning"
+            },
+            {
+                "Location": "What type of EVERYWHERE pain?",
+                "PainYesNo": true,
+                "Description": "Aching"
+            },
+            {
+                "Location": "Other, please describe",
+                "PainYesNo": true,
+                "Description": "pain location other"
+            },
+            {
+                "Location": "What type of NECK pain?",
+                "PainYesNo": true,
+                "Description": "Burning"
+            },
+            {
+                "Location": "What type of SHOULDERS pain?",
+                "PainYesNo": true,
+                "Description": "Aching"
+            },
+            {
+                "Location": "What type of ARMS pain?",
+                "PainYesNo": true,
+                "Description": "Tingling"
+            },
+            {
+                "Location": "What type of UPPER BACK pain?",
+                "PainYesNo": true,
+                "Description": "Prickling"
+            },
+            {
+                "Location": "What type of LOWER BACK pain?",
+                "PainYesNo": true,
+                "Description": "Throbbing"
+            },
+            {
+                "Location": "What type of HANDS pain?",
+                "PainYesNo": true,
+                "Description": "Stabbing"
+            },
+            {
+                "Location": "What type of ABDOMEN pain?",
+                "PainYesNo": true,
+                "Description": "Burning"
+            },
+            {
+                "Location": "What type of PELVIS pain?",
+                "PainYesNo": true,
+                "Description": "Aching"
+            }
+        ],
+        "PainIntensityAndInterference": [
+            {
+                "Question": "How intense was your pain at its worst?",
+                "Response": "Had no pain"
+            },
+            {
+                "Question": "How intense was your average pain?",
+                "Response": "Mild"
+            },
+            {
+                "Question": "What is your level of pain right now?",
+                "Response": "Moderate"
+            },
+            {
+                "Question": "How much did pain interfere with your day to day activities?",
+                "Response": "Not at all"
+            },
+            {
+                "Question": "How much did pain interfere with your work around the home?",
+                "Response": "A little bit"
+            },
+            {
+                "Question": "How much did pain interfere with your ability to participate in social activities?",
+                "Response": "Somewhat"
+            },
+            {
+                "Question": "How much did pain interfere with your household chores?",
+                "Response": "Quite a bit"
+            }
+        ],
+        "ResourcesProvidedInMyPAIN": [
+            {
+                "Resource": "US Pain Foundation website",
+                "ResourceUrl": "https://uspainfoundation.org/living-with-pain/",
+                "ViewedOn": "2020-10-21T13:52:02-06:00"
+            },
+            {
+                "Resource": "ACPA four flat tires video",
+                "ResourceUrl": "https://www.youtube.com/embed/QWcr9J3MLfo",
+                "ViewedOn": "2020-10-21T13:52:02-06:00"
+            }
+        ]
+    },
+      "PertinentConditions": {
+        "ConditionsAssociatedWithChronicPain": [
+          {
+            "Name": "Fibromyalgia (disorder)",
+            "Status": "active",
+            "Onset": "2013-04-05T16:00:00.000+00:00",
+            "DateRecorded": "2013-04-05T00:00:00.000+00:00",
+            "_id": 4
+          },
+          {
+            "Name": "Lumbar post-laminectomy syndrome (disorder)",
+            "Status": "active",
+            "Onset": "2012-02-01T16:00:00.000+00:00",
+            "DateRecorded": "2012-02-16T00:00:00.000+00:00",
+            "_id": 5
+          },
+          {
+            "Name": "Low back pain",
+            "Status": "active",
+            "Onset": "2008-11-12T16:00:00.000+00:00",
+            "DateRecorded": "2008-11-12T00:00:00.000+00:00",
+            "_id": 6
+          }
+        ],
+        "CoMorbidConditionsIncreasingRiskWhenUsingOpioids": [
+          null,
+          {
+            "Name": "Moderate major depression (disorder)",
+            "Status": "active",
+            "Onset": "2016-12-02T16:00:00.000+00:00",
+            "DateRecorded": null,
+            "Abatement": null,
+            "Visit": null,
+            "_id": 7
+          }
+        ],
+        "Recommendation8Text": "Per CDC guidelines, before starting, and periodically during continuation of opioid therapy, clinicians should evaluate risk factors for opioid-related harms. Clinicians should incorporate into the management plan strategies to mitigate risk, including considering offering naloxone when factors that increase risk for opioid overdose, such as history of overdose, history of substance use disorder, higher opioid dosages (greater than or equal to [?] 50 morphine milligram equivalents [MME]/day), or concurrent benzodiazepine use, are present (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)"
+      },
+      "CurrentPertinentTreatments": {
+        "CurrentMME": [
+          {
+            "Name": "Current Milligram Morphine Equivalent",
+            "Result": "40",
+            "Date": "2019-04-15T16:02:00.000+00:00"
+          }
+        ],
+        "MostRecentMME": [
+          {
+            "Name": "Morphine Milligram Equivalent (MME)",
+            "Result": "40",
+            "Date": "2019-04-15T16:02:00.000+00:00"
+          }
+        ],
+        "OpioidMedications": [
+          {
+            "Type": "Request",
+            "Name": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet",
+            "Start": "2019-04-15T16:02:00.000+00:00",
+            "End": null,
+            "Status": "active",
+            "_id": 8
+          },
+          {
+            "Type": "Request",
+            "Name": "Oxycodone Hydrochloride 10 MG Oral Capsule",
+            "Start": "2019-04-15T16:01:00.000+00:00",
+            "End": null,
+            "Status": "active",
+            "_id": 9
+          },
+          {
+            "Type": "Request",
+            "Name": "12 HR Oxycodone Hydrochloride 60 MG Extended Release Oral Tablet",
+            "Start": "2019-01-15T16:02:00.000+00:00",
+            "End": null,
+            "Status": "inactive",
+            "_id": 10
+          },
+          {
+            "Type": "Request",
+            "Name": "Oxycodone Hydrochloride 10 MG Oral Capsule",
+            "Start": "2019-01-15T16:01:00.000+00:00",
+            "End": null,
+            "Status": "inactive",
+            "_id": 11
+          }
+        ],
+        "NonOpioidMedications": [
+          {
+            "Type": "Request",
+            "Name": "Ibuprofen 800mg",
+            "Start": "2019-04-15T16:02:00.000+00:00",
+            "End": null,
+            "Status": "inactive",
+            "_id": 8
+          },
+          {
+            "Type": "Request",
+            "Name": "Amoxicillin 75mg",
+            "Start": "2019-01-15T16:01:00.000+00:00",
+            "End": null,
+            "Status": "inactive",
+            "_id": 9
+          }
+        ],
+        "SelfReportedTreatmentsFromMyPAIN": [
+          {
+            "Treatment": "Physical Therapy",
+            "Effectiveness": "Sometimes"
+          },
+          {
+            "Treatment": "Chiropractic Treatment",
+            "Effectiveness": "Sometimes"
+          },
+          {
+            "Treatment": "Sleep Therapy",
+            "Effectiveness": "Always"
+          },
+          {
+            "Treatment": "Pain Relievers",
+            "Effectiveness": "Always"
+          },
+          {
+            "Treatment": "CBD Oil",
+            "Effectiveness": "Always"
+          },
+          {
+            "Treatment": "Cortisone Injections",
+            "Effectiveness": "Always"
+          }
+        ],
+        "Recommendation3Text": "ReportRecommendation3Text",
+        "Recommendation5Text": "ReportRecommendation5Text",
+        "Recommendation11Text": "ReportRecommendation11Text"
+      },
+      "RiskConsiderations": {
+        "BenzodiazepineMedications": [],
+        "NaloxoneMedications": [],
+        "RiskScreeningsRelevantToPainManagement": [
+          {
+            "Name": "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] [Range: 0-27]",
+            "Score": "18",
+            "Interpretation": "Moderately severe depression",
+            "Date": "2020-10-02T16:00:00.000+00:00",
+            "_id": 13
+          }
+        ]
+      }
+    }
+  }
+}

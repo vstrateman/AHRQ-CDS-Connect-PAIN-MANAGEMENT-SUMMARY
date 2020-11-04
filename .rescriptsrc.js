@@ -18,17 +18,21 @@ const path = require('path');
 //     launch: ["/path/to/pain-management-summary/src/index.js"]
 //   }
 // In development, it is similar, but each array also contains a Webpack hotloader.
-const addLaunch = config => {
+const addLaunch = function (config) {
   return edit(
-    entries => {
-      if (!Array.isArray(entries) || entries.filter(e => e.endsWith(`${path.sep}index.js`)).length !== 1) {
+    function (entries) {
+      if (!Array.isArray(entries) || entries.filter(function (e) {
+          return e.endsWith(path.sep + 'index.tsx');
+        }).length !== 1) {
         console.error('Cannot add launch.js to entry. Unexpected starting value for entry:', entries);
         return entries;
       }
       return {
         main: entries,
-        launch: entries.map(e => e.replace(/[\/\\]index.js$/, `${path.sep}launch.js`))
-      }
+        launch: entries.map(function (e) {
+            return e.replace(/[\/\\]index.tsx$/, path.sep + 'launch.ts');
+          })
+      };
     },
     [['entry']],
     config
@@ -40,12 +44,12 @@ const addLaunch = config => {
 //   output.filename: "static/js/bundle.js"
 // to
 //   output.filename: "static/js/[name].js"
-const changeOutputFilenameForDev = config => {
+const changeOutputFilenameForDev = function (config) {
   if (config.mode !== 'development') {
     return config;
   }
   return edit(
-    filename => {
+    function (filename) {
       if (!filename.endsWith('/bundle.js')) {
         console.error('Cannot modify output filename. Unexpected starting value:', filename);
         return filename;
@@ -54,7 +58,7 @@ const changeOutputFilenameForDev = config => {
     },
     [['output', 'filename']],
     config
-  )
+  );
 }
 
 // Changes the existing HtmlWebpackPlugin for index.html to specify that it should use the main chunk.
@@ -62,9 +66,9 @@ const changeOutputFilenameForDev = config => {
 //   options.chunks: "all"
 // to
 //   options.chunks: ["main"]
-const editChunksInHtmlWebpackPluginForIndex = config => {
+const editChunksInHtmlWebpackPluginForIndex = function (config) {
   return editWebpackPlugin(
-    p => {
+    function (p) {
       if (p.options.filename !== 'index.html') {
         console.error('Cannot modify HtmlWebpackPlugin. Unexpected filename:', p.options.filename);
         return p;
@@ -73,19 +77,20 @@ const editChunksInHtmlWebpackPluginForIndex = config => {
         return p;
       }
       p.options.chunks = ['main'];
-      return p
+      return p;
     },
     'HtmlWebpackPlugin',
-    config,
+    config
   );
 }
 
 // Adds a new HtmlWebpackPlugin for launch.html.  It is configured the same as the index.html one,
 // except the filename is "launch.html" and the chunks are ["launch"].
-const addHtmlWebpackPluginForLaunch = config => {
+const addHtmlWebpackPluginForLaunch = function (config) {
   const indexPlugin = getWebpackPlugin('HtmlWebpackPlugin', config);
   if (indexPlugin == null || indexPlugin.options.filename !== 'index.html') {
     console.error('Cannot find HtmlWebpackPlugin for index.html to use as baseline for launch plugin.');
+    alert('Cannot find HtmlWebpackPlugin for index.html to use as baseline for launch plugin.');
     return config;
   }
 
@@ -95,7 +100,7 @@ const addHtmlWebpackPluginForLaunch = config => {
   return appendWebpackPlugin(
     new HtmlWebpackPlugin(launchOptions),
     config
-  )
+  );
 }
 
 // Stubs out files that are not needed but take up lots of space in webpacked source. This includes:
@@ -103,9 +108,9 @@ const addHtmlWebpackPluginForLaunch = config => {
 // ./modelInfos/fhir-modelinfo-1.6.xml.js (from cql-exec-fhir)
 // ./modelInfos/fhir-modelinfo-3.0.0.xml.js (from cql-exec-fhir)
 // ./modelInfos/fhir-modelinfo-4.0.0.xml.js (from cql-exec-fhir)
-const stubUnneededFiles = config => {
+const stubUnneededFiles = function (config) {
   return edit(
-    resolve => {
+    function (resolve) {
       // currently, resolve.alias exists (for react-native), but play it safe in case this
       // changes in the future
       if (resolve.alias == null) {
@@ -116,8 +121,9 @@ const stubUnneededFiles = config => {
       resolve.alias['./fhir/models'] = path.resolve(__dirname, './src/stubs/fhir-models.js');
       // Replace cql-exec-fhir's bundled 1.6, and 3.0.0 modelinfos with stubs since we
       // only use the 1.0.2 and 4.0.0 modelinfos and the others take up a lot of space.
+      //  bryant 3.26.2020 - put 3.00 back in to use for MyPAIN/PainManager work
       resolve.alias['./modelInfos/fhir-modelinfo-1.6.xml.js'] = path.resolve(__dirname, './src/stubs/fhir-modelinfo-stub.xml.js');
-      resolve.alias['./modelInfos/fhir-modelinfo-3.0.0.xml.js'] = path.resolve(__dirname, './src/stubs/fhir-modelinfo-stub.xml.js');
+      //      resolve.alias['./modelInfos/fhir-modelinfo-3.0.0.xml.js'] = path.resolve(__dirname, './src/stubs/fhir-modelinfo-stub.xml.js');
       return resolve;
     },
     [['resolve']],
@@ -126,9 +132,9 @@ const stubUnneededFiles = config => {
 }
 
 // Logs the config, mainly useful for debugging
-const logConfig = config => {
-  console.log(JSON.stringify(config, null, 2))
-  return config
+const logConfig = function (config) {
+  console.log(JSON.stringify(config, null, 2));
+  return config;
 }
 // uncomment below to log config between each rescript
 // logConfig.isMiddleware = true;

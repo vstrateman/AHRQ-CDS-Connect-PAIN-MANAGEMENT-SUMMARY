@@ -92,12 +92,13 @@ export function quantityCompare(a, b) {
   } else if (aM == null && bM == null) {
     return 0;
   }
-  const aUnit = aM.length === 5 && aM[4] != null ? aM[4] : '';
-  const bUnit = bM.length === 5 && bM[4] != null ? bM[4] : '';
+  const aUnit = aM?.length === 5 && aM[4] != null ? aM[4] : '';
+  const bUnit = bM?.length === 5 && bM[4] != null ? bM[4] : '';
   const unitCmp = stringCompare(aUnit, bUnit);
   if (unitCmp !== 0) {
     return unitCmp;
   }
+  // @ts-ignore
   return numberCompare(aM[1], bM[1]);
 }
 

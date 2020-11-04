@@ -57,19 +57,29 @@
 //
 // ##Source guideline: [CDC Guideline for Opioid Prescribing for Chronic Pain](https://www.cdc.gov/drugoverdose/prescribing/guideline.html)
 
-library Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400 version '1.0.0'
+// Changes for version 1.0.1
+// - Updated to FHIR 4.0.1
+// - Minor changes in list usage (wasn't translating the union with the latest CQL translator)
+// - Introduced ChronicPainConcepts terminology library to allow value sets to be redirected by versioning
+//     NOTE: This isn't ideal, it's not really a version, but in the absence of some other mechanism
+//     (like a concept mapping of value sets?) this is the best approach with existing machinery
+//     To use the original chronic pain value sets, use version 1.0.0
+//     To use the pain manager value sets, use version 2.0.0
+library Factors_to_Consider_in_Managing_Chronic_Pain_FHIRv400 version '1.0.1'
 
 // # Data model #
 
 // The FHIR R4 model is used for testing purposes only.  It has not been piloted.
-using FHIR version '4.0.0'
+using FHIR version '4.0.1'
 
 // # Referenced libraries #
 
 // The CDS Connect Commons for FHIRv400 library provides functions representing commonly used CDS logic and patterns.
-include CDS_Connect_Commons_for_FHIRv400 version '1.0.1' called C3F
+include CDS_Connect_Commons_for_FHIRv400 version '1.0.2' called C3F
 // The FHIRHelpers library provides common functions for simplifying interaction w/ the FHIR R4 data model.
-include FHIRHelpers version '4.0.0' called FHIRHelpers
+include FHIRHelpers version '4.0.1' called FHIRHelpers
+// The ChronicPainConcepts library provides terminology concepts used to identify data elements throughout the artifact.
+include ChronicPainConcepts version '2.0.0' called Cx
 
 // # Value sets and codes #
 
@@ -83,80 +93,6 @@ codesystem "SNOMED-CT": 'http://snomed.info/sct'
 // not yet available.  Once available, the CDS will be updated.  Until then, CDS implementors will need to map to
 // local codes (signified by the LOCAL code system below) or replace them with their own codes.
 codesystem "LOCAL": 'http://cds.ahrq.gov/cdsconnect/pms'
-
-// ## Value sets ##
-
-// List value sets used by the artifact. The links to the Value Set Authority Center (VSAC) point to the latest
-// expansion of each value set available.
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.37/expansion)
-valueset "Conditions associated with chronic pain": '2.16.840.1.113762.1.4.1032.37'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.34/expansion)
-valueset "Opioid Pain Medications": '2.16.840.1.113762.1.4.1032.34'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.54/expansion)
-valueset "Adjuvant Analgesic Medications": '2.16.840.1.113762.1.4.1032.54'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.464.1003.105.12.1007/expansion)
-valueset "Major Depression": '2.16.840.1.113883.3.464.1003.105.12.1007'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.600.143/expansion)
-valueset "Depression Diagnosis ICD9": '2.16.840.1.113883.3.600.143'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.52/expansion)
-valueset "Anxiety": '2.16.840.1.113762.1.4.1032.52'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.1240.2017.3.2.1015/expansion)
-valueset "Anxiety Disorders ICD9": '2.16.840.1.113883.3.1240.2017.3.2.1015'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.464.1003.106.12.1004/expansion)
-valueset "Substance use disorder": '2.16.840.1.113883.3.464.1003.106.12.1004'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.464.1003.106.11.1010/expansion)
-valueset "Substance Abuse": '2.16.840.1.113883.3.464.1003.106.11.1010'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.102/expansion)
-valueset "Suicide Attempt": '2.16.840.1.113762.1.4.1032.102'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.53/expansion)
-valueset "Sleep-disordered breathing": '2.16.840.1.113762.1.4.1032.53'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.464.1003.109.12.1028/expansion)
-valueset "Kidney Failure": '2.16.840.1.113883.3.464.1003.109.12.1028'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.464.1003.199.12.1035/expansion)
-valueset "Chronic Liver Disease": '2.16.840.1.113883.3.464.1003.199.12.1035'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1047.42/expansion)
-valueset "Liver Disease": '2.16.840.1.113762.1.4.1047.42'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113883.3.526.3.378/expansion)
-valueset "Pregnancy": '2.16.840.1.113883.3.526.3.378'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.80/expansion)
-valueset "Pregnancy (New ICD10 codes published in 2018 and 2019)": '2.16.840.1.113762.1.4.1032.80'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.26/expansion)
-valueset "Non opiod pain medications": '2.16.840.1.113762.1.4.1032.26'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.36/expansion)
-valueset "Non pharmacologic treatments for chronic pain": '2.16.840.1.113762.1.4.1032.36'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.55/expansion)
-valueset "Risk assessments relevant to pain management": '2.16.840.1.113762.1.4.1032.55'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.43/expansion)
-valueset "Benzodiazepine medications": '2.16.840.1.113762.1.4.1032.43'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.42/expansion)
-valueset "Naloxone medications": '2.16.840.1.113762.1.4.1032.42'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.28/expansion)
-valueset "Urine drug screen for pain management": '2.16.840.1.113762.1.4.1032.28'
-
-// [See value set in VSAC](https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1032.44/expansion)
-valueset "Stool softeners and laxatives": '2.16.840.1.113762.1.4.1032.44'
 
 // ## Individual codes ##
 
@@ -222,44 +158,47 @@ code "Morphine Milligram Equivalent (MME) code": 'MME' from "LOCAL" display 'Mor
 
 // CQL currently requires concept declarations to contain references to code declarations.
 
-concept "Pregnancy status": { "Pregnancy status code" } display 'Pregnancy status'
-concept "Pregnant": { "Pregnant code" } display 'Patient currently pregnant (finding)'
-concept "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]":
-  { "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported] code" }
-  display 'Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]'
-concept "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]":
-  { "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] code" }
-  display 'Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]'
-concept "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]":
-  { "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ] code" }
-  display 'Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]'
-concept "Total score [AUDIT]": { "Total score [AUDIT] code" } display 'Total score [AUDIT]'
-concept "Total score [AUDIT-C]": { "Total score [AUDIT-C] code" } display 'Total score [AUDIT-C]'
-concept "Total score [DAST-10]": { "Total score [DAST-10] code" } display 'Total score [DAST-10]'
-concept "Total score ORT": { "Total score ORT code" } display 'Total score ORT'
-concept "Pain severity Wong-Baker FACES Scale":
-  { "Pain severity Wong-Baker FACES Scale code" } display 'Pain severity Wong-Baker FACES Scale'
-concept "Pain severity in the past week - 0-10 numeric rating [Reported]":
-  { "Pain severity in the past week - 0-10 numeric rating [Reported] code" }
-  display 'Pain severity in the past week - 0-10 numeric rating [Reported]'
-concept "What number best describes how pain has interfered with your enjoyment of life during the past week":
-  { "What number best describes how pain has interfered with your enjoyment of life during the past week code" }
-  display 'What number best describes how pain has interfered with your enjoyment of life during the past week'
-concept "What number best describes how pain has interfered with your general activity during the past week":
-  { "What number best describes how pain has interfered with your general activity during the past week code" }
-  display 'What number best describes how pain has interfered with your general activity during the past week'
-concept "Mean score [PEG]": { "Mean score [PEG] code" } display 'Mean score [PEG]'
-concept "Pain Enjoyment General Activity (PEG) Assessment LEGACY":
-  { "Pain Enjoyment General Activity (PEG) Assessment LEGACY code" } display 'Pain Enjoyment General Activity (PEG) Assessment'
-concept "Pain LEGACY": { "Pain LEGACY code" } display 'Pain'
-concept "Enjoyment of life LEGACY": { "Enjoyment of life LEGACY code" } display 'Enjoyment of life'
-concept "General activity LEGACY": { "General activity LEGACY code" } display 'General activity'
-concept "Total score [STarT Back]": { "Total score [STarT Back] code" } display 'Total score [STarT Back]'
-concept "STarT Back Screening Tool LEGACY": { "STarT Back Screening Tool LEGACY code" } display 'STarT Back Screening Tool'
-concept "Single question r/t ETOH use": { "Single question r/t ETOH use code" } display 'Single question r/t ETOH use'
-concept "Single question r/t drug use": { "Single question r/t drug use code" } display 'Single question r/t drug use'
-concept "Morphine Milligram Equivalent (MME)":
-  { "Morphine Milligram Equivalent (MME) code" } display 'Morphine Milligram Equivalent (MME)'
+// NOTE: This shouldn't be required but there is an unimplemented evaluator in the Java Engine (ConceptRef)
+// An issue has been logged to correct this: https://github.com/DBCG/cql_engine/issues/421
+// Commenting these out until that issue is resolved
+//concept "Pregnancy status": { "Pregnancy status code" } display 'Pregnancy status'
+//concept "Pregnant": { "Pregnant code" } display 'Patient currently pregnant (finding)'
+//concept "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]":
+//  { "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported] code" }
+//  display 'Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]'
+//concept "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]":
+//  { "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] code" }
+//  display 'Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]'
+//concept "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]":
+//  { "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ] code" }
+//  display 'Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]'
+//concept "Total score [AUDIT]": { "Total score [AUDIT] code" } display 'Total score [AUDIT]'
+//concept "Total score [AUDIT-C]": { "Total score [AUDIT-C] code" } display 'Total score [AUDIT-C]'
+//concept "Total score [DAST-10]": { "Total score [DAST-10] code" } display 'Total score [DAST-10]'
+//concept "Total score ORT": { "Total score ORT code" } display 'Total score ORT'
+//concept "Pain severity Wong-Baker FACES Scale":
+//  { "Pain severity Wong-Baker FACES Scale code" } display 'Pain severity Wong-Baker FACES Scale'
+//concept "Pain severity in the past week - 0-10 numeric rating [Reported]":
+//  { "Pain severity in the past week - 0-10 numeric rating [Reported] code" }
+//  display 'Pain severity in the past week - 0-10 numeric rating [Reported]'
+//concept "What number best describes how pain has interfered with your enjoyment of life during the past week":
+//  { "What number best describes how pain has interfered with your enjoyment of life during the past week code" }
+//  display 'What number best describes how pain has interfered with your enjoyment of life during the past week'
+//concept "What number best describes how pain has interfered with your general activity during the past week":
+//  { "What number best describes how pain has interfered with your general activity during the past week code" }
+//  display 'What number best describes how pain has interfered with your general activity during the past week'
+//concept "Mean score [PEG]": { "Mean score [PEG] code" } display 'Mean score [PEG]'
+//concept "Pain Enjoyment General Activity (PEG) Assessment LEGACY":
+//  { "Pain Enjoyment General Activity (PEG) Assessment LEGACY code" } display 'Pain Enjoyment General Activity (PEG) Assessment'
+//concept "Pain LEGACY": { "Pain LEGACY code" } display 'Pain'
+//concept "Enjoyment of life LEGACY": { "Enjoyment of life LEGACY code" } display 'Enjoyment of life'
+//concept "General activity LEGACY": { "General activity LEGACY code" } display 'General activity'
+//concept "Total score [STarT Back]": { "Total score [STarT Back] code" } display 'Total score [STarT Back]'
+//concept "STarT Back Screening Tool LEGACY": { "STarT Back Screening Tool LEGACY code" } display 'STarT Back Screening Tool'
+//concept "Single question r/t ETOH use": { "Single question r/t ETOH use code" } display 'Single question r/t ETOH use'
+//concept "Single question r/t drug use": { "Single question r/t drug use code" } display 'Single question r/t drug use'
+//concept "Morphine Milligram Equivalent (MME)":
+//  { "Morphine Milligram Equivalent (MME) code" } display 'Morphine Milligram Equivalent (MME)'
 
 // # Parameters #
 
@@ -282,15 +221,15 @@ context Patient
 // @returns {System.String} the display text or null if none is found
 
 define function ConceptText(c FHIR.CodeableConcept):
-  if c ~ "Mean score [PEG]" or c ~ "Pain Enjoyment General Activity (PEG) Assessment LEGACY"
+  if c ~ "Mean score [PEG] code" or c ~ "Pain Enjoyment General Activity (PEG) Assessment LEGACY code"
     then 'Mean score [PEG]'
-  else if c ~ "Pain severity in the past week - 0-10 numeric rating [Reported]" or c ~ "Pain LEGACY"
+  else if c ~ "Pain severity in the past week - 0-10 numeric rating [Reported] code" or c ~ "Pain LEGACY code"
     then 'Pain'
-  else if c ~ "What number best describes how pain has interfered with your enjoyment of life during the past week"
-       or c ~ "Enjoyment of life LEGACY"
+  else if c ~ "What number best describes how pain has interfered with your enjoyment of life during the past week code"
+       or c ~ "Enjoyment of life LEGACY code"
     then 'Enjoyment of life'
-  else if c ~ "What number best describes how pain has interfered with your general activity during the past week"
-       or c ~ "General activity LEGACY"
+  else if c ~ "What number best describes how pain has interfered with your general activity during the past week code"
+       or c ~ "General activity LEGACY code"
     then 'General activity'
   else
     Coalesce(c.text.value, Coalesce((c.coding) c2 return c2.display.value))
@@ -300,27 +239,27 @@ define function ConceptText(c FHIR.CodeableConcept):
 // @param c - a FHIR CodeableConcept to get the updated text for
 // @returns {System.String} the display text with range information appended
 define function ConceptTextWithRange(c FHIR.CodeableConcept):
-  if c ~ "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported]"
+  if c ~ "Patient Health Questionnaire 2 item (PHQ-2) total score [Reported] code"
     then ConceptText(c) + ' [Range: 0-6]'
-  else if c ~ "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported]"
+  else if c ~ "Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] code"
     then ConceptText(c) + ' [Range: 0-27]'
-  else if c ~ "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ]"
+  else if c ~ "Generalized anxiety disorder 7 item (GAD-7) total score [Reported.PHQ] code"
     then ConceptText(c) + ' [Range: 0-21]'
-  else if c ~ "Total score [AUDIT]"
+  else if c ~ "Total score [AUDIT] code"
     then ConceptText(c) + ' [Range: 0-40]'
-  else if c ~ "Total score [AUDIT-C]"
+  else if c ~ "Total score [AUDIT-C] code"
     then ConceptText(c) + ' [Range: 0-12]'
-  else if c ~ "Total score [DAST-10]"
+  else if c ~ "Total score [DAST-10] code"
     then ConceptText(c) + ' [Range: 0-10]'
-  else if c ~ "Total score ORT"
+  else if c ~ "Total score ORT code"
     then ConceptText(c) + ' [Range: 0-26]'
-  else if c ~ "Pain severity Wong-Baker FACES Scale"
+  else if c ~ "Pain severity Wong-Baker FACES Scale code"
     then ConceptText(c) + ' [Range: 0-10]'
-  else if c ~ "Mean score [PEG]"
-       or c ~ "Pain Enjoyment General Activity (PEG) Assessment LEGACY"
+  else if c ~ "Mean score [PEG] code"
+       or c ~ "Pain Enjoyment General Activity (PEG) Assessment LEGACY code"
     then ConceptText(c) + ' [Range: 0-10]'
-  else if c ~ "Total score [STarT Back]"
-       or c ~ "STarT Back Screening Tool LEGACY"
+  else if c ~ "Total score [STarT Back] code"
+       or c ~ "STarT Back Screening Tool LEGACY code"
     then ConceptText(c) + ' [Range: 0-9]'
   else
     ConceptText(c)
@@ -433,7 +372,7 @@ define Is18orOlder:
 
 // Conditions associated with chronic pain
 define ConditionsAssociatedWithChronicPain:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Conditions associated with chronic pain"]))
+  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Conditions associated with chronic pain"]))
 
 // Determines if the patient has any of the conditions associated with chronic pain
 define HasConditionAssociatedWithChronicPain:
@@ -444,11 +383,11 @@ define HasConditionAssociatedWithChronicPain:
 //       - Medication Statement by patient within past 180 days (lookback can be made a parameter)
 define HasRecentOpioidPainMedication:
   exists(C3F.ActiveCompletedOrStoppedMedicationRequest(C3F.MedicationRequestLookBack(
-    [MedicationRequest: "Opioid Pain Medications"],
+    [MedicationRequest: Cx."Opioid Pain Medications"],
     InclusionMedicationsLookbackPeriod)
   ))
   or exists(C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
-    [MedicationStatement: "Opioid Pain Medications"],
+    [MedicationStatement: Cx."Opioid Pain Medications"],
     InclusionMedicationsLookbackPeriod)
   ))
 
@@ -457,11 +396,11 @@ define HasRecentOpioidPainMedication:
 //       - Medication Statement by patient within past 180 days (lookback can be made a parameter)
 define HasRecentAdjuvantAnalgesicMedication:
   exists(C3F.ActiveCompletedOrStoppedMedicationRequest(C3F.MedicationRequestLookBack(
-    [MedicationRequest: "Adjuvant Analgesic Medications"],
+    [MedicationRequest: Cx."Adjuvant Analgesic Medications"],
     InclusionMedicationsLookbackPeriod)
   ))
   or exists(C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
-    [MedicationStatement: "Adjuvant Analgesic Medications"],
+    [MedicationStatement: Cx."Adjuvant Analgesic Medications"],
     InclusionMedicationsLookbackPeriod)
   ))
 
@@ -513,45 +452,45 @@ define ReportConditionsAssociatedWithChronicPain:
 // This is a union of nine value sets (w/ different filtering criteria)
 
 define DepressionConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Major Depression"]))
-  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Depression Diagnosis ICD9"]))
+  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Major Depression"]))
+  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Depression Diagnosis ICD9"]))
 
 define AnxietyConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Anxiety"]))
-  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Anxiety Disorders ICD9"]))
+  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Anxiety"]))
+  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Anxiety Disorders ICD9"]))
 
 define SubstanceUseDisorderConditions:
-  C3F.Confirmed([Condition: "Substance use disorder"])
-  union C3F.Confirmed([Condition: "Substance Abuse"])
+  C3F.Confirmed([Condition: Cx."Substance use disorder"])
+  union C3F.Confirmed([Condition: Cx."Substance Abuse"])
 
 define SuicideAttemptConditions:
-  C3F.Confirmed([Condition: "Suicide Attempt"])
+  C3F.Confirmed([Condition: Cx."Suicide Attempt"])
 
 define SleepDisorderedBreathingConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Sleep-disordered breathing"]))
+  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Sleep-disordered breathing"]))
 
 define RenalDysfunctionConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Kidney Failure"]))
+  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Kidney Failure"]))
 
 define HepaticDysfunctionConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Chronic Liver Disease"]))
-  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Liver Disease"]))
+  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Chronic Liver Disease"]))
+  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Liver Disease"]))
 
 define PregnancyConditions:
   C3F.Confirmed(C3F.ConditionLookBack(C3F.ActiveOrRecurring(
-    [Condition: "Pregnancy"])
-      union [Condition: "Pregnancy (New ICD10 codes published in 2018 and 2019)"],
+    [Condition: Cx."Pregnancy"])
+      union [Condition: Cx."Pregnancy (New ICD10 codes published in 2018 or later)"],
     42 weeks
   ))
 
 define PregnancyObservations:
-  C3F.Verified(C3F.ObservationLookBack([Observation: "Pregnancy status"], 42 weeks))
+  C3F.Verified(C3F.ObservationLookBack([Observation: "Pregnancy status code"], 42 weeks))
 
 define MostRecentPregnancyObservation:
   C3F.MostRecent(PregnancyObservations)
 
 define MostRecentPregnancyObservationIsPositive:
-  C3F.ConceptValue(MostRecentPregnancyObservation) ~ "Pregnant"
+  C3F.ConceptValue(MostRecentPregnancyObservation) ~ "Pregnant code"
 
 define Is65orOlder:
   AgeInYears() >= 65
@@ -575,17 +514,17 @@ define ConditionRiskFactorsForOpioidRelatedHarms:
 define EncounterRiskFactorsForOpioidRelatedHarms:
   [Encounter] E where exists(
     E.reasonCode R where
-      FHIRHelpers.ToConcept(R) in "Major Depression"
-      or FHIRHelpers.ToConcept(R) in "Depression Diagnosis ICD9"
-      or FHIRHelpers.ToConcept(R) in "Anxiety"
-      or FHIRHelpers.ToConcept(R) in "Anxiety Disorders ICD9"
-      or FHIRHelpers.ToConcept(R) in "Substance use disorder"
-      or FHIRHelpers.ToConcept(R) in "Substance Abuse"
-      or FHIRHelpers.ToConcept(R) in "Suicide Attempt"
-      or FHIRHelpers.ToConcept(R) in "Sleep-disordered breathing"
-      or FHIRHelpers.ToConcept(R) in "Kidney Failure"
-      or FHIRHelpers.ToConcept(R) in "Chronic Liver Disease"
-      or FHIRHelpers.ToConcept(R) in "Liver Disease"
+      FHIRHelpers.ToConcept(R) in Cx."Major Depression"
+      or FHIRHelpers.ToConcept(R) in Cx."Depression Diagnosis ICD9"
+      or FHIRHelpers.ToConcept(R) in Cx."Anxiety"
+      or FHIRHelpers.ToConcept(R) in Cx."Anxiety Disorders ICD9"
+      or FHIRHelpers.ToConcept(R) in Cx."Substance use disorder"
+      or FHIRHelpers.ToConcept(R) in Cx."Substance Abuse"
+      or FHIRHelpers.ToConcept(R) in Cx."Suicide Attempt"
+      or FHIRHelpers.ToConcept(R) in Cx."Sleep-disordered breathing"
+      or FHIRHelpers.ToConcept(R) in Cx."Kidney Failure"
+      or FHIRHelpers.ToConcept(R) in Cx."Chronic Liver Disease"
+      or FHIRHelpers.ToConcept(R) in Cx."Liver Disease"
       // Pregnancy not considered in Encounter diagnoses because this is an unrestricted lookback.
   )
 
@@ -610,17 +549,17 @@ define ReportConditionRiskFactorsForOpioidRelatedHarms:
 
 define function GetEncounterDiagnosesRiskFactorsForOpioidRelatedHarms(enc Encounter):
   (enc.reasonCode) R
-    where FHIRHelpers.ToConcept(R) in "Major Depression"
-      or FHIRHelpers.ToConcept(R) in "Depression Diagnosis ICD9"
-      or FHIRHelpers.ToConcept(R) in "Anxiety"
-      or FHIRHelpers.ToConcept(R) in "Anxiety Disorders ICD9"
-      or FHIRHelpers.ToConcept(R) in "Substance use disorder"
-      or FHIRHelpers.ToConcept(R) in "Substance Abuse"
-      or FHIRHelpers.ToConcept(R) in "Suicide Attempt"
-      or FHIRHelpers.ToConcept(R) in "Sleep-disordered breathing"
-      or FHIRHelpers.ToConcept(R) in "Kidney Failure"
-      or FHIRHelpers.ToConcept(R) in "Chronic Liver Disease"
-      or FHIRHelpers.ToConcept(R) in "Liver Disease"
+    where FHIRHelpers.ToConcept(R) in Cx."Major Depression"
+      or FHIRHelpers.ToConcept(R) in Cx."Depression Diagnosis ICD9"
+      or FHIRHelpers.ToConcept(R) in Cx."Anxiety"
+      or FHIRHelpers.ToConcept(R) in Cx."Anxiety Disorders ICD9"
+      or FHIRHelpers.ToConcept(R) in Cx."Substance use disorder"
+      or FHIRHelpers.ToConcept(R) in Cx."Substance Abuse"
+      or FHIRHelpers.ToConcept(R) in Cx."Suicide Attempt"
+      or FHIRHelpers.ToConcept(R) in Cx."Sleep-disordered breathing"
+      or FHIRHelpers.ToConcept(R) in Cx."Kidney Failure"
+      or FHIRHelpers.ToConcept(R) in Cx."Chronic Liver Disease"
+      or FHIRHelpers.ToConcept(R) in Cx."Liver Disease"
       // Pregnancy not considered in Encounter diagnoses because this is an unrestricted lookback.
     return {
       Name:      ConceptText(R),
@@ -639,48 +578,52 @@ define ReportEncounterRiskFactorsForOpioidRelatedHarms:
 // Shape the pregnancy Observation as a Condition, since this is the backup approach for detecting a pregnancy in case
 // there are no active Conditions found.
 define ReportMostRecentPositivePregnancyObservation:
-  if MostRecentPregnancyObservationIsPositive then
-    {
-      Name: ConceptText(MostRecentPregnancyObservation.code),
-      Status: ConceptText(MostRecentPregnancyObservation.value as FHIR.CodeableConcept),
-      Onset: ToString(Coalesce(
-        (MostRecentPregnancyObservation.effective as FHIR.dateTime).value,
-        (MostRecentPregnancyObservation.effective as FHIR.instant).value,
-        (MostRecentPregnancyObservation.effective as FHIR.Period)."start".value
-      )),
-      DateRecorded: ToString(MostRecentPregnancyObservation.issued.value),
-      Abatement: null as String,
-      Visit: null as Tuple{ Start String, End String }
-    }
-  else
-    null
+({
+  {
+    Name: ConceptText(MostRecentPregnancyObservation.code),
+    Status: ConceptText(MostRecentPregnancyObservation.value as FHIR.CodeableConcept),
+    Onset: ToString(Coalesce(
+      (MostRecentPregnancyObservation.effective as FHIR.dateTime).value,
+      (MostRecentPregnancyObservation.effective as FHIR.instant).value,
+      (MostRecentPregnancyObservation.effective as FHIR.Period)."start".value
+    )),
+    DateRecorded: ToString(MostRecentPregnancyObservation.issued.value),
+    Abatement: null as String,
+    Visit: null as Tuple{ Start String, End String }
+  }
+}) C
+  where MostRecentPregnancyObservationIsPositive
 
 // Shape the case of being 65 or older as a Condition for the purposes of building the summary.
 define ReportOlderThan65:
-  if Is65orOlder then
-    {
-      Name: '65 years or older',
-      Status: 'active',
-      Onset: null as String,
-      DateRecorded: null as String,
-      Abatement: null as String,
-      Visit: null as Tuple{ Start String, End String }
-    }
-  else
-    null
+({
+  {
+    Name: '65 years or older',
+    Status: 'active',
+    Onset: ToString(Patient.birthDate + 65 years),
+    DateRecorded: null as String,
+    Abatement: null as String,
+    Visit: null as Tuple{ Start String, End String }
+  }
+}) C
+  where Is65orOlder
 
 define ReportRiskFactorsForOpioidRelatedHarms:
+(
   // If a pregnancy Condition is present, use that.
   if Exists(PregnancyConditions) then
     (ReportConditionRiskFactorsForOpioidRelatedHarms
       union ReportEncounterRiskFactorsForOpioidRelatedHarms
-      union ReportOlderThan65) C
+      union ReportOlderThan65
+    ) C
   // Otherwise, try to find a positive pregnancy status in an Observation.
   else
     (ReportConditionRiskFactorsForOpioidRelatedHarms
       union ReportEncounterRiskFactorsForOpioidRelatedHarms
       union ReportOlderThan65
-      union ReportMostRecentPositivePregnancyObservation) C
+      union ReportMostRecentPositivePregnancyObservation
+    ) C
+) C
   sort by (if Onset is not null then Onset as String else Visit.Start) desc, Visit.End desc, (Abatement as String) desc
 
 // PAIN ASSESSMENT
@@ -688,7 +631,7 @@ define ReportRiskFactorsForOpioidRelatedHarms:
 // Numeric pain intensity assessment - scores and dates (lookback 2 years)
 
 define NumericPainIntensityAssessments:
-  C3F.Verified(C3F.ObservationLookBack([Observation: "Pain severity Wong-Baker FACES Scale"], 2 years))
+  C3F.Verified(C3F.ObservationLookBack([Observation: "Pain severity Wong-Baker FACES Scale code"], 2 years))
 
 define ReportNumericPainIntensityAssessments:
   (NumericPainIntensityAssessments) A
@@ -734,8 +677,8 @@ define ReportNumericPainIntensityAssessments:
 
 define PainEnjoymentGeneralActivityAssessments:
   C3F.Verified(C3F.ObservationLookBack(
-    [Observation: "Mean score [PEG]"]
-      union [Observation: "Pain Enjoyment General Activity (PEG) Assessment LEGACY"],
+    [Observation: "Mean score [PEG] code"]
+      union [Observation: "Pain Enjoyment General Activity (PEG) Assessment LEGACY code"],
     2 years
   ))
 
@@ -743,14 +686,14 @@ define ReportPainEnjoymentGeneralActivityAssessments:
   (PainEnjoymentGeneralActivityAssessments) A
   let
     Pain: (A.component) C
-      where C.code ~ "Pain severity in the past week - 0-10 numeric rating [Reported]"
-      or C.code ~ "Pain LEGACY",
+      where C.code ~ "Pain severity in the past week - 0-10 numeric rating [Reported] code"
+      or C.code ~ "Pain LEGACY code",
     Enjoyment: (A.component) C
-      where C.code ~ "What number best describes how pain has interfered with your enjoyment of life during the past week"
-      or C.code ~ "Enjoyment of life LEGACY",
+      where C.code ~ "What number best describes how pain has interfered with your enjoyment of life during the past week code"
+      or C.code ~ "Enjoyment of life LEGACY code",
     GeneralActivity: (A.component) C
-      where C.code ~ "What number best describes how pain has interfered with your general activity during the past week"
-      or C.code ~ "General activity LEGACY"
+      where C.code ~ "What number best describes how pain has interfered with your general activity during the past week code"
+      or C.code ~ "General activity LEGACY code"
   where true // grammar needs a where statement to separate the "let" from the "return"
   return {
     // NOTE: Hard-code in names because the real LOINC code displays are quite long
@@ -768,8 +711,8 @@ define ReportPainEnjoymentGeneralActivityAssessments:
 
 define STarTBackAssessments:
   C3F.Verified(C3F.ObservationLookBack(
-    [Observation: "Total score [STarT Back]"]
-      union [Observation: "STarT Back Screening Tool LEGACY"],
+    [Observation: "Total score [STarT Back] code"]
+      union [Observation: "STarT Back Screening Tool LEGACY code"],
     2 years
   ))
 
@@ -789,13 +732,13 @@ define ReportSTarTBackAssessments:
 
 define OpioidMedicationRequests:
   C3F.ActiveCompletedOrStoppedMedicationRequest(C3F.MedicationRequestLookBack(
-    [MedicationRequest: "Opioid Pain Medications"],
+    [MedicationRequest: Cx."Opioid Pain Medications"],
     2 years
   ))
 
 define OpioidMedicationStatements:
   C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
-    [MedicationStatement: "Opioid Pain Medications"],
+    [MedicationStatement: Cx."Opioid Pain Medications"],
     2 years
   ))
 
@@ -829,13 +772,13 @@ define ReportOpioidMedications:
 
 define NonOpioidMedicationRequests:
   C3F.ActiveCompletedOrStoppedMedicationRequest(C3F.MedicationRequestLookBack(
-    [MedicationRequest: "Non opiod pain medications"],
+    [MedicationRequest: Cx."Non opioid pain medications"],
     2 years
   ))
 
 define NonOpioidMedicationStatements:
   C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
-    [MedicationStatement: "Non opiod pain medications"],
+    [MedicationStatement: Cx."Non opioid pain medications"],
     2 years
   ))
 
@@ -868,7 +811,7 @@ define ReportNonOpioidMedications:
 // Non-pharmacologic treatments, orders, and referrals with dates (lookback 2 years)
 
 define NonPharmacologicTreatmentProcedures:
-  C3F.ProcedurePerformance(C3F.ProcedureLookBack([Procedure: "Non pharmacologic treatments for chronic pain"], 2 years))
+  C3F.ProcedurePerformance(C3F.ProcedureLookBack([Procedure: Cx."Non pharmacologic treatments for chronic pain"], 2 years))
 
 define ReportNonPharmacologicTreatmentProcedures:
   (NonPharmacologicTreatmentProcedures) P
@@ -884,7 +827,7 @@ define ReportNonPharmacologicTreatmentProcedures:
 
 define NonPharmacologicTreatmentServiceRequests:
   C3F.ServiceRequestActiveOrCompleted(
-    C3F.ServiceRequestLookBack([ServiceRequest: "Non pharmacologic treatments for chronic pain"], 2 years)
+    C3F.ServiceRequestLookBack([ServiceRequest: Cx."Non pharmacologic treatments for chronic pain"], 2 years)
   )
 
 define ReportNonPharmacologicTreatmentServiceRequests:
@@ -905,13 +848,13 @@ define ReportNonPharmacologicTreatments:
 
 define StoolSoftenersAndLaxativesRequests:
   C3F.ActiveCompletedOrStoppedMedicationRequest(C3F.MedicationRequestLookBack(
-    [MedicationRequest: "Stool softeners and laxatives"],
+    [MedicationRequest: Cx."Stool softeners and laxatives"],
     6 months
   ))
 
 define StoolSoftenersAndLaxativesStatements:
   C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
-    [MedicationStatement: "Stool softeners and laxatives"],
+    [MedicationStatement: Cx."Stool softeners and laxatives"],
     6 months
   ))
 
@@ -946,23 +889,23 @@ define ReportStoolSoftenersAndLaxatives:
 // MME (MOST RECENT w/ lookback 6 months) - amount and date
 
 define MostRecentMME:
-  C3F.MostRecent(C3F.Verified(C3F.ObservationLookBack([Observation: "Morphine Milligram Equivalent (MME)"], 6 months)))
+  C3F.MostRecent(C3F.Verified(C3F.ObservationLookBack([Observation: "Morphine Milligram Equivalent (MME) code"], 6 months)))
 
 define ReportMostRecentMME:
-  if MostRecentMME is null
-  then null
-  else
-    (MostRecentMME) M
+({
+  (MostRecentMME) M
     return {
       Name:   ConceptText(M.code),
       Result: QuantityText(M.value as FHIR.Quantity),
       Date:   ObservationDate(M)
     }
+}) C
+  where C is not null
 
 // Urine drug screen - dates and results (all screens w/ lookback of 1 year)
 
 define UrineDrugScreens:
-  C3F.Verified(C3F.ObservationLookBack([Observation: "Urine drug screen for pain management"], 1 year))
+  C3F.Verified(C3F.ObservationLookBack([Observation: Cx."Urine drug screen for pain management"], 1 year))
 
 define ReportUrineDrugScreens:
   (UrineDrugScreens) S
@@ -982,13 +925,13 @@ define ReportUrineDrugScreens:
 
 define BenzodiazepineMedicationRequests:
   C3F.ActiveCompletedOrStoppedMedicationRequest(C3F.MedicationRequestLookBack(
-    [MedicationRequest: "Benzodiazepine medications"],
+    [MedicationRequest: Cx."Benzodiazepine medications"],
     2 years
   ))
 
 define BenzodiazepineMedicationStatements:
   C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
-    [MedicationStatement: "Benzodiazepine medications"],
+    [MedicationStatement: Cx."Benzodiazepine medications"],
     2 years
   ))
 
@@ -1021,10 +964,10 @@ define ReportBenzodiazepineMedications:
 // Naloxone Medications (unrestricted lookback) - orders and statements with dates
 
 define NaloxoneMedicationRequests:
-  C3F.ActiveCompletedOrStoppedMedicationRequest([MedicationRequest: "Naloxone medications"])
+  C3F.ActiveCompletedOrStoppedMedicationRequest([MedicationRequest: Cx."Naloxone medications"])
 
 define NaloxoneMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement([MedicationStatement: "Naloxone medications"])
+  C3F.ActiveOrCompletedMedicationStatement([MedicationStatement: Cx."Naloxone medications"])
 
 define ReportNaloxoneMedicationRequests:
   (NaloxoneMedicationRequests) O
@@ -1056,9 +999,9 @@ define ReportNaloxoneMedications:
 
 define RiskScreeningsRelevantToPainManagement:
   C3F.Verified(C3F.ObservationLookBack(
-    [Observation: "Risk assessments relevant to pain management"]
-    union [Observation: "Single question r/t ETOH use"]
-    union [Observation: "Single question r/t drug use"]
+    [Observation: Cx."Risk assessments relevant to pain management"]
+    union [Observation: "Single question r/t ETOH use code"]
+    union [Observation: "Single question r/t drug use code"]
   , 1 year))
 
 define ReportRiskScreeningsRelevantToPainManagement:

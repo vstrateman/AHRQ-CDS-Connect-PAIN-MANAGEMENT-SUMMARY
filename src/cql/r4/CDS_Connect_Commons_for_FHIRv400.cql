@@ -6,12 +6,16 @@
 //   - Add back ...ByConcept functions for backwards compatibility w/ libraries that
 //     might expect them
 //   - Consider effectiveInstant in ObservationLookBack
-library CDS_Connect_Commons_for_FHIRv400 version '1.0.1'
+// - 1.0.2
+//   - Updated to FHIR 4.0.1 (note did not change library name to ...v401, potentially confusing
+//     but not sure the best approach, given the FHIR version is in the library name...)
+//   - Updated FHIRHelpers functions based on FHIR 4.0.1
+library CDS_Connect_Commons_for_FHIRv400 version '1.0.2'
 
-using FHIR version '4.0.0'
+using FHIR version '4.0.1'
 
 // Include the FHIRHelpers library for simplifying interacton w/ the FHIR data model
-include FHIRHelpers version '4.0.0' called FHIRHelpers
+include FHIRHelpers version '4.0.1' called FHIRHelpers
 
 codesystem "AIVERSTATUS": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-verification'
 codesystem "AICLINSTATUS": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical'
@@ -23,12 +27,12 @@ code "Condition Confirmed code": 'confirmed' from "CONDVERSTATUS" display 'Confi
 code "Condition Active code": 'active' from "CONDCLINSTATUS" display 'Active'
 code "Condition Recurrence code": 'recurrence' from "CONDCLINSTATUS" display 'Recurrence'
 code "Condition Relapse code": 'relapse' from "CONDCLINSTATUS" display 'Relapse'
-concept "AllergyIntolerance Confirmed": { "AllergyIntolerance Confirmed code" } display 'Confirmed'
-concept "AllergyIntolerance Active": { "AllergyIntolerance Active code" } display 'Active'
-concept "Condition Confirmed": { "Condition Confirmed code" } display 'Confirmed'
-concept "Condition Active": { "Condition Active code" } display 'Active'
-concept "Condition Recurrence": { "Condition Recurrence code" } display 'Recurrence'
-concept "Condition Relapse": { "Condition Relapse code" } display 'Relapse'
+//concept "AllergyIntolerance Confirmed": { "AllergyIntolerance Confirmed code" } display 'Confirmed'
+//concept "AllergyIntolerance Active": { "AllergyIntolerance Active code" } display 'Active'
+//concept "Condition Confirmed": { "Condition Confirmed code" } display 'Confirmed'
+//concept "Condition Active": { "Condition Active code" } display 'Active'
+//concept "Condition Recurrence": { "Condition Recurrence code" } display 'Recurrence'
+//concept "Condition Relapse": { "Condition Relapse code" } display 'Relapse'
 
 // -------------------------------------------------- GENERAL ---------------------------------------------------------
 
@@ -44,7 +48,46 @@ define function PeriodToInterval(period FHIR.Period):
   if period is null then
     null
   else
-    Interval[period."start".value, period."end".value]
+    if period."start" is null then
+      Interval(period."start".value, period."end".value]
+    else
+      Interval[period."start".value, period."end".value]
+
+/**
+ * Converts a FHIR Quantity to a CQL Interval.  FHIRHelpers provides a function for this, but
+ * FHIRHelpers provides several overloads of the ToInterval function, and the JavaScript CQL
+ * Execution Framework apparently does not handle this correctly.  Creating uniquely named
+ * functions here ensures safe execution.
+ * @param quantity - a FHIR Quantity
+ * @returns {System.Interval} a CQL Interval or null if null was passed in
+ */
+define function QuantityToInterval(quantity FHIR.Quantity):
+  if quantity is null then null else
+    case quantity.comparator.value
+      when '<' then
+        Interval[
+          null,
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity)
+        )
+      when '<=' then
+        Interval[
+          null,
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity)
+        ]
+      when '>=' then
+        Interval[
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity),
+          null
+        ]
+      when '>' then
+        Interval(
+          FHIRHelpers.ToQuantityIgnoringComparator(quantity),
+          null
+        ]
+      else
+        Interval[FHIRHelpers.ToQuantity(quantity), FHIRHelpers.ToQuantity(quantity)]
+    end
+
 
 /**
  * Converts a FHIR Range to a CQL Interval.  FHIRHelpers provides a function for this, but
@@ -185,7 +228,7 @@ define function ConditionsByConcept(Koncept System.Concept):
  * @returns {List<Condition>} a list of confirmed Conditions, or null if null was passed in
  */
 define function Confirmed(CondList List<Condition>):
-  CondList C where C.verificationStatus ~ "Condition Confirmed"
+  CondList C where C.verificationStatus ~ "Condition Confirmed code"
 
 /**
  * Conditions that are active. In FHIR R4, this is reflected by clinicalStatus: 'active' and the absence of any
@@ -197,7 +240,7 @@ define function Confirmed(CondList List<Condition>):
  */
 define function ActiveCondition(CondList List<Condition>):
   CondList C
-    where C.clinicalStatus ~ "Condition Active"
+    where C.clinicalStatus ~ "Condition Active code"
       and C.abatement is null
 
 /**
@@ -210,9 +253,9 @@ define function ActiveCondition(CondList List<Condition>):
  */
 define function ActiveOrRecurring(CondList List<Condition>):
   CondList C
-    where C.clinicalStatus ~ "Condition Active"
-      or C.clinicalStatus ~ "Condition Recurrence"
-      or C.clinicalStatus ~ "Condition Relapse"
+    where C.clinicalStatus ~ "Condition Active code"
+      or C.clinicalStatus ~ "Condition Recurrence code"
+      or C.clinicalStatus ~ "Condition Relapse code"
 
 /**
  * Conditions with an onset or recorded date in the specified "look back" period.  For example, pregnancy in
@@ -511,8 +554,8 @@ define function AllergyIntolerancesByConcept(Koncept System.Concept):
 */
 define function ActiveOrConfirmedAllergyIntolerance(AllergyIntolList List<AllergyIntolerance>):
   AllergyIntolList A
-    where A.clinicalStatus ~ "AllergyIntolerance Active"
-      or A.verificationStatus ~ "AllergyIntolerance Confirmed"
+    where A.clinicalStatus ~ "AllergyIntolerance Active code"
+      or A.verificationStatus ~ "AllergyIntolerance Confirmed code"
 
 // -------------------------------------------------------- GOALS ------------------------------------------------------
 

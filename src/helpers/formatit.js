@@ -14,7 +14,7 @@ export function dateAgeFormat(result, input) {
   if (result == null || result.Patient == null || input == null) return '';
   const patientDOB = result.Patient.birthDate._json;
   const patientAgeAtDate = moment(input).diff(patientDOB, 'years');
-  return `${dateFormat(result, input)} (age ${patientAgeAtDate})`;
+  return dateFormat(result, input)  + ' (age ' + patientAgeAtDate +')';
 }
 
 export function datishFormat(result, input) {
@@ -33,33 +33,33 @@ export function ageFormat(result, input) {
     if (m.length === 5 && m[4] != null) { // it has a unit
       switch (m[4]) {
         case 'a': case 'y': case 'yr': case 'yrs': case 'year': case 'years':
-          return `age ${num}`; // no unit, years is implied
+          return 'age ' + num; // no unit, years is implied
         case 'mo': case 'mos': case 'month': case 'months':
-          return `age ${num} months`;
+          return 'age ' + num + 'months';
         case 'wk': case 'wks': case 'week': case 'weeks':
-          return `age ${num} weeks`;
+          return 'age' + num + 'weeks';
         case 'd': case 'day': case 'days':
-          return `age ${num} days`;
+          return 'age '+ num + ' days';
         default:
-          return `age ${input}`;
+          return 'age ' + input;
       }
     }
   }
   // fall back to returning the age + string
-  return `age ${input}`;
+  return 'age ' + input;
 }
 
 export function booleanFormat(result, input) {
   if (input == null) return '';
-  return `${input}`;
+  return input;
 }
 
 export function arrayFlatten(result, input, property, propertyAria, showAria) {
   if (input == null) return '';
   return input.map((question, i) => {
     let ariaLabel = '';
-    if (showAria) ariaLabel = `${question[property]} - Question Score: ${question[propertyAria]}`;
-    return <span key={i} aria-hidden={!showAria} aria-label={ariaLabel}>{question[property]}<br /></span>;
+    if (showAria) {ariaLabel = question[property] + ' - Question Score: ' + question[propertyAria]};
+    return (<span key={i} aria-hidden={!showAria} aria-label={ariaLabel}>{question[property]}<br /></span>);
   });
 }
 
@@ -71,9 +71,9 @@ export function quantityFormat(result, input) {
     if (m.length === 5 && m[4] != null) { // it has a unit
       // re-name MME/day unit
       const unit = m[4] === '{MME}/d' ? 'MME/day' : m[4];
-      return `${num} ${unit}`;
+      return num + ' ' + unit;
     }
-    return `${num}`;
+    return num;
   }
   // fall back to returning string
   return input;
@@ -97,11 +97,11 @@ function _datishAgeFormat(result, input, showAge) {
   } else if (input.Start || input.End) {
     const start = input.Start ? df(result, input.Start) : 'unknown start';
     const end = input.End ? df(result, input.End) : 'ongoing';
-    return `${start} - ${end}`;
+    return start + ' - ' + end;
   } else if (input.Low || input.High) {
     const low = input.Low ? ageFormat(result, input.Low) : 'age unknown';
     const high = input.High ? ageFormat(result, input.High) : 'age unknown';
-    return `${low} - ${high.slice(4)}`; // slice removes 'age ' prefix
+    return low + ' - ' + high.slice(4); // slice removes 'age ' prefix
   }
   // fall back to the input string
   return input;

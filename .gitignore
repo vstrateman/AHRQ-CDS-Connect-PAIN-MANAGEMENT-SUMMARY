@@ -7,3 +7,6 @@
 /test_patient_dump
 *.css
 .DS_Store
+/.idea
+yarn.lock
+yarn-error.log

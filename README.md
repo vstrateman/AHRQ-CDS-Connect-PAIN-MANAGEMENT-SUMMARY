@@ -1,5 +1,12 @@
 # Pain Management Summary SMART on FHIR Application
 
+> NOTE: This is a fork of the Pain Management Summary application in support of
+the AHRQ Clinical Decision Support for Chronic Pain Management project that adds
+shared-decision making capabilities to the Pain Management Summary. Although the
+work was originally done as a fork with the intention of submitting back to the
+Pain Management Summary, the feature set and focus of the project is sufficiently
+different that a full contribution is not possible.
+
 ## About
 
 The Pain Management Summary SMART on FHIR application was developed to support the pilot of the CDS artifact, [Factors to Consider in Managing Chronic Pain: A Pain Management Summary](https://cds.ahrq.gov/cdsconnect/artifact/factors-consider-managing-chronic-pain-pain-management-summary).  This artifact presents a variety of key "factors" for clinicians to consider when assessing the history of a patient's chronic pain.  These factors include subjective and objective findings, along with recorded treatments and interventions to inform shared decision making on treatments moving forward.
@@ -67,6 +74,10 @@ The Pain Management Summary can be deployed as static web resources on any HTTP 
 Optionally to step 9, you can run the static build contents in a simple Node http-server via the command: `yarn start-static`.
 
 ### To update the valueset-db.json file
+
+> NOTE: This feature is no longer supported within this repository. The terminology
+process for PainManager is now part of the CDS4CPM implementation guide. See the terminology
+page of that IG for more information.
 
 The value set content used by the CQL is cached in a file named `valueset-db.json`.  If the CQL has been modified to add or remove value sets, or if the value sets themselves have been updated, you may wish to update the valueset-db.json with the latest codes.  To do this, you will need a [UMLS Terminology Services account](https://uts.nlm.nih.gov//license.html).
 
@@ -156,3 +167,13 @@ The data that is posted reports whether or not the patient met the CDS inclusion
 ```
 
 To enable posting of analytics, configure the `analytics_endpoint` and `x_api_key` in the `public/config.json` file. The default value is an empty string, which will not post any analytics.
+
+## Docker
+
+To build with docker run:
+
+`docker build .`
+
+from the root directory. This is will build a container which serves content on port 80. You can run this with:
+
+`docker run -p 80:80 <hash>`

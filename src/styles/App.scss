@@ -2,7 +2,6 @@
 @import 'elements/variables';
 
 /* ------------------------- IMPORT 3RD PARTY VENDORS ---------------------- */
-@import 'node_modules/tocbot/src/scss/tocbot-core';
 @import 'node_modules/react-table/react-table';
 
 /* ------------------------- IMPORT CUSTOM SCSS ---------------------------- */
@@ -17,3 +16,9 @@
 // component-specific
 @import 'components/Header';
 @import 'components/Summary';
+@import 'components/Landing';
+@import 'components/Footer';
+
+main {
+    display: block;
+}

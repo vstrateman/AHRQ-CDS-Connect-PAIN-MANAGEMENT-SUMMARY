@@ -1,8 +1,12 @@
 {
    "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "",
+         "type" : "CqlToElmInfo"
+      } ],
       "identifier" : {
          "id" : "CDS_Connect_Commons_for_FHIRv400",
-         "version" : "1.0.1"
+         "version" : "1.0.2"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -15,14 +19,14 @@
          }, {
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.0"
+            "version" : "4.0.1"
          } ]
       },
       "includes" : {
          "def" : [ {
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.0"
+            "version" : "4.0.1"
          } ]
       },
       "codeSystems" : {
@@ -95,51 +99,6 @@
             }
          } ]
       },
-      "concepts" : {
-         "def" : [ {
-            "name" : "AllergyIntolerance Confirmed",
-            "display" : "Confirmed",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "AllergyIntolerance Confirmed code"
-            } ]
-         }, {
-            "name" : "AllergyIntolerance Active",
-            "display" : "Active",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "AllergyIntolerance Active code"
-            } ]
-         }, {
-            "name" : "Condition Confirmed",
-            "display" : "Confirmed",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Confirmed code"
-            } ]
-         }, {
-            "name" : "Condition Active",
-            "display" : "Active",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Active code"
-            } ]
-         }, {
-            "name" : "Condition Recurrence",
-            "display" : "Recurrence",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Recurrence code"
-            } ]
-         }, {
-            "name" : "Condition Relapse",
-            "display" : "Relapse",
-            "accessLevel" : "Public",
-            "code" : [ {
-               "name" : "Condition Relapse code"
-            } ]
-         } ]
-      },
       "statements" : {
          "def" : [ {
             "name" : "PeriodToInterval",
@@ -173,30 +132,77 @@
                   }
                },
                "else" : {
-                  "lowClosed" : true,
-                  "highClosed" : true,
-                  "type" : "Interval",
-                  "low" : {
-                     "path" : "value",
-                     "type" : "Property",
-                     "source" : {
-                        "path" : "start",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "period",
-                           "type" : "OperandRef"
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "IsNull",
+                        "operand" : {
+                           "path" : "start",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "period",
+                              "type" : "OperandRef"
+                           }
                         }
                      }
                   },
-                  "high" : {
-                     "path" : "value",
-                     "type" : "Property",
-                     "source" : {
-                        "path" : "end",
+                  "then" : {
+                     "lowClosed" : false,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "path" : "value",
                         "type" : "Property",
                         "source" : {
-                           "name" : "period",
-                           "type" : "OperandRef"
+                           "path" : "start",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "period",
+                              "type" : "OperandRef"
+                           }
+                        }
+                     },
+                     "high" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "end",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "period",
+                              "type" : "OperandRef"
+                           }
+                        }
+                     }
+                  },
+                  "else" : {
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "start",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "period",
+                              "type" : "OperandRef"
+                           }
+                        }
+                     },
+                     "high" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "end",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "period",
+                              "type" : "OperandRef"
+                           }
                         }
                      }
                   }
@@ -206,6 +212,192 @@
                "name" : "period",
                "operandTypeSpecifier" : {
                   "name" : "{http://hl7.org/fhir}Period",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "name" : "QuantityToInterval",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "IsNull",
+                     "operand" : {
+                        "name" : "quantity",
+                        "type" : "OperandRef"
+                     }
+                  }
+               },
+               "then" : {
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               },
+               "else" : {
+                  "type" : "Case",
+                  "comparand" : {
+                     "path" : "value",
+                     "type" : "Property",
+                     "source" : {
+                        "path" : "comparator",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "quantity",
+                           "type" : "OperandRef"
+                        }
+                     }
+                  },
+                  "caseItem" : [ {
+                     "when" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "<",
+                        "type" : "Literal"
+                     },
+                     "then" : {
+                        "lowClosed" : true,
+                        "highClosed" : false,
+                        "type" : "Interval",
+                        "low" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           }
+                        },
+                        "high" : {
+                           "name" : "ToQuantityIgnoringComparator",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "quantity",
+                              "type" : "OperandRef"
+                           } ]
+                        }
+                     }
+                  }, {
+                     "when" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "<=",
+                        "type" : "Literal"
+                     },
+                     "then" : {
+                        "lowClosed" : true,
+                        "highClosed" : true,
+                        "type" : "Interval",
+                        "low" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           }
+                        },
+                        "high" : {
+                           "name" : "ToQuantityIgnoringComparator",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "quantity",
+                              "type" : "OperandRef"
+                           } ]
+                        }
+                     }
+                  }, {
+                     "when" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : ">=",
+                        "type" : "Literal"
+                     },
+                     "then" : {
+                        "lowClosed" : true,
+                        "highClosed" : true,
+                        "type" : "Interval",
+                        "low" : {
+                           "name" : "ToQuantityIgnoringComparator",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "quantity",
+                              "type" : "OperandRef"
+                           } ]
+                        },
+                        "high" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           }
+                        }
+                     }
+                  }, {
+                     "when" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : ">",
+                        "type" : "Literal"
+                     },
+                     "then" : {
+                        "lowClosed" : false,
+                        "highClosed" : true,
+                        "type" : "Interval",
+                        "low" : {
+                           "name" : "ToQuantityIgnoringComparator",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "quantity",
+                              "type" : "OperandRef"
+                           } ]
+                        },
+                        "high" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           }
+                        }
+                     }
+                  } ],
+                  "else" : {
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "low" : {
+                        "name" : "ToQuantity",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "quantity",
+                           "type" : "OperandRef"
+                        } ]
+                     },
+                     "high" : {
+                        "name" : "ToQuantity",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "quantity",
+                           "type" : "OperandRef"
+                        } ]
+                     }
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "quantity",
+               "operandTypeSpecifier" : {
+                  "name" : "{http://hl7.org/fhir}Quantity",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
@@ -290,6 +482,7 @@
                   "alias" : "O",
                   "expression" : {
                      "dataType" : "{http://hl7.org/fhir}Observation",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
                      "type" : "Retrieve"
                   }
                } ],
@@ -952,6 +1145,7 @@
                   "alias" : "C",
                   "expression" : {
                      "dataType" : "{http://hl7.org/fhir}Condition",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
                      "type" : "Retrieve"
                   }
                } ],
@@ -1007,8 +1201,11 @@
                         "type" : "Property"
                      } ]
                   }, {
-                     "name" : "Condition Confirmed",
-                     "type" : "ConceptRef"
+                     "type" : "ToConcept",
+                     "operand" : {
+                        "name" : "Condition Confirmed code",
+                        "type" : "CodeRef"
+                     }
                   } ]
                }
             },
@@ -1051,8 +1248,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "Condition Active",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "Condition Active code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   }, {
                      "type" : "IsNull",
@@ -1105,8 +1305,11 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "name" : "Condition Active",
-                           "type" : "ConceptRef"
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "Condition Active code",
+                              "type" : "CodeRef"
+                           }
                         } ]
                      }, {
                         "type" : "Equivalent",
@@ -1120,8 +1323,11 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "name" : "Condition Recurrence",
-                           "type" : "ConceptRef"
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "Condition Recurrence code",
+                              "type" : "CodeRef"
+                           }
                         } ]
                      } ]
                   }, {
@@ -1136,8 +1342,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "Condition Relapse",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "Condition Relapse code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                }
@@ -1379,6 +1588,7 @@
                   "alias" : "P",
                   "expression" : {
                      "dataType" : "{http://hl7.org/fhir}Procedure",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
                      "type" : "Retrieve"
                   }
                } ],
@@ -1863,6 +2073,7 @@
                   "alias" : "M",
                   "expression" : {
                      "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
                      "type" : "Retrieve"
                   }
                } ],
@@ -1910,6 +2121,7 @@
                   "alias" : "M",
                   "expression" : {
                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
                      "type" : "Retrieve"
                   }
                } ],
@@ -2452,6 +2664,7 @@
                   "alias" : "E",
                   "expression" : {
                      "dataType" : "{http://hl7.org/fhir}Encounter",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
                      "type" : "Retrieve"
                   }
                } ],
@@ -2547,6 +2760,7 @@
                   "alias" : "A",
                   "expression" : {
                      "dataType" : "{http://hl7.org/fhir}AllergyIntolerance",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/AllergyIntolerance",
                      "type" : "Retrieve"
                   }
                } ],
@@ -2604,8 +2818,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "AllergyIntolerance Active",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "AllergyIntolerance Active code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   }, {
                      "type" : "Equivalent",
@@ -2619,8 +2836,11 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "name" : "AllergyIntolerance Confirmed",
-                        "type" : "ConceptRef"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "AllergyIntolerance Confirmed code",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                }
