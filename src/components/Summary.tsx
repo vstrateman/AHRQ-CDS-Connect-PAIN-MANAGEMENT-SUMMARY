@@ -457,11 +457,11 @@ export default class Summary extends Component<any, any> {
                                     <div className="activity-section">
                                         {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-goals">
                                             <h3>ACTIVITY GOALS</h3>
-                                            <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div>
+                                            {/* <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div> */}
                                         </div> : ''}
                                         {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-barriers">
                                             <h3>ACTIVITY BARRIERS</h3>
-                                            <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div>
+                                            {/* <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div> */}
                                         </div> : ''}
                                     </div>
                                 </div>
