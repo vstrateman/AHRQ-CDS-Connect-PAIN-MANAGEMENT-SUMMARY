@@ -477,22 +477,18 @@
                   "expression" : {
                      "type" : "Coalesce",
                      "operand" : [ {
-                        "type" : "If",
-                        "condition" : {
-                           "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "As",
-                           "operand" : {
-                              "type" : "Not",
-                              "operand" : {
-                                 "type" : "IsNull",
-                                 "operand" : {
-                                    "name" : "doseRange",
-                                    "type" : "QueryLetRef"
-                                 }
-                              }
-                           }
-                        },
-                        "then" : {
+                        "type" : "ToString",
+                        "operand" : {
+                           "name" : "ToQuantity",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "doseQuantity",
+                              "type" : "QueryLetRef"
+                           } ]
+                        }
+                     }, {
+                        "type" : "Concatenate",
+                        "operand" : [ {
                            "type" : "Concatenate",
                            "operand" : [ {
                               "type" : "Concatenate",
@@ -501,17 +497,20 @@
                                  "operand" : [ {
                                     "type" : "ToString",
                                     "operand" : {
-                                       "name" : "ToQuantity",
-                                       "libraryName" : "FHIRHelpers",
-                                       "type" : "FunctionRef",
-                                       "operand" : [ {
-                                          "path" : "low",
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "value",
                                           "type" : "Property",
                                           "source" : {
-                                             "name" : "doseRange",
-                                             "type" : "QueryLetRef"
+                                             "path" : "low",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "name" : "doseRange",
+                                                "type" : "QueryLetRef"
+                                             }
                                           }
-                                       } ]
+                                       }
                                     }
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -521,51 +520,43 @@
                               }, {
                                  "type" : "ToString",
                                  "operand" : {
-                                    "name" : "ToQuantity",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "high",
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "value",
                                        "type" : "Property",
                                        "source" : {
-                                          "name" : "doseRange",
-                                          "type" : "QueryLetRef"
+                                          "path" : "high",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "name" : "doseRange",
+                                             "type" : "QueryLetRef"
+                                          }
                                        }
-                                    } ]
+                                    }
                                  }
                               } ]
                            }, {
-                              "path" : "value",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : " ",
+                              "type" : "Literal"
+                           } ]
+                        }, {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "unit",
                               "type" : "Property",
                               "source" : {
-                                 "path" : "unit",
+                                 "path" : "high",
                                  "type" : "Property",
                                  "source" : {
-                                    "path" : "high",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "doseRange",
-                                       "type" : "QueryLetRef"
-                                    }
+                                    "name" : "doseRange",
+                                    "type" : "QueryLetRef"
                                  }
                               }
-                           } ]
-                        },
-                        "else" : {
-                           "type" : "ToString",
-                           "operand" : {
-                              "name" : "ToQuantity",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "doseQuantity",
-                                 "type" : "QueryLetRef"
-                              } ]
                            }
-                        }
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "",
-                        "type" : "Literal"
+                        } ]
                      } ]
                   }
                }, {
@@ -784,25 +775,14 @@
                      }, {
                         "name" : "dose",
                         "value" : {
-                           "type" : "If",
-                           "condition" : {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "operand" : {
-                                 "type" : "Not",
-                                 "operand" : {
-                                    "type" : "IsNull",
-                                    "operand" : {
-                                       "name" : "doseRange",
-                                       "type" : "QueryLetRef"
-                                    }
-                                 }
-                              }
-                           },
-                           "then" : {
-                              "name" : "ToQuantity",
-                              "type" : "FunctionRef",
+                           "name" : "ToQuantity",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "type" : "Coalesce",
                               "operand" : [ {
+                                 "name" : "doseQuantity",
+                                 "type" : "QueryLetRef"
+                              }, {
                                  "path" : "high",
                                  "type" : "Property",
                                  "source" : {
@@ -810,15 +790,7 @@
                                     "type" : "QueryLetRef"
                                  }
                               } ]
-                           },
-                           "else" : {
-                              "name" : "ToQuantity",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "doseQuantity",
-                                 "type" : "QueryLetRef"
-                              } ]
-                           }
+                           } ]
                         }
                      }, {
                         "name" : "dosesPerDay",
