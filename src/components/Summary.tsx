@@ -410,8 +410,7 @@ export default class Summary extends Component<any, any> {
 
     render() {
         const { summary, collector, qrCollector, result, cdsCollector, questionText } = this.props;
-        // const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
-        const meetsInclusionCriteria = true;
+        const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
         let submitDate;
         if (sharedDecisionSection.MyPAINSubmitDate.length > 0) {
