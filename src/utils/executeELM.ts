@@ -176,7 +176,8 @@ function processPage(uri, collector, resources) {
                     let referenceFound = false;
                     for (let medRefEntry of bundle.entry) {
                         if (medRefEntry.resource.resourceType === 'Medication'
-                            && reference === 'Medication/' + medRefEntry.resource.id) {
+                            && reference.endsWith('Medication/' + medRefEntry.resource.id)) {
+                            medReqEntry.resource.medicationReference = null;
                             medReqEntry.resource.medicationCodeableConcept = medRefEntry.resource.code;
                             referenceFound = true;
                         }
