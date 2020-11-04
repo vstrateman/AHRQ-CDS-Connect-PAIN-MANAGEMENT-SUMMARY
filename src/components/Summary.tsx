@@ -332,7 +332,7 @@ export default class Summary extends Component<any, any> {
                             </h3>
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
-                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"} mg/day</span>
+                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"}</span>
                             </div>
                         </div>
 
@@ -455,14 +455,18 @@ export default class Summary extends Component<any, any> {
                                     {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
 
                                     <div className="activity-section">
-                                        {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-goals">
+                                    <div className="activity-goals">
                                             <h3>ACTIVITY GOALS</h3>
-                                            <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div>
-                                        </div> : ''}
-                                        {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-barriers">
+                                            {(sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]] && sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value !== null) ? <div>
+                                                <div>{sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
+                                            </div> : "No activity goals submitted"}
+                                        </div>
+                                        <div className="activity-barriers">
                                             <h3>ACTIVITY BARRIERS</h3>
-                                            <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div>
-                                        </div> : ''}
+                                            {(sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]] && sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value !== null) ? <div>
+                                                <div>{sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
+                                            </div> : "No activity barriers submitted"}
+                                        </div>
                                     </div>
                                 </div>
                                 {<div className="shared-decision-making-section">
