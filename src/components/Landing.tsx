@@ -1,3 +1,4 @@
+import '../helpers/polyfill';
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -10,7 +11,6 @@ import Summary from './Summary';
 import Spinner from '../elements/Spinner';
 import executeExternalCDSCall from "../utils/executeExternalCDSHooksCall";
 import executeInternalCDSCall from "../utils/executeInternalCDSHooksCall";
-import '../helpers/polyfill';
 import { Hook, Console, Decode } from 'console-feed'
 require('es6-promise').polyfill();
 require('fetch-everywhere');
