@@ -1,9 +1,9 @@
 {
-  "PertinentMedicalHistory": [
+  "PertinentConditions": [
     {
       "name": "CHRONIC PAIN CONDITIONS (past 12 months)",
       "dataKey": "ConditionsAssociatedWithChronicPain",
-      "dataKeySource": "PertinentMedicalHistory",
+      "dataKeySource": "PertinentConditions",
       "info": [
         {
           "type": "elements",
@@ -28,7 +28,7 @@
     {
       "name": "CO-MORBID CONDITIONS INCREASING RISK WHEN USING OPIOIDS (past 12 months)",
       "dataKey": "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
-      "dataKeySource": "PertinentMedicalHistory",
+      "dataKeySource": "PertinentConditions",
       "info": [
         {
           "type": "elements",
