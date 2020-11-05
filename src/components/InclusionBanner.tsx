@@ -19,7 +19,7 @@ export default class InclusionBanner extends Component<any, any> {
     return (
       <div
         className="inclusion-banner banner"
-        style={{display: this.state.displayed ? 'block' : 'none'}}
+        style={{ display: this.state.displayed ? 'block' : 'none' }}
         role="banner">
         {this.props.dismissible &&
           <FontAwesomeIcon className="close-button" icon="times" onClick={this.handleClose} title="close" />
@@ -39,7 +39,19 @@ export default class InclusionBanner extends Component<any, any> {
             <li>Has an active adjuvant analgesic medication in the last 180 days</li>
           </ul>
         </div>
+        <div className="cdc-disclaimer">
+          Please see the
+            <a
+            href="https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm"
+            data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
+            target="_blank"
+            rel="noopener noreferrer">
+            CDC Guideline for Prescribing Opioids for Chronic Pain
+            </a>
+          for additional information and prescribing guidance.
+        </div>
       </div>
+
     );
   }
 }

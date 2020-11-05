@@ -12,6 +12,7 @@ import summaryMap from './summary.json';
 import pkg from '../../package.json'
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
+import * as configData from '../helpers/redcapLink.json'
 
 import InclusionBanner from './InclusionBanner';
 // import ExclusionBanner from './ExclusionBanner';
@@ -454,7 +455,7 @@ export default class Summary extends Component<any, any> {
                                     {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
 
                                     <div className="activity-section">
-                                    <div className="activity-goals">
+                                        <div className="activity-goals">
                                             <h3>ACTIVITY GOALS</h3>
                                             {(sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]] && sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value !== null) ? <div>
                                                 <div>{sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
@@ -474,18 +475,16 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                         </div>
                     }
-
-                    <div className="cdc-disclaimer">
-                        Please see the
-                        <a
-                            href="https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm"
+                    {configData.redcapSurveyLink ? (<div className="redcap-link">
+                        <p>To provide comments on this release of PainManager, please complete the <a
+                            href={configData.redcapSurveyLink}
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
                             target="_blank"
                             rel="noopener noreferrer">
-                            CDC Guideline for Prescribing Opioids for Chronic Pain
-                        </a>
-                        for additional information and prescribing guidance.
-                    </div>
+                             REDCap survey
+                        </a>.</p>
+                    </div>) : ('')}
+                    
 
                     <DevTools
                         collector={collector}
