@@ -12,7 +12,6 @@ import summaryMap from './summary.json';
 import pkg from '../../package.json'
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
-import * as configData from '../helpers/redcapLink.json'
 
 import InclusionBanner from './InclusionBanner';
 // import ExclusionBanner from './ExclusionBanner';
@@ -422,6 +421,19 @@ export default class Summary extends Component<any, any> {
         if (!summary) {
             return null;
         }
+        fetch(process.env.PUBLIC_URL + '/config.json')
+            .then((response: any) => {
+                return response.json();
+            })
+            .then((config: any) => {
+                // Only provide analytics if the endpoint has been set
+                this.setState({ appConfig: config });
+                // console.log('config: ', this.appConfig)
+
+            })
+            .catch((err: any) => {
+                console.error('Error: ', err)
+            });
 
         return (
             <div className="summary">
@@ -475,16 +487,16 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                         </div>
                     }
-                    {configData.redcapSurveyLink ? (<div className="redcap-link">
+
+                    {this.state.appConfig ? (<div className="redcap-link">
                         <p>To provide comments on this release of PainManager, please complete the <a
-                            href={configData.redcapSurveyLink}
+                            href={this.state.appConfig.redcapSurveyLink }
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
                             target="_blank"
                             rel="noopener noreferrer">
-                             REDCap survey
+                            REDCap survey
                         </a>.</p>
                     </div>) : ('')}
-                    
 
                     <DevTools
                         collector={collector}
