@@ -35,25 +35,26 @@ export default class Summary extends Component<any, any> {
 
         ReactModal.setAppElement('body');
         console.log(`You are running version ${this.appVersion} of the PainManager Application`);
+        console.log('shared: ', this.props.summary.SharedDecisionMaking)
     }
 
     componentDidMount() {
         let appConfig = localStorage.getItem('config');
 
-        if(appConfig) {
-           appConfig = JSON.parse(appConfig);
-           this.setState({ appConfig }) 
+        if (appConfig) {
+            appConfig = JSON.parse(appConfig);
+            this.setState({ appConfig })
         } else {
-            
+
             fetch(process.env.PUBLIC_URL + '/config.json')
-            .then((response: any) => {return response.json()})
-            .then((config: any) => {
-                this.setState({ appConfig: config })
-                localStorage.setItem('config', JSON.stringify(config))
-            })
-            .catch((err: any) => {
-                console.error('Error: ', err)
-            });
+                .then((response: any) => { return response.json() })
+                .then((config: any) => {
+                    this.setState({ appConfig: config })
+                    localStorage.setItem('config', JSON.stringify(config))
+                })
+                .catch((err: any) => {
+                    console.error('Error: ', err)
+                });
         }
     }
 
@@ -431,14 +432,14 @@ export default class Summary extends Component<any, any> {
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
         let submitDate;
         if (sharedDecisionSection.MyPAINSubmitDate.length > 0) {
-            submitDate = this.formatitHelper.datishFormat('dateFormat', sharedDecisionSection.MyPAINSubmitDate);
+            submitDate = this.formatitHelper.dateFormat('dateFormat', sharedDecisionSection.MyPAINSubmitDate);
         } else {
             submitDate = '';
         }
         if (!summary) {
             return null;
         }
-        
+
         return (
             <div className="summary">
 
@@ -466,35 +467,44 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
+                                {((sharedDecisionSection.ActivityGoals.length === 0) && 
+                                (sharedDecisionSection.ActivityBarriers.length === 0) && 
+                                (sharedDecisionSection.MyPAINSubmitDate.length === 0) && 
+                                (sharedDecisionSection.PainLocations.length === 0) && 
+                                (sharedDecisionSection.PainIntensityAndInterference.length === 0)) ? 
+                                (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
+                                    : (<div>
 
-                                <div className="shared-top-section">
-                                    {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
+                                        <div className="shared-top-section">
+                                            {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
 
-                                    <div className="activity-section">
-                                        <div className="activity-goals">
-                                            <h3>ACTIVITY GOALS</h3>
-                                            {(sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]] && sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value !== null) ? <div>
-                                                <div>{sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
-                                            </div> : "No activity goals submitted"}
+                                            <div className="activity-section">
+                                                <div className="activity-goals">
+                                                    <h3>ACTIVITY GOALS</h3>
+                                                    {(sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]] && sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value !== null) ? <div>
+                                                        <div>{sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
+                                                    </div> : "No activity goals submitted"}
+                                                </div>
+                                                <div className="activity-barriers">
+                                                    <h3>ACTIVITY BARRIERS</h3>
+                                                    {(sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]] && sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value !== null) ? <div>
+                                                        <div>{sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
+                                                    </div> : "No activity barriers submitted"}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="activity-barriers">
-                                            <h3>ACTIVITY BARRIERS</h3>
-                                            {(sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]] && sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value !== null) ? <div>
-                                                <div>{sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
-                                            </div> : "No activity barriers submitted"}
+                                        <div className="shared-decision-making-section">
+                                            {this.renderSection("SharedDecisionMaking")}
                                         </div>
                                     </div>
-                                </div>
-                                {<div className="shared-decision-making-section">
-                                    {this.renderSection("SharedDecisionMaking")}
-                                </div>}
+                                    )}
                             </Collapsible>
                         </div>
                     }
 
                     {this.state.appConfig ? (<div className="redcap-link">
                         <p>To provide comments on this release of PainManager, please complete the <a
-                            href={this.state.appConfig.redcapSurveyLink }
+                            href={this.state.appConfig.redcapSurveyLink}
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
                             target="_blank"
                             rel="noopener noreferrer">
