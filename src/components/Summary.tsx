@@ -35,7 +35,6 @@ export default class Summary extends Component<any, any> {
 
         ReactModal.setAppElement('body');
         console.log(`You are running version ${this.appVersion} of the PainManager Application`);
-        console.log('shared: ', this.props.summary.SharedDecisionMaking)
     }
 
     componentDidMount() {
