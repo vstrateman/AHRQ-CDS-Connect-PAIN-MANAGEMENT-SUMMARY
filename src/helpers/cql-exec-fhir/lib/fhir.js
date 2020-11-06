@@ -72,7 +72,6 @@ var FHIRWrapper = function () {
 }();
 
 var PatientSource = function () {
-  console.log('in patient source')
   function PatientSource(filePathOrXML) {
     _classCallCheck(this, PatientSource);
 

@@ -421,6 +421,19 @@ export default class Summary extends Component<any, any> {
         if (!summary) {
             return null;
         }
+        fetch(process.env.PUBLIC_URL + '/config.json')
+            .then((response: any) => {
+                return response.json();
+            })
+            .then((config: any) => {
+                // Only provide analytics if the endpoint has been set
+                this.setState({ appConfig: config });
+                // console.log('config: ', this.appConfig)
+
+            })
+            .catch((err: any) => {
+                console.error('Error: ', err)
+            });
 
         return (
             <div className="summary">
@@ -454,7 +467,7 @@ export default class Summary extends Component<any, any> {
                                     {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
 
                                     <div className="activity-section">
-                                    <div className="activity-goals">
+                                        <div className="activity-goals">
                                             <h3>ACTIVITY GOALS</h3>
                                             {(sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]] && sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value !== null) ? <div>
                                                 <div>{sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
@@ -475,17 +488,15 @@ export default class Summary extends Component<any, any> {
                         </div>
                     }
 
-                    <div className="cdc-disclaimer">
-                        Please see the
-                        <a
-                            href="https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm"
+                    {this.state.appConfig ? (<div className="redcap-link">
+                        <p>To provide comments on this release of PainManager, please complete the <a
+                            href={this.state.appConfig.redcapSurveyLink }
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
                             target="_blank"
                             rel="noopener noreferrer">
-                            CDC Guideline for Prescribing Opioids for Chronic Pain
-                        </a>
-                        for additional information and prescribing guidance.
-                    </div>
+                            REDCap survey
+                        </a>.</p>
+                    </div>) : ('')}
 
                     <DevTools
                         collector={collector}
