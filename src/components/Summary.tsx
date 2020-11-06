@@ -29,7 +29,7 @@ export default class Summary extends Component<any, any> {
         super(props);
         this.state = {
             showModal: false,
-            modalSubSection: null
+            modalSubSection: null,
         };
         this.subsectionTableProps = { id: 'react_sub-section__table' };
 
@@ -38,6 +38,23 @@ export default class Summary extends Component<any, any> {
     }
 
     componentDidMount() {
+        let appConfig = localStorage.getItem('config');
+
+        if(appConfig) {
+           appConfig = JSON.parse(appConfig);
+           this.setState({ appConfig }) 
+        } else {
+            
+            fetch(process.env.PUBLIC_URL + '/config.json')
+            .then((response: any) => {return response.json()})
+            .then((config: any) => {
+                this.setState({ appConfig: config })
+                localStorage.setItem('config', JSON.stringify(config))
+            })
+            .catch((err: any) => {
+                console.error('Error: ', err)
+            });
+        }
     }
 
     handleOpenModal = (modalSubSection: any, event: any) => {
@@ -421,20 +438,7 @@ export default class Summary extends Component<any, any> {
         if (!summary) {
             return null;
         }
-        fetch(process.env.PUBLIC_URL + '/config.json')
-            .then((response: any) => {
-                return response.json();
-            })
-            .then((config: any) => {
-                // Only provide analytics if the endpoint has been set
-                this.setState({ appConfig: config });
-                // console.log('config: ', this.appConfig)
-
-            })
-            .catch((err: any) => {
-                console.error('Error: ', err)
-            });
-
+        
         return (
             <div className="summary">
 
