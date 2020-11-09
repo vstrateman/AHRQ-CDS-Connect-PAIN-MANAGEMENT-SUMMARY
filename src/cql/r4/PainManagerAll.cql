@@ -1226,24 +1226,20 @@ define ReportPainLocations:
 (QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'Stabbing', 'Burning', 'Aching', 'Tingling', 'Prickling', 'Throbbing'}
   or qrOb.code.coding[0].code.value = 'mpq-1053')//'painLocationOther') => doesn't work
 return
-{
   {
     Location: qrOb.code.coding[0].display,
     PainYesNo: true,
     Description: ObservationValue(qrOb)
   }
-}
 
 // Data from the most recent PainIntensityAndInteference Observations
 define ReportPainIntensityAndInterference:
   (QuestionnaireObservations) qrOb where ObservationValue(qrOb) in
     {'Had no pain', 'Mild', 'Moderate', 'Severe', 'Very Severe', 'Not at all', 'A little bit', 'Somewhat', 'Quite a bit', 'Very much'}
   return
-   {
-     {
+  {
     Question: qrOb.code.coding[0].display,
     Response: ObservationValue(qrOb)
-  }
   }
 
   define function GetResourceURL(linkId String):
