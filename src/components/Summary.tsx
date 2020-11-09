@@ -157,10 +157,10 @@ export default class Summary extends Component<any, any> {
                 //   entry.Answer = this.props.questionText.get(entry.LinkId) + entry.Answer;
                 entry.Question = this.props.questionText.get(entry.LinkId);
             }
-            if (entry.Location && (entry.Location !== null)) {
-                let locationWord = entry.Location.match(/(\b[A-Z0-9][A-Z0-9]+|\b[A-Z]\b)/g);
+            if (entry.Location && (entry.Location !== null) && (entry.Location.value !== (null || undefined))) {
+                let locationWord = entry.Location.value.match(/(\b[A-Z0-9][A-Z0-9]+|\b[A-Z]\b)/g);
                 if (locationWord !== null) {
-                    entry.Location = locationWord;
+                    entry.Location = locationWord.join(',');
                 }
             }
             if (entry.PainYesNo && (entry.PainYesNo !== null) && (entry.PainYesNo === true)) {
