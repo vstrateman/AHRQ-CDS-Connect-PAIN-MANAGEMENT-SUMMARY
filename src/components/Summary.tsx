@@ -187,25 +187,7 @@ export default class Summary extends Component<any, any> {
         if (filteredEntries.length === 0) return null;
 
         const headers = Object.keys(table.headers);
-        const columns = [
-            {
-                id: 'flagged',
-                Header: <span aria-label="flag"></span>,
-                accessor: (entry: any) => this.isEntryFlagged(section, subSection.dataKey, entry),
-                Cell: (props: any) =>
-                    <FontAwesomeIcon
-                        className={'flag flag-entry ' + (props.value ? 'flagged' : '')}
-                        icon="exclamation-circle"
-                        title={props.value ? 'flag: ' + props.value : 'flag'}
-                        data-tip={props.value ? props.value : ''}
-                        role="tooltip"
-                        tabIndex={0}
-                    />,
-                sortable: false,
-                width: 35,
-                minWidth: 35
-            }
-        ];
+        const columns: any[] = [];
         headers.forEach((header) => {
             const headerKey = table.headers[header];
 
@@ -336,14 +318,14 @@ export default class Summary extends Component<any, any> {
                                         role="button"
                                         tabIndex={0}
                                         aria-label={subSection.name}>
-                                        <FontAwesomeIcon
+                                        {subSection.recommendationText ? <FontAwesomeIcon
                                             className='info-icon'
                                             icon="info-circle"
                                             title={'more info: ' + subSection.name}
                                             data-tip="more info"
                                             role="tooltip"
                                             tabIndex={0}
-                                        />
+                                        /> : ''}
                                     </div>
                                 }
                             </h3>
@@ -372,14 +354,14 @@ export default class Summary extends Component<any, any> {
                             role="button"
                             tabIndex={0}
                             aria-label={subSection.name}>
-                            <FontAwesomeIcon
+                            {subSection.recommendationText ? <FontAwesomeIcon
                                 className='info-icon'
                                 icon="info-circle"
                                 title={'more info: ' + subSection.name}
                                 data-tip="more info"
                                 role="tooltip"
                                 tabIndex={0}
-                            />
+                            /> : ''}
                         </div>
                     }
                 </div>)
