@@ -165,6 +165,18 @@ function processPage(uri, collector, resources) {
         if (bundle && bundle.link && bundle.link.some(l => l.relation === 'self' && l.url != null)) {
             url = bundle.link.find(l => l.relation === 'self').url;
         }
+        if (uri.startsWith('Condition')){
+            bundle.entry.forEach((conditionEntry) => {
+                conditionEntry.resource.code.coding.forEach((codeEntry)=> {
+                    if (codeEntry.system.startsWith('urn:oid')) {
+                        console.log('New System should be       ' + getUrlFromOid(codeEntry.system.substring(codeEntry.system.lastIndexOf(':') + 1)));
+                        codeEntry.system = getUrlFromOid(codeEntry.system.substring(codeEntry.system.lastIndexOf(':') + 1));
+                        console.log('OID        ' + codeEntry.system);
+
+                    }
+                });
+            });
+        }
         if (uri.startsWith('MedicationRequest') ||
             uri.startsWith('MedicationStatement')) {
             bundle.entry.forEach((medReqEntry) => {
@@ -253,6 +265,69 @@ function updateSearchParams(params, release, type) {
                 //nothing
             }
         }
+    }
+}
+
+    /* The following is base on
+    based on the 1.0.0 publication of the terminology: https://terminology.hl7.org/1.0.0/
+     */
+function getUrlFromOid(oid:string) {
+    switch (oid) {
+        case "2.16.840.1.113883.5.4": return "http://terminology.hl7.org/CodeSystem/v3-ActCode";
+        case "2.16.840.1.113883.5.1001": return "http://terminology.hl7.org/CodeSystem/v3-ActMood";
+        case "2.16.840.1.113883.5.7": return "http://terminology.hl7.org/CodeSystem/v3-ActPriority";
+        case "2.16.840.1.113883.5.8": return "http://terminology.hl7.org/CodeSystem/v3-ActReason";
+        case "2.16.840.1.113883.5.1002": return "http://terminology.hl7.org/CodeSystem/v3-ActRelationshipType";
+        case "2.16.840.1.113883.5.14": return "http://terminology.hl7.org/CodeSystem/v3-ActStatus";
+        case "2.16.840.1.113883.5.1119": return "http://terminology.hl7.org/CodeSystem/v3-AddressUse";
+        case "2.16.840.1.113883.5.1": return "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender";
+        case "2.16.840.1.113883.18.2": return "http://terminology.hl7.org/CodeSystem/v2-0001";
+        case "2.16.840.1.113883.6.12": return "http://www.ama-assn.org/go/cpt";
+        case "2.16.840.1.113883.12.292": return "http://hl7.org/fhir/sid/cvx";
+        case "2.16.840.1.113883.5.25": return "http://terminology.hl7.org/CodeSystem/v3-Confidentiality";
+        case "2.16.840.1.113883.12.112": return "urn:oid:2.16.840.1.113883.12.112";
+        case "2.16.840.1.113883.4.642.1.1093": return "http://terminology.hl7.org/CodeSystem/discharge-disposition";
+        case "2.16.840.1.113883.5.43": return "http://terminology.hl7.org/CodeSystem/v3-EntityNamePartQualifier";
+        case "2.16.840.1.113883.5.45": return "http://terminology.hl7.org/CodeSystem/v3-EntityNameUse";
+        case "2.16.840.1.113883.6.14": return "http://terminology.hl7.org/CodeSystem/HCPCS";
+        case "2.16.840.1.113883.6.285": return "urn:oid:2.16.840.1.113883.6.285";
+        case "2.16.840.1.113883.6.3": return "http://terminology.hl7.org/CodeSystem/icd10";
+        case "2.16.840.1.113883.6.4": return "http://www.cms.gov/Medicare/Coding/ICD10";
+        case "2.16.840.1.113883.6.90": return "http://hl7.org/fhir/sid/icd-10-cm";
+        case "2.16.840.1.113883.6.42": return "http://terminology.hl7.org/CodeSystem/icd9";
+        case "2.16.840.1.113883.6.2": return "http://terminology.hl7.org/CodeSystem/icd9cm";
+        case "2.16.840.1.113883.6.104": return "urn:oid:2.16.840.1.113883.6.104";
+        case "2.16.840.1.113883.6.1": return "http://loinc.org";
+        case "2.16.840.1.113883.5.60": return "http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityMode";
+        case "2.16.840.1.113883.5.61": return "http://terminology.hl7.org/CodeSystem/v3-LanguageAbilityProficiency";
+        case "2.16.840.1.113883.5.63": return "http://terminology.hl7.org/CodeSystem/v3-LivingArrangement";
+        case "2.16.840.1.113883.5.2": return "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus";
+        case "2.16.840.1.113883.3.26.1.1": return "http://ncithesaurus-stage.nci.nih.gov";
+        case "2.16.840.1.113883.3.26.1.5": return "http://terminology.hl7.org/CodeSystem/nciVersionOfNDF-RT";
+        case "2.16.840.1.113883.6.101": return "http://nucc.org/provider-taxonomy";
+        case "2.16.840.1.113883.5.1008": return "http://terminology.hl7.org/CodeSystem/v3-NullFlavor";
+        case "2.16.840.1.113883.5.83": return "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation";
+        case "2.16.840.1.113883.5.1063": return "http://terminology.hl7.org/CodeSystem/v3-ObservationValue";
+        case "2.16.840.1.113883.5.88": return "http://terminology.hl7.org/CodeSystem/v3-ParticipationFunction";
+        case "2.16.840.1.113883.5.1064": return "http://terminology.hl7.org/CodeSystem/v3-ParticipationMode";
+        case "2.16.840.1.113883.5.90": return "http://terminology.hl7.org/CodeSystem/v3-ParticipationType";
+        case "2.16.840.1.113883.6.88": return "http://www.nlm.nih.gov/research/umls/rxnorm";
+        case "2.16.840.1.113883.5.1076": return "http://terminology.hl7.org/CodeSystem/v3-ReligiousAffiliation";
+        case "2.16.840.1.113883.5.110": return "http://terminology.hl7.org/CodeSystem/v3-RoleClass";
+        case "2.16.840.1.113883.5.111": return "http://terminology.hl7.org/CodeSystem/v3-RoleCode";
+        case "2.16.840.1.113883.5.1068": return "http://terminology.hl7.org/CodeSystem/v3-RoleStatus";
+        case "2.16.840.1.113883.6.96": return "http://snomed.info/sct";
+        case "2.16.840.1.113883.6.21": return "http://terminology.hl7.org/CodeSystem/nubc-UB92";
+        case "2.16.840.1.113883.6.301.3": return "http://terminology.hl7.org/CodeSystem/v2-0456";
+        case "2.16.840.1.113883.6.50": return "http://terminology.hl7.org/CodeSystem/POS";
+        case "2.16.840.1.113883.6.238": return "http://terminology.hl7.org/CodeSystem/PHRaceAndEthnicityCDC";
+        case "2.16.840.1.113883.6.13": return "http://terminology.hl7.org/CodeSystem/CD2";
+        case "2.16.840.1.113883.5.79": return "http://terminology.hl7.org/CodeSystem/v3-mediatypes";
+        case "2.16.840.1.113883.3.221.5": return "urn:oid:2.16.840.1.113883.3.221.5";
+        case "1.3.6.1.4.1.12009.10.3.1": return "urn:oid:1.3.6.1.4.1.12009.10.3.1";
+        case "2.16.840.1.113883.6.8": return "http://unitsofmeasure.org";
+        case "2.16.840.1.113883.6.86": return "http://terminology.hl7.org/CodeSystem/umls";
+        default: return null;
     }
 }
 
