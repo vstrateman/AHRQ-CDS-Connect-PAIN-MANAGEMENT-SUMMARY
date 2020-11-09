@@ -7698,49 +7698,46 @@
                },
                "return" : {
                   "expression" : {
-                     "type" : "List",
+                     "type" : "Tuple",
                      "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Location",
-                           "value" : {
-                              "path" : "display",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "coding",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "code",
-                                       "scope" : "qrOb",
-                                       "type" : "Property"
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           }
-                        }, {
-                           "name" : "PainYesNo",
-                           "value" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "name" : "Description",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
+                        "name" : "Location",
+                        "value" : {
+                           "path" : "display",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "Indexer",
                               "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
+                                 "path" : "coding",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "code",
+                                    "scope" : "qrOb",
+                                    "type" : "Property"
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal"
                               } ]
                            }
-                        } ]
+                        }
+                     }, {
+                        "name" : "PainYesNo",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "Description",
+                        "value" : {
+                           "name" : "ObservationValue",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
                      } ]
                   }
                }
@@ -7815,42 +7812,39 @@
                },
                "return" : {
                   "expression" : {
-                     "type" : "List",
+                     "type" : "Tuple",
                      "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Question",
-                           "value" : {
-                              "path" : "display",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "coding",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "code",
-                                       "scope" : "qrOb",
-                                       "type" : "Property"
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           }
-                        }, {
-                           "name" : "Response",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
+                        "name" : "Question",
+                        "value" : {
+                           "path" : "display",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "Indexer",
                               "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
+                                 "path" : "coding",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "code",
+                                    "scope" : "qrOb",
+                                    "type" : "Property"
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal"
                               } ]
                            }
-                        } ]
+                        }
+                     }, {
+                        "name" : "Response",
+                        "value" : {
+                           "name" : "ObservationValue",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
                      } ]
                   }
                }
