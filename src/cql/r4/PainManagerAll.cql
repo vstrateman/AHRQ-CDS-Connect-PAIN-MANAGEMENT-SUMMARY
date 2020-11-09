@@ -1088,7 +1088,6 @@ define ReportRiskScreeningsRelevantToPainManagement:
 // returned as user-friendly text representations, but a robust user interface (UI) should be implemented to
 // display the data to the user in a friendly manner.  See the Pain Management Summary SMART on FHIR application as
 // an example of how to integrate this summary into an EHR using modern web UI technologies.
-
 //****************************************************************************************
 
 //*************************** MME Calculation **********************************

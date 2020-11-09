@@ -177,8 +177,8 @@
           "headers": {
             "Medication": "Name",
             "MME/Day": {
-              "key": "Start",
-              "formatter": "datishFormat"
+              "key": "MME",
+              "formatter": "booleanFormat"
             },
             "Date Prescribed": {
               "key": "Start",
