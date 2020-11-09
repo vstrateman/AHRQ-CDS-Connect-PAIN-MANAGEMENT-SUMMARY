@@ -1,5 +1,5 @@
-import FHIR from 'fhirclient';
 import './helpers/polyfill';
+import FHIR from 'fhirclient';
 require('fetch-everywhere');
 
 fetch(process.env.PUBLIC_URL + '/launch-context.json')

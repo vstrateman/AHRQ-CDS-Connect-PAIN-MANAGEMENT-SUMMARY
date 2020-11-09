@@ -9,6 +9,7 @@ import ReactModal from 'react-modal';
 
 // import summaryMap from './summary.json';
 import summaryMap from './summary.json';
+import pkg from '../../package.json'
 import * as formatit from '../helpers/formatit';
 import * as sortit from '../helpers/sortit';
 
@@ -18,6 +19,7 @@ import InfoModal from './InfoModal';
 import DevTools from './DevTools';
 
 export default class Summary extends Component<any, any> {
+    appVersion = pkg.version;
     static propTypes: any;
     subsectionTableProps: { id: string; };
     formatitHelper: any = formatit;
@@ -27,14 +29,32 @@ export default class Summary extends Component<any, any> {
         super(props);
         this.state = {
             showModal: false,
-            modalSubSection: null
+            modalSubSection: null,
         };
         this.subsectionTableProps = { id: 'react_sub-section__table' };
 
         ReactModal.setAppElement('body');
+        console.log(`You are running version ${this.appVersion} of the PainManager Application`);
     }
 
     componentDidMount() {
+        let appConfig = localStorage.getItem('config');
+
+        if(appConfig) {
+           appConfig = JSON.parse(appConfig);
+           this.setState({ appConfig }) 
+        } else {
+            
+            fetch(process.env.PUBLIC_URL + '/config.json')
+            .then((response: any) => {return response.json()})
+            .then((config: any) => {
+                this.setState({ appConfig: config })
+                localStorage.setItem('config', JSON.stringify(config))
+            })
+            .catch((err: any) => {
+                console.error('Error: ', err)
+            });
+        }
     }
 
     handleOpenModal = (modalSubSection: any, event: any) => {
@@ -311,7 +331,7 @@ export default class Summary extends Component<any, any> {
                             </h3>
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
-                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"} mg/day</span>
+                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"}</span>
                             </div>
                         </div>
 
@@ -389,8 +409,7 @@ export default class Summary extends Component<any, any> {
 
     render() {
         const { summary, collector, qrCollector, result, cdsCollector, questionText } = this.props;
-        // const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
-        const meetsInclusionCriteria = true;
+        const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
         let submitDate;
         if (sharedDecisionSection.MyPAINSubmitDate.length > 0) {
@@ -401,7 +420,7 @@ export default class Summary extends Component<any, any> {
         if (!summary) {
             return null;
         }
-
+        
         return (
             <div className="summary">
 
@@ -434,14 +453,18 @@ export default class Summary extends Component<any, any> {
                                     {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
 
                                     <div className="activity-section">
-                                        {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-goals">
+                                        <div className="activity-goals">
                                             <h3>ACTIVITY GOALS</h3>
-                                            <div>{sharedDecisionSection.ActivityGoals || "No activity goals submitted"}</div>
-                                        </div> : ''}
-                                        {sharedDecisionSection.ActivityGoals.length > 0 ? <div className="activity-barriers">
+                                            {(sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]] && sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value !== null) ? <div>
+                                                <div>{sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
+                                            </div> : "No activity goals submitted"}
+                                        </div>
+                                        <div className="activity-barriers">
                                             <h3>ACTIVITY BARRIERS</h3>
-                                            <div>{sharedDecisionSection.ActivityBarriers || "No activity barriers submitted"}</div>
-                                        </div> : ''}
+                                            {(sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]] && sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value !== null) ? <div>
+                                                <div>{sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
+                                            </div> : "No activity barriers submitted"}
+                                        </div>
                                     </div>
                                 </div>
                                 {<div className="shared-decision-making-section">
@@ -451,17 +474,15 @@ export default class Summary extends Component<any, any> {
                         </div>
                     }
 
-                    <div className="cdc-disclaimer">
-                        Please see the
-                        <a
-                            href="https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm"
+                    {this.state.appConfig ? (<div className="redcap-link">
+                        <p>To provide comments on this release of PainManager, please complete the <a
+                            href={this.state.appConfig.redcapSurveyLink }
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
                             target="_blank"
                             rel="noopener noreferrer">
-                            CDC Guideline for Prescribing Opioids for Chronic Pain
-                        </a>
-                        for additional information and prescribing guidance.
-                    </div>
+                            REDCap survey
+                        </a>.</p>
+                    </div>) : ('')}
 
                     <DevTools
                         collector={collector}

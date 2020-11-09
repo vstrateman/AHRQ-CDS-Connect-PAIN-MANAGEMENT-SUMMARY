@@ -600,7 +600,7 @@ define ReportOlderThan65:
   {
     Name: '65 years or older',
     Status: 'active',
-    Onset: null as String,
+    Onset: ToString(Patient.birthDate + 65 years),
     DateRecorded: null as String,
     Abatement: null as String,
     Visit: null as Tuple{ Start String, End String }
@@ -614,13 +614,15 @@ define ReportRiskFactorsForOpioidRelatedHarms:
   if Exists(PregnancyConditions) then
     (ReportConditionRiskFactorsForOpioidRelatedHarms
       union ReportEncounterRiskFactorsForOpioidRelatedHarms
-      union ReportOlderThan65) C
+      union ReportOlderThan65
+    ) C
   // Otherwise, try to find a positive pregnancy status in an Observation.
   else
     (ReportConditionRiskFactorsForOpioidRelatedHarms
       union ReportEncounterRiskFactorsForOpioidRelatedHarms
       union ReportOlderThan65
-      union ReportMostRecentPositivePregnancyObservation) C
+      union ReportMostRecentPositivePregnancyObservation
+    ) C
 ) C
   sort by (if Onset is not null then Onset as String else Visit.Start) desc, Visit.End desc, (Abatement as String) desc
 

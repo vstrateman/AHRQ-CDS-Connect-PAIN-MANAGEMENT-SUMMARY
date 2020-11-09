@@ -657,7 +657,7 @@ define ReportOlderThan65:
   {
     Name: '65 years or older',
     Status: 'active',
-    Onset: null as String,
+    Onset: ToString(Patient.birthDate + 65 years),
     DateRecorded: null as String,
     Abatement: null as String,
     Visit: null as Tuple{ Start String, End String }
@@ -671,13 +671,15 @@ define ReportRiskFactorsForOpioidRelatedHarms:
   if Exists(PregnancyConditions) then
     (ReportConditionRiskFactorsForOpioidRelatedHarms
       union ReportEncounterRiskFactorsForOpioidRelatedHarms
-      union ReportOlderThan65) C
+      union ReportOlderThan65
+    ) C
   // Otherwise, try to find a positive pregnancy status in an Observation.
   else
     (ReportConditionRiskFactorsForOpioidRelatedHarms
       union ReportEncounterRiskFactorsForOpioidRelatedHarms
       union ReportOlderThan65
-      union ReportMostRecentPositivePregnancyObservation) C
+      union ReportMostRecentPositivePregnancyObservation
+    ) C
 ) C
   sort by (if Onset is not null then Onset as String else Visit.Start) desc, Visit.End desc, (Abatement as String) desc
 
@@ -1080,13 +1082,67 @@ define ReportRiskScreeningsRelevantToPainManagement:
 // The Summary object represents the full Pain Management Summary to be displayed to the clinician.  All values are
 // returned as user-friendly text representations, but a robust user interface (UI) should be implemented to
 // display the data to the user in a friendly manner.  See the Pain Management Summary SMART on FHIR application as
-// an example of how to integrate this summary into an EHR using modern web UI technologies.' ||
+// an example of how to integrate this summary into an EHR using modern web UI technologies.
+
 //****************************************************************************************
 
 //*************************** MME Calculation **********************************
 
 define ActiveOpioidMedications:
   C3F.ActiveMedicationRequest([MedicationRequest: "Opioid Pain Medications"])
+
+/*
+TESTING Expressions:
+define ActiveOpioidPrescriptions:
+  MMECalculator.Prescriptions(ActiveOpioidMedications)
+
+define ActiveOpioidPrescriptionsInput:
+  ActiveOpioidMedications O
+    let
+      // NOTE: Assuming a single dosage instruction element
+      dosageInstruction: O.dosageInstruction[0],
+      // NOTE: Assuming a single dose and rate element
+      doseAndRate: dosageInstruction.doseAndRate[0],
+      repeat: dosageInstruction.timing.repeat,
+      frequency: Coalesce(repeat.frequencyMax.value, repeat.frequency.value),
+      doseRange: MMECalculator.ToFHIRRange(doseAndRate.dose),
+      doseQuantity: MMECalculator.ToFHIRQuantity(doseAndRate.dose),
+      doseDescription:
+        Coalesce(
+          // There should be a conversion from FHIR.SimpleQuantity to System.Quantity
+          if doseRange is not null
+            then ToString(doseRange.low)
+                + '-' + ToString(doseRange.high)
+                + doseRange.high.unit.value
+            else ToString(MMECalculator.ToQuantity(doseQuantity)),
+            ''
+        ),
+      frequencyDescription:
+        ToString(dosageInstruction.timing.repeat.frequency.value) +
+          Coalesce(
+            '-' + ToString(dosageInstruction.timing.repeat.frequencyMax.value),
+            ''
+          )
+    return {
+      id: O.id,
+      isDraft: O.status.value = 'draft',
+      // NOTE: Assuming asNeeded is expressed as a boolean
+      isPRN: dosageInstruction.asNeeded,
+      doseQuantity: doseQuantity,
+      doseRange: doseRange,
+      dose: Coalesce(doseQuantity, doseRange.high)
+    }
+
+
+define ActiveOpioidMME:
+  MMECalculator.MME(ActiveOpioidMedications)
+
+define TestActiveOpioidMedications1:
+  ActiveOpioidMedications M return M.dosageInstruction[0].doseAndRate[0].dose
+
+define TestActiveOpioidMedications2:
+  ActiveOpioidMedications M return M.dosageInstruction[0].timing.repeat
+*/
 
 define CurrentMME:
   MMECalculator.TotalMME(ActiveOpioidMedications)

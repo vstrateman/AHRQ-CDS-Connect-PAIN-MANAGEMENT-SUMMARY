@@ -1,6 +1,6 @@
 {
   "name": "pain-management-factors",
-  "version": "0.3.3",
+  "version": "0.4.4",
   "description": "Pain Management Factors SMART-on-FHIR App",
   "homepage": "https://painmanager-develop.rti.alphora.com",
   "license": "Apache-2.0",
@@ -20,7 +20,6 @@
     "chalk": "^4.1.0",
     "console-feed": "^3.1.10",
     "core-js": "^3.6.5",
-    "cql-exec-fhir": "^1.3.1",
     "cql-execution": "^1.3.7",
     "es6-promise": "^4.2.8",
     "esm": "^3.2.25",
