@@ -81,6 +81,8 @@ include FHIRHelpers version '4.0.1' called FHIRHelpers
 // The ChronicPainConcepts library provides terminology concepts used to identify data elements throughout the artifact.
 include ChronicPainConcepts version '2.0.0' called Cx
 
+include MMECalculator version '3.0.0' called MMECalculator
+
 // # Value sets and codes #
 
 // ## Code Systems ##
@@ -748,6 +750,7 @@ define ReportOpioidMedicationRequests:
     Type:  'Request',
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
+    MME: ToString(MMECalculator.TotalMME(List{O})),
     End:   null as String, // MedicationRequest end date not supported in R4,
     Status: O.status.value
   }
@@ -907,20 +910,23 @@ define ReportMostRecentMME:
 define UrineDrugScreens:
   C3F.Verified(C3F.ObservationLookBack([Observation: Cx."Urine drug screen for pain management"], 1 year))
 
-define ReportUrineDrugScreens:
-  (UrineDrugScreens) S
-  return {
-    Name:           ConceptText(S.code),
-    Result:         Coalesce(
-      QuantityText(S.value as FHIR.Quantity),
-      (S.value as FHIR.string).value,
-      ConceptText(S.value as FHIR.CodeableConcept)
-    ),
-    Interpretation: ConceptText(First(S.interpretation)),
-    Date:           ObservationDate(S)
-  }
-  sort by Date desc
+  define function UrineDrugScreenResult(uds FHIR.Observation):
+  Coalesce(
+    QuantityText(uds.value as FHIR.Quantity),
+    (uds.value as FHIR.string).value,
+    ConceptText(uds.value as FHIR.CodeableConcept)
+  )
 
+  define ReportUrineDrugScreens:
+    (UrineDrugScreens) S
+    return {
+      Name:           ConceptText(S.code),
+      Result:         UrineDrugScreenResult(S),
+      Interpretation: if (S.interpretation is null) then UrineDrugScreenResult(S)
+          else ConceptText(First(S.interpretation)),
+      Date:           ObservationDate(S)
+    }
+    sort by Date desc
 // Benzodiazepine Medications (lookback of 2 years)-  orders and statements with dates
 
 define BenzodiazepineMedicationRequests:

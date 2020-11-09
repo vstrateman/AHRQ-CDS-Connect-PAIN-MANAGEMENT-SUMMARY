@@ -35,6 +35,10 @@
             "localIdentifier" : "Cx",
             "path" : "ChronicPainConcepts",
             "version" : "2.0.0"
+         }, {
+            "localIdentifier" : "MMECalculator",
+            "path" : "MMECalculator",
+            "version" : "3.0.0"
          } ]
       },
       "parameters" : {
@@ -4547,6 +4551,23 @@
                            } ]
                         }
                      }, {
+                        "name" : "MME",
+                        "value" : {
+                           "type" : "ToString",
+                           "operand" : {
+                              "name" : "TotalMME",
+                              "libraryName" : "MMECalculator",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "type" : "List",
+                                 "element" : [ {
+                                    "name" : "O",
+                                    "type" : "AliasRef"
+                                 } ]
+                              } ]
+                           }
+                        }
+                     }, {
                         "name" : "End",
                         "value" : {
                            "strict" : false,
@@ -4698,11 +4719,175 @@
                   "expression" : {
                      "type" : "Union",
                      "operand" : [ {
-                        "name" : "ReportOpioidMedicationRequests",
-                        "type" : "ExpressionRef"
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "ReportOpioidMedicationRequests",
+                           "type" : "ExpressionRef"
+                        },
+                        "asTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "type" : "ChoiceTypeSpecifier",
+                              "choice" : [ {
+                                 "type" : "TupleTypeSpecifier",
+                                 "element" : [ {
+                                    "name" : "Type",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Start",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "End",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Status",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "TupleTypeSpecifier",
+                                 "element" : [ {
+                                    "name" : "Type",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Start",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "MME",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "End",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Status",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }
                      }, {
-                        "name" : "ReportOpioidMedicationStatements",
-                        "type" : "ExpressionRef"
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "ReportOpioidMedicationStatements",
+                           "type" : "ExpressionRef"
+                        },
+                        "asTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "type" : "ChoiceTypeSpecifier",
+                              "choice" : [ {
+                                 "type" : "TupleTypeSpecifier",
+                                 "element" : [ {
+                                    "name" : "Type",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Start",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "End",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Status",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "TupleTypeSpecifier",
+                                 "element" : [ {
+                                    "name" : "Type",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Start",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "MME",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "End",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Status",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }
                      } ]
                   }
                } ],
@@ -5675,6 +5860,79 @@
                } ]
             }
          }, {
+            "name" : "UrineDrugScreenResult",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Coalesce",
+               "operand" : [ {
+                  "name" : "QuantityText",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "uds",
+                           "type" : "OperandRef"
+                        }
+                     },
+                     "asTypeSpecifier" : {
+                        "name" : "{http://hl7.org/fhir}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }, {
+                  "path" : "value",
+                  "type" : "Property",
+                  "source" : {
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "uds",
+                           "type" : "OperandRef"
+                        }
+                     },
+                     "asTypeSpecifier" : {
+                        "name" : "{http://hl7.org/fhir}string",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "name" : "ConceptText",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "uds",
+                           "type" : "OperandRef"
+                        }
+                     },
+                     "asTypeSpecifier" : {
+                        "name" : "{http://hl7.org/fhir}CodeableConcept",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               } ]
+            },
+            "operand" : [ {
+               "name" : "uds",
+               "operandTypeSpecifier" : {
+                  "name" : "{http://hl7.org/fhir}Observation",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
             "name" : "ReportUrineDrugScreens",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5705,70 +5963,49 @@
                      }, {
                         "name" : "Result",
                         "value" : {
-                           "type" : "Coalesce",
+                           "name" : "UrineDrugScreenResult",
+                           "type" : "FunctionRef",
                            "operand" : [ {
-                              "name" : "QuantityText",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "path" : "value",
-                                    "scope" : "S",
-                                    "type" : "Property"
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{http://hl7.org/fhir}Quantity",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ]
-                           }, {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "path" : "value",
-                                    "scope" : "S",
-                                    "type" : "Property"
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{http://hl7.org/fhir}string",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }
-                           }, {
-                              "name" : "ConceptText",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "path" : "value",
-                                    "scope" : "S",
-                                    "type" : "Property"
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{http://hl7.org/fhir}CodeableConcept",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ]
+                              "name" : "S",
+                              "type" : "AliasRef"
                            } ]
                         }
                      }, {
                         "name" : "Interpretation",
                         "value" : {
-                           "name" : "ConceptText",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "type" : "First",
-                              "source" : {
-                                 "path" : "interpretation",
-                                 "scope" : "S",
-                                 "type" : "Property"
+                           "type" : "If",
+                           "condition" : {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "path" : "interpretation",
+                                    "scope" : "S",
+                                    "type" : "Property"
+                                 }
                               }
-                           } ]
+                           },
+                           "then" : {
+                              "name" : "UrineDrugScreenResult",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "name" : "S",
+                                 "type" : "AliasRef"
+                              } ]
+                           },
+                           "else" : {
+                              "name" : "ConceptText",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "type" : "First",
+                                 "source" : {
+                                    "path" : "interpretation",
+                                    "scope" : "S",
+                                    "type" : "Property"
+                                 }
+                              } ]
+                           }
                         }
                      }, {
                         "name" : "Date",

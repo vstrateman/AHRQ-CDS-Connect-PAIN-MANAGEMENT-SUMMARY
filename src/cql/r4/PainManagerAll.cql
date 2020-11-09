@@ -805,6 +805,7 @@ define ReportOpioidMedicationRequests:
     Type:  'Request',
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
+    MME: ToString(MMECalculator.TotalMME(List{O})),
     End:   null as String, // MedicationRequest end date not supported in R4,
     Status: O.status.value
   }
@@ -964,16 +965,20 @@ define ReportMostRecentMME:
 define UrineDrugScreens:
   C3F.Verified(C3F.ObservationLookBack([Observation: "Urine drug screen for pain management"], 1 year))
 
+define function UrineDrugScreenResult(uds FHIR.Observation):
+Coalesce(
+  QuantityText(uds.value as FHIR.Quantity),
+  (uds.value as FHIR.string).value,
+  ConceptText(uds.value as FHIR.CodeableConcept)
+)
+
 define ReportUrineDrugScreens:
   (UrineDrugScreens) S
   return {
     Name:           ConceptText(S.code),
-    Result:         Coalesce(
-      QuantityText(S.value as FHIR.Quantity),
-      (S.value as FHIR.string).value,
-      ConceptText(S.value as FHIR.CodeableConcept)
-    ),
-    Interpretation: ConceptText(First(S.interpretation)),
+    Result:         UrineDrugScreenResult(S),
+    Interpretation: if (S.interpretation is null) then UrineDrugScreenResult(S)
+        else ConceptText(First(S.interpretation)),
     Date:           ObservationDate(S)
   }
   sort by Date desc
