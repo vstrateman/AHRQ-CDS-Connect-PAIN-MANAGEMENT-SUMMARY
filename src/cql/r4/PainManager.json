@@ -162,36 +162,21 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "M",
-                  "expression" : {
-                     "name" : "ActiveMedicationRequest",
-                     "libraryName" : "C3F",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
-                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                        "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
-                        "codeProperty" : "medication",
-                        "codeComparator" : "in",
-                        "type" : "Retrieve",
-                        "codes" : {
-                           "name" : "Opioid Pain Medications",
-                           "libraryName" : "Cx",
-                           "type" : "ValueSetRef"
-                        }
-                     } ]
+               "name" : "ActiveMedicationRequest",
+               "libraryName" : "C3F",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                  "codeProperty" : "medication",
+                  "codeComparator" : "in",
+                  "type" : "Retrieve",
+                  "codes" : {
+                     "name" : "Opioid Pain Medications",
+                     "libraryName" : "Cx",
+                     "type" : "ValueSetRef"
                   }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "Exists",
-                  "operand" : {
-                     "path" : "dosageInstruction",
-                     "scope" : "M",
-                     "type" : "Property"
-                  }
-               }
+               } ]
             }
          }, {
             "name" : "CurrentMME",
@@ -1600,22 +1585,6 @@
                }
             }
          }, {
-            "name" : "ReportCurrentDoseAndRateQuantity",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "List",
-               "element" : [ {
-                  "name" : "MME",
-                  "libraryName" : "MMECalculator",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "name" : "ActiveOpioidMedications",
-                     "type" : "ExpressionRef"
-                  } ]
-               } ]
-            }
-         }, {
             "name" : "Summary",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1830,12 +1799,6 @@
                         "name" : "CurrentMME",
                         "value" : {
                            "name" : "ReportCurrentMME",
-                           "type" : "ExpressionRef"
-                        }
-                     }, {
-                        "name" : "CurrentDoseAndRateQuantity",
-                        "value" : {
-                           "name" : "ReportCurrentDoseAndRateQuantity",
                            "type" : "ExpressionRef"
                         }
                      }, {
