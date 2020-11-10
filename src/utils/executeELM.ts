@@ -169,10 +169,7 @@ function processPage(uri, collector, resources) {
             bundle.entry.forEach((conditionEntry) => {
                 conditionEntry.resource.code.coding.forEach((codeEntry)=> {
                     if (codeEntry.system.startsWith('urn:oid')) {
-                        console.log('New System should be       ' + getUrlFromOid(codeEntry.system.substring(codeEntry.system.lastIndexOf(':') + 1)));
                         codeEntry.system = getUrlFromOid(codeEntry.system.substring(codeEntry.system.lastIndexOf(':') + 1));
-                        console.log('OID        ' + codeEntry.system);
-
                     }
                 });
             });
@@ -202,6 +199,11 @@ function processPage(uri, collector, resources) {
                             });
                     }
                 }
+                medReqEntry.resource.medicationCodeableConcept.coding.forEach((codeEntry) => {
+                    if (codeEntry.system.startsWith('urn:oid')) {
+                        codeEntry.system = getUrlFromOid(codeEntry.system.substring(codeEntry.system.lastIndexOf(':') + 1));
+                    }
+                });
             });
         }
         collector.push({url: url, data: bundle});
@@ -327,7 +329,7 @@ function getUrlFromOid(oid:string) {
         case "1.3.6.1.4.1.12009.10.3.1": return "urn:oid:1.3.6.1.4.1.12009.10.3.1";
         case "2.16.840.1.113883.6.8": return "http://unitsofmeasure.org";
         case "2.16.840.1.113883.6.86": return "http://terminology.hl7.org/CodeSystem/umls";
-        default: return null;
+        default: return "urn:oid:" + oid;
     }
 }
 
