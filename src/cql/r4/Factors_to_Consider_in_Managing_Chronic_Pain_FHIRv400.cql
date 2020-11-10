@@ -739,10 +739,12 @@ define OpioidMedicationRequests:
   ))
 
 define OpioidMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: Cx."Opioid Pain Medications"],
     2 years
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportOpioidMedicationRequests:
   (OpioidMedicationRequests) O
@@ -780,10 +782,12 @@ define NonOpioidMedicationRequests:
   ))
 
 define NonOpioidMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: Cx."Non opioid pain medications"],
     2 years
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportNonOpioidMedicationRequests:
   (NonOpioidMedicationRequests) O
@@ -856,10 +860,12 @@ define StoolSoftenersAndLaxativesRequests:
   ))
 
 define StoolSoftenersAndLaxativesStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: Cx."Stool softeners and laxatives"],
     6 months
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportStoolSoftenersAndLaxativesRequests:
   (StoolSoftenersAndLaxativesRequests) O
@@ -936,10 +942,12 @@ define BenzodiazepineMedicationRequests:
   ))
 
 define BenzodiazepineMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: Cx."Benzodiazepine medications"],
     2 years
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportBenzodiazepineMedicationRequests:
   (BenzodiazepineMedicationRequests) O
@@ -973,7 +981,9 @@ define NaloxoneMedicationRequests:
   C3F.ActiveCompletedOrStoppedMedicationRequest([MedicationRequest: Cx."Naloxone medications"])
 
 define NaloxoneMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement([MedicationStatement: Cx."Naloxone medications"])
+  (C3F.ActiveOrCompletedMedicationStatement([MedicationStatement: Cx."Naloxone medications"])) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportNaloxoneMedicationRequests:
   (NaloxoneMedicationRequests) O

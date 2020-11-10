@@ -4471,29 +4471,88 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "name" : "ActiveOrCompletedMedicationStatement",
-               "libraryName" : "C3F",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "name" : "MedicationStatementLookBack",
-                  "libraryName" : "C3F",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
-                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
-                     "codeProperty" : "medication",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Opioid Pain Medications",
-                        "libraryName" : "Cx",
-                        "type" : "ValueSetRef"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "MS",
+                  "expression" : {
+                     "name" : "ActiveOrCompletedMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "MedicationStatementLookBack",
+                        "libraryName" : "C3F",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Opioid Pain Medications",
+                              "libraryName" : "Cx",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "value" : 2,
+                           "unit" : "years",
+                           "type" : "Quantity"
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ {
+                  "alias" : "MR",
+                  "type" : "Without",
+                  "expression" : {
+                     "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                     "type" : "Retrieve"
+                  },
+                  "suchThat" : {
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "b",
+                           "expression" : {
+                              "path" : "basedOn",
+                              "scope" : "MS",
+                              "type" : "Property"
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "EndsWith",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "reference",
+                                 "scope" : "b",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "MedicationRequest/",
+                                 "type" : "Literal"
+                              }, {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "id",
+                                    "scope" : "MR",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           } ]
+                        }
                      }
-                  }, {
-                     "value" : 2,
-                     "unit" : "years",
-                     "type" : "Quantity"
-                  } ]
+                  }
                } ]
             }
          }, {
@@ -4939,29 +4998,88 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "name" : "ActiveOrCompletedMedicationStatement",
-               "libraryName" : "C3F",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "name" : "MedicationStatementLookBack",
-                  "libraryName" : "C3F",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
-                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
-                     "codeProperty" : "medication",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Non opioid pain medications",
-                        "libraryName" : "Cx",
-                        "type" : "ValueSetRef"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "MS",
+                  "expression" : {
+                     "name" : "ActiveOrCompletedMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "MedicationStatementLookBack",
+                        "libraryName" : "C3F",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Non opioid pain medications",
+                              "libraryName" : "Cx",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "value" : 2,
+                           "unit" : "years",
+                           "type" : "Quantity"
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ {
+                  "alias" : "MR",
+                  "type" : "Without",
+                  "expression" : {
+                     "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                     "type" : "Retrieve"
+                  },
+                  "suchThat" : {
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "b",
+                           "expression" : {
+                              "path" : "basedOn",
+                              "scope" : "MS",
+                              "type" : "Property"
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "EndsWith",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "reference",
+                                 "scope" : "b",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "MedicationRequest/",
+                                 "type" : "Literal"
+                              }, {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "id",
+                                    "scope" : "MR",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           } ]
+                        }
                      }
-                  }, {
-                     "value" : 2,
-                     "unit" : "years",
-                     "type" : "Quantity"
-                  } ]
+                  }
                } ]
             }
          }, {
@@ -5459,29 +5577,88 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "name" : "ActiveOrCompletedMedicationStatement",
-               "libraryName" : "C3F",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "name" : "MedicationStatementLookBack",
-                  "libraryName" : "C3F",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
-                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
-                     "codeProperty" : "medication",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Stool softeners and laxatives",
-                        "libraryName" : "Cx",
-                        "type" : "ValueSetRef"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "MS",
+                  "expression" : {
+                     "name" : "ActiveOrCompletedMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "MedicationStatementLookBack",
+                        "libraryName" : "C3F",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Stool softeners and laxatives",
+                              "libraryName" : "Cx",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "value" : 6,
+                           "unit" : "months",
+                           "type" : "Quantity"
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ {
+                  "alias" : "MR",
+                  "type" : "Without",
+                  "expression" : {
+                     "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                     "type" : "Retrieve"
+                  },
+                  "suchThat" : {
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "b",
+                           "expression" : {
+                              "path" : "basedOn",
+                              "scope" : "MS",
+                              "type" : "Property"
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "EndsWith",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "reference",
+                                 "scope" : "b",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "MedicationRequest/",
+                                 "type" : "Literal"
+                              }, {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "id",
+                                    "scope" : "MR",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           } ]
+                        }
                      }
-                  }, {
-                     "value" : 6,
-                     "unit" : "months",
-                     "type" : "Quantity"
-                  } ]
+                  }
                } ]
             }
          }, {
@@ -6063,29 +6240,88 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "name" : "ActiveOrCompletedMedicationStatement",
-               "libraryName" : "C3F",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "name" : "MedicationStatementLookBack",
-                  "libraryName" : "C3F",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
-                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
-                     "codeProperty" : "medication",
-                     "codeComparator" : "in",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Benzodiazepine medications",
-                        "libraryName" : "Cx",
-                        "type" : "ValueSetRef"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "MS",
+                  "expression" : {
+                     "name" : "ActiveOrCompletedMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "MedicationStatementLookBack",
+                        "libraryName" : "C3F",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Benzodiazepine medications",
+                              "libraryName" : "Cx",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "value" : 2,
+                           "unit" : "years",
+                           "type" : "Quantity"
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ {
+                  "alias" : "MR",
+                  "type" : "Without",
+                  "expression" : {
+                     "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                     "type" : "Retrieve"
+                  },
+                  "suchThat" : {
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "b",
+                           "expression" : {
+                              "path" : "basedOn",
+                              "scope" : "MS",
+                              "type" : "Property"
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "EndsWith",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "reference",
+                                 "scope" : "b",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "MedicationRequest/",
+                                 "type" : "Literal"
+                              }, {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "id",
+                                    "scope" : "MR",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           } ]
+                        }
                      }
-                  }, {
-                     "value" : 2,
-                     "unit" : "years",
-                     "type" : "Quantity"
-                  } ]
+                  }
                } ]
             }
          }, {
@@ -6341,19 +6577,78 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "name" : "ActiveOrCompletedMedicationStatement",
-               "libraryName" : "C3F",
-               "type" : "FunctionRef",
-               "operand" : [ {
-                  "dataType" : "{http://hl7.org/fhir}MedicationStatement",
-                  "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
-                  "codeProperty" : "medication",
-                  "codeComparator" : "in",
-                  "type" : "Retrieve",
-                  "codes" : {
-                     "name" : "Naloxone medications",
-                     "libraryName" : "Cx",
-                     "type" : "ValueSetRef"
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "MS",
+                  "expression" : {
+                     "name" : "ActiveOrCompletedMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Naloxone medications",
+                           "libraryName" : "Cx",
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ {
+                  "alias" : "MR",
+                  "type" : "Without",
+                  "expression" : {
+                     "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                     "type" : "Retrieve"
+                  },
+                  "suchThat" : {
+                     "type" : "Exists",
+                     "operand" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "b",
+                           "expression" : {
+                              "path" : "basedOn",
+                              "scope" : "MS",
+                              "type" : "Property"
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "EndsWith",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "reference",
+                                 "scope" : "b",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "MedicationRequest/",
+                                 "type" : "Literal"
+                              }, {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "id",
+                                    "scope" : "MR",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           } ]
+                        }
+                     }
                   }
                } ]
             }

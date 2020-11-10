@@ -19,6 +19,7 @@ import medicationReferenceSolver from "./medicationReferenceSolver";
 
 var Promise = require('es6-promise').Promise;
 // var cqlResults = require('../helpers/cqlResults.json');
+var defaultMMEConversion = require('../helpers/codesystem-DefaultMMEConversionFactors.json');
 
 let cqlFhirModule: any = cqlfhir;
 
@@ -61,6 +62,7 @@ function executeELM(collector: any) {
                     requestResults.forEach((result) => {
                         resources.push(...result)
                     });
+                    resources.push(defaultMMEConversion);
                     return {
                         resourceType: "Bundle",
                         entry: resources.map(r => ({resource: r}))
