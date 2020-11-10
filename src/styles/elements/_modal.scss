@@ -30,6 +30,10 @@ body.ReactModal__Body--open {
   }
 }
 
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 100;
+}
+
 .info-modal {
   display: flex;
   flex-direction: column;

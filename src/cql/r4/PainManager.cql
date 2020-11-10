@@ -56,7 +56,7 @@ context Patient
 //*************************** MME Calculation **********************************
 
 define ActiveOpioidMedications:
-  (C3F.ActiveMedicationRequest([MedicationRequest: Cx."Opioid Pain Medications"])) M where exists M.dosageInstruction
+  C3F.ActiveMedicationRequest([MedicationRequest: Cx."Opioid Pain Medications"])
 
 define CurrentMME:
   MMECalculator.TotalMME(ActiveOpioidMedications)
@@ -328,11 +328,6 @@ Activity Barriers
 | Resource | Viewed On |
 
 */
-define ReportCurrentDoseAndRateQuantity:
-({
-        MMECalculator.MME(ActiveOpioidMedications)
-//          MMECalculator.TotalMME(ActiveOpioidMedications)
-})
 
 define Summary: {
    Patient: {
@@ -348,7 +343,6 @@ define Summary: {
   },
   CurrentPertinentTreatments: {
     CurrentMME: ReportCurrentMME,
-    CurrentDoseAndRateQuantity: ReportCurrentDoseAndRateQuantity,
     MostRecentMME: F2C.ReportMostRecentMME,
     OpioidMedications: F2C.ReportOpioidMedications,
     NonOpioidMedications: F2C.ReportNonOpioidMedications,

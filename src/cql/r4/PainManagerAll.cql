@@ -794,10 +794,12 @@ define OpioidMedicationRequests:
   ))
 
 define OpioidMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: "Opioid Pain Medications"],
     2 years
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportOpioidMedicationRequests:
   (OpioidMedicationRequests) O
@@ -805,6 +807,7 @@ define ReportOpioidMedicationRequests:
     Type:  'Request',
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
+    MME: ToString(MMECalculator.TotalMME(List{O})),
     End:   null as String, // MedicationRequest end date not supported in R4,
     Status: O.status.value
   }
@@ -834,10 +837,12 @@ define NonOpioidMedicationRequests:
   ))
 
 define NonOpioidMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: "Non opioid pain medications"],
     2 years
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportNonOpioidMedicationRequests:
   (NonOpioidMedicationRequests) O
@@ -910,10 +915,12 @@ define StoolSoftenersAndLaxativesRequests:
   ))
 
 define StoolSoftenersAndLaxativesStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: "Stool softeners and laxatives"],
     6 months
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportStoolSoftenersAndLaxativesRequests:
   (StoolSoftenersAndLaxativesRequests) O
@@ -964,16 +971,20 @@ define ReportMostRecentMME:
 define UrineDrugScreens:
   C3F.Verified(C3F.ObservationLookBack([Observation: "Urine drug screen for pain management"], 1 year))
 
+define function UrineDrugScreenResult(uds FHIR.Observation):
+Coalesce(
+  QuantityText(uds.value as FHIR.Quantity),
+  (uds.value as FHIR.string).value,
+  ConceptText(uds.value as FHIR.CodeableConcept)
+)
+
 define ReportUrineDrugScreens:
   (UrineDrugScreens) S
   return {
     Name:           ConceptText(S.code),
-    Result:         Coalesce(
-      QuantityText(S.value as FHIR.Quantity),
-      (S.value as FHIR.string).value,
-      ConceptText(S.value as FHIR.CodeableConcept)
-    ),
-    Interpretation: ConceptText(First(S.interpretation)),
+    Result:         UrineDrugScreenResult(S),
+    Interpretation: if (S.interpretation is null) then UrineDrugScreenResult(S)
+        else ConceptText(First(S.interpretation)),
     Date:           ObservationDate(S)
   }
   sort by Date desc
@@ -987,10 +998,12 @@ define BenzodiazepineMedicationRequests:
   ))
 
 define BenzodiazepineMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
+  (C3F.ActiveOrCompletedMedicationStatement(C3F.MedicationStatementLookBack(
     [MedicationStatement: "Benzodiazepine medications"],
     2 years
-  ))
+  ))) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportBenzodiazepineMedicationRequests:
   (BenzodiazepineMedicationRequests) O
@@ -1024,7 +1037,9 @@ define NaloxoneMedicationRequests:
   C3F.ActiveCompletedOrStoppedMedicationRequest([MedicationRequest: "Naloxone medications"])
 
 define NaloxoneMedicationStatements:
-  C3F.ActiveOrCompletedMedicationStatement([MedicationStatement: "Naloxone medications"])
+  (C3F.ActiveOrCompletedMedicationStatement([MedicationStatement: "Naloxone medications"])) MS
+    without [MedicationRequest] MR such that
+      exists (MS.basedOn b where b.reference.endsWith('MedicationRequest/' + MR.id))
 
 define ReportNaloxoneMedicationRequests:
   (NaloxoneMedicationRequests) O
@@ -1083,7 +1098,6 @@ define ReportRiskScreeningsRelevantToPainManagement:
 // returned as user-friendly text representations, but a robust user interface (UI) should be implemented to
 // display the data to the user in a friendly manner.  See the Pain Management Summary SMART on FHIR application as
 // an example of how to integrate this summary into an EHR using modern web UI technologies.
-
 //****************************************************************************************
 
 //*************************** MME Calculation **********************************
@@ -1226,24 +1240,20 @@ define ReportPainLocations:
 (QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'Stabbing', 'Burning', 'Aching', 'Tingling', 'Prickling', 'Throbbing'}
   or qrOb.code.coding[0].code.value = 'mpq-1053')//'painLocationOther') => doesn't work
 return
-{
   {
     Location: qrOb.code.coding[0].display,
     PainYesNo: true,
     Description: ObservationValue(qrOb)
   }
-}
 
 // Data from the most recent PainIntensityAndInteference Observations
 define ReportPainIntensityAndInterference:
   (QuestionnaireObservations) qrOb where ObservationValue(qrOb) in
     {'Had no pain', 'Mild', 'Moderate', 'Severe', 'Very Severe', 'Not at all', 'A little bit', 'Somewhat', 'Quite a bit', 'Very much'}
   return
-   {
-     {
+ {
     Question: qrOb.code.coding[0].display,
     Response: ObservationValue(qrOb)
-  }
   }
 
   define function GetResourceURL(linkId String):

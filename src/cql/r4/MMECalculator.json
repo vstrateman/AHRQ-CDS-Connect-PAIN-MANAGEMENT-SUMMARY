@@ -473,6 +473,19 @@
                      } ]
                   }
                }, {
+                  "identifier" : "timesPerDay",
+                  "expression" : {
+                     "type" : "Count",
+                     "source" : {
+                        "path" : "timeOfDay",
+                        "type" : "Property",
+                        "source" : {
+                           "name" : "repeat",
+                           "type" : "QueryLetRef"
+                        }
+                     }
+                  }
+               }, {
                   "identifier" : "doseDescription",
                   "expression" : {
                      "type" : "Coalesce",
@@ -807,6 +820,12 @@
                                  "name" : "period",
                                  "type" : "QueryLetRef"
                               } ]
+                           }, {
+                              "type" : "ToDecimal",
+                              "operand" : {
+                                 "name" : "timesPerDay",
+                                 "type" : "QueryLetRef"
+                              }
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "1.0",
