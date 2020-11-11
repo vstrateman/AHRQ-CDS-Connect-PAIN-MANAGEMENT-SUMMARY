@@ -201,11 +201,16 @@ function processPage(uri, collector, resources) {
                             });
                     }
                 }
-                medReqEntry.resource.medicationCodeableConcept.coding.forEach((codeEntry) => {
-                    if (codeEntry.system.startsWith('urn:oid')) {
-                        codeEntry.system = getUrlFromOid(codeEntry.system.substring(codeEntry.system.lastIndexOf(':') + 1));
-                    }
-                });
+                if(medReqEntry.resource.medicationCodeableConcept !== null
+                    && medReqEntry.resource.medicationCodeableConcept !== undefined
+                    && medReqEntry.resource.medicationCodeableConcept.coding !== null
+                    && medReqEntry.resource.medicationCodeableConcept.coding !== undefined) {
+                    medReqEntry.resource.medicationCodeableConcept.coding.forEach((codeEntry) => {
+                        if (codeEntry.system.startsWith('urn:oid')) {
+                            codeEntry.system = getUrlFromOid(codeEntry.system.substring(codeEntry.system.lastIndexOf(':') + 1));
+                        }
+                    });
+                }
             });
         }
         collector.push({url: url, data: bundle});
