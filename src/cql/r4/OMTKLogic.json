@@ -1638,89 +1638,106 @@
                "source" : {
                   "type" : "Query",
                   "source" : [ {
-                     "alias" : "C",
+                     "alias" : "X",
                      "expression" : {
-                        "path" : "codes",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "concept",
-                           "type" : "OperandRef"
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "C",
+                           "expression" : {
+                              "path" : "codes",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "concept",
+                                 "type" : "OperandRef"
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "Equal",
+                           "operand" : [ {
+                              "path" : "system",
+                              "scope" : "C",
+                              "type" : "Property"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "http://www.nlm.nih.gov/research/umls/rxnorm",
+                              "type" : "Literal"
+                           } ]
+                        },
+                        "return" : {
+                           "expression" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "type" : "Query",
+                                 "source" : [ {
+                                    "alias" : "DI",
+                                    "expression" : {
+                                       "name" : "DrugIngredients",
+                                       "libraryName" : "OMTKData",
+                                       "type" : "ExpressionRef"
+                                    }
+                                 } ],
+                                 "relationship" : [ ],
+                                 "where" : {
+                                    "type" : "Equal",
+                                    "operand" : [ {
+                                       "path" : "drugCode",
+                                       "scope" : "DI",
+                                       "type" : "Property"
+                                    }, {
+                                       "type" : "ToInteger",
+                                       "operand" : {
+                                          "path" : "code",
+                                          "scope" : "C",
+                                          "type" : "Property"
+                                       }
+                                    } ]
+                                 },
+                                 "return" : {
+                                    "expression" : {
+                                       "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                                       "type" : "Instance",
+                                       "element" : [ {
+                                          "name" : "code",
+                                          "value" : {
+                                             "type" : "ToString",
+                                             "operand" : {
+                                                "path" : "drugCode",
+                                                "scope" : "DI",
+                                                "type" : "Property"
+                                             }
+                                          }
+                                       }, {
+                                          "name" : "system",
+                                          "value" : {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                             "type" : "Literal"
+                                          }
+                                       }, {
+                                          "name" : "display",
+                                          "value" : {
+                                             "path" : "drugName",
+                                             "scope" : "DI",
+                                             "type" : "Property"
+                                          }
+                                       } ]
+                                    }
+                                 }
+                              }
+                           }
                         }
                      }
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "path" : "system",
-                        "scope" : "C",
-                        "type" : "Property"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://www.nlm.nih.gov/research/umls/rxnorm",
-                        "type" : "Literal"
-                     } ]
-                  },
-                  "return" : {
-                     "expression" : {
-                        "type" : "SingletonFrom",
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "IsNull",
                         "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "DI",
-                              "expression" : {
-                                 "name" : "DrugIngredients",
-                                 "libraryName" : "OMTKData",
-                                 "type" : "ExpressionRef"
-                              }
-                           } ],
-                           "relationship" : [ ],
-                           "where" : {
-                              "type" : "Equal",
-                              "operand" : [ {
-                                 "path" : "drugCode",
-                                 "scope" : "DI",
-                                 "type" : "Property"
-                              }, {
-                                 "type" : "ToInteger",
-                                 "operand" : {
-                                    "path" : "code",
-                                    "scope" : "C",
-                                    "type" : "Property"
-                                 }
-                              } ]
-                           },
-                           "return" : {
-                              "expression" : {
-                                 "classType" : "{urn:hl7-org:elm-types:r1}Code",
-                                 "type" : "Instance",
-                                 "element" : [ {
-                                    "name" : "code",
-                                    "value" : {
-                                       "type" : "ToString",
-                                       "operand" : {
-                                          "path" : "drugCode",
-                                          "scope" : "DI",
-                                          "type" : "Property"
-                                       }
-                                    }
-                                 }, {
-                                    "name" : "system",
-                                    "value" : {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : "http://www.nlm.nih.gov/research/umls/rxnorm",
-                                       "type" : "Literal"
-                                    }
-                                 }, {
-                                    "name" : "display",
-                                    "value" : {
-                                       "path" : "drugName",
-                                       "scope" : "DI",
-                                       "type" : "Property"
-                                    }
-                                 } ]
-                              }
-                           }
+                           "name" : "X",
+                           "type" : "AliasRef"
                         }
                      }
                   }
@@ -2051,57 +2068,110 @@
             "accessLevel" : "Public",
             "type" : "FunctionDef",
             "expression" : {
-               "type" : "If",
-               "condition" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "GreaterOrEqual",
-                     "operand" : [ {
-                        "type" : "LastPositionOf",
-                        "pattern" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "/",
-                           "type" : "Literal"
-                        },
-                        "string" : {
-                           "name" : "unit",
-                           "type" : "OperandRef"
-                        }
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     } ]
-                  }
-               },
-               "then" : {
-                  "type" : "Substring",
-                  "stringToSub" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "X",
+                  "expression" : {
                      "name" : "unit",
                      "type" : "OperandRef"
-                  },
-                  "startIndex" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  },
-                  "length" : {
-                     "type" : "LastPositionOf",
-                     "pattern" : {
+                  }
+               } ],
+               "let" : [ {
+                  "identifier" : "split",
+                  "expression" : {
+                     "type" : "Split",
+                     "stringToSplit" : {
+                        "name" : "unit",
+                        "type" : "OperandRef"
+                     },
+                     "separator" : {
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "/",
                         "type" : "Literal"
+                     }
+                  }
+               }, {
+                  "identifier" : "splitCount",
+                  "expression" : {
+                     "type" : "Count",
+                     "source" : {
+                        "name" : "split",
+                        "type" : "QueryLetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Greater",
+                           "operand" : [ {
+                              "name" : "splitCount",
+                              "type" : "QueryLetRef"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           } ]
+                        }
                      },
-                     "string" : {
+                     "then" : {
+                        "type" : "Substring",
+                        "stringToSub" : {
+                           "name" : "unit",
+                           "type" : "OperandRef"
+                        },
+                        "startIndex" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        },
+                        "length" : {
+                           "type" : "Subtract",
+                           "operand" : [ {
+                              "type" : "Subtract",
+                              "operand" : [ {
+                                 "type" : "Length",
+                                 "operand" : {
+                                    "name" : "unit",
+                                    "type" : "OperandRef"
+                                 }
+                              }, {
+                                 "type" : "Length",
+                                 "operand" : {
+                                    "type" : "Indexer",
+                                    "operand" : [ {
+                                       "name" : "split",
+                                       "type" : "QueryLetRef"
+                                    }, {
+                                       "type" : "Subtract",
+                                       "operand" : [ {
+                                          "name" : "splitCount",
+                                          "type" : "QueryLetRef"
+                                       }, {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "1",
+                                          "type" : "Literal"
+                                       } ]
+                                    } ]
+                                 }
+                              } ]
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     },
+                     "else" : {
                         "name" : "unit",
                         "type" : "OperandRef"
                      }
                   }
-               },
-               "else" : {
-                  "name" : "unit",
-                  "type" : "OperandRef"
                }
             },
             "operand" : [ {
@@ -2124,23 +2194,49 @@
                      "operand" : [ {
                         "type" : "Or",
                         "operand" : [ {
-                           "type" : "IsNull",
-                           "operand" : {
-                              "name" : "dosesPerDay",
-                              "type" : "OperandRef"
-                           }
+                           "type" : "Or",
+                           "operand" : [ {
+                              "type" : "Or",
+                              "operand" : [ {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "name" : "dosesPerDay",
+                                    "type" : "OperandRef"
+                                 }
+                              }, {
+                                 "type" : "IsNull",
+                                 "operand" : {
+                                    "name" : "doseQuantity",
+                                    "type" : "OperandRef"
+                                 }
+                              } ]
+                           }, {
+                              "type" : "IsNull",
+                              "operand" : {
+                                 "name" : "strength",
+                                 "type" : "OperandRef"
+                              }
+                           } ]
                         }, {
                            "type" : "IsNull",
                            "operand" : {
-                              "name" : "doseQuantity",
-                              "type" : "OperandRef"
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "strength",
+                                 "type" : "OperandRef"
+                              }
                            }
                         } ]
                      }, {
                         "type" : "IsNull",
                         "operand" : {
-                           "name" : "strength",
-                           "type" : "OperandRef"
+                           "path" : "unit",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "strength",
+                              "type" : "OperandRef"
+                           }
                         }
                      } ]
                   },

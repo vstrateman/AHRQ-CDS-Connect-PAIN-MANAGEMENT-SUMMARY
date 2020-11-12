@@ -33,15 +33,6 @@
       },
       "statements" : {
          "def" : [ {
-            "name" : "Test1",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "name" : "Summary0",
-               "libraryName" : "PMA",
-               "type" : "ExpressionRef"
-            }
-         }, {
             "name" : "ReportCurrentDoseAndRateQuantity",
             "context" : "Patient",
             "accessLevel" : "Public",

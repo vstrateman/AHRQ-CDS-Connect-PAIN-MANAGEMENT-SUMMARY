@@ -336,33 +336,25 @@
                }, {
                   "identifier" : "dosageInstruction",
                   "expression" : {
-                     "type" : "Indexer",
-                     "operand" : [ {
+                     "type" : "SingletonFrom",
+                     "operand" : {
                         "path" : "dosageInstruction",
                         "scope" : "O",
                         "type" : "Property"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     } ]
+                     }
                   }
                }, {
                   "identifier" : "doseAndRate",
                   "expression" : {
-                     "type" : "Indexer",
-                     "operand" : [ {
+                     "type" : "SingletonFrom",
+                     "operand" : {
                         "path" : "doseAndRate",
                         "type" : "Property",
                         "source" : {
                            "name" : "dosageInstruction",
                            "type" : "QueryLetRef"
                         }
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "0",
-                        "type" : "Literal"
-                     } ]
+                     }
                   }
                }, {
                   "identifier" : "repeat",
