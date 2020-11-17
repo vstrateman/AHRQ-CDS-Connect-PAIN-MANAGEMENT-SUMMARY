@@ -390,7 +390,8 @@ define function ObservationDate(o FHIR.Observation):
 define function MedicationStatementDate(s FHIR.MedicationStatement):
   Coalesce(
     DateTimeText(s.effective as FHIR.dateTime),
-    DateTimeText((s.effective as FHIR.Period)."start")
+    DateTimeText((s.effective as FHIR.Period)."start"),
+    DateTimeText(s.dateAsserted)
   )
 
 // Returns a text representation of a Condition's onset, whether represented as a dateTime, Period, Quantity (Age),
@@ -1098,6 +1099,7 @@ define ReportRiskScreeningsRelevantToPainManagement:
 // returned as user-friendly text representations, but a robust user interface (UI) should be implemented to
 // display the data to the user in a friendly manner.  See the Pain Management Summary SMART on FHIR application as
 // an example of how to integrate this summary into an EHR using modern web UI technologies.
+
 //****************************************************************************************
 
 //*************************** MME Calculation **********************************
@@ -1251,10 +1253,10 @@ define ReportPainIntensityAndInterference:
   (QuestionnaireObservations) qrOb where ObservationValue(qrOb) in
     {'Had no pain', 'Mild', 'Moderate', 'Severe', 'Very Severe', 'Not at all', 'A little bit', 'Somewhat', 'Quite a bit', 'Very much'}
   return
- {
+    {
     Question: qrOb.code.coding[0].display,
     Response: ObservationValue(qrOb)
-  }
+    }
 
   define function GetResourceURL(linkId String):
     case

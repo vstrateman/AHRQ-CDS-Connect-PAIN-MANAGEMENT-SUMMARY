@@ -1721,6 +1721,17 @@
                         }
                      }
                   } ]
+               }, {
+                  "name" : "DateTimeText",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "path" : "dateAsserted",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "s",
+                        "type" : "OperandRef"
+                     }
+                  } ]
                } ]
             },
             "operand" : [ {
