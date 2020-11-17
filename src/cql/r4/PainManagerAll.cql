@@ -1253,10 +1253,10 @@ define ReportPainIntensityAndInterference:
   (QuestionnaireObservations) qrOb where ObservationValue(qrOb) in
     {'Had no pain', 'Mild', 'Moderate', 'Severe', 'Very Severe', 'Not at all', 'A little bit', 'Somewhat', 'Quite a bit', 'Very much'}
   return
-     {
+    {
     Question: qrOb.code.coding[0].display,
     Response: ObservationValue(qrOb)
-  }
+    }
 
   define function GetResourceURL(linkId String):
     case
