@@ -443,17 +443,17 @@ export default class Summary extends Component<any, any> {
                                 {this.renderSection("CurrentPertinentTreatments")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={false}>
+                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
                                 {this.renderSection("UrineDrugScreening")}
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
-                                {((sharedDecisionSection.ActivityGoals.length === 0) && 
-                                (sharedDecisionSection.ActivityBarriers.length === 0) && 
-                                (sharedDecisionSection.MyPAINSubmitDate.length === 0) && 
-                                (sharedDecisionSection.PainLocations.length === 0) && 
-                                (sharedDecisionSection.PainIntensityAndInterference.length === 0)) ? 
-                                (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
+                                {((sharedDecisionSection.ActivityGoals.length === 0) &&
+                                    (sharedDecisionSection.ActivityBarriers.length === 0) &&
+                                    (sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
+                                    (sharedDecisionSection.PainLocations.length === 0) &&
+                                    (sharedDecisionSection.PainIntensityAndInterference.length === 0)) ?
+                                    (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     : (<div>
 
                                         <div className="shared-top-section">
