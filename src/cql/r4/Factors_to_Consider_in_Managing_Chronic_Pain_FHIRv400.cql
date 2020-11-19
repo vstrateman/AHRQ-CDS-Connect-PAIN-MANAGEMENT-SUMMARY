@@ -96,6 +96,9 @@ codesystem "SNOMED-CT": 'http://snomed.info/sct'
 // local codes (signified by the LOCAL code system below) or replace them with their own codes.
 codesystem "LOCAL": 'http://cds.ahrq.gov/cdsconnect/pms'
 
+codesystem "Condition Category Codes": 'http://hl7.org/fhir/condition-category' // NOTE: This is the STU3 category, should really be the R4 category, but some systems still return this
+//codesystem "Condition Category Codes": 'http://terminology.hl7.org/CodeSystem/condition-category'
+
 // ## Individual codes ##
 
 // list individual codes from code systems used directly in the CQL logic. Individual codes are used when there is
@@ -158,6 +161,8 @@ code "Single question r/t ETOH use code": 'SQETOHUSE' from "LOCAL" display 'Sing
 code "Single question r/t drug use code": 'SQDRUGUSE' from "LOCAL" display 'Single question r/t drug use'
 code "Morphine Milligram Equivalent (MME) code": 'MME' from "LOCAL" display 'Morphine Milligram Equivalent (MME)'
 
+code "Encounter Diagnosis code": 'encounter-diagnosis' from "Condition Category Codes" display 'Encounter Diagnosis'
+
 // CQL currently requires concept declarations to contain references to code declarations.
 
 // NOTE: This shouldn't be required but there is an unimplemented evaluator in the Java Engine (ConceptRef)
@@ -211,6 +216,58 @@ parameter InclusionMedicationsLookbackPeriod default 180 days
 // # CDS logic #
 
 context Patient
+
+// ## Condition Behavior Changes ##
+
+// The following condition functions are used here to address the difference in behavior
+// between a "problem-list-item" condition and other categories of conditions.
+// Specifically, problem-list-items typically have clinicalStatus and verificationStatus
+// where encounter-diagnoses in particular would not be expected to have those items
+// For the PainManager use case, encounter-diagnoses can be included.
+// NOTE: Encounter-diagnoses should be filter by a lookback, but that is not handled by these functions
+
+/**
+ * Returns true if the Condition has a category of "encounter-diagnosis"
+ */
+define function IsEncounterDiagnosis(Condition Condition):
+  exists (Condition.category C where C ~ "Encounter Diagnosis code")
+
+/**
+ * Conditions that are confirmed. In FHIR R4, this is reflected by verificationStatus: 'confirmed'.
+ * @see http://hl7.org/fhir/R4/valueset-condition-ver-status.html
+ * @param CondList - a list of Conditions
+ * @returns {List<Condition>} a list of confirmed Conditions, or null if null was passed in
+ */
+define function Confirmed(CondList List<Condition>):
+  CondList C where IsEncounterDiagnosis(C) or C.verificationStatus ~ C3F."Condition Confirmed code"
+
+/**
+ * Conditions that are active. In FHIR R4, this is reflected by clinicalStatus: 'active' and the absence of any
+ * abatement information (i.e., if it abated, it is no longer active).
+ * TODO: Rename to Active once the execution engine supports overloaded functions.
+ * @see http://hl7.org/fhir/R4/valueset-condition-clinical.html
+ * @param CondList - a list of Conditions
+ * @returns {List<Condition>} a list of active Conditions, or null if null was passed in
+ */
+define function ActiveCondition(CondList List<Condition>):
+  CondList C
+    where (IsEncounterDiagnosis(C) or C.clinicalStatus ~ C3F."Condition Active code")
+      and C.abatement is null
+
+/**
+ * Conditions that are active or recurring. In FHIR R4, this is reflected by clinicalStatus: 'active', 'recurrence', or
+ * 'relapse'.  We do not check for null abatement information because it may have dates from when the now recurring
+ * condition initially went into remission.
+ * @see http://hl7.org/fhir/R4/valueset-condition-clinical.html
+ * @param CondList - a list of Conditions
+ * @returns {List<Condition>} a list of active or recurring Conditions, or null if null was passed in
+ */
+define function ActiveOrRecurring(CondList List<Condition>):
+  CondList C
+    where IsEncounterDiagnosis(C)
+      or C.clinicalStatus ~ C3F."Condition Active code"
+      or C.clinicalStatus ~ C3F."Condition Recurrence code"
+      or C.clinicalStatus ~ C3F."Condition Relapse code"
 
 // ## Re-usable functions ##
 
@@ -335,7 +392,8 @@ define function ObservationDate(o FHIR.Observation):
 define function MedicationStatementDate(s FHIR.MedicationStatement):
   Coalesce(
     DateTimeText(s.effective as FHIR.dateTime),
-    DateTimeText((s.effective as FHIR.Period)."start")
+    DateTimeText((s.effective as FHIR.Period)."start"),
+    DateTimeText(s.dateAsserted)
   )
 
 // Returns a text representation of a Condition's onset, whether represented as a dateTime, Period, Quantity (Age),
@@ -374,7 +432,7 @@ define Is18orOlder:
 
 // Conditions associated with chronic pain
 define ConditionsAssociatedWithChronicPain:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Conditions associated with chronic pain"]))
+  Confirmed(ActiveOrRecurring([Condition: Cx."Conditions associated with chronic pain"]))
 
 // Determines if the patient has any of the conditions associated with chronic pain
 define HasConditionAssociatedWithChronicPain:
@@ -454,32 +512,32 @@ define ReportConditionsAssociatedWithChronicPain:
 // This is a union of nine value sets (w/ different filtering criteria)
 
 define DepressionConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Major Depression"]))
-  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Depression Diagnosis ICD9"]))
+  Confirmed(ActiveOrRecurring([Condition: Cx."Major Depression"]))
+  union Confirmed(ActiveOrRecurring([Condition: Cx."Depression Diagnosis ICD9"]))
 
 define AnxietyConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Anxiety"]))
-  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Anxiety Disorders ICD9"]))
+  Confirmed(ActiveOrRecurring([Condition: Cx."Anxiety"]))
+  union Confirmed(ActiveOrRecurring([Condition: Cx."Anxiety Disorders ICD9"]))
 
 define SubstanceUseDisorderConditions:
-  C3F.Confirmed([Condition: Cx."Substance use disorder"])
-  union C3F.Confirmed([Condition: Cx."Substance Abuse"])
+  Confirmed([Condition: Cx."Substance use disorder"])
+  union Confirmed([Condition: Cx."Substance Abuse"])
 
 define SuicideAttemptConditions:
-  C3F.Confirmed([Condition: Cx."Suicide Attempt"])
+  Confirmed([Condition: Cx."Suicide Attempt"])
 
 define SleepDisorderedBreathingConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Sleep-disordered breathing"]))
+  Confirmed(ActiveOrRecurring([Condition: Cx."Sleep-disordered breathing"]))
 
 define RenalDysfunctionConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Kidney Failure"]))
+  Confirmed(ActiveOrRecurring([Condition: Cx."Kidney Failure"]))
 
 define HepaticDysfunctionConditions:
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Chronic Liver Disease"]))
-  union C3F.Confirmed(C3F.ActiveOrRecurring([Condition: Cx."Liver Disease"]))
+  Confirmed(ActiveOrRecurring([Condition: Cx."Chronic Liver Disease"]))
+  union Confirmed(ActiveOrRecurring([Condition: Cx."Liver Disease"]))
 
 define PregnancyConditions:
-  C3F.Confirmed(C3F.ConditionLookBack(C3F.ActiveOrRecurring(
+  Confirmed(C3F.ConditionLookBack(ActiveOrRecurring(
     [Condition: Cx."Pregnancy"])
       union [Condition: Cx."Pregnancy (New ICD10 codes published in 2018 or later)"],
     42 weeks

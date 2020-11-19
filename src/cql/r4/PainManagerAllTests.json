@@ -33,21 +33,13 @@
       },
       "statements" : {
          "def" : [ {
-            "name" : "ReportCurrentDoseAndRateQuantity",
+            "name" : "Test1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "List",
-               "element" : [ {
-                  "name" : "MME",
-                  "libraryName" : "MMECalculator",
-                  "type" : "FunctionRef",
-                  "operand" : [ {
-                     "name" : "ActiveOpioidMedications",
-                     "libraryName" : "PMA",
-                     "type" : "ExpressionRef"
-                  } ]
-               } ]
+               "name" : "Summary",
+               "libraryName" : "PMA",
+               "type" : "ExpressionRef"
             }
          } ]
       }
