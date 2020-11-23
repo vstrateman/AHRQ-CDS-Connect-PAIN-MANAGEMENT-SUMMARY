@@ -1327,11 +1327,9 @@ define ReportResourcesProvidedInMyPAIN:
 (QuestionnaireObservations) qrOb where qrOb.extension[0].extension[0].value as FHIR.string in {'12', '13'}
   return
   {
-    {
       Resource: qrOb.value,
       ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),//qrOb),
       ViewedOn: qrOb.effective
-    }
   }
 
 // Data from the most recent self reported MyPAIN observations
@@ -1339,10 +1337,8 @@ define ReportSelfReportedTreatmentsFromMyPAIN:
 (QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'Never', 'Sometimes', 'Always'} or qrOb.code.coding[0].code.value in {'mpq-1054', 'mpq-1057', 'mpq-1059'})
 return
 {
-  {
     Treatment: QuestionTextByLinkId(qrOb),
     Effectiveness: ObservationValue(qrOb)
-  }
 }
 
 // ******************************* Decision Logic ******************************
