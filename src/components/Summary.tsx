@@ -204,6 +204,7 @@ export default class Summary extends Component<any, any> {
 
                     return value;
                 },
+                width: 'auto',
                 sortable: headerKey.sortable !== false
             };
 
@@ -235,7 +236,6 @@ export default class Summary extends Component<any, any> {
             if (headerKey.maxWidth != null) {
                 column.maxWidth = headerKey.maxWidth;
             }
-
             columns.push(column);
         });
 
