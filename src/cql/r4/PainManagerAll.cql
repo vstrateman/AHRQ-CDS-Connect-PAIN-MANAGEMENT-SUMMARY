@@ -865,7 +865,8 @@ define ReportOpioidMedicationRequests:
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
     MME: ToString(MMECalculator.TotalMME(List{O})),
-    End:   null as String, // MedicationRequest end date not supported in R4,
+    End: null as String, // MedicationRequest end date not supported in R4,
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -877,6 +878,7 @@ define ReportOpioidMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc
@@ -907,7 +909,8 @@ define ReportNonOpioidMedicationRequests:
     Type:  'Request',
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
-    End:   null as String, // MedicationRequest end date not supported in R4,
+    End:   null as String, // MedicationRequest end date not supported in R4,'
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -919,6 +922,7 @@ define ReportNonOpioidMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc
@@ -1327,11 +1331,9 @@ define ReportResourcesProvidedInMyPAIN:
 (QuestionnaireObservations) qrOb where qrOb.extension[0].extension[0].value as FHIR.string in {'12', '13'}
   return
   {
-    {
       Resource: qrOb.value,
       ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),//qrOb),
       ViewedOn: qrOb.effective
-    }
   }
 
 // Data from the most recent self reported MyPAIN observations
@@ -1339,10 +1341,8 @@ define ReportSelfReportedTreatmentsFromMyPAIN:
 (QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'Never', 'Sometimes', 'Always'} or qrOb.code.coding[0].code.value in {'mpq-1054', 'mpq-1057', 'mpq-1059'})
 return
 {
-  {
     Treatment: QuestionTextByLinkId(qrOb),
     Effectiveness: ObservationValue(qrOb)
-  }
 }
 
 // ******************************* Decision Logic ******************************

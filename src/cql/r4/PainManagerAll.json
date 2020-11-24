@@ -5027,6 +5027,20 @@
                            }
                         }
                      }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }
+                           }
+                        }
+                     }, {
                         "name" : "Status",
                         "value" : {
                            "path" : "value",
@@ -5129,6 +5143,20 @@
                            } ]
                         }
                      }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              }
+                           }
+                        }
+                     }, {
                         "name" : "Status",
                         "value" : {
                            "path" : "value",
@@ -5195,9 +5223,21 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
+                                    "name" : "MME",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
                                     "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Sig",
+                                    "type" : {
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
@@ -5228,15 +5268,15 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "MME",
+                                    "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "End",
+                                    "name" : "Sig",
                                     "type" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
@@ -5280,9 +5320,21 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
+                                    "name" : "MME",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
                                     "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Sig",
+                                    "type" : {
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
@@ -5313,15 +5365,15 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "MME",
+                                    "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "End",
+                                    "name" : "Sig",
                                     "type" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
@@ -5535,6 +5587,20 @@
                            }
                         }
                      }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }
+                           }
+                        }
+                     }, {
                         "name" : "Status",
                         "value" : {
                            "path" : "value",
@@ -5635,6 +5701,20 @@
                                  }
                               }
                            } ]
+                        }
+                     }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              }
+                           }
                         }
                      }, {
                         "name" : "Status",
@@ -8541,70 +8621,67 @@
                },
                "return" : {
                   "expression" : {
-                     "type" : "List",
+                     "type" : "Tuple",
                      "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Resource",
-                           "value" : {
-                              "path" : "value",
-                              "scope" : "qrOb",
-                              "type" : "Property"
-                           }
-                        }, {
-                           "name" : "ResourceUrl",
-                           "value" : {
-                              "name" : "GetResourceURL",
+                        "name" : "Resource",
+                        "value" : {
+                           "path" : "value",
+                           "scope" : "qrOb",
+                           "type" : "Property"
+                        }
+                     }, {
+                        "name" : "ResourceUrl",
+                        "value" : {
+                           "name" : "GetResourceURL",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
                               "operand" : [ {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "operand" : [ {
-                                    "strict" : false,
-                                    "type" : "As",
-                                    "operand" : {
-                                       "path" : "value",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "type" : "Indexer",
-                                          "operand" : [ {
-                                             "path" : "extension",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "type" : "Indexer",
-                                                "operand" : [ {
-                                                   "path" : "extension",
-                                                   "scope" : "qrOb",
-                                                   "type" : "Property"
-                                                }, {
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                   "value" : "0",
-                                                   "type" : "Literal"
-                                                } ]
-                                             }
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                             "value" : "0",
-                                             "type" : "Literal"
-                                          } ]
-                                       }
-                                    },
-                                    "asTypeSpecifier" : {
-                                       "name" : "{http://hl7.org/fhir}string",
-                                       "type" : "NamedTypeSpecifier"
+                                 "strict" : false,
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "type" : "Indexer",
+                                       "operand" : [ {
+                                          "path" : "extension",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "type" : "Indexer",
+                                             "operand" : [ {
+                                                "path" : "extension",
+                                                "scope" : "qrOb",
+                                                "type" : "Property"
+                                             }, {
+                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "value" : "0",
+                                                "type" : "Literal"
+                                             } ]
+                                          }
+                                       }, {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "0",
+                                          "type" : "Literal"
+                                       } ]
                                     }
-                                 } ]
+                                 },
+                                 "asTypeSpecifier" : {
+                                    "name" : "{http://hl7.org/fhir}string",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
                               } ]
-                           }
-                        }, {
-                           "name" : "ViewedOn",
-                           "value" : {
-                              "path" : "effective",
-                              "scope" : "qrOb",
-                              "type" : "Property"
-                           }
-                        } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "ViewedOn",
+                        "value" : {
+                           "path" : "effective",
+                           "scope" : "qrOb",
+                           "type" : "Property"
+                        }
                      } ]
                   }
                }
@@ -8695,30 +8772,27 @@
                },
                "return" : {
                   "expression" : {
-                     "type" : "List",
+                     "type" : "Tuple",
                      "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Treatment",
-                           "value" : {
-                              "name" : "QuestionTextByLinkId",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        }, {
-                           "name" : "Effectiveness",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        } ]
+                        "name" : "Treatment",
+                        "value" : {
+                           "name" : "QuestionTextByLinkId",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "Effectiveness",
+                        "value" : {
+                           "name" : "ObservationValue",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
                      } ]
                   }
                }
