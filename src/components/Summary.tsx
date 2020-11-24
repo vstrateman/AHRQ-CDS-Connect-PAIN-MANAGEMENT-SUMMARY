@@ -294,13 +294,7 @@ export default class Summary extends Component<any, any> {
                 subSection.recommendationText = this.props.summary.PertinentConditions.Recommendation8Text;
             }
             if (subSection.dataKey === 'OpioidMedications') {
-                if (this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result >= 50) {
-                    subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
-                } else if ((this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result < 50) || (this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result === null)) {
-                    subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation3Text;
-                } else if ((this.props.summary.CurrentPertinentTreatments.OpioidMedications.length > 0) && (this.props.summary.CurrentPertinentTreatments.BenzodiazepineMedications.length > 0)) {
-                    subSection.recommendationText = this.props.summary.CurrentPertinentTreatments.Recommendation11Text;
-                }
+                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation5Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || this.props.summary.CurrentPertinentTreatments.Recommendation11Text || null)
                 datatable = (
                     <div id={subSection.dataKey} className="sub-section__header">
                         <FontAwesomeIcon
