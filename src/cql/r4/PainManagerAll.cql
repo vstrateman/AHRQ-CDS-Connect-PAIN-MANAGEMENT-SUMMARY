@@ -865,7 +865,8 @@ define ReportOpioidMedicationRequests:
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
     MME: ToString(MMECalculator.TotalMME(List{O})),
-    End:   null as String, // MedicationRequest end date not supported in R4,
+    End: null as String, // MedicationRequest end date not supported in R4,
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -877,6 +878,7 @@ define ReportOpioidMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc

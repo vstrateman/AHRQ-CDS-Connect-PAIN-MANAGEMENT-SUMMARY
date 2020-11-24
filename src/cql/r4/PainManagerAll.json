@@ -5027,6 +5027,20 @@
                            }
                         }
                      }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }
+                           }
+                        }
+                     }, {
                         "name" : "Status",
                         "value" : {
                            "path" : "value",
@@ -5129,6 +5143,20 @@
                            } ]
                         }
                      }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              }
+                           }
+                        }
+                     }, {
                         "name" : "Status",
                         "value" : {
                            "path" : "value",
@@ -5195,9 +5223,21 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
+                                    "name" : "MME",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
                                     "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Sig",
+                                    "type" : {
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
@@ -5228,15 +5268,15 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "MME",
+                                    "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "End",
+                                    "name" : "Sig",
                                     "type" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
@@ -5280,9 +5320,21 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
+                                    "name" : "MME",
+                                    "type" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
                                     "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "name" : "Sig",
+                                    "type" : {
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
@@ -5313,15 +5365,15 @@
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "MME",
+                                    "name" : "End",
                                     "type" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
-                                    "name" : "End",
+                                    "name" : "Sig",
                                     "type" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}string",
                                        "type" : "NamedTypeSpecifier"
                                     }
                                  }, {
