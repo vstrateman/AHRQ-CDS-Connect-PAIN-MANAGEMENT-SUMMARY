@@ -5587,6 +5587,20 @@
                            }
                         }
                      }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }
+                           }
+                        }
+                     }, {
                         "name" : "Status",
                         "value" : {
                            "path" : "value",
@@ -5687,6 +5701,20 @@
                                  }
                               }
                            } ]
+                        }
+                     }, {
+                        "name" : "Sig",
+                        "value" : {
+                           "path" : "text",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              }
+                           }
                         }
                      }, {
                         "name" : "Status",
