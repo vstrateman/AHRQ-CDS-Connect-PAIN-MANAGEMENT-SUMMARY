@@ -144,6 +144,12 @@ main {
                     color: $color-blue;
                     cursor: pointer;
                 }
+                .warning-icon {
+                    margin-left: 5px;
+                    font-size: 0.9em;
+                    color: $color-red;
+                    cursor: pointer;
+                }
                 .no-entries {
                     padding: 10px 18px;
                     font-style: italic;
@@ -268,6 +274,7 @@ main {
     .total-mme-link {
         margin-left: 5%;
         width: 100%;
+        display: flex;
         span {
             margin-left: 2%;
         }
