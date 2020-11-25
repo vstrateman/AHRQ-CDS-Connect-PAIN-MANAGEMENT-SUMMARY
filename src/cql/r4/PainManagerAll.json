@@ -8841,10 +8841,10 @@
                   "type" : "Literal"
                },
                "else" : {
-                  "type" : "ToString",
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
                   "operand" : {
-                     "name" : "CurrentMME",
-                     "type" : "ExpressionRef"
+                     "type" : "Null"
                   }
                }
             }
