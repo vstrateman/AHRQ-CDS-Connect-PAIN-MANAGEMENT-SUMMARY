@@ -1375,10 +1375,10 @@ plan strategies to mitigate risk, including considering offering naloxone
 [CDC Opioid Prescribing Guideline, Recommendation #5 and #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)"
 */
 define ReportRecommendation5Text:
-  if CurrentMME >= 50 then
+  if MMECalculator.TotalMMEValue(ActiveOpioidMedications) >= 50 then
     'Per CDC guidelines, when opioids are started, clinicians should prescribe the lowest effective dosage. Clinicians should use caution when prescribing opioids at any dosage, should carefully reassess evidence of individual benefits and risks when considering increasing dosage to ≥50 morphine milligram equivalents (MME)/day, and should avoid increasing dosage to ≥90 MME/day or carefully justify a decision to titrate dosage to ≥90 MME/day (recommendation category: A, evidence type: 3).\n\nFor MME/day of ≥ 50, CDC guidelines recommend incorporating into the management plan strategies to mitigate risk, including considering offering naloxone (recommendation category: A, evidence type: 4). [CDC Opioid Prescribing Guideline, Recommendation #5 and #8](https://www.cdc.gov/mmwr/volumes/65/rr/rr6501e1.htm)'
   else
-    null
+    ToString(CurrentMME)
 
 /*
 # Recommendation #8

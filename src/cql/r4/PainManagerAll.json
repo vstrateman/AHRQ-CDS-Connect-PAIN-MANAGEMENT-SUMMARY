@@ -8818,10 +8818,15 @@
                   "operand" : {
                      "type" : "GreaterOrEqual",
                      "operand" : [ {
-                        "name" : "CurrentMME",
-                        "type" : "ExpressionRef"
+                        "name" : "TotalMMEValue",
+                        "libraryName" : "MMECalculator",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "ActiveOpioidMedications",
+                           "type" : "ExpressionRef"
+                        } ]
                      }, {
-                        "type" : "ToQuantity",
+                        "type" : "ToDecimal",
                         "operand" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "50",
@@ -8836,10 +8841,10 @@
                   "type" : "Literal"
                },
                "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
+                  "type" : "ToString",
                   "operand" : {
-                     "type" : "Null"
+                     "name" : "CurrentMME",
+                     "type" : "ExpressionRef"
                   }
                }
             }

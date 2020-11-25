@@ -142,3 +142,13 @@ define function TotalMME(prescriptions List<MedicationRequest>):
     Sum((MME(prescriptions)) M return M.mme.value),
     '{MME}/d'
   )
+
+/*
+Calculates total Milligram Morphine Equivalent (MME) for the given list of medications.
+The calculation assumes the most aggressive dosing, and is performed for all
+medications in the given list (i.e. no additional filtering for status is performed).
+ Returns JUSt the value for further calculation
+*/
+
+define function TotalMMEValue(prescriptions List<MedicationRequest>):
+    Sum((MME(prescriptions)) M return M.mme.value)
