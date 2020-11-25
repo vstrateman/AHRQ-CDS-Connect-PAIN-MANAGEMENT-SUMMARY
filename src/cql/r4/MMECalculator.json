@@ -1042,6 +1042,50 @@
                   }
                }
             } ]
+         }, {
+            "name" : "TotalMMEValue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Sum",
+               "source" : {
+                  "type" : "Query",
+                  "source" : [ {
+                     "alias" : "M",
+                     "expression" : {
+                        "name" : "MME",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "prescriptions",
+                           "type" : "OperandRef"
+                        } ]
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "return" : {
+                     "expression" : {
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "mme",
+                           "scope" : "M",
+                           "type" : "Property"
+                        }
+                     }
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "prescriptions",
+               "operandTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
          } ]
       }
    }
