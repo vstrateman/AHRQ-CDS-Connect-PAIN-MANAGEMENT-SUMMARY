@@ -297,6 +297,9 @@ export default class Summary extends Component<any, any> {
             }
             if (subSection.dataKey === 'OpioidMedications') {
                 subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || null);
+                if(this.props.summary.CurrentPertinentTreatments.Recommendation5Text) {
+                    subSection.warningText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
+                }
 
                 datatable = (
                     <div id={subSection.dataKey} className="sub-section__header">
@@ -328,13 +331,13 @@ export default class Summary extends Component<any, any> {
                             </h3>
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
-                                {this.props.summary.CurrentPertinentTreatments.Recommendation5Text ? (<div
+                                {subSection.info ? (<div
                                         onClick={(event) => this.handleOpenModal(subSection, event)}
                                         onKeyDown={(event) => this.handleOpenModal(subSection, event)}
                                         role="button"
                                         tabIndex={0}
                                         aria-label={subSection.name}>
-                                        {this.props.summary.CurrentPertinentTreatments.Recommendation5Text ? <FontAwesomeIcon
+                                        {subSection.warningText ? <FontAwesomeIcon
                                             className='warning-icon'
                                             icon="exclamation-circle"
                                             title={'warning: ' + subSection.name}

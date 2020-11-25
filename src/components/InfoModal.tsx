@@ -30,25 +30,33 @@ export default class InfoModal extends Component<any, any> {
       accessor: 'lookback'
     }];
     if (this.props.subSection.dataKey === "OpioidMedications") {
-      if(this.props.subSection.recommendationText) {
+      if (this.props.subSection.warningText) {
+        return (
+          <div className="element" role="table"
+            aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
+            <Markdown>{this.props.subSection.warningText}</Markdown>
+
+          </div>
+        );
+      } else if (this.props.subSection.recommendationText) {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
             <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
-            
+
           </div>
-        );  
+        );
       }
     }
     if (this.props.subSection.dataKey === "CoMorbidConditionsIncreasingRiskWhenUsingOpioids") {
-      if(this.props.subSection.recommendationText) {
+      if (this.props.subSection.recommendationText) {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
             <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
-            
+
           </div>
-        );  
+        );
       }
     }
     return (
@@ -78,17 +86,17 @@ export default class InfoModal extends Component<any, any> {
       Header: () => { return <span className="col-header">Title</span> },
       accessor: 'title'
     }, {
-    Header: () => {  return <span className="col-header">Details</span>},
+      Header: () => { return <span className="col-header">Details</span> },
       accessor: 'details'
     }];
 
     let data = references;
     data.forEach((reference: any) => {
-        reference.urlLink = (
-          <a href={reference.url} data-src={reference.title} target="_blank"
-            rel="noopener noreferrer"><FontAwesomeIcon icon="link" title="link" /></a>
-        );
-      });
+      reference.urlLink = (
+        <a href={reference.url} data-src={reference.title} target="_blank"
+          rel="noopener noreferrer"><FontAwesomeIcon icon="link" title="link" /></a>
+      );
+    });
 
     return (
       <div className="reference" role="table"
