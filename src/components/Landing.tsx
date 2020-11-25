@@ -39,7 +39,6 @@ export default class Landing extends Component<any, any> {
 
     componentDidMount() {
         executeElm(this.state.collector).then((result: any) => {
-
             this.setState({ loading: false });
             const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
             this.setState({ result, sectionFlags, flaggedCount });
@@ -152,6 +151,10 @@ export default class Landing extends Component<any, any> {
 
                     const data = summary[subSection.dataKeySource][subSection.dataKey];
                     const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
+                        // convert sig object to string value
+                        if(r['Sig']) {
+                            r['Sig'] = r['Sig'].value
+                        }
                         return r != null;
                     });
                     if (entries.length > 0) {
@@ -166,7 +169,6 @@ export default class Landing extends Component<any, any> {
                                 flaggedEntries.push({ 'entryId': entry._id, 'flagText': entryFlag });
                                 flaggedCount += 1;
                             }
-
                             return flaggedEntries;
                         }, []);
                     } else {

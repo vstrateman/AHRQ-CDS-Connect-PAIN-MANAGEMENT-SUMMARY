@@ -141,9 +141,9 @@
               "key": "Start",
               "formatter": "datishFormat"
             },
-            "Status": {
-              "key": "Status",
-              "formatter": "datishFormat"
+            "Sig": {
+              "key": "Sig",
+              "formatter":"booleanFormat"
             }
           },
           "flags": [
@@ -184,9 +184,9 @@
               "key": "Start",
               "formatter": "datishFormat"
             },
-            "Status": {
-              "key": "Status",
-              "formatter": "datishAgeFormat"
+            "Sig": {
+              "key": "Sig",
+              "formatter":"booleanFormat"
             }
           },
           "flags": [

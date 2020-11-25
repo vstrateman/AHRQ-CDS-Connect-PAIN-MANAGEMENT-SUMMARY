@@ -196,6 +196,9 @@ export default class Summary extends Component<any, any> {
                 Header: () => <span className="col-header">{header}</span>,
                 accessor: (entry: any) => {
                     let value = entry[headerKey];
+                    if (Array.isArray(entry[headerKey])) {
+                        value = entry[headerKey][0][0].value;
+                    } 
                     if (headerKey.formatter) {
                         const { result } = this.props;
                         let formatterArguments = headerKey.formatterArguments || [];
@@ -282,7 +285,6 @@ export default class Summary extends Component<any, any> {
 
 
         return sectionMap.map((subSection: any) => {
-            // console.log('subSection: ', subSection);
             const data = this.props.summary[subSection.dataKeySource][subSection.dataKey];
             const entries = (Array.isArray(data) ? data : [data]).filter(r => r != null);
             const hasEntries = entries.length !== 0;
@@ -294,7 +296,8 @@ export default class Summary extends Component<any, any> {
                 subSection.recommendationText = this.props.summary.PertinentConditions.Recommendation8Text;
             }
             if (subSection.dataKey === 'OpioidMedications') {
-                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation5Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || this.props.summary.CurrentPertinentTreatments.Recommendation11Text || null)
+                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || null);
+
                 datatable = (
                     <div id={subSection.dataKey} className="sub-section__header">
                         <FontAwesomeIcon
@@ -325,6 +328,21 @@ export default class Summary extends Component<any, any> {
                             </h3>
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
+                                {this.props.summary.CurrentPertinentTreatments.Recommendation5Text ? (<div
+                                        onClick={(event) => this.handleOpenModal(subSection, event)}
+                                        onKeyDown={(event) => this.handleOpenModal(subSection, event)}
+                                        role="button"
+                                        tabIndex={0}
+                                        aria-label={subSection.name}>
+                                        {this.props.summary.CurrentPertinentTreatments.Recommendation5Text ? <FontAwesomeIcon
+                                            className='warning-icon'
+                                            icon="exclamation-circle"
+                                            title={'warning: ' + subSection.name}
+                                            data-tip="warning"
+                                            role="tooltip"
+                                            tabIndex={0}
+                                        /> : ''}
+                                    </div>) : ('')}
                                 <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"}</span>
                             </div>
                         </div>
