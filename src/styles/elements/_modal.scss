@@ -5,7 +5,6 @@
   right: 0;
   width: 75%;
   max-height: 75%;
-  overflow: scroll;
   margin: auto;
   background-color: $color-white;
   border-radius: 5px;
@@ -33,7 +32,11 @@ body.ReactModal__Body--open {
 .ReactModal__Overlay.ReactModal__Overlay--after-open {
   z-index: 100;
 }
-
+.warning-modal {
+  .info-modal__header {
+    background-color: #d9534f;
+  }
+}
 .info-modal {
   display: flex;
   flex-direction: column;
