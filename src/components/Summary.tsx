@@ -347,7 +347,7 @@ export default class Summary extends Component<any, any> {
                                             tabIndex={0}
                                         /> : ''}
                                     </div>) : ('')}
-                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"}</span>
+                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
                             </div>
                         </div>
 
