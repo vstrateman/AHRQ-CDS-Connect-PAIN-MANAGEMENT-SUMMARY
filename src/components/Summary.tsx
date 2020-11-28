@@ -30,6 +30,7 @@ export default class Summary extends Component<any, any> {
         this.state = {
             showModal: false,
             modalSubSection: null,
+            modalRole: null
         };
         this.subsectionTableProps = { id: 'react_sub-section__table' };
 
@@ -57,10 +58,10 @@ export default class Summary extends Component<any, any> {
         }
     }
 
-    handleOpenModal = (modalSubSection: any, event: any) => {
+    handleOpenModal = (modalSubSection: any, event: any, modalRole?: any) => {
         //only open modal   on 'enter' or click
         if (event.keyCode === 13 || event.type === "click") {
-            this.setState({ showModal: true, modalSubSection });
+            this.setState({ showModal: true, modalSubSection, modalRole});
         }
     }
 
@@ -314,8 +315,8 @@ export default class Summary extends Component<any, any> {
                             <h3 className="opioid-name">{subSection.name}
                                 {subSection.info &&
                                     <div
-                                        onClick={(event) => this.handleOpenModal(subSection, event)}
-                                        onKeyDown={(event) => this.handleOpenModal(subSection, event)}
+                                        onClick={(event) => this.handleOpenModal(subSection, event, 'info')}
+                                        onKeyDown={(event) => this.handleOpenModal(subSection, event, 'info')}
                                         role="button"
                                         tabIndex={0}
                                         aria-label={subSection.name}>
@@ -333,21 +334,21 @@ export default class Summary extends Component<any, any> {
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
                                 {subSection.info ? (<div
-                                    onClick={(event) => this.handleOpenModal(subSection, event)}
-                                    onKeyDown={(event) => this.handleOpenModal(subSection, event)}
-                                    role="button"
-                                    tabIndex={0}
-                                    aria-label={subSection.name}>
-                                    {subSection.warningText ? <FontAwesomeIcon
-                                        className='warning-icon'
-                                        icon="exclamation-circle"
-                                        title={'warning: ' + subSection.name}
-                                        data-tip="warning"
-                                        role="tooltip"
+                                        onClick={(event) => this.handleOpenModal(subSection, event, 'warning')}
+                                        onKeyDown={(event) => this.handleOpenModal(subSection, event, 'warning')}
+                                        role="button"
                                         tabIndex={0}
-                                    /> : ''}
-                                </div>) : ('')}
-                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"}</span>
+                                        aria-label={subSection.name}>
+                                        {subSection.warningText ? <FontAwesomeIcon
+                                            className='warning-icon'
+                                            icon="exclamation-circle"
+                                            title={'warning: ' + subSection.name}
+                                            data-tip="warning"
+                                            role="tooltip"
+                                            tabIndex={0}
+                                        /> : ''}
+                                    </div>) : ('')}
+                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
                             </div>
                         </div>
 
@@ -401,8 +402,8 @@ export default class Summary extends Component<any, any> {
 
                     {subSection.info &&
                         <div
-                            onClick={(event) => this.handleOpenModal(subSection, event)}
-                            onKeyDown={(event) => this.handleOpenModal(subSection, event)}
+                            onClick={(event) => this.handleOpenModal(subSection, event, 'info')}
+                            onKeyDown={(event) => this.handleOpenModal(subSection, event, 'info')}
                             role="button"
                             tabIndex={0}
                             aria-label={subSection.name}>
@@ -563,7 +564,8 @@ export default class Summary extends Component<any, any> {
                         contentLabel="More Info">
                         <InfoModal
                             closeModal={this.handleCloseModal}
-                            subSection={this.state.modalSubSection} />
+                            subSection={this.state.modalSubSection}
+                            modalRole={this.state.modalRole} />
                     </ReactModal>
                 </div>
             </div>
