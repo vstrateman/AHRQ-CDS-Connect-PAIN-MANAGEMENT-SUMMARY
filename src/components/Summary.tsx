@@ -298,7 +298,7 @@ export default class Summary extends Component<any, any> {
                 subSection.recommendationText = this.props.summary.PertinentConditions.Recommendation8Text;
             }
             if (subSection.dataKey === 'OpioidMedications') {
-                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || null);
+                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation3Text || null);
                 if (this.props.summary.CurrentPertinentTreatments.Recommendation5Text) {
                     subSection.warningText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
                 }
@@ -355,10 +355,7 @@ export default class Summary extends Component<any, any> {
 
                     </div>)
             } else if (subSection.dataKey === 'NonOpioidMedications') {
-                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || null);
-                if (this.props.summary.CurrentPertinentTreatments.Recommendation5Text) {
-                    subSection.warningText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
-                }
+                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || null);
 
                 datatable = (
                     <div id={subSection.dataKey} className="sub-section__header">
@@ -371,12 +368,12 @@ export default class Summary extends Component<any, any> {
                         <div id="opioid-title">
                             <h3 className="opioid-name">{subSection.name}
                                 {subSection.info ? (<div
-                                    onClick={(event) => this.handleOpenModal(subSection, event)}
-                                    onKeyDown={(event) => this.handleOpenModal(subSection, event)}
+                                    onClick={(event) => this.handleOpenModal(subSection, event, 'warning')}
+                                    onKeyDown={(event) => this.handleOpenModal(subSection, event, 'warning')}
                                     role="button"
                                     tabIndex={0}
                                     aria-label={subSection.name}>
-                                    {subSection.warningText ? <FontAwesomeIcon
+                                    {subSection.recommendationText ? <FontAwesomeIcon
                                         className='warning-icon'
                                         icon="exclamation-circle"
                                         title={'warning: ' + subSection.name}
