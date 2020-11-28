@@ -198,7 +198,7 @@ export default class Summary extends Component<any, any> {
                     let value = entry[headerKey];
                     if (Array.isArray(entry[headerKey])) {
                         value = entry[headerKey][0][0].value;
-                    } 
+                    }
                     if (headerKey.formatter) {
                         const { result } = this.props;
                         let formatterArguments = headerKey.formatterArguments || [];
@@ -285,6 +285,7 @@ export default class Summary extends Component<any, any> {
 
 
         return sectionMap.map((subSection: any) => {
+            // in here I need to combine the data for naloxone, benzodiazepines, and non-opioids
             const data = this.props.summary[subSection.dataKeySource][subSection.dataKey];
             const entries = (Array.isArray(data) ? data : [data]).filter(r => r != null);
             const hasEntries = entries.length !== 0;
@@ -297,7 +298,7 @@ export default class Summary extends Component<any, any> {
             }
             if (subSection.dataKey === 'OpioidMedications') {
                 subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || null);
-                if(this.props.summary.CurrentPertinentTreatments.Recommendation5Text) {
+                if (this.props.summary.CurrentPertinentTreatments.Recommendation5Text) {
                     subSection.warningText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
                 }
 
@@ -332,22 +333,58 @@ export default class Summary extends Component<any, any> {
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
                                 {subSection.info ? (<div
-                                        onClick={(event) => this.handleOpenModal(subSection, event)}
-                                        onKeyDown={(event) => this.handleOpenModal(subSection, event)}
-                                        role="button"
+                                    onClick={(event) => this.handleOpenModal(subSection, event)}
+                                    onKeyDown={(event) => this.handleOpenModal(subSection, event)}
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-label={subSection.name}>
+                                    {subSection.warningText ? <FontAwesomeIcon
+                                        className='warning-icon'
+                                        icon="exclamation-circle"
+                                        title={'warning: ' + subSection.name}
+                                        data-tip="warning"
+                                        role="tooltip"
                                         tabIndex={0}
-                                        aria-label={subSection.name}>
-                                        {subSection.warningText ? <FontAwesomeIcon
-                                            className='warning-icon'
-                                            icon="exclamation-circle"
-                                            title={'warning: ' + subSection.name}
-                                            data-tip="warning"
-                                            role="tooltip"
-                                            tabIndex={0}
-                                        /> : ''}
-                                    </div>) : ('')}
+                                    /> : ''}
+                                </div>) : ('')}
                                 <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "0"}</span>
                             </div>
+                        </div>
+
+
+                    </div>)
+            } else if (subSection.dataKey === 'NonOpioidMedications') {
+                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || this.props.summary.CurrentPertinentTreatments.Recommendation3Text || null);
+                if (this.props.summary.CurrentPertinentTreatments.Recommendation5Text) {
+                    subSection.warningText = this.props.summary.CurrentPertinentTreatments.Recommendation5Text;
+                }
+
+                datatable = (
+                    <div id={subSection.dataKey} className="sub-section__header">
+                        <FontAwesomeIcon
+                            className={'flag flag-nav ' + flaggedClass}
+                            icon={flagged ? 'exclamation-circle' : 'circle'}
+                            title="flag"
+                            tabIndex={0}
+                        />
+                        <div id="opioid-title">
+                            <h3 className="opioid-name">{subSection.name}
+                                {subSection.info ? (<div
+                                    onClick={(event) => this.handleOpenModal(subSection, event)}
+                                    onKeyDown={(event) => this.handleOpenModal(subSection, event)}
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-label={subSection.name}>
+                                    {subSection.warningText ? <FontAwesomeIcon
+                                        className='warning-icon'
+                                        icon="exclamation-circle"
+                                        title={'warning: ' + subSection.name}
+                                        data-tip="warning"
+                                        role="tooltip"
+                                        tabIndex={0}
+                                    /> : ''}
+                                </div>) : ('')}
+                            </h3>
                         </div>
 
 

@@ -41,6 +41,12 @@ export default class Landing extends Component<any, any> {
         executeElm(this.state.collector).then((result: any) => {
             this.setState({ loading: false });
             const { sectionFlags, flaggedCount } = this.processSummary(result.Summary);
+            if(result.Summary['CurrentPertinentTreatments']['NonOpioidMedications']) {
+                result.Summary['CurrentPertinentTreatments']['NonOpioidMedications'] = result.Summary['CurrentPertinentTreatments']['NonOpioidMedications'].concat(result.Summary['CurrentPertinentTreatments']['BenzodiazepineMedications']);
+                result.Summary['CurrentPertinentTreatments']['NonOpioidMedications'] = result.Summary['CurrentPertinentTreatments']['NonOpioidMedications'].concat(result.Summary['CurrentPertinentTreatments']['NaloxoneMedications']);
+                console.log('cur per tre', result.Summary['CurrentPertinentTreatments']['NonOpioidMedications'])
+            }
+
             this.setState({ result, sectionFlags, flaggedCount });
             return this.state.collector;
         }, (error) => {
@@ -180,7 +186,6 @@ export default class Landing extends Component<any, any> {
                         }
                     }
                 }
-
             }, (error) => {
                 console.error('Error: ',error)
             });
