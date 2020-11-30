@@ -180,7 +180,6 @@ export default class Landing extends Component<any, any> {
                         }
                     }
                 }
-
             }, (error) => {
                 console.error('Error: ',error)
             });

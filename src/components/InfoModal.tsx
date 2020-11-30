@@ -29,7 +29,7 @@ export default class InfoModal extends Component<any, any> {
       Header: () => { return <span className="col-header">Lookback</span> },
       accessor: 'lookback'
     }];
-    if (this.props.subSection.dataKey === "OpioidMedications") {
+    if (this.props.subSection.dataKey === "OpioidMedications" || this.props.subSection.dataKey === "NonOpioidMedications") {
       if (this.props.subSection.warningText && this.props.modalRole === 'warning') {
         return (
           <div className="element" role="table"
