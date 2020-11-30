@@ -884,7 +884,9 @@ define ReportOpioidMedicationStatements:
   sort by Start desc, End desc
 
 define ReportOpioidMedications:
-  (ReportOpioidMedicationRequests union ReportOpioidMedicationStatements) M
+  (ReportOpioidMedicationRequests
+   union ReportOpioidMedicationStatements
+   union ReportNaloxoneMedications ) M
   sort by Start desc, End desc
 
 // Non-opioid medication orders and statements with dates (lookback 2 years)
@@ -928,7 +930,9 @@ define ReportNonOpioidMedicationStatements:
   sort by Start desc, End desc
 
 define ReportNonOpioidMedications:
-  (ReportNonOpioidMedicationRequests union ReportNonOpioidMedicationStatements) M
+  (ReportNonOpioidMedicationRequests
+    union ReportNonOpioidMedicationStatements
+    union ReportBenzodiazepineMedications) M
   sort by Start desc, End desc
 
 // Non-pharmacologic treatments, orders, and referrals with dates (lookback 2 years)
@@ -1072,7 +1076,8 @@ define ReportBenzodiazepineMedicationRequests:
     Type:  'Request',
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
-    End:   null as String, // MedicationRequest end date not supported in R4,
+    End:   null as String, // MedicationRequest end date not supported in R4
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -1084,6 +1089,7 @@ define ReportBenzodiazepineMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc
@@ -1109,6 +1115,7 @@ define ReportNaloxoneMedicationRequests:
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
     End:   null as String, // MedicationRequest end date not supported in R4,
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -1120,6 +1127,7 @@ define ReportNaloxoneMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc
