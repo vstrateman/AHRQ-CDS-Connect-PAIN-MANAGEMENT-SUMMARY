@@ -1,7 +1,7 @@
 {
   "PertinentConditions": [
     {
-      "name": "CHRONIC PAIN CONDITIONS (past 12 months)",
+      "name": "CHRONIC PAIN CONDITIONS (duplication due to providing both active problem list entries and visit diagnoses from past 12 months)",
       "dataKey": "ConditionsAssociatedWithChronicPain",
       "dataKeySource": "PertinentConditions",
       "info": [
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "name": "CO-MORBID CONDITIONS INCREASING RISK WHEN USING OPIOIDS (past 12 months)",
+      "name": "CO-MORBID CONDITIONS INCREASING RISK WHEN USING OPIOIDS (duplication due to providing both active problem list entries and visit diagnoses from past 12 months)",
       "dataKey": "CoMorbidConditionsIncreasingRiskWhenUsingOpioids",
       "dataKeySource": "PertinentConditions",
       "info": [

@@ -17,6 +17,7 @@ import InclusionBanner from './InclusionBanner';
 // import ExclusionBanner from './ExclusionBanner';
 import InfoModal from './InfoModal';
 import DevTools from './DevTools';
+import Footer from './Footer';
 
 export default class Summary extends Component<any, any> {
     appVersion = pkg.version;
@@ -542,6 +543,8 @@ export default class Summary extends Component<any, any> {
                             REDCap survey
                         </a>.</p>
                     </div>) : ('')}
+
+                <Footer key={this.state.appConfig}>{this.state.appConfig}</Footer>
 
                     <DevTools
                         collector={collector}
