@@ -919,7 +919,7 @@ define ReportOpioidMedicationRequests:
     Start: DateTimeText(O.authoredOn),
     End: null as String, // MedicationRequest end date not supported in R4,
     MME: MMEText(MMECalculator.TotalMME(List{O})),
-    Sig: (singleton from (O.dosageInstruction)).text.value,
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -932,7 +932,7 @@ define ReportOpioidMedicationStatements:
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
     MME: 'Not calculated',
-    Sig: (singleton from (S.dosage)).text.value,
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc
@@ -967,7 +967,7 @@ define ReportNonOpioidMedicationRequests:
     Start: DateTimeText(O.authoredOn),
     End:   null as String, // MedicationRequest end date not supported in R4,'
     MME: 'N/A',
-    Sig: (singleton from (O.dosageInstruction)).text.value,
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -980,7 +980,7 @@ define ReportNonOpioidMedicationStatements:
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
     MME: 'N/A',
-    Sig: (singleton from (S.dosage)).text.value,
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc
@@ -1134,7 +1134,7 @@ define ReportBenzodiazepineMedicationRequests:
     Start: DateTimeText(O.authoredOn),
     End:   null as String, // MedicationRequest end date not supported in R4
     MME: 'N/A',
-    Sig: (singleton from (O.dosageInstruction)).text.value,
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -1147,7 +1147,7 @@ define ReportBenzodiazepineMedicationStatements:
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
     MME: 'N/A',
-    Sig: (singleton from (S.dosage)).text.value,
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc
@@ -1174,7 +1174,7 @@ define ReportNaloxoneMedicationRequests:
     Start: DateTimeText(O.authoredOn),
     End:   null as String, // MedicationRequest end date not supported in R4,
     MME: MMEText(MMECalculator.TotalMME(List{O})),
-    Sig: (singleton from (O.dosageInstruction)).text.value,
+    Sig: (singleton from (O.dosageInstruction)).text,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -1187,7 +1187,7 @@ define ReportNaloxoneMedicationStatements:
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
     MME: 'Not calculated',
-    Sig: (singleton from (S.dosage)).text.value,
+    Sig: (singleton from (S.dosage)).text,
     Status: S.status.value
   }
   sort by Start desc, End desc

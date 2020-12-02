@@ -5522,18 +5522,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosageInstruction",
-                                    "scope" : "O",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
                               }
                            }
                         }
@@ -5649,18 +5645,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosage",
-                                    "scope" : "S",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
                               }
                            }
                         }
@@ -5798,18 +5790,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosageInstruction",
-                                    "scope" : "O",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
                               }
                            }
                         }
@@ -6004,18 +5992,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosage",
-                                    "scope" : "S",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
                               }
                            }
                         }
@@ -6309,18 +6293,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosageInstruction",
-                                    "scope" : "O",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
                               }
                            }
                         }
@@ -6436,18 +6416,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosage",
-                                    "scope" : "S",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
                               }
                            }
                         }
@@ -6583,18 +6559,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosageInstruction",
-                                    "scope" : "O",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosageInstruction",
+                                 "scope" : "O",
+                                 "type" : "Property"
                               }
                            }
                         }
@@ -6798,18 +6770,14 @@
                      }, {
                         "name" : "Sig",
                         "value" : {
-                           "path" : "value",
+                           "path" : "text",
                            "type" : "Property",
                            "source" : {
-                              "path" : "text",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "SingletonFrom",
-                                 "operand" : {
-                                    "path" : "dosage",
-                                    "scope" : "S",
-                                    "type" : "Property"
-                                 }
+                              "type" : "SingletonFrom",
+                              "operand" : {
+                                 "path" : "dosage",
+                                 "scope" : "S",
+                                 "type" : "Property"
                               }
                            }
                         }
