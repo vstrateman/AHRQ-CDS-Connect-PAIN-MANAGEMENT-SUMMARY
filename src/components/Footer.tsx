@@ -23,7 +23,7 @@ export default class Footer extends Component<any, any> {
         return <footer>
             <p className="app-version">PainManager v{this.appVersion}</p>
             <div className="info-box">
-                <p>This SGL version of PainManager does not support linking our from the application. If you need more information about the CDC Opioid Guideline referenced here, please visit: [<span>{this.appConfig.CDCLink}</span>].</p>
+                <p>This SGL version of PainManager does not support linking out from the application. If you need more information about the CDC Opioid Guideline referenced here, please visit: [<span>{this.appConfig.CDCLink}</span>].</p>
                 <p> To provide comments on this release or PainManager, please complete this REDCap survey: [<span>{this.appConfig.redcapSurveyLink}</span>].</p>
             </div>
         </footer>
