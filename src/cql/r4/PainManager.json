@@ -224,11 +224,13 @@
                               }, {
                                  "name" : "Result",
                                  "value" : {
-                                    "type" : "ToString",
-                                    "operand" : {
+                                    "name" : "MMEText",
+                                    "libraryName" : "F2C",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
                                        "name" : "M",
                                        "type" : "AliasRef"
-                                    }
+                                    } ]
                                  }
                               }, {
                                  "name" : "Date",
@@ -1478,12 +1480,9 @@
                         "name" : "CurrentMME",
                         "type" : "ExpressionRef"
                      }, {
-                        "type" : "ToQuantity",
-                        "operand" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "50",
-                           "type" : "Literal"
-                        }
+                        "value" : 50,
+                        "unit" : "{MME}/d",
+                        "type" : "Quantity"
                      } ]
                   }
                },
