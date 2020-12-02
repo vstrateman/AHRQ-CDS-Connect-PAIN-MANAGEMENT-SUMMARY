@@ -544,7 +544,10 @@ export default class Summary extends Component<any, any> {
                         </a>.</p>
                     </div>) : ('')} */}
 
-                <Footer key={this.state.appConfig}>{this.state.appConfig}</Footer>
+                    {this.state.appConfig ? (<Footer key={this.state.appConfig}>{this.state.appConfig}</Footer>) : (
+                        <Footer key={this.state.appConfig}></Footer>
+                    )}
+                
 
                     <DevTools
                         collector={collector}
