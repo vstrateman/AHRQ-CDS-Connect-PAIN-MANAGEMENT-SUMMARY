@@ -231,6 +231,7 @@ context Patient
  */
 define function IsEncounterDiagnosis(Condition Condition):
   exists (Condition.category C where C ~ "Encounter Diagnosis code")
+    and Condition.recordedDate after Today() - 1 year
 
 /**
  * Conditions that are confirmed. In FHIR R4, this is reflected by verificationStatus: 'confirmed'.
@@ -239,7 +240,7 @@ define function IsEncounterDiagnosis(Condition Condition):
  * @returns {List<Condition>} a list of confirmed Conditions, or null if null was passed in
  */
 define function Confirmed(CondList List<Condition>):
-  CondList C where IsEncounterDiagnosis(C) or C.verificationStatus ~ C3F."Condition Confirmed code"
+  CondList C where IsEncounterDiagnosis(C) xor C.verificationStatus ~ C3F."Condition Confirmed code"
 
 /**
  * Conditions that are active. In FHIR R4, this is reflected by clinicalStatus: 'active' and the absence of any
@@ -251,7 +252,7 @@ define function Confirmed(CondList List<Condition>):
  */
 define function ActiveCondition(CondList List<Condition>):
   CondList C
-    where (IsEncounterDiagnosis(C) or C.clinicalStatus ~ C3F."Condition Active code")
+    where (IsEncounterDiagnosis(C) xor C.clinicalStatus ~ C3F."Condition Active code")
       and C.abatement is null
 
 /**
@@ -265,14 +266,26 @@ define function ActiveCondition(CondList List<Condition>):
 define function ActiveOrRecurring(CondList List<Condition>):
   CondList C
     where IsEncounterDiagnosis(C)
-      or C.clinicalStatus ~ C3F."Condition Active code"
-      or C.clinicalStatus ~ C3F."Condition Recurrence code"
-      or C.clinicalStatus ~ C3F."Condition Relapse code"
+      xor (C.clinicalStatus ~ C3F."Condition Active code"
+        or C.clinicalStatus ~ C3F."Condition Recurrence code"
+        or C.clinicalStatus ~ C3F."Condition Relapse code")
 
 // ## Re-usable functions ##
 
 // The summary logic contains many constructs that are needed throughout the logic. Where possible, these constructs
 // have been developed as re-usable functions that can be invoked wherever they are needed.
+
+define function AgeToQuantity(age FHIR.Age):
+  if age is null then
+    null as System.Quantity
+  else
+    FHIRHelpers.ToQuantity(age)
+
+define function QuantityToQuantity(quantity FHIR.Quantity):
+  if quantity is null then
+    null as System.Quantity
+  else
+    FHIRHelpers.ToQuantity(quantity)
 
 // Returns the first-found display text for a CodeableConcept, looking first at the `text` attribute, then the
 // `display` on each `coding` until it finds a non-null value.  Some PEG codes are normalized due to length.
@@ -351,6 +364,16 @@ define function QuantityText(q FHIR.Quantity):
   else if (q.code is not null and q.code.value != '{score}') then ToString(q.value.value) + ' ' + q.code.value
   else ToString(q.value.value)
 
+// Returns a text representation of an MME Quantity with the Quantity's value and unit in as a user-friendly display.
+// If the unit is {MME}/d, display it as MME/Day, otherwise, just return the ToString of the given quantity.
+// @param quantity - MME as a System Quantity to get text for
+// @returns {System.String} a user-friendly text representation of the MME
+define function MMEText(quantity System.Quantity):
+  if quantity.unit = '{MME}/d' then
+    ToString(quantity.value) + ' MME/Day'
+  else
+    ToString(quantity)
+
 // Returns a tuple containing a Period's start and end as text representations.
 // @param p - a FHIR Period to get a tuple for
 // @returns {Tuple<Start System.String, End System.String>} the tuple representation of the Period
@@ -401,7 +424,7 @@ define function MedicationStatementDate(s FHIR.MedicationStatement):
 // @param c - a FHIR Condition to get the text representation of the onset from
 // @returns {System.String} the text representation of the Condition's onset
 define function Onset(c FHIR.Condition):
-  Coalesce( List{
+  Coalesce({
     DateTimeText(c.onset as FHIR.dateTime),
     QuantityText(c.onset as FHIR.Age),
     PeriodObject(c.onset as FHIR.Period),
@@ -409,12 +432,25 @@ define function Onset(c FHIR.Condition):
     (c.onset as FHIR.string).value
   })
 
+// Returns the date of a Condition's onset, whether represented as a dateTime, Period, Quantity (Age),
+// Range (Age), or the recordedDate if no onset is available
+// @param c - a FHIR Condition to get the text representation of the onset from
+// @returns {System.DateTime} the date of the Condition's onset or when it was recorded
+define function OnsetOrRecordedDate(c FHIR.Condition):
+  Coalesce(
+    (c.onset as FHIR.dateTime).value,
+    //Patient.birthDate + AgeToQuantity(c.onset),
+    (c.onset as FHIR.Period)."start".value,
+    //Patient.birthDate + QuantityToQuantity((c.onset as FHIR.Range)."low"),
+    c.recordedDate.value
+  )
+
 // Returns a text representation of a Condition's abatement, whether represented as a dateTime, Period, Quantity (Age),
 // Range (Age), string, or boolean.
 // @param c - a FHIR Condition to get the text representation of the abatement from
 // @returns {System.String} the text representation of the Condition's abatement
 define function Abatement(c FHIR.Condition):
-  Coalesce( List{
+  Coalesce({
     DateTimeText(c.abatement as FHIR.dateTime),
     QuantityText(c.abatement as FHIR.Age),
     PeriodObject(c.abatement as FHIR.Period),
@@ -496,17 +532,23 @@ define MeetsInclusionCriteria:
 
 // PERTINENT MEDICAL HISTORY
 
-// Conditions associated with chronic pain and their dates of onset
+define function UniqueConditionReports(reports List<Tuple{Name System.String, Status System.String, Onset System.Any, DateRecorded System.String, Date System.DateTime}>):
+  (reports R return R.Name) U
+    return First(reports R where R.Name = U sort by Date desc)
 
+// Conditions associated with chronic pain and their dates of onset
 define ReportConditionsAssociatedWithChronicPain:
-  (ConditionsAssociatedWithChronicPain) C
-  return {
-    Name:   ConceptText(C.code),
-    Status: C.clinicalStatus.coding[0].code.value,
-    Onset:  Onset(C),
-    DateRecorded: DateTimeText(C.recordedDate)
-  }
-  sort by (Onset as String) desc
+  (UniqueConditionReports(
+    ConditionsAssociatedWithChronicPain C
+      return {
+        Name:   ConceptText(C.code),
+        Status: C.clinicalStatus.coding[0].code.value,
+        Onset:  Onset(C),
+        DateRecorded: DateTimeText(C.recordedDate),
+        Date: OnsetOrRecordedDate(C)
+      }
+  )) R
+    sort by Date desc
 
 // Conditions that are risk factors for opioid-related harms and their dates of onset
 // This is a union of nine value sets (w/ different filtering criteria)
@@ -591,6 +633,10 @@ define EncounterRiskFactorsForOpioidRelatedHarms:
 // NOTE: As a convention, if an expression's name starts with "Report", its purpose is to format data for the purpose
 // of building the final summary object.
 
+define function UniqueRiskFactorReports(reports List<Tuple{Name System.String, Status System.String, Onset System.Any, DateRecorded System.String, Abatement System.Any, Visit Tuple { Start System.String, End System.String }, Date System.DateTime}>):
+  (reports R return R.Name) U
+    return First(reports R where R.Name = U sort by Date desc)
+
 // Format the risk factors in a uniform way despite the different sources of the data (conditions, encounter diagnoses,
 // etc.). Note that conditions do not have a "Visit" date and encounter diagnoses do not have a status, onset date,
 // recorded date, or abatement date.
@@ -603,9 +649,9 @@ define ReportConditionRiskFactorsForOpioidRelatedHarms:
     Onset:     Onset(C),
     DateRecorded: DateTimeText(C.recordedDate),
     Abatement: Abatement(C),
-    Visit:     null as Tuple{ Start String, End String }
+    Visit:     null as Tuple { Start String, End String },
+    Date: OnsetOrRecordedDate(C)
   }
-  sort by (Onset as String) desc, (Abatement as String) desc
 
 define function GetEncounterDiagnosesRiskFactorsForOpioidRelatedHarms(enc Encounter):
   (enc.reasonCode) R
@@ -627,13 +673,13 @@ define function GetEncounterDiagnosesRiskFactorsForOpioidRelatedHarms(enc Encoun
       Onset:     null as String,
       DateRecorded: null as String,
       Abatement: null as String,
-      Visit:     PeriodObject(enc.period)
+      Visit:     PeriodObject(enc.period),
+      Date: enc.period."start".value
     }
 
 define ReportEncounterRiskFactorsForOpioidRelatedHarms:
   (flatten((EncounterRiskFactorsForOpioidRelatedHarms) E
   return GetEncounterDiagnosesRiskFactorsForOpioidRelatedHarms(E))) D
-  sort by Visit.Start desc, Visit.End desc
 
 // Shape the pregnancy Observation as a Condition, since this is the backup approach for detecting a pregnancy in case
 // there are no active Conditions found.
@@ -649,7 +695,13 @@ define ReportMostRecentPositivePregnancyObservation:
     )),
     DateRecorded: ToString(MostRecentPregnancyObservation.issued.value),
     Abatement: null as String,
-    Visit: null as Tuple{ Start String, End String }
+    Visit: null as Tuple { Start String, End String },
+    Date: Coalesce(
+      (MostRecentPregnancyObservation.effective as FHIR.dateTime).value,
+      (MostRecentPregnancyObservation.effective as FHIR.instant).value,
+      (MostRecentPregnancyObservation.effective as FHIR.Period)."start".value,
+      MostRecentPregnancyObservation.issued.value
+    )
   }
 }) C
   where MostRecentPregnancyObservationIsPositive
@@ -660,31 +712,32 @@ define ReportOlderThan65:
   {
     Name: '65 years or older',
     Status: 'active',
-    Onset: ToString(Patient.birthDate + 65 years),
+    Onset: null as String,
     DateRecorded: null as String,
     Abatement: null as String,
-    Visit: null as Tuple{ Start String, End String }
+    Visit: null as Tuple { Start String, End String },
+    Date: ToDateTime(Patient.birthDate + 65 years)
   }
 }) C
   where Is65orOlder
 
 define ReportRiskFactorsForOpioidRelatedHarms:
-(
-  // If a pregnancy Condition is present, use that.
-  if Exists(PregnancyConditions) then
-    (ReportConditionRiskFactorsForOpioidRelatedHarms
-      union ReportEncounterRiskFactorsForOpioidRelatedHarms
-      union ReportOlderThan65
-    ) C
-  // Otherwise, try to find a positive pregnancy status in an Observation.
-  else
-    (ReportConditionRiskFactorsForOpioidRelatedHarms
-      union ReportEncounterRiskFactorsForOpioidRelatedHarms
-      union ReportOlderThan65
-      union ReportMostRecentPositivePregnancyObservation
-    ) C
-) C
-  sort by (if Onset is not null then Onset as String else Visit.Start) desc, Visit.End desc, (Abatement as String) desc
+  (UniqueRiskFactorReports(
+    // If a pregnancy Condition is present, use that.
+    if Exists(PregnancyConditions) then
+      (ReportConditionRiskFactorsForOpioidRelatedHarms
+        union ReportEncounterRiskFactorsForOpioidRelatedHarms
+        union ReportOlderThan65
+      )
+    // Otherwise, try to find a positive pregnancy status in an Observation.
+    else
+      (ReportConditionRiskFactorsForOpioidRelatedHarms
+        union ReportEncounterRiskFactorsForOpioidRelatedHarms
+        union ReportOlderThan65
+        union ReportMostRecentPositivePregnancyObservation
+      )
+  )) C
+    sort by Date desc
 
 // PAIN ASSESSMENT
 
@@ -810,8 +863,9 @@ define ReportOpioidMedicationRequests:
     Type:  'Request',
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
-    MME: ToString(MMECalculator.TotalMME(List{O})),
     End:   null as String, // MedicationRequest end date not supported in R4,
+    MME: MMEText(MMECalculator.TotalMME(List{O})),
+    Sig: (singleton from (O.dosageInstruction)).text.value,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -823,12 +877,16 @@ define ReportOpioidMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    MME: 'Not calculated',
+    Sig: (singleton from (S.dosage)).text.value,
     Status: S.status.value
   }
   sort by Start desc, End desc
 
 define ReportOpioidMedications:
-  (ReportOpioidMedicationRequests union ReportOpioidMedicationStatements) M
+  (ReportOpioidMedicationRequests
+    union ReportOpioidMedicationStatements
+    union ReportNaloxoneMedications) M
   sort by Start desc, End desc
 
 // Non-opioid medication orders and statements with dates (lookback 2 years)
@@ -854,6 +912,8 @@ define ReportNonOpioidMedicationRequests:
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
     End:   null as String, // MedicationRequest end date not supported in R4,
+    MME: 'N/A',
+    Sig: (singleton from (O.dosageInstruction)).text.value,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -865,12 +925,16 @@ define ReportNonOpioidMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    MME: 'N/A',
+    Sig: (singleton from (S.dosage)).text.value,
     Status: S.status.value
   }
   sort by Start desc, End desc
 
 define ReportNonOpioidMedications:
-  (ReportNonOpioidMedicationRequests union ReportNonOpioidMedicationStatements) M
+  (ReportNonOpioidMedicationRequests
+    union ReportNonOpioidMedicationStatements
+    union ReportBenzodiazepineMedications) M
   sort by Start desc, End desc
 
 // Non-pharmacologic treatments, orders, and referrals with dates (lookback 2 years)
@@ -1014,6 +1078,8 @@ define ReportBenzodiazepineMedicationRequests:
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
     End:   null as String, // MedicationRequest end date not supported in R4,
+    MME: 'N/A',
+    Sig: (singleton from (O.dosageInstruction)).text.value,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -1025,6 +1091,8 @@ define ReportBenzodiazepineMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    MME: 'N/A',
+    Sig: (singleton from (S.dosage)).text.value,
     Status: S.status.value
   }
   sort by Start desc, End desc
@@ -1050,6 +1118,8 @@ define ReportNaloxoneMedicationRequests:
     Name:  ConceptText(O.medication as FHIR.CodeableConcept),
     Start: DateTimeText(O.authoredOn),
     End:   null as String, // MedicationRequest end date not supported in R4,
+    MME: MMEText(MMECalculator.TotalMME(List{O})),
+    Sig: (singleton from (O.dosageInstruction)).text.value,
     Status: O.status.value
   }
   sort by Start desc, End desc
@@ -1061,6 +1131,8 @@ define ReportNaloxoneMedicationStatements:
     Name:  ConceptText(S.medication as FHIR.CodeableConcept),
     Start: MedicationStatementDate(S),
     End:   DateTimeText((S.effective as FHIR.Period)."end"),
+    MME: 'Not calculated',
+    Sig: (singleton from (S.dosage)).text.value,
     Status: S.status.value
   }
   sort by Start desc, End desc

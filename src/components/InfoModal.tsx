@@ -7,7 +7,7 @@ import ReactTable from 'react-table';
 export default class InfoModal extends Component<any, any> {
   elementsTableProps: { id: string; };
   referencesTableProps: { id: string; };
-  static propTypes: { subSection: PropTypes.Requireable<object>; closeModal: PropTypes.Validator<(...args: any[]) => any>; };
+  static propTypes: { subSection: PropTypes.Requireable<object>; closeModal: PropTypes.Validator<(...args: any[]) => any>; modalRole: PropTypes.Requireable<string>};
 
   constructor(props: any) {
     super(props);
@@ -29,8 +29,8 @@ export default class InfoModal extends Component<any, any> {
       Header: () => { return <span className="col-header">Lookback</span> },
       accessor: 'lookback'
     }];
-    if (this.props.subSection.dataKey === "OpioidMedications") {
-      if (this.props.subSection.warningText) {
+    if (this.props.subSection.dataKey === "OpioidMedications" || this.props.subSection.dataKey === "NonOpioidMedications") {
+      if (this.props.subSection.warningText && this.props.modalRole === 'warning') {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
@@ -117,12 +117,12 @@ export default class InfoModal extends Component<any, any> {
   }
 
   render() {
-    const { subSection, closeModal } = this.props;
+    const { subSection, closeModal, modalRole } = this.props;
     const elements = subSection.info.find((el: any) => el.type === "elements");
     const references = subSection.info.filter((el: any) => el.type === "reference");
 
     return (
-      <div className="info-modal">
+      <div className={`${modalRole}-modal`}>
         <div className="info-modal__header">
           More Information for {subSection.name}
           <FontAwesomeIcon icon="times" title="close" className="close-icon" onClick={closeModal} />
@@ -149,5 +149,6 @@ export default class InfoModal extends Component<any, any> {
 
 InfoModal.propTypes = {
   subSection: PropTypes.object,
-  closeModal: PropTypes.func.isRequired
+  closeModal: PropTypes.func.isRequired,
+  modalRole: PropTypes.string
 };

@@ -4,9 +4,20 @@ Footer {
     color: white;
     display: flex;
     align-items: center;
-    height: 40px;
-    p {
+    .app-version {
         font-size: large;
         padding-left: 20px;
+        // width: 30%;
+        word-wrap: none;
+        width: max-content;
+    }
+        .info-box {
+            padding: 0 10px;
+        p {
+            font-size: medium;
+            span {
+                color: lightgrey;
+            }
+        }
     }
 }
