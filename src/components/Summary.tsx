@@ -257,10 +257,8 @@ export default class Summary extends Component<any, any> {
                     columns={columns}
                     data={filteredEntries}
                     minRows={1}
-                    // showPagination={filteredEntries.length > 10}
                     showPagination={false}
-                    // pageSizeOptions={[10, 20, 50, 100]}
-                    // defaultPageSize={10}
+                    defaultPageSize={filteredEntries.length}
                     resizable={false}
                     getProps={() => customProps}
                     getTheadThProps={(state, rowInfo, column, instance) => {
