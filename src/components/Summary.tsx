@@ -34,7 +34,8 @@ export default class Summary extends Component<any, any> {
             modalRole: null
         };
         this.subsectionTableProps = { id: 'react_sub-section__table' };
-
+        // let screenRes = this.detectScreenResolution();
+        // console.log('screenRes', screenRes)
         ReactModal.setAppElement('body');
         console.log(`You are running version ${this.appVersion} of the PainManager Application`);
     }
@@ -58,6 +59,12 @@ export default class Summary extends Component<any, any> {
                 });
         }
     }
+
+    // detectScreenResolution() {
+    //     let pixels = window.devicePixelRatio;
+    //     // console.log('pixels:', pixels);
+    //     return true ? pixels > 1 : pixels <= 1;
+    // }
 
     handleOpenModal = (modalSubSection: any, event: any, modalRole?: any) => {
         //only open modal   on 'enter' or click
