@@ -23,6 +23,7 @@ function generateUuid() {
 
 export default class Landing extends Component<any, any> {
     summaryMapData: any = summaryMap;
+    screenRes = this.detectScreenResolution();
     constructor(props: any) {
         super(props);
         this.state = {
@@ -34,6 +35,8 @@ export default class Landing extends Component<any, any> {
             questionText: new Map(),
             logs: []
         };
+        // let screenRes = this.detectScreenResolution();
+        // console.log('screenRes', screenRes)
 
     }
 
@@ -79,6 +82,11 @@ export default class Landing extends Component<any, any> {
             const patientName = this.state.result.Summary.Patient.Name;
             document.title = 'Pain Management Summary - ' + patientName;
         }
+    }
+
+    detectScreenResolution() {
+        let pixels = window.devicePixelRatio;
+        return true ? pixels > 1 : pixels <= 1;
     }
 
     getAnalyticsData(endpoint: any, apikey: any, summary: any) {
@@ -152,7 +160,7 @@ export default class Landing extends Component<any, any> {
                     const data = summary[subSection.dataKeySource][subSection.dataKey];
                     const entries = (Array.isArray(data) ? data : [data]).filter((r) => {
                         // convert sig object to string value
-                        if(r['Sig']) {
+                        if (r['Sig']) {
                             r['Sig'] = r['Sig'].value
                         }
                         return r != null;
@@ -181,7 +189,7 @@ export default class Landing extends Component<any, any> {
                     }
                 }
             }, (error) => {
-                console.error('Error: ',error)
+                console.error('Error: ', error)
             });
         });
 
@@ -197,7 +205,7 @@ export default class Landing extends Component<any, any> {
                 }
             })
             .catch((err: any) => {
-                console.error('Error: ',err)
+                console.error('Error: ', err)
             });
 
         return { sectionFlags, flaggedCount };
@@ -242,7 +250,7 @@ export default class Landing extends Component<any, any> {
         // const totalEntries = numMedicalHistoryEntries + numPainEntries + numTreatmentsEntries + numRiskEntries;
 
         return (
-            <div className="landing">
+            <div className={"landing " + (this.screenRes ? "" : 'low-dpi')}>
                 <div id="skiptocontent"><a href="#maincontent">skip to main content</a></div>
 
                 {/* <Header
