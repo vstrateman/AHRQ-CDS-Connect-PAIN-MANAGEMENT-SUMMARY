@@ -15,7 +15,6 @@ export default class Footer extends Component<any, any> {
 
     componentDidMount() {
         this.appConfig = this.props.children;
-        console.log('props:', this.props.children)
 
     }
 

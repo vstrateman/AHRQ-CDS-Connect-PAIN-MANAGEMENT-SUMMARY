@@ -69,7 +69,7 @@ export default class Summary extends Component<any, any> {
     handleOpenModal = (modalSubSection: any, event: any, modalRole?: any) => {
         //only open modal   on 'enter' or click
         if (event.keyCode === 13 || event.type === "click") {
-            this.setState({ showModal: true, modalSubSection, modalRole});
+            this.setState({ showModal: true, modalSubSection, modalRole });
         }
     }
 
@@ -126,18 +126,15 @@ export default class Summary extends Component<any, any> {
         const tooltip = flagged ? flagText : '';
         if (section === 'UrineDrugScreening' && (this.props.summary['UrineDrugScreening'].UrineDrugScreens.length === 0)) {
             return (
-                <div className="table">
-                    <div className="no-entries">
-                        <FontAwesomeIcon
-                            className={'flag flag-no-entry ' + flaggedClass}
-                            icon="exclamation-circle"
-                            title={'flag:' + tooltip}
-                            data-tip={tooltip}
-                            data-role="tooltip"
-                            tabIndex={0}
-                        />
-                        <Markdown>{this.props.summary['UrineDrugScreening'].Recommendation10Text}</Markdown>
-                    </div>
+                <div className="no-entries">
+                    <FontAwesomeIcon
+                        icon="exclamation-circle"
+                        // title={'flag:' + tooltip}
+                        // data-tip={tooltip}
+                        size="2x"
+                        tabIndex={0}
+                    />
+                    <Markdown>{this.props.summary['UrineDrugScreening'].Recommendation10Text}</Markdown>
                 </div>
             );
         }
@@ -268,6 +265,12 @@ export default class Summary extends Component<any, any> {
                     defaultPageSize={filteredEntries.length}
                     resizable={false}
                     getProps={() => customProps}
+                    defaultSorted={[
+                        {
+                            id: 'Result',
+                            desc: true
+                        }
+                    ]}
                     getTheadThProps={(state, rowInfo, column, instance) => {
                         return {
                             tabIndex: 0,
@@ -340,20 +343,20 @@ export default class Summary extends Component<any, any> {
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
                                 {subSection.info ? (<div
-                                        onClick={(event) => this.handleOpenModal(subSection, event, 'warning')}
-                                        onKeyDown={(event) => this.handleOpenModal(subSection, event, 'warning')}
-                                        role="button"
+                                    onClick={(event) => this.handleOpenModal(subSection, event, 'warning')}
+                                    onKeyDown={(event) => this.handleOpenModal(subSection, event, 'warning')}
+                                    role="button"
+                                    tabIndex={0}
+                                    aria-label={subSection.name}>
+                                    {subSection.warningText ? <FontAwesomeIcon
+                                        className='warning-icon'
+                                        icon="exclamation-circle"
+                                        title={'warning: ' + subSection.name}
+                                        data-tip="warning"
+                                        role="tooltip"
                                         tabIndex={0}
-                                        aria-label={subSection.name}>
-                                        {subSection.warningText ? <FontAwesomeIcon
-                                            className='warning-icon'
-                                            icon="exclamation-circle"
-                                            title={'warning: ' + subSection.name}
-                                            data-tip="warning"
-                                            role="tooltip"
-                                            tabIndex={0}
-                                        /> : ''}
-                                    </div>) : ('')}
+                                    /> : ''}
+                                </div>) : ('')}
                                 <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
                             </div>
                         </div>
@@ -509,6 +512,7 @@ export default class Summary extends Component<any, any> {
                                     (sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
                                     (sharedDecisionSection.PainLocations.length === 0) &&
                                     (sharedDecisionSection.PainIntensityAndInterference.length === 0)) ?
+                                    // (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     : (<div>
 
@@ -552,7 +556,7 @@ export default class Summary extends Component<any, any> {
                     {this.state.appConfig ? (<Footer key={this.state.appConfig}>{this.state.appConfig}</Footer>) : (
                         <Footer key={this.state.appConfig}></Footer>
                     )}
-                
+
 
                     <DevTools
                         collector={collector}
