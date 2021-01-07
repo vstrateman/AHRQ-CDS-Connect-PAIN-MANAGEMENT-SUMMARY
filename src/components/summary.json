@@ -266,7 +266,11 @@
               "key": "Date",
               "formatter": "datishFormat"
             },
-            "Result": "Result"
+            "Result": {
+              "key":"Result",
+              "formatter": "datishFormat",
+              "style": ["color", "red"]
+            }
           },
           "flags": [
             {

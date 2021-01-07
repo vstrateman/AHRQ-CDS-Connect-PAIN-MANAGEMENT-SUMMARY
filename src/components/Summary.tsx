@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Collapsible from 'react-collapsible';
 import ReactTooltip from 'react-tooltip';
-import ReactTable from 'react-table';
+import ReactTable, { Column } from 'react-table';
 import ReactModal from 'react-modal';
 
 // import summaryMap from './summary.json';
@@ -26,6 +26,7 @@ export default class Summary extends Component<any, any> {
     formatitHelper: any = formatit;
     sortitHelper: any = sortit;
     summaryMapData: any = summaryMap;
+    logged: boolean = false;
     constructor(props: any) {
         super(props);
         this.state = {
@@ -65,6 +66,10 @@ export default class Summary extends Component<any, any> {
     //     // console.log('pixels:', pixels);
     //     return true ? pixels > 1 : pixels <= 1;
     // }
+    logToConsoleOnce(itemToLog: any) {
+        this.logged = true;
+        console.log('logged: ', itemToLog);
+    }
 
     handleOpenModal = (modalSubSection: any, event: any, modalRole?: any) => {
         //only open modal   on 'enter' or click
@@ -193,11 +198,11 @@ export default class Summary extends Component<any, any> {
         if (filteredEntries.length === 0) return null;
 
         const headers = Object.keys(table.headers);
-        const columns: any[] = [];
+        const columns: Column[] = [];
         headers.forEach((header) => {
             const headerKey = table.headers[header];
 
-            const column: any = {
+            const column: Column = {
                 id: header,
                 Header: () => <span className="col-header">{header}</span>,
                 accessor: (entry: any) => {
@@ -213,7 +218,7 @@ export default class Summary extends Component<any, any> {
 
                     return value;
                 },
-                width: 'auto',
+                minWidth: 150,
                 sortable: headerKey.sortable !== false
             };
 
@@ -264,7 +269,16 @@ export default class Summary extends Component<any, any> {
                     showPagination={false}
                     defaultPageSize={filteredEntries.length}
                     resizable={false}
-                    getProps={() => customProps}
+                    // getProps={() => customProps}
+                    // getProps={(state,rowInfo, column) => {
+                    //     // if(state.columns[2].id && state.columns[2].id === 'Result') {
+
+                    //     //     console.log('state: ', state.columns[2] )
+                    //     // }
+                    //     return {
+                            
+                    //     }
+                    // }}
                     defaultSorted={[
                         {
                             id: 'Result',
@@ -272,15 +286,31 @@ export default class Summary extends Component<any, any> {
                         }
                     ]}
                     getTheadThProps={(state, rowInfo, column, instance) => {
-                        return {
-                            tabIndex: 0,
-                            onKeyPress: (e: { which: number; stopPropagation: () => void; }, handleOriginal: any) => {
-                                if (e.which === 13) {
-                                    instance.sortColumn(column);
-                                    e.stopPropagation();
+                        
+
+                            return {
+                                tabIndex: 0,
+                                onKeyPress: (e: { which: number; stopPropagation: () => void; }, handleOriginal: any) => {
+                                    if (e.which === 13) {
+                                        instance.sortColumn(column);
+                                        e.stopPropagation();
+                                    }
                                 }
+                            };
+                        
+                    }}
+                    getTdProps={(state, rowInfo, column, instance) => {
+                        // console.log('columnresult', column)
+                        // if(rowInfo.row['Result']) {
+                        //     if(rowInfo.row['Result'] !== '')
+                        // }
+                        return{
+                            style: {
+                                // color: ((rowInfo.row['Result'].includes('pos')) ? 'red' : 'black')
+                                color: ((rowInfo.row['Result'] === 'Presumptive Pos') ? 'red' : 'black')
+                                // color: ((rowInfo.row['Result'] !== 'Negative' && rowInfo.row['Result'] !== '' && rowInfo.row['Result'] !== 'Not Detected') ? 'red' : 'black')
                             }
-                        };
+                        }
                     }}
                 />
             </div>
@@ -598,3 +628,4 @@ Summary.propTypes = {
     numTreatmentsEntries: PropTypes.number.isRequired,
     numRiskEntries: PropTypes.number.isRequired
 };
+
