@@ -61,16 +61,6 @@ export default class Summary extends Component<any, any> {
         }
     }
 
-    // detectScreenResolution() {
-    //     let pixels = window.devicePixelRatio;
-    //     // console.log('pixels:', pixels);
-    //     return true ? pixels > 1 : pixels <= 1;
-    // }
-    logToConsoleOnce(itemToLog: any) {
-        this.logged = true;
-        console.log('logged: ', itemToLog);
-    }
-
     handleOpenModal = (modalSubSection: any, event: any, modalRole?: any) => {
         //only open modal   on 'enter' or click
         if (event.keyCode === 13 || event.type === "click") {
@@ -269,16 +259,7 @@ export default class Summary extends Component<any, any> {
                     showPagination={false}
                     defaultPageSize={filteredEntries.length}
                     resizable={false}
-                    // getProps={() => customProps}
-                    // getProps={(state,rowInfo, column) => {
-                    //     // if(state.columns[2].id && state.columns[2].id === 'Result') {
-
-                    //     //     console.log('state: ', state.columns[2] )
-                    //     // }
-                    //     return {
-                            
-                    //     }
-                    // }}
+                    getProps={() => customProps}
                     defaultSorted={[
                         {
                             id: 'Result',
@@ -299,19 +280,15 @@ export default class Summary extends Component<any, any> {
                             };
                         
                     }}
-                    getTdProps={(state, rowInfo, column, instance) => {
-                        // console.log('columnresult', column)
-                        // if(rowInfo.row['Result']) {
-                        //     if(rowInfo.row['Result'] !== '')
-                        // }
-                        return{
-                            style: {
-                                // color: ((rowInfo.row['Result'].includes('pos')) ? 'red' : 'black')
-                                color: ((rowInfo.row['Result'] === 'Presumptive Pos') ? 'red' : 'black')
-                                // color: ((rowInfo.row['Result'] !== 'Negative' && rowInfo.row['Result'] !== '' && rowInfo.row['Result'] !== 'Not Detected') ? 'red' : 'black')
-                            }
-                        }
-                    }}
+                    // getTdProps={(state, rowInfo, column, instance) => {
+                    
+                    //     return{
+                    //         style: {
+                    //             color: ((rowInfo.row['Result'] === 'Presumptive Pos') ? 'red' : 'black')
+                    //             // color: ((rowInfo.row['Result'] !== 'Negative' && rowInfo.row['Result'] !== '' && rowInfo.row['Result'] !== 'Not Detected') ? 'red' : 'black')
+                    //         }
+                    //     }
+                    // }}
                 />
             </div>
         );
