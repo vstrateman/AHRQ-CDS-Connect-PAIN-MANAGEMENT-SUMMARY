@@ -154,12 +154,20 @@ main {
                     padding: 10px 18px;
                     font-style: italic;
                     color: $color-gray-light;
+                    display: flex;
+                    align-items: center;
                     .flag-no-entry {
                         margin-right: 12px;
                         font-size: 1em;
                         color: transparent;
                         &.flagged {
                             color: $color-red;
+                        }
+                    }
+                    &>svg {
+                        width: 100px;
+                        path {
+                            fill: #fea135;
                         }
                     }
                 }

@@ -266,7 +266,10 @@
               "key": "Date",
               "formatter": "datishFormat"
             },
-            "Result": "Interpretation"
+            "Result": {
+              "key":"Result",
+              "formatter": "datishFormat"
+            }
           },
           "flags": [
             {
