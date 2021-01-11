@@ -374,35 +374,43 @@ export default class Summary extends Component<any, any> {
                 subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || null);
 
                 datatable = (
-                    <div id={subSection.dataKey} className="sub-section__header">
-                        <FontAwesomeIcon
-                            className={'flag flag-nav ' + flaggedClass}
-                            icon={flagged ? 'exclamation-circle' : 'circle'}
-                            title="flag"
-                            tabIndex={0}
-                        />
-                        <div id="opioid-title">
-                            <h3 className="opioid-name">{subSection.name}
-                                {subSection.info ? (<div
-                                    onClick={(event) => this.handleOpenModal(subSection, event, 'warning')}
-                                    onKeyDown={(event) => this.handleOpenModal(subSection, event, 'warning')}
-                                    role="button"
-                                    tabIndex={0}
-                                    aria-label={subSection.name}>
-                                    {subSection.recommendationText ? <FontAwesomeIcon
-                                        className='warning-icon'
-                                        icon="exclamation-circle"
-                                        title={'warning: ' + subSection.name}
-                                        data-tip="warning"
-                                        role="tooltip"
-                                        tabIndex={0}
-                                    /> : ''}
-                                </div>) : ('')}
-                            </h3>
+                    <>
+                        <div>
+                            *Self-reported medications are listed below when patients have provided this information via
+                            MyPAIN.
+                        <br/>
+                            *Active prescriptions do not include locally compounded medications.
+                        <br/>
+                            <h3> ACTIVE PRESCRIPTIONS</h3>
                         </div>
+                        <div id={subSection.dataKey} className="sub-section__header">
+                            <FontAwesomeIcon
+                                className={'flag flag-nav ' + flaggedClass}
+                                icon={flagged ? 'exclamation-circle' : 'circle'}
+                                title="flag"
+                                tabIndex={0}/>
+                            <div id="opioid-title">
+                                <h3 className="opioid-name">{subSection.name}
+                                    {subSection.info ? (<div
+                                        onClick={(event) => this.handleOpenModal(subSection, event, 'warning')}
+                                        onKeyDown={(event) => this.handleOpenModal(subSection, event, 'warning')}
+                                        role="button"
+                                        tabIndex={0}
+                                        aria-label={subSection.name}>
+                                        {subSection.recommendationText ? <FontAwesomeIcon
+                                            className='warning-icon'
+                                            icon="exclamation-circle"
+                                            title={'warning: ' + subSection.name}
+                                            data-tip="warning"
+                                            role="tooltip"
+                                            tabIndex={0}/> : ''}
+                                    </div>) : ('')}
+                                </h3>
+                            </div>
 
 
-                    </div>)
+                        </div>
+                    </>)
             } else {
                 datatable = (<div id={subSection.dataKey} className="sub-section__header">
                     <FontAwesomeIcon
@@ -452,7 +460,7 @@ export default class Summary extends Component<any, any> {
         if (section === 'PertinentConditions') {
             title = 'Pertinent Conditions';
         } else if (section === 'CurrentPertinentTreatments') {
-            title = 'Current Pertinent Treatments';
+            title = 'Current Pertinent Treatments*';
         } else if (section === 'UrineDrugScreening') {
             title = 'Urine Drug Screening';
         } else if (section === 'SharedDecisionMaking') {
