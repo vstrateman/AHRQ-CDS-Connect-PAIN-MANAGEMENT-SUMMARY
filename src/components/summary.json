@@ -207,7 +207,7 @@
       ]
     },
     {
-      "name": "Self-Reported Treatments From MyPAIN (past 6 months)",
+      "name": "SELF-REPORTED TREATMENTS FROM MyPAIN (past 6 months)",
       "dataKey": "SelfReportedTreatmentsFromMyPAIN",
       "dataKeySource": "CurrentPertinentTreatments",
       "info": [
