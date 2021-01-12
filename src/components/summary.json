@@ -141,8 +141,16 @@
               "key": "Start",
               "formatter": "datishFormat"
             },
+            "Date Ended": {
+              "key": "End",
+              "formatter":"datishFormat"
+            },
             "Sig": {
               "key": "Sig",
+              "formatter":"booleanFormat"
+            },
+            "Status": {
+              "key": "Status",
               "formatter":"booleanFormat"
             }
           },
