@@ -29892,6 +29892,22 @@
       {
         "code": "61775-3",
         "system": "http://loinc.org"
+      },
+      {
+        "code": "61671-3",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "61777-9",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "61794-4",
+        "system": "http://loinc.org"
+      },
+      {
+        "code": "61762-1",
+        "system": "http://loinc.org"
       }
     ]
   },
