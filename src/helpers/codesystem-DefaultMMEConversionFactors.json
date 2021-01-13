@@ -109,6 +109,10 @@
         {
           "code": "dose-form-conversion-factor",
           "valueString": "858080:30"
+        },
+        {
+          "code": "dose-form-conversion-factor",
+          "valueString": "2269578:30"
         }
       ]
     },
