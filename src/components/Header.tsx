@@ -8,11 +8,12 @@ export default class Header extends Component {
     return (
       <header className="header">
         <div className="header__logo">
-          <span className="header__logo-text">PainManager</span>
+          <img className="header__logo-img" src={`${process.env.PUBLIC_URL}/assets/images/Pain_Manager_LOGO.jpg`} alt="" />
+          <span className="header__logo-text"></span>
         </div>
-            <div className="header-notice">
-              <p>NOTE:  This summary is not intended for patients who are undergoing end-of-life care (hospice or palliative) or active cancer treatment.</p>
-            </div>
+        <div className="header-notice">
+          <p>NOTE:  This summary is not intended for patients who are undergoing end-of-life care (hospice or palliative) or active cancer treatment.</p>
+        </div>
       </header>
     );
   }
