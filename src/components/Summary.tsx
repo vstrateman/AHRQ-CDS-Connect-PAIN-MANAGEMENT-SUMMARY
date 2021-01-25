@@ -566,7 +566,7 @@ export default class Summary extends Component<any, any> {
                         </div>
                     }
 
-                    {/* {this.state.appConfig ? (<div className="redcap-link">
+                    { this.state.appConfig ? (<div className="redcap-link">
                         <p>To provide comments on this release of PainManager, please complete the <a
                             href={this.state.appConfig.redcapSurveyLink}
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
@@ -574,7 +574,7 @@ export default class Summary extends Component<any, any> {
                             rel="noopener noreferrer">
                             REDCap survey
                         </a>.</p>
-                    </div>) : ('')} */}
+                    </div>) : ('') }
 
                     {this.state.appConfig ? (<Footer key={this.state.appConfig} receiveTools={this.showTools}>{this.state.appConfig}</Footer>) : (
                         <Footer key={this.state.appConfig} receiveTools={this.showTools}></Footer>
