@@ -4,6 +4,10 @@ Footer {
     color: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     .app-version {
         font-size: large;
         padding-left: 20px;
@@ -11,8 +15,11 @@ Footer {
         word-wrap: none;
         width: max-content;
     }
-        .info-box {
-            padding: 0 10px;
+    .dev-tools-icon {
+        margin-right: 1rem;
+    }
+    .info-box {
+        padding: 0 10px;
         p {
             font-size: medium;
             span {

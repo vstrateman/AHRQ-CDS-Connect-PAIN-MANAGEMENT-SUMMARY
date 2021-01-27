@@ -1388,15 +1388,15 @@ define ReportPainIntensityAndInterference:
 
   define function GetResourceURL(linkId String):
     case
-      when linkId = '12' then 'https://www.youtube.com/embed/QWcr9J3MLfo'
-      when linkId = '13' then 'https://uspainfoundation.org/living-with-pain/'
+      when linkId = '13' then 'https://www.youtube.com/embed/QWcr9J3MLfo'
+      when linkId = '14' then 'https://uspainfoundation.org/living-with-pain/'
       else null
     end
 
 
 // Data from the most recent "resources viewed" Observations
 define ReportResourcesProvidedInMyPAIN:
-(QuestionnaireObservations) qrOb where qrOb.extension[0].extension[0].value as FHIR.string in {'12', '13'}
+(QuestionnaireObservations) qrOb where qrOb.extension[0].extension[0].value as FHIR.string in {'13', '14'}
   return
   {
       Resource: qrOb.value,

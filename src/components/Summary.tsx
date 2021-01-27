@@ -32,7 +32,8 @@ export default class Summary extends Component<any, any> {
         this.state = {
             showModal: false,
             modalSubSection: null,
-            modalRole: null
+            modalRole: null,
+            showDevTools: false
         };
         this.subsectionTableProps = { id: 'react_sub-section__table' };
         // let screenRes = this.detectScreenResolution();
@@ -70,6 +71,13 @@ export default class Summary extends Component<any, any> {
 
     handleCloseModal = () => {
         this.setState({ showModal: false });
+    }
+
+    showTools = (value) => {
+        console.log('value: ', value);
+        this.setState({ showDevTools: value }, () => {
+            console.log('state: ', this.state)
+        })
     }
 
     isSectionFlagged(section: any) {
@@ -267,28 +275,28 @@ export default class Summary extends Component<any, any> {
                         }
                     ]}
                     getTheadThProps={(state, rowInfo, column, instance) => {
-                        
 
-                            return {
-                                tabIndex: 0,
-                                onKeyPress: (e: { which: number; stopPropagation: () => void; }, handleOriginal: any) => {
-                                    if (e.which === 13) {
-                                        instance.sortColumn(column);
-                                        e.stopPropagation();
-                                    }
+
+                        return {
+                            tabIndex: 0,
+                            onKeyPress: (e: { which: number; stopPropagation: () => void; }, handleOriginal: any) => {
+                                if (e.which === 13) {
+                                    instance.sortColumn(column);
+                                    e.stopPropagation();
                                 }
-                            };
-                        
+                            }
+                        };
+
                     }}
-                    // getTdProps={(state, rowInfo, column, instance) => {
-                    
-                    //     return{
-                    //         style: {
-                    //             color: ((rowInfo.row['Result'] === 'Presumptive Pos') ? 'red' : 'black')
-                    //             // color: ((rowInfo.row['Result'] !== 'Negative' && rowInfo.row['Result'] !== '' && rowInfo.row['Result'] !== 'Not Detected') ? 'red' : 'black')
-                    //         }
-                    //     }
-                    // }}
+                // getTdProps={(state, rowInfo, column, instance) => {
+
+                //     return{
+                //         style: {
+                //             color: ((rowInfo.row['Result'] === 'Presumptive Pos') ? 'red' : 'black')
+                //             // color: ((rowInfo.row['Result'] !== 'Negative' && rowInfo.row['Result'] !== '' && rowInfo.row['Result'] !== 'Not Detected') ? 'red' : 'black')
+                //         }
+                //     }
+                // }}
                 />
             </div>
         );
@@ -378,9 +386,9 @@ export default class Summary extends Component<any, any> {
                         <div>
                             *Self-reported medications are listed below when patients have provided this information via
                             MyPAIN.
-                        <br/>
+                        <br />
                             *Active prescriptions do not include locally compounded medications.
-                        <br/>
+                        <br />
                             <h3> ACTIVE PRESCRIPTIONS</h3>
                         </div>
                         <div id={subSection.dataKey} className="sub-section__header">
@@ -388,7 +396,7 @@ export default class Summary extends Component<any, any> {
                                 className={'flag flag-nav ' + flaggedClass}
                                 icon={flagged ? 'exclamation-circle' : 'circle'}
                                 title="flag"
-                                tabIndex={0}/>
+                                tabIndex={0} />
                             <div id="opioid-title">
                                 <h3 className="opioid-name">{subSection.name}
                                     {subSection.info ? (<div
@@ -403,7 +411,7 @@ export default class Summary extends Component<any, any> {
                                             title={'warning: ' + subSection.name}
                                             data-tip="warning"
                                             role="tooltip"
-                                            tabIndex={0}/> : ''}
+                                            tabIndex={0} /> : ''}
                                     </div>) : ('')}
                                 </h3>
                             </div>
@@ -558,7 +566,7 @@ export default class Summary extends Component<any, any> {
                         </div>
                     }
 
-                    {/* {this.state.appConfig ? (<div className="redcap-link">
+                    { this.state.appConfig ? (<div className="redcap-link">
                         <p>To provide comments on this release of PainManager, please complete the <a
                             href={this.state.appConfig.redcapSurveyLink}
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
@@ -566,20 +574,20 @@ export default class Summary extends Component<any, any> {
                             rel="noopener noreferrer">
                             REDCap survey
                         </a>.</p>
-                    </div>) : ('')} */}
+                    </div>) : ('') }
 
-                    {this.state.appConfig ? (<Footer key={this.state.appConfig}>{this.state.appConfig}</Footer>) : (
-                        <Footer key={this.state.appConfig}></Footer>
+                    {this.state.appConfig ? (<Footer key={this.state.appConfig} receiveTools={this.showTools}>{this.state.appConfig}</Footer>) : (
+                        <Footer key={this.state.appConfig} receiveTools={this.showTools}></Footer>
                     )}
 
-
-                    <DevTools
+                    
+                    {this.state.showDevTools ? <DevTools
                         collector={collector}
                         qrCollector={qrCollector}
                         result={result}
                         cdsCollector={cdsCollector}
                         questionText={questionText}
-                    />
+                    /> : ''}
 
                     <ReactTooltip className="summary-tooltip" />
 
