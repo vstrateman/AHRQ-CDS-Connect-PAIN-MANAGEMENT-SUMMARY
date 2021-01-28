@@ -1358,11 +1358,11 @@ define ReportMyPAINSubmitDate:
   return DateTimeText(qrOb.effective as FHIR.dateTime)
 
 define ReportActivityGoals:
-  (QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1036'
+  (QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1035'
     return qrOb.value
 
 define ReportActivityBarriers:
-(QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1037'
+(QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1036'
   return qrOb.value
 
 // Data from the most recent PainLocation Observations
@@ -1371,7 +1371,7 @@ define ReportPainLocations:
   or qrOb.code.coding[0].code.value = 'mpq-1053')//'painLocationOther') => doesn't work
 return
   {
-    Location: qrOb.code.coding[0].display,
+    Location: qrOb.code.coding[0].display.value,
     PainYesNo: true,
     Description: ObservationValue(qrOb)
   }
@@ -1382,7 +1382,7 @@ define ReportPainIntensityAndInterference:
     {'Had no pain', 'Mild', 'Moderate', 'Severe', 'Very Severe', 'Not at all', 'A little bit', 'Somewhat', 'Quite a bit', 'Very much'}
   return
   {
-    Question: qrOb.code.coding[0].display,
+    Question: qrOb.code.coding[0].display.value,
     Response: ObservationValue(qrOb)
   }
 
@@ -1399,8 +1399,8 @@ define ReportResourcesProvidedInMyPAIN:
 (QuestionnaireObservations) qrOb where qrOb.extension[0].extension[0].value as FHIR.string in {'13', '14'}
   return
   {
-      Resource: qrOb.value,
-      ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),//qrOb),
+      Resource: qrOb.value.value,
+      ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),
       ViewedOn: qrOb.effective
   }
 
