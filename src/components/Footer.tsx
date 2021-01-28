@@ -11,14 +11,8 @@ export default class Footer extends Component<any, any> {
     showTools: boolean = this.props.showTools;
     handleDevTools = () => {
         this.showTools = !this.showTools;
-        console.log('props: ', this.props)
         this.props.receiveTools(this.showTools);
     }
-    // constructor(props) {
-    //     super(props)
-    //     // console.log('props:', props)
-    //     // this.appConfig = props.config;
-    // }
     appVersion = pkg.version;
 
     componentDidMount() {

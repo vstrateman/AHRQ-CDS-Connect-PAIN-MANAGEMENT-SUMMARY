@@ -36,8 +36,6 @@ export default class Summary extends Component<any, any> {
             showDevTools: false
         };
         this.subsectionTableProps = { id: 'react_sub-section__table' };
-        // let screenRes = this.detectScreenResolution();
-        // console.log('screenRes', screenRes)
         ReactModal.setAppElement('body');
         console.log(`You are running version ${this.appVersion} of the PainManager Application`);
     }
@@ -74,9 +72,7 @@ export default class Summary extends Component<any, any> {
     }
 
     showTools = (value) => {
-        console.log('value: ', value);
         this.setState({ showDevTools: value }, () => {
-            console.log('state: ', this.state)
         })
     }
 
