@@ -35,9 +35,6 @@ export default class Landing extends Component<any, any> {
             questionText: new Map(),
             logs: []
         };
-        // let screenRes = this.detectScreenResolution();
-        // console.log('screenRes', screenRes)
-
     }
 
     componentDidMount() {

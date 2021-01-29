@@ -8625,7 +8625,7 @@
                      }
                   }, {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "mpq-1036",
+                     "value" : "mpq-1035",
                      "type" : "Literal"
                   } ]
                },
@@ -8678,7 +8678,7 @@
                      }
                   }, {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "mpq-1037",
+                     "value" : "mpq-1036",
                      "type" : "Literal"
                   } ]
                },
@@ -8781,23 +8781,27 @@
                      "element" : [ {
                         "name" : "Location",
                         "value" : {
-                           "path" : "display",
+                           "path" : "value",
                            "type" : "Property",
                            "source" : {
-                              "type" : "Indexer",
-                              "operand" : [ {
-                                 "path" : "coding",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "code",
-                                    "scope" : "qrOb",
-                                    "type" : "Property"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
-                              } ]
+                              "path" : "display",
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
                            }
                         }
                      }, {
@@ -8895,23 +8899,27 @@
                      "element" : [ {
                         "name" : "Question",
                         "value" : {
-                           "path" : "display",
+                           "path" : "value",
                            "type" : "Property",
                            "source" : {
-                              "type" : "Indexer",
-                              "operand" : [ {
-                                 "path" : "coding",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "code",
-                                    "scope" : "qrOb",
-                                    "type" : "Property"
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
-                              } ]
+                              "path" : "display",
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
                            }
                         }
                      }, {
@@ -9060,8 +9068,12 @@
                         "name" : "Resource",
                         "value" : {
                            "path" : "value",
-                           "scope" : "qrOb",
-                           "type" : "Property"
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "value",
+                              "scope" : "qrOb",
+                              "type" : "Property"
+                           }
                         }
                      }, {
                         "name" : "ResourceUrl",
