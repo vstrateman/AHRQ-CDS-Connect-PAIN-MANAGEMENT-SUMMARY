@@ -45,8 +45,8 @@ code "painLocationOther": 'mpq-1053' from "MyPAIN Questionnaire Codes" display '
 code "physicalTreatmentsOther": 'mpq-1054' from "MyPAIN Questionnaire Codes" display 'Other physical treatment'
 code "prescriptionOther": 'mpq-1057' from "MyPAIN Questionnaire Codes" display 'Other prescription treatment'
 code "newTreatmentOther": 'mpq-1059' from "MyPAIN Questionnaire Codes" display 'Other new treatment'
-code "painGoal": 'mpq-1036' from "MyPAIN Questionnaire Codes" display 'Pain Goal'
-code "goalBarriers": 'mpq-1037' from "MyPAIN Questionnaire Codes" display 'Goal Barriers'
+code "painGoal": 'mpq-1035' from "MyPAIN Questionnaire Codes" display 'Pain Goal'
+code "goalBarriers": 'mpq-1036' from "MyPAIN Questionnaire Codes" display 'Goal Barriers'
 
 concept "Questionnaire response Document":
   { "Questionnaire response Document code" } display 'Questionnaire response Document'
@@ -130,11 +130,11 @@ define ReportMyPAINSubmitDate:
   return F2C.DateTimeText(qrOb.effective as FHIR.dateTime)
 
 define ReportActivityGoals:
-  (QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1036'
+  (QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1035'
     return qrOb.value
 
 define ReportActivityBarriers:
-(QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1037'
+(QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value = 'mpq-1036'
   return qrOb.value
 
 // Data from the most recent PainLocation Observations
@@ -144,7 +144,7 @@ define ReportPainLocations:
 return
 {
   {
-    Location: qrOb.code.coding[0].display,
+    Location: qrOb.code.coding[0].display.value,
     PainYesNo: true,
     Description: ObservationValue(qrOb)
   }
@@ -157,7 +157,7 @@ define ReportPainIntensityAndInterference:
   return
    {
      {
-    Question: qrOb.code.coding[0].display,
+    Question: qrOb.code.coding[0].display.value,
     Response: ObservationValue(qrOb)
   }
   }
@@ -176,8 +176,8 @@ define ReportResourcesProvidedInMyPAIN:
   return
   {
     {
-      Resource: qrOb.value,
-      ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),//qrOb),
+      Resource: qrOb.value.value,
+      ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),
       ViewedOn: qrOb.effective
     }
   }

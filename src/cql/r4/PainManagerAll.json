@@ -401,7 +401,7 @@
             }
          }, {
             "name" : "painGoal",
-            "id" : "mpq-1036",
+            "id" : "mpq-1035",
             "display" : "Pain Goal",
             "accessLevel" : "Public",
             "codeSystem" : {
@@ -409,7 +409,7 @@
             }
          }, {
             "name" : "goalBarriers",
-            "id" : "mpq-1037",
+            "id" : "mpq-1036",
             "display" : "Goal Barriers",
             "accessLevel" : "Public",
             "codeSystem" : {
