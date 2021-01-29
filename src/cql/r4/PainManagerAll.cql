@@ -210,8 +210,8 @@ code "painLocationOther": 'mpq-1053' from "MyPAIN Questionnaire Codes" display '
 code "physicalTreatmentsOther": 'mpq-1054' from "MyPAIN Questionnaire Codes" display 'Other physical treatment'
 code "prescriptionOther": 'mpq-1057' from "MyPAIN Questionnaire Codes" display 'Other prescription treatment'
 code "newTreatmentOther": 'mpq-1059' from "MyPAIN Questionnaire Codes" display 'Other new treatment'
-code "painGoal": 'mpq-1036' from "MyPAIN Questionnaire Codes" display 'Pain Goal'
-code "goalBarriers": 'mpq-1037' from "MyPAIN Questionnaire Codes" display 'Goal Barriers'
+code "painGoal": 'mpq-1035' from "MyPAIN Questionnaire Codes" display 'Pain Goal'
+code "goalBarriers": 'mpq-1036' from "MyPAIN Questionnaire Codes" display 'Goal Barriers'
 
 code "Encounter Diagnosis code": 'encounter-diagnosis' from "Condition Category Codes" display 'Encounter Diagnosis'
 
