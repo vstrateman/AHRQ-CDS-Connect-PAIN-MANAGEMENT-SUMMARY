@@ -548,7 +548,7 @@ export default class Summary extends Component<any, any> {
                                                 <div className="activity-barriers">
                                                     <h3>ACTIVITY BARRIERS</h3>
                                                     {(sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]] && sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value !== null) ? <div>
-                                                        <div>{sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
+                                                        <div>{sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value}</div>
                                                     </div> : "No activity barriers submitted"}
                                                 </div>
                                             </div>
