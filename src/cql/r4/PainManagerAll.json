@@ -8719,27 +8719,27 @@
                         "type" : "List",
                         "element" : [ {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Stabbing",
+                           "value" : "55145008",
                            "type" : "Literal"
                         }, {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Burning",
+                           "value" : "36349006",
                            "type" : "Literal"
                         }, {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Aching",
+                           "value" : "27635008",
                            "type" : "Literal"
                         }, {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Tingling",
+                           "value" : "786837007",
                            "type" : "Literal"
                         }, {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Prickling",
+                           "value" : "162506004",
                            "type" : "Literal"
                         }, {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Throbbing",
+                           "value" : "29695002",
                            "type" : "Literal"
                         } ]
                      } ]

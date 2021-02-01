@@ -139,7 +139,7 @@ define ReportActivityBarriers:
 
 // Data from the most recent PainLocation Observations
 define ReportPainLocations:
-(QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'Stabbing', 'Burning', 'Aching', 'Tingling', 'Prickling', 'Throbbing'}
+(QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'55145008', '36349006', '27635008', '786837007', '162506004', '29695002'}
   or qrOb.code.coding[0].code.value = 'mpq-1053')//'painLocationOther') => doesn't work
 return
 {
