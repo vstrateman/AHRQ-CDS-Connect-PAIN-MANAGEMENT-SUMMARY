@@ -376,6 +376,54 @@
                "name" : "MyPAIN Questionnaire Codes"
             }
          }, {
+            "name" : "Aching",
+            "id" : "27635008",
+            "display" : "Aching",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Burning",
+            "id" : "36349006",
+            "display" : "Burning",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Stabbing",
+            "id" : "55145008",
+            "display" : "Stabbing",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Throbbing",
+            "id" : "29695002",
+            "display" : "Throbbing",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Prickling",
+            "id" : "162506004",
+            "display" : "Prickling",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Tingling",
+            "id" : "786837007",
+            "display" : "Tingling",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
             "name" : "physicalTreatmentsOther",
             "id" : "mpq-1054",
             "display" : "Other physical treatment",
@@ -8707,36 +8755,194 @@
                "where" : {
                   "type" : "Or",
                   "operand" : [ {
-                     "type" : "In",
+                     "type" : "Or",
                      "operand" : [ {
-                        "name" : "ObservationValue",
-                        "type" : "FunctionRef",
+                        "type" : "Or",
                         "operand" : [ {
-                           "name" : "qrOb",
-                           "type" : "AliasRef"
+                           "type" : "Or",
+                           "operand" : [ {
+                              "type" : "Or",
+                              "operand" : [ {
+                                 "type" : "Or",
+                                 "operand" : [ {
+                                    "type" : "Equal",
+                                    "operand" : [ {
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "code",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "type" : "Indexer",
+                                             "operand" : [ {
+                                                "path" : "coding",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "path" : "code",
+                                                   "scope" : "qrOb",
+                                                   "type" : "Property"
+                                                }
+                                             }, {
+                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "value" : "0",
+                                                "type" : "Literal"
+                                             } ]
+                                          }
+                                       }
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "55145008",
+                                       "type" : "Literal"
+                                    } ]
+                                 }, {
+                                    "type" : "Equal",
+                                    "operand" : [ {
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "code",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "type" : "Indexer",
+                                             "operand" : [ {
+                                                "path" : "coding",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "path" : "code",
+                                                   "scope" : "qrOb",
+                                                   "type" : "Property"
+                                                }
+                                             }, {
+                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "value" : "0",
+                                                "type" : "Literal"
+                                             } ]
+                                          }
+                                       }
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "36349006",
+                                       "type" : "Literal"
+                                    } ]
+                                 } ]
+                              }, {
+                                 "type" : "Equal",
+                                 "operand" : [ {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "path" : "coding",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "path" : "code",
+                                                "scope" : "qrOb",
+                                                "type" : "Property"
+                                             }
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "27635008",
+                                    "type" : "Literal"
+                                 } ]
+                              } ]
+                           }, {
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "type" : "Indexer",
+                                       "operand" : [ {
+                                          "path" : "coding",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "path" : "code",
+                                             "scope" : "qrOb",
+                                             "type" : "Property"
+                                          }
+                                       }, {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "0",
+                                          "type" : "Literal"
+                                       } ]
+                                    }
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "786837007",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        }, {
+                           "type" : "Equal",
+                           "operand" : [ {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "code",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "type" : "Indexer",
+                                    "operand" : [ {
+                                       "path" : "coding",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "code",
+                                          "scope" : "qrOb",
+                                          "type" : "Property"
+                                       }
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "0",
+                                       "type" : "Literal"
+                                    } ]
+                                 }
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "162506004",
+                              "type" : "Literal"
+                           } ]
                         } ]
                      }, {
-                        "type" : "List",
-                        "element" : [ {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "55145008",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "36349006",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "27635008",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "786837007",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "162506004",
-                           "type" : "Literal"
+                        "type" : "Equal",
+                        "operand" : [ {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "code",
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
+                           }
                         }, {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "29695002",
