@@ -563,7 +563,7 @@ export default class Summary extends Component<any, any> {
                                             {sharedDecisionSection.ResourcesProvidedInMyPAIN ? (
                                                 <ul>
                                                     {sharedDecisionSection.ResourcesProvidedInMyPAIN.map((resource) => {
-                                                        return <li>{resource.ResourceUrl} viewed on {this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</li>
+                                                        return <li key={resource.ResourceUrl}>{resource.ResourceUrl} viewed on {this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</li>
                                                     })
                                                 }
                                                 </ul>
