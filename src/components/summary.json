@@ -301,7 +301,7 @@
   ],
   "SharedDecisionMaking": [
     {
-      "name": "Pain Locations",
+      "name": "Pain Locations (only yes responses shown)",
       "dataKey": "PainLocations",
       "dataKeySource": "SharedDecisionMaking",
       "info": [

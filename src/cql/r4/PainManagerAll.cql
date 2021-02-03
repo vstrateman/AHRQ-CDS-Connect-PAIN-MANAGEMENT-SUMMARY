@@ -207,6 +207,13 @@ code "Morphine Milligram Equivalent (MME) code": 'MME' from "LOCAL" display 'Mor
 
 code "Questionnaire response Document code": '74465-6' from "LOINC" display 'Questionnaire response Document'
 code "painLocationOther": 'mpq-1053' from "MyPAIN Questionnaire Codes" display 'Other pain location'
+code "Aching": '27635008' from "SNOMED-CT" display 'Aching'
+code "Burning": '36349006' from "SNOMED-CT" display 'Burning'
+code "Stabbing": '55145008' from "SNOMED-CT" display 'Stabbing'
+code "Throbbing": '29695002' from "SNOMED-CT" display 'Throbbing'
+code "Prickling": '162506004' from "SNOMED-CT" display 'Prickling'
+code "Tingling": '786837007' from "SNOMED-CT" display 'Tingling'
+
 code "physicalTreatmentsOther": 'mpq-1054' from "MyPAIN Questionnaire Codes" display 'Other physical treatment'
 code "prescriptionOther": 'mpq-1057' from "MyPAIN Questionnaire Codes" display 'Other prescription treatment'
 code "newTreatmentOther": 'mpq-1059' from "MyPAIN Questionnaire Codes" display 'Other new treatment'
@@ -1367,8 +1374,16 @@ define ReportActivityBarriers:
 
 // Data from the most recent PainLocation Observations
 define ReportPainLocations:
-(QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'55145008', '36349006', '27635008', '786837007', '162506004', '29695002'}
-  or qrOb.code.coding[0].code.value = 'mpq-1053')//'painLocationOther') => doesn't work
+//(QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'55145008', '36349006', '27635008', '786837007', '162506004', '29695002'}'
+//(QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value in {'55145008', '36349006', '27635008', '786837007', '162506004', '29695002','mpq-1053'}
+(QuestionnaireObservations) qrOb where
+    (qrOb.code.coding[0].code.value = '55145008'
+    or qrOb.code.coding[0].code.value = '36349006'
+    or qrOb.code.coding[0].code.value = '27635008'
+    or qrOb.code.coding[0].code.value = '786837007'
+    or qrOb.code.coding[0].code.value = '162506004'
+    or qrOb.code.coding[0].code.value = '29695002'
+    or qrOb.code.coding[0].code.value = 'mpq-1053')
 return
   {
     Location: qrOb.code.coding[0].display.value,
@@ -1401,7 +1416,8 @@ define ReportResourcesProvidedInMyPAIN:
   {
       Resource: qrOb.value.value,
       ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),
-      ViewedOn: qrOb.effective
+      ViewedOn: ObservationValue(qrOb)
+//qrOb.effective.value
   }
 
 // Data from the most recent self reported MyPAIN observations
