@@ -206,13 +206,22 @@ code "Single question r/t drug use code": 'SQDRUGUSE' from "LOCAL" display 'Sing
 code "Morphine Milligram Equivalent (MME) code": 'MME' from "LOCAL" display 'Morphine Milligram Equivalent (MME)'
 
 code "Questionnaire response Document code": '74465-6' from "LOINC" display 'Questionnaire response Document'
+code "painLocationHead": 'mpq-1038' from "MyPAIN Questionnaire Codes" display 'Head pain location'
+code "painLocationNeck": 'mpq-1039' from "MyPAIN Questionnaire Codes" display 'Neck pain location'
+code "painLocationShoulders": 'mpq-1040' from "MyPAIN Questionnaire Codes" display 'Shoulder pain location'
+code "painLocationArms": 'mpq-1041' from "MyPAIN Questionnaire Codes" display 'Arm pain location'
+code "painLocationUpperBack": 'mpq-1042' from "MyPAIN Questionnaire Codes" display 'Upper back pain location'
+code "painLocationLowerBack": 'mpq-1043' from "MyPAIN Questionnaire Codes" display 'Lower back pain location'
+code "painLocationHands": 'mpq-1044' from "MyPAIN Questionnaire Codes" display 'Hand pain location'
+code "painLocationAbdomen": 'mpq-1045' from "MyPAIN Questionnaire Codes" display 'Abdominal pain location'
+code "painLocationPelvis": 'mpq-1046' from "MyPAIN Questionnaire Codes" display 'Pelvic pain location'
+code "painLocationHips": 'mpq-1047' from "MyPAIN Questionnaire Codes" display 'Hip pain location'
+code "painLocationUpperLegs": 'mpq-1048' from "MyPAIN Questionnaire Codes" display 'Upper leg pain location'
+code "painLocationKnees": 'mpq-1049' from "MyPAIN Questionnaire Codes" display 'Knee pain location'
+code "painLocationLowerLegs": 'mpq-1050' from "MyPAIN Questionnaire Codes" display 'Lower leg pain location'
+code "painLocationFeet": 'mpq-1051' from "MyPAIN Questionnaire Codes" display 'Foot pain location'
+code "painLocationEverywhere": 'mpq-1052' from "MyPAIN Questionnaire Codes" display 'Everywhere pain location'
 code "painLocationOther": 'mpq-1053' from "MyPAIN Questionnaire Codes" display 'Other pain location'
-code "Aching": '27635008' from "SNOMED-CT" display 'Aching'
-code "Burning": '36349006' from "SNOMED-CT" display 'Burning'
-code "Stabbing": '55145008' from "SNOMED-CT" display 'Stabbing'
-code "Throbbing": '29695002' from "SNOMED-CT" display 'Throbbing'
-code "Prickling": '162506004' from "SNOMED-CT" display 'Prickling'
-code "Tingling": '786837007' from "SNOMED-CT" display 'Tingling'
 
 code "physicalTreatmentsOther": 'mpq-1054' from "MyPAIN Questionnaire Codes" display 'Other physical treatment'
 code "prescriptionOther": 'mpq-1057' from "MyPAIN Questionnaire Codes" display 'Other prescription treatment'
@@ -1374,22 +1383,29 @@ define ReportActivityBarriers:
 
 // Data from the most recent PainLocation Observations
 define ReportPainLocations:
-//(QuestionnaireObservations) qrOb where (ObservationValue(qrOb) in {'55145008', '36349006', '27635008', '786837007', '162506004', '29695002'}'
-//(QuestionnaireObservations) qrOb where qrOb.code.coding[0].code.value in {'55145008', '36349006', '27635008', '786837007', '162506004', '29695002','mpq-1053'}
-(QuestionnaireObservations) qrOb where
-    (qrOb.code.coding[0].code.value = '55145008'
-    or qrOb.code.coding[0].code.value = '36349006'
-    or qrOb.code.coding[0].code.value = '27635008'
-    or qrOb.code.coding[0].code.value = '786837007'
-    or qrOb.code.coding[0].code.value = '162506004'
-    or qrOb.code.coding[0].code.value = '29695002'
-    or qrOb.code.coding[0].code.value = 'mpq-1053')
-return
-  {
-    Location: qrOb.code.coding[0].display.value,
-    PainYesNo: true,
-    Description: ObservationValue(qrOb)
-  }
+    (QuestionnaireObservations) qrOb where
+        (qrOb.code ~ painLocationHead
+        or qrOb.code ~ painLocationNeck
+        or qrOb.code ~ painLocationShoulders
+        or qrOb.code ~ painLocationArms
+        or qrOb.code ~ painLocationUpperBack
+        or qrOb.code ~ painLocationLowerBack
+        or qrOb.code ~ painLocationHands
+        or qrOb.code ~ painLocationAbdomen
+        or qrOb.code ~ painLocationPelvis
+        or qrOb.code ~ painLocationHips
+        or qrOb.code ~ painLocationUpperLegs
+        or qrOb.code ~ painLocationKnees
+        or qrOb.code ~ painLocationLowerLegs
+        or qrOb.code ~ painLocationFeet
+        or qrOb.code ~ painLocationEverywhere
+        or qrOb.code ~ painLocationOther)
+    return
+      {
+        Location: qrOb.code.coding[0].display.value,
+        PainYesNo: true,
+        Description: ObservationValue(qrOb)
+      }
 
 // Data from the most recent PainIntensityAndInteference Observations
 define ReportPainIntensityAndInterference:
@@ -1417,7 +1433,6 @@ define ReportResourcesProvidedInMyPAIN:
       Resource: qrOb.value.value,
       ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),
       ViewedOn: ObservationValue(qrOb)
-//qrOb.effective.value
   }
 
 // Data from the most recent self reported MyPAIN observations
