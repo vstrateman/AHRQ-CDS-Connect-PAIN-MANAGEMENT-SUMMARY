@@ -1609,7 +1609,7 @@ define Summary: {
     Recommendation10Text: ReportRecommendation10Text
   },
   SharedDecisionMaking: {
-    MyPAINSubmitDate: ReportMyPAINSubmitDate,
+    MyPAINSubmitDate: ReportMyPAINSubmitDate[0],
     ActivityGoals: ReportActivityGoals,
     ActivityBarriers: ReportActivityBarriers,
     PainLocations: ReportPainLocations,

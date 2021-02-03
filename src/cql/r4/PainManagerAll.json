@@ -496,54 +496,6 @@
                "name" : "MyPAIN Questionnaire Codes"
             }
          }, {
-            "name" : "Aching",
-            "id" : "27635008",
-            "display" : "Aching",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "SNOMED-CT"
-            }
-         }, {
-            "name" : "Burning",
-            "id" : "36349006",
-            "display" : "Burning",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "SNOMED-CT"
-            }
-         }, {
-            "name" : "Stabbing",
-            "id" : "55145008",
-            "display" : "Stabbing",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "SNOMED-CT"
-            }
-         }, {
-            "name" : "Throbbing",
-            "id" : "29695002",
-            "display" : "Throbbing",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "SNOMED-CT"
-            }
-         }, {
-            "name" : "Prickling",
-            "id" : "162506004",
-            "display" : "Prickling",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "SNOMED-CT"
-            }
-         }, {
-            "name" : "Tingling",
-            "id" : "786837007",
-            "display" : "Tingling",
-            "accessLevel" : "Public",
-            "codeSystem" : {
-               "name" : "SNOMED-CT"
-            }
-         }, {
             "name" : "physicalTreatmentsOther",
             "id" : "mpq-1054",
             "display" : "Other physical treatment",
@@ -10096,8 +10048,15 @@
                      "element" : [ {
                         "name" : "MyPAINSubmitDate",
                         "value" : {
-                           "name" : "ReportMyPAINSubmitDate",
-                           "type" : "ExpressionRef"
+                           "type" : "Indexer",
+                           "operand" : [ {
+                              "name" : "ReportMyPAINSubmitDate",
+                              "type" : "ExpressionRef"
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           } ]
                         }
                      }, {
                         "name" : "ActivityGoals",
