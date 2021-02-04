@@ -209,6 +209,358 @@
                "name" : "MyPAIN Questionnaire Codes"
             }
          }, {
+            "name" : "flatTiresVideo",
+            "id" : "mpq-1061",
+            "display" : "Did the patient view the 4 flat tires video",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "cdcLink",
+            "id" : "mpq-1062",
+            "display" : "Did the patient access the US Chronic Pain website",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "worstPain",
+            "id" : "75262-6",
+            "display" : "How intense was your pain at its worse in the past 7 days?",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "averagePain",
+            "id" : "75261-8",
+            "display" : "How intense was your average pain in the past 7 days",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "painRightNow",
+            "id" : "75260-0",
+            "display" : "What is your level of pain right now",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "dayToDay",
+            "id" : "61758-9",
+            "display" : "How much did pain interfere with your day to day activities in past 7 days",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "homeWork",
+            "id" : "61769-6",
+            "display" : "How much did pain interfere with work around the home in past 7 days",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "socialActivities",
+            "id" : "61773-8",
+            "display" : "How much did pain interfere with your ability to participate in social activities",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "householdChores",
+            "id" : "61775-3",
+            "display" : "How much did pain interfere with your household chores in past 7 days",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "funActivities",
+            "id" : "61761-3",
+            "display" : "How much did pain interfere with the things you usually do for fun in past 7 days",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "enjoySocial",
+            "id" : "61777-9",
+            "display" : "How much did pain interfere with your enjoyment of social activities",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "enjoyLife",
+            "id" : "61794-4",
+            "display" : "How much did pain interfere with your enjoyment of life in past 7 days",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "enjoyFamily",
+            "id" : "61762-1",
+            "display" : "How much did pain interfere with your family life",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "exercises",
+            "id" : "mpq-1008",
+            "display" : "How often have Exercises worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "sleepPositioners",
+            "id" : "mpq-1009",
+            "display" : "How often have Sleep positioners worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "stretching",
+            "id" : "mpq-1010",
+            "display" : "How often has Stretching worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "weightLoss",
+            "id" : "mpq-1011",
+            "display" : "How often has Weight loss worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "reachingGoals",
+            "id" : "mpq-1012",
+            "display" : "How often has Setting and reaching activity goals worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "iceOrHeat",
+            "id" : "mpq-1013",
+            "display" : "How often has Ice or heat therapy worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "physicalTherapy",
+            "id" : "mpq-1014",
+            "display" : "How often has Physical therapy worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "acupuncture",
+            "id" : "mpq-1015",
+            "display" : "How often has Acupuncture worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "chiropracticTx",
+            "id" : "mpq-1016",
+            "display" : "How often has Chiropractic treatment worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "painRelievers",
+            "id" : "mpq-1017",
+            "display" : "How often have Pain relievers worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "herbTx",
+            "id" : "mpq-1018",
+            "display" : "How often have Herbal txs worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "cremes",
+            "id" : "mpq-1019",
+            "display" : "How often have Cremes, lotions, gels or patches worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "otherOTC",
+            "id" : "mpq-1055",
+            "display" : "Have you used any Other items you can buy without a prescription",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "opioidMeds",
+            "id" : "mpq-1020",
+            "display" : "How often have prescription Opioid medications worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "cortisone",
+            "id" : "mpq-1021",
+            "display" : "How often have prescription Cortisone injections worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "nonOpioidMeds",
+            "id" : "mpq-1022",
+            "display" : "How often have prescription Non-opioid medications worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "medMarijuana",
+            "id" : "mpq-1056",
+            "display" : "How often has Medical marijuana worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "yogo",
+            "id" : "mpq-1023",
+            "display" : "How often has Yoga worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "massage",
+            "id" : "mpq-1024",
+            "display" : "How often has Massage worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "meditation",
+            "id" : "mpq-1025",
+            "display" : "How often has Meditation worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "relaxation",
+            "id" : "mpq-1026",
+            "display" : "How often has Relaxation worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "groupIndividualTherapy",
+            "id" : "mpq-1027",
+            "display" : "How often has Group or individual therapy",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "cognitiveTherapy",
+            "id" : "mpq-1058",
+            "display" : "How often has Cognitive behavioral therapy worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "acceptanceTherapy",
+            "id" : "mpq-1028",
+            "display" : "How often has Acceptance and commitment therapy worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "sleepManagement",
+            "id" : "mpq-1029",
+            "display" : "How often has Sleep management worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "aromatherapy",
+            "id" : "mpq-1030",
+            "display" : "How often has Aromatherapy  worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "crystals",
+            "id" : "mpq-1031",
+            "display" : "How often have Crystals worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "essentialOils",
+            "id" : "mpq-1032",
+            "display" : "How often have Essential oils worked",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "cbdOil",
+            "id" : "mpq-1060",
+            "display" : "How often has CBD oil helped",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "musicTherapy",
+            "id" : "mpq-1033",
+            "display" : "How often has Music therapy helped",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "otherNewTreatments",
+            "id" : "mpq-1034",
+            "display" : "Have you tried any Other new treatments",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
             "name" : "physicalTreatmentsOther",
             "id" : "mpq-1054",
             "display" : "Other physical treatment",
@@ -1436,101 +1788,273 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "type" : "In",
+                  "type" : "Or",
                   "operand" : [ {
-                     "name" : "ObservationValue",
-                     "type" : "FunctionRef",
+                     "type" : "Or",
                      "operand" : [ {
-                        "name" : "qrOb",
-                        "type" : "AliasRef"
+                        "type" : "Or",
+                        "operand" : [ {
+                           "type" : "Or",
+                           "operand" : [ {
+                              "type" : "Or",
+                              "operand" : [ {
+                                 "type" : "Or",
+                                 "operand" : [ {
+                                    "type" : "Or",
+                                    "operand" : [ {
+                                       "type" : "Or",
+                                       "operand" : [ {
+                                          "type" : "Or",
+                                          "operand" : [ {
+                                             "type" : "Or",
+                                             "operand" : [ {
+                                                "type" : "Equivalent",
+                                                "operand" : [ {
+                                                   "name" : "ToConcept",
+                                                   "libraryName" : "FHIRHelpers",
+                                                   "type" : "FunctionRef",
+                                                   "operand" : [ {
+                                                      "path" : "code",
+                                                      "scope" : "qrOb",
+                                                      "type" : "Property"
+                                                   } ]
+                                                }, {
+                                                   "type" : "ToConcept",
+                                                   "operand" : {
+                                                      "name" : "worstPain",
+                                                      "type" : "CodeRef"
+                                                   }
+                                                } ]
+                                             }, {
+                                                "type" : "Equivalent",
+                                                "operand" : [ {
+                                                   "name" : "ToConcept",
+                                                   "libraryName" : "FHIRHelpers",
+                                                   "type" : "FunctionRef",
+                                                   "operand" : [ {
+                                                      "path" : "code",
+                                                      "scope" : "qrOb",
+                                                      "type" : "Property"
+                                                   } ]
+                                                }, {
+                                                   "type" : "ToConcept",
+                                                   "operand" : {
+                                                      "name" : "averagePain",
+                                                      "type" : "CodeRef"
+                                                   }
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "type" : "Equivalent",
+                                             "operand" : [ {
+                                                "name" : "ToConcept",
+                                                "libraryName" : "FHIRHelpers",
+                                                "type" : "FunctionRef",
+                                                "operand" : [ {
+                                                   "path" : "code",
+                                                   "scope" : "qrOb",
+                                                   "type" : "Property"
+                                                } ]
+                                             }, {
+                                                "type" : "ToConcept",
+                                                "operand" : {
+                                                   "name" : "painRightNow",
+                                                   "type" : "CodeRef"
+                                                }
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "type" : "Equivalent",
+                                          "operand" : [ {
+                                             "name" : "ToConcept",
+                                             "libraryName" : "FHIRHelpers",
+                                             "type" : "FunctionRef",
+                                             "operand" : [ {
+                                                "path" : "code",
+                                                "scope" : "qrOb",
+                                                "type" : "Property"
+                                             } ]
+                                          }, {
+                                             "type" : "ToConcept",
+                                             "operand" : {
+                                                "name" : "dayToDay",
+                                                "type" : "CodeRef"
+                                             }
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "type" : "Equivalent",
+                                       "operand" : [ {
+                                          "name" : "ToConcept",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "operand" : [ {
+                                             "path" : "code",
+                                             "scope" : "qrOb",
+                                             "type" : "Property"
+                                          } ]
+                                       }, {
+                                          "type" : "ToConcept",
+                                          "operand" : {
+                                             "name" : "homeWork",
+                                             "type" : "CodeRef"
+                                          }
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "type" : "Equivalent",
+                                    "operand" : [ {
+                                       "name" : "ToConcept",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "operand" : [ {
+                                          "path" : "code",
+                                          "scope" : "qrOb",
+                                          "type" : "Property"
+                                       } ]
+                                    }, {
+                                       "type" : "ToConcept",
+                                       "operand" : {
+                                          "name" : "socialActivities",
+                                          "type" : "CodeRef"
+                                       }
+                                    } ]
+                                 } ]
+                              }, {
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    } ]
+                                 }, {
+                                    "type" : "ToConcept",
+                                    "operand" : {
+                                       "name" : "householdChores",
+                                       "type" : "CodeRef"
+                                    }
+                                 } ]
+                              } ]
+                           }, {
+                              "type" : "Equivalent",
+                              "operand" : [ {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "path" : "code",
+                                    "scope" : "qrOb",
+                                    "type" : "Property"
+                                 } ]
+                              }, {
+                                 "type" : "ToConcept",
+                                 "operand" : {
+                                    "name" : "funActivities",
+                                    "type" : "CodeRef"
+                                 }
+                              } ]
+                           } ]
+                        }, {
+                           "type" : "Equivalent",
+                           "operand" : [ {
+                              "name" : "ToConcept",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "code",
+                                 "scope" : "qrOb",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "ToConcept",
+                              "operand" : {
+                                 "name" : "enjoySocial",
+                                 "type" : "CodeRef"
+                              }
+                           } ]
+                        } ]
+                     }, {
+                        "type" : "Equivalent",
+                        "operand" : [ {
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "code",
+                              "scope" : "qrOb",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "enjoyLife",
+                              "type" : "CodeRef"
+                           }
+                        } ]
                      } ]
                   }, {
-                     "type" : "List",
-                     "element" : [ {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Had no pain",
-                        "type" : "Literal"
+                     "type" : "Equivalent",
+                     "operand" : [ {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "code",
+                           "scope" : "qrOb",
+                           "type" : "Property"
+                        } ]
                      }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Mild",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Moderate",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Severe",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Very Severe",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Not at all",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "A little bit",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Somewhat",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Quite a bit",
-                        "type" : "Literal"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Very much",
-                        "type" : "Literal"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "enjoyFamily",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                },
                "return" : {
                   "expression" : {
-                     "type" : "List",
+                     "type" : "Tuple",
                      "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Question",
-                           "value" : {
-                              "path" : "value",
+                        "name" : "Question",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "display",
                               "type" : "Property",
                               "source" : {
-                                 "path" : "display",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "path" : "coding",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "path" : "code",
-                                          "scope" : "qrOb",
-                                          "type" : "Property"
-                                       }
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    }
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
                               }
                            }
-                        }, {
-                           "name" : "Response",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        } ]
+                        }
+                     }, {
+                        "name" : "Response",
+                        "value" : {
+                           "name" : "ObservationValue",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
                      } ]
                   }
                }
@@ -1541,54 +2065,84 @@
             "accessLevel" : "Public",
             "type" : "FunctionDef",
             "expression" : {
-               "type" : "Case",
-               "caseItem" : [ {
-                  "when" : {
-                     "type" : "Equal",
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Equivalent",
                      "operand" : [ {
-                        "name" : "linkId",
-                        "type" : "OperandRef"
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "code",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "qrOb",
+                              "type" : "OperandRef"
+                           }
+                        } ]
                      }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "13",
-                        "type" : "Literal"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "cdcLink",
+                           "type" : "CodeRef"
+                        }
                      } ]
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "https://uspainfoundation.org/living-with-pain/",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "Equivalent",
+                        "operand" : [ {
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "code",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "qrOb",
+                                 "type" : "OperandRef"
+                              }
+                           } ]
+                        }, {
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "flatTiresVideo",
+                              "type" : "CodeRef"
+                           }
+                        } ]
+                     }
                   },
                   "then" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "https://www.youtube.com/embed/QWcr9J3MLfo",
                      "type" : "Literal"
-                  }
-               }, {
-                  "when" : {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "name" : "linkId",
-                        "type" : "OperandRef"
-                     }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "14",
-                        "type" : "Literal"
-                     } ]
                   },
-                  "then" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "https://uspainfoundation.org/living-with-pain/",
-                     "type" : "Literal"
-                  }
-               } ],
-               "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "Null"
+                  "else" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "Null"
+                     }
                   }
                }
             },
             "operand" : [ {
-               "name" : "linkId",
+               "name" : "qrOb",
                "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "{http://hl7.org/fhir}Observation",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
@@ -1607,129 +2161,79 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "type" : "In",
+                  "type" : "Or",
                   "operand" : [ {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
+                     "type" : "Equivalent",
                      "operand" : [ {
-                        "strict" : false,
-                        "type" : "As",
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "code",
+                           "scope" : "qrOb",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "type" : "ToConcept",
                         "operand" : {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "type" : "Indexer",
-                              "operand" : [ {
-                                 "path" : "extension",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "path" : "extension",
-                                       "scope" : "qrOb",
-                                       "type" : "Property"
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
-                              } ]
-                           }
-                        },
-                        "asTypeSpecifier" : {
-                           "name" : "{http://hl7.org/fhir}string",
-                           "type" : "NamedTypeSpecifier"
+                           "name" : "flatTiresVideo",
+                           "type" : "CodeRef"
                         }
                      } ]
                   }, {
-                     "type" : "List",
-                     "element" : [ {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "13",
-                        "type" : "Literal"
+                     "type" : "Equivalent",
+                     "operand" : [ {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "code",
+                           "scope" : "qrOb",
+                           "type" : "Property"
+                        } ]
                      }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "14",
-                        "type" : "Literal"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "cdcLink",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                },
                "return" : {
                   "expression" : {
-                     "type" : "List",
+                     "type" : "Tuple",
                      "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Resource",
-                           "value" : {
+                        "name" : "Resource",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
                               "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "value",
-                                 "scope" : "qrOb",
-                                 "type" : "Property"
-                              }
-                           }
-                        }, {
-                           "name" : "ResourceUrl",
-                           "value" : {
-                              "name" : "GetResourceURL",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "operand" : [ {
-                                    "strict" : false,
-                                    "type" : "As",
-                                    "operand" : {
-                                       "path" : "value",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "type" : "Indexer",
-                                          "operand" : [ {
-                                             "path" : "extension",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "type" : "Indexer",
-                                                "operand" : [ {
-                                                   "path" : "extension",
-                                                   "scope" : "qrOb",
-                                                   "type" : "Property"
-                                                }, {
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                   "value" : "0",
-                                                   "type" : "Literal"
-                                                } ]
-                                             }
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                             "value" : "0",
-                                             "type" : "Literal"
-                                          } ]
-                                       }
-                                    },
-                                    "asTypeSpecifier" : {
-                                       "name" : "{http://hl7.org/fhir}string",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 } ]
-                              } ]
-                           }
-                        }, {
-                           "name" : "ViewedOn",
-                           "value" : {
-                              "path" : "effective",
                               "scope" : "qrOb",
                               "type" : "Property"
                            }
-                        } ]
+                        }
+                     }, {
+                        "name" : "ResourceUrl",
+                        "value" : {
+                           "name" : "GetResourceURL",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "ViewedOn",
+                        "value" : {
+                           "name" : "ObservationValue",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
                      } ]
                   }
                }
@@ -1751,99 +2255,782 @@
                "where" : {
                   "type" : "Or",
                   "operand" : [ {
-                     "type" : "In",
+                     "type" : "Or",
                      "operand" : [ {
-                        "name" : "ObservationValue",
-                        "type" : "FunctionRef",
+                        "type" : "Or",
                         "operand" : [ {
-                           "name" : "qrOb",
-                           "type" : "AliasRef"
-                        } ]
-                     }, {
-                        "type" : "List",
-                        "element" : [ {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Never",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sometimes",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Always",
-                           "type" : "Literal"
-                        } ]
-                     } ]
-                  }, {
-                     "type" : "In",
-                     "operand" : [ {
-                        "path" : "value",
-                        "type" : "Property",
-                        "source" : {
-                           "path" : "code",
-                           "type" : "Property",
-                           "source" : {
-                              "type" : "Indexer",
+                           "type" : "Or",
+                           "operand" : [ {
+                              "type" : "Or",
                               "operand" : [ {
-                                 "path" : "coding",
-                                 "type" : "Property",
-                                 "source" : {
+                                 "type" : "Or",
+                                 "operand" : [ {
+                                    "type" : "Or",
+                                    "operand" : [ {
+                                       "type" : "Or",
+                                       "operand" : [ {
+                                          "type" : "Or",
+                                          "operand" : [ {
+                                             "type" : "Or",
+                                             "operand" : [ {
+                                                "type" : "Or",
+                                                "operand" : [ {
+                                                   "type" : "Or",
+                                                   "operand" : [ {
+                                                      "type" : "Or",
+                                                      "operand" : [ {
+                                                         "type" : "Or",
+                                                         "operand" : [ {
+                                                            "type" : "Or",
+                                                            "operand" : [ {
+                                                               "type" : "Or",
+                                                               "operand" : [ {
+                                                                  "type" : "Or",
+                                                                  "operand" : [ {
+                                                                     "type" : "Or",
+                                                                     "operand" : [ {
+                                                                        "type" : "Or",
+                                                                        "operand" : [ {
+                                                                           "type" : "Or",
+                                                                           "operand" : [ {
+                                                                              "type" : "Or",
+                                                                              "operand" : [ {
+                                                                                 "type" : "Or",
+                                                                                 "operand" : [ {
+                                                                                    "type" : "Or",
+                                                                                    "operand" : [ {
+                                                                                       "type" : "Or",
+                                                                                       "operand" : [ {
+                                                                                          "type" : "Or",
+                                                                                          "operand" : [ {
+                                                                                             "type" : "Or",
+                                                                                             "operand" : [ {
+                                                                                                "type" : "Or",
+                                                                                                "operand" : [ {
+                                                                                                   "type" : "Or",
+                                                                                                   "operand" : [ {
+                                                                                                      "type" : "Or",
+                                                                                                      "operand" : [ {
+                                                                                                         "type" : "Or",
+                                                                                                         "operand" : [ {
+                                                                                                            "type" : "Or",
+                                                                                                            "operand" : [ {
+                                                                                                               "type" : "Or",
+                                                                                                               "operand" : [ {
+                                                                                                                  "type" : "Or",
+                                                                                                                  "operand" : [ {
+                                                                                                                     "type" : "Equivalent",
+                                                                                                                     "operand" : [ {
+                                                                                                                        "name" : "ToConcept",
+                                                                                                                        "libraryName" : "FHIRHelpers",
+                                                                                                                        "type" : "FunctionRef",
+                                                                                                                        "operand" : [ {
+                                                                                                                           "path" : "code",
+                                                                                                                           "scope" : "qrOb",
+                                                                                                                           "type" : "Property"
+                                                                                                                        } ]
+                                                                                                                     }, {
+                                                                                                                        "type" : "ToConcept",
+                                                                                                                        "operand" : {
+                                                                                                                           "name" : "physicalTreatmentsOther",
+                                                                                                                           "type" : "CodeRef"
+                                                                                                                        }
+                                                                                                                     } ]
+                                                                                                                  }, {
+                                                                                                                     "type" : "Equivalent",
+                                                                                                                     "operand" : [ {
+                                                                                                                        "name" : "ToConcept",
+                                                                                                                        "libraryName" : "FHIRHelpers",
+                                                                                                                        "type" : "FunctionRef",
+                                                                                                                        "operand" : [ {
+                                                                                                                           "path" : "code",
+                                                                                                                           "scope" : "qrOb",
+                                                                                                                           "type" : "Property"
+                                                                                                                        } ]
+                                                                                                                     }, {
+                                                                                                                        "type" : "ToConcept",
+                                                                                                                        "operand" : {
+                                                                                                                           "name" : "prescriptionOther",
+                                                                                                                           "type" : "CodeRef"
+                                                                                                                        }
+                                                                                                                     } ]
+                                                                                                                  } ]
+                                                                                                               }, {
+                                                                                                                  "type" : "Equivalent",
+                                                                                                                  "operand" : [ {
+                                                                                                                     "name" : "ToConcept",
+                                                                                                                     "libraryName" : "FHIRHelpers",
+                                                                                                                     "type" : "FunctionRef",
+                                                                                                                     "operand" : [ {
+                                                                                                                        "path" : "code",
+                                                                                                                        "scope" : "qrOb",
+                                                                                                                        "type" : "Property"
+                                                                                                                     } ]
+                                                                                                                  }, {
+                                                                                                                     "type" : "ToConcept",
+                                                                                                                     "operand" : {
+                                                                                                                        "name" : "newTreatmentOther",
+                                                                                                                        "type" : "CodeRef"
+                                                                                                                     }
+                                                                                                                  } ]
+                                                                                                               } ]
+                                                                                                            }, {
+                                                                                                               "type" : "Equivalent",
+                                                                                                               "operand" : [ {
+                                                                                                                  "name" : "ToConcept",
+                                                                                                                  "libraryName" : "FHIRHelpers",
+                                                                                                                  "type" : "FunctionRef",
+                                                                                                                  "operand" : [ {
+                                                                                                                     "path" : "code",
+                                                                                                                     "scope" : "qrOb",
+                                                                                                                     "type" : "Property"
+                                                                                                                  } ]
+                                                                                                               }, {
+                                                                                                                  "type" : "ToConcept",
+                                                                                                                  "operand" : {
+                                                                                                                     "name" : "exercises",
+                                                                                                                     "type" : "CodeRef"
+                                                                                                                  }
+                                                                                                               } ]
+                                                                                                            } ]
+                                                                                                         }, {
+                                                                                                            "type" : "Equivalent",
+                                                                                                            "operand" : [ {
+                                                                                                               "name" : "ToConcept",
+                                                                                                               "libraryName" : "FHIRHelpers",
+                                                                                                               "type" : "FunctionRef",
+                                                                                                               "operand" : [ {
+                                                                                                                  "path" : "code",
+                                                                                                                  "scope" : "qrOb",
+                                                                                                                  "type" : "Property"
+                                                                                                               } ]
+                                                                                                            }, {
+                                                                                                               "type" : "ToConcept",
+                                                                                                               "operand" : {
+                                                                                                                  "name" : "sleepPositioners",
+                                                                                                                  "type" : "CodeRef"
+                                                                                                               }
+                                                                                                            } ]
+                                                                                                         } ]
+                                                                                                      }, {
+                                                                                                         "type" : "Equivalent",
+                                                                                                         "operand" : [ {
+                                                                                                            "name" : "ToConcept",
+                                                                                                            "libraryName" : "FHIRHelpers",
+                                                                                                            "type" : "FunctionRef",
+                                                                                                            "operand" : [ {
+                                                                                                               "path" : "code",
+                                                                                                               "scope" : "qrOb",
+                                                                                                               "type" : "Property"
+                                                                                                            } ]
+                                                                                                         }, {
+                                                                                                            "type" : "ToConcept",
+                                                                                                            "operand" : {
+                                                                                                               "name" : "stretching",
+                                                                                                               "type" : "CodeRef"
+                                                                                                            }
+                                                                                                         } ]
+                                                                                                      } ]
+                                                                                                   }, {
+                                                                                                      "type" : "Equivalent",
+                                                                                                      "operand" : [ {
+                                                                                                         "name" : "ToConcept",
+                                                                                                         "libraryName" : "FHIRHelpers",
+                                                                                                         "type" : "FunctionRef",
+                                                                                                         "operand" : [ {
+                                                                                                            "path" : "code",
+                                                                                                            "scope" : "qrOb",
+                                                                                                            "type" : "Property"
+                                                                                                         } ]
+                                                                                                      }, {
+                                                                                                         "type" : "ToConcept",
+                                                                                                         "operand" : {
+                                                                                                            "name" : "weightLoss",
+                                                                                                            "type" : "CodeRef"
+                                                                                                         }
+                                                                                                      } ]
+                                                                                                   } ]
+                                                                                                }, {
+                                                                                                   "type" : "Equivalent",
+                                                                                                   "operand" : [ {
+                                                                                                      "name" : "ToConcept",
+                                                                                                      "libraryName" : "FHIRHelpers",
+                                                                                                      "type" : "FunctionRef",
+                                                                                                      "operand" : [ {
+                                                                                                         "path" : "code",
+                                                                                                         "scope" : "qrOb",
+                                                                                                         "type" : "Property"
+                                                                                                      } ]
+                                                                                                   }, {
+                                                                                                      "type" : "ToConcept",
+                                                                                                      "operand" : {
+                                                                                                         "name" : "reachingGoals",
+                                                                                                         "type" : "CodeRef"
+                                                                                                      }
+                                                                                                   } ]
+                                                                                                } ]
+                                                                                             }, {
+                                                                                                "type" : "Equivalent",
+                                                                                                "operand" : [ {
+                                                                                                   "name" : "ToConcept",
+                                                                                                   "libraryName" : "FHIRHelpers",
+                                                                                                   "type" : "FunctionRef",
+                                                                                                   "operand" : [ {
+                                                                                                      "path" : "code",
+                                                                                                      "scope" : "qrOb",
+                                                                                                      "type" : "Property"
+                                                                                                   } ]
+                                                                                                }, {
+                                                                                                   "type" : "ToConcept",
+                                                                                                   "operand" : {
+                                                                                                      "name" : "iceOrHeat",
+                                                                                                      "type" : "CodeRef"
+                                                                                                   }
+                                                                                                } ]
+                                                                                             } ]
+                                                                                          }, {
+                                                                                             "type" : "Equivalent",
+                                                                                             "operand" : [ {
+                                                                                                "name" : "ToConcept",
+                                                                                                "libraryName" : "FHIRHelpers",
+                                                                                                "type" : "FunctionRef",
+                                                                                                "operand" : [ {
+                                                                                                   "path" : "code",
+                                                                                                   "scope" : "qrOb",
+                                                                                                   "type" : "Property"
+                                                                                                } ]
+                                                                                             }, {
+                                                                                                "type" : "ToConcept",
+                                                                                                "operand" : {
+                                                                                                   "name" : "physicalTherapy",
+                                                                                                   "type" : "CodeRef"
+                                                                                                }
+                                                                                             } ]
+                                                                                          } ]
+                                                                                       }, {
+                                                                                          "type" : "Equivalent",
+                                                                                          "operand" : [ {
+                                                                                             "name" : "ToConcept",
+                                                                                             "libraryName" : "FHIRHelpers",
+                                                                                             "type" : "FunctionRef",
+                                                                                             "operand" : [ {
+                                                                                                "path" : "code",
+                                                                                                "scope" : "qrOb",
+                                                                                                "type" : "Property"
+                                                                                             } ]
+                                                                                          }, {
+                                                                                             "type" : "ToConcept",
+                                                                                             "operand" : {
+                                                                                                "name" : "acupuncture",
+                                                                                                "type" : "CodeRef"
+                                                                                             }
+                                                                                          } ]
+                                                                                       } ]
+                                                                                    }, {
+                                                                                       "type" : "Equivalent",
+                                                                                       "operand" : [ {
+                                                                                          "name" : "ToConcept",
+                                                                                          "libraryName" : "FHIRHelpers",
+                                                                                          "type" : "FunctionRef",
+                                                                                          "operand" : [ {
+                                                                                             "path" : "code",
+                                                                                             "scope" : "qrOb",
+                                                                                             "type" : "Property"
+                                                                                          } ]
+                                                                                       }, {
+                                                                                          "type" : "ToConcept",
+                                                                                          "operand" : {
+                                                                                             "name" : "chiropracticTx",
+                                                                                             "type" : "CodeRef"
+                                                                                          }
+                                                                                       } ]
+                                                                                    } ]
+                                                                                 }, {
+                                                                                    "type" : "Equivalent",
+                                                                                    "operand" : [ {
+                                                                                       "name" : "ToConcept",
+                                                                                       "libraryName" : "FHIRHelpers",
+                                                                                       "type" : "FunctionRef",
+                                                                                       "operand" : [ {
+                                                                                          "path" : "code",
+                                                                                          "scope" : "qrOb",
+                                                                                          "type" : "Property"
+                                                                                       } ]
+                                                                                    }, {
+                                                                                       "type" : "ToConcept",
+                                                                                       "operand" : {
+                                                                                          "name" : "painRelievers",
+                                                                                          "type" : "CodeRef"
+                                                                                       }
+                                                                                    } ]
+                                                                                 } ]
+                                                                              }, {
+                                                                                 "type" : "Equivalent",
+                                                                                 "operand" : [ {
+                                                                                    "name" : "ToConcept",
+                                                                                    "libraryName" : "FHIRHelpers",
+                                                                                    "type" : "FunctionRef",
+                                                                                    "operand" : [ {
+                                                                                       "path" : "code",
+                                                                                       "scope" : "qrOb",
+                                                                                       "type" : "Property"
+                                                                                    } ]
+                                                                                 }, {
+                                                                                    "type" : "ToConcept",
+                                                                                    "operand" : {
+                                                                                       "name" : "herbTx",
+                                                                                       "type" : "CodeRef"
+                                                                                    }
+                                                                                 } ]
+                                                                              } ]
+                                                                           }, {
+                                                                              "type" : "Equivalent",
+                                                                              "operand" : [ {
+                                                                                 "name" : "ToConcept",
+                                                                                 "libraryName" : "FHIRHelpers",
+                                                                                 "type" : "FunctionRef",
+                                                                                 "operand" : [ {
+                                                                                    "path" : "code",
+                                                                                    "scope" : "qrOb",
+                                                                                    "type" : "Property"
+                                                                                 } ]
+                                                                              }, {
+                                                                                 "type" : "ToConcept",
+                                                                                 "operand" : {
+                                                                                    "name" : "cremes",
+                                                                                    "type" : "CodeRef"
+                                                                                 }
+                                                                              } ]
+                                                                           } ]
+                                                                        }, {
+                                                                           "type" : "Equivalent",
+                                                                           "operand" : [ {
+                                                                              "name" : "ToConcept",
+                                                                              "libraryName" : "FHIRHelpers",
+                                                                              "type" : "FunctionRef",
+                                                                              "operand" : [ {
+                                                                                 "path" : "code",
+                                                                                 "scope" : "qrOb",
+                                                                                 "type" : "Property"
+                                                                              } ]
+                                                                           }, {
+                                                                              "type" : "ToConcept",
+                                                                              "operand" : {
+                                                                                 "name" : "otherOTC",
+                                                                                 "type" : "CodeRef"
+                                                                              }
+                                                                           } ]
+                                                                        } ]
+                                                                     }, {
+                                                                        "type" : "Equivalent",
+                                                                        "operand" : [ {
+                                                                           "name" : "ToConcept",
+                                                                           "libraryName" : "FHIRHelpers",
+                                                                           "type" : "FunctionRef",
+                                                                           "operand" : [ {
+                                                                              "path" : "code",
+                                                                              "scope" : "qrOb",
+                                                                              "type" : "Property"
+                                                                           } ]
+                                                                        }, {
+                                                                           "type" : "ToConcept",
+                                                                           "operand" : {
+                                                                              "name" : "opioidMeds",
+                                                                              "type" : "CodeRef"
+                                                                           }
+                                                                        } ]
+                                                                     } ]
+                                                                  }, {
+                                                                     "type" : "Equivalent",
+                                                                     "operand" : [ {
+                                                                        "name" : "ToConcept",
+                                                                        "libraryName" : "FHIRHelpers",
+                                                                        "type" : "FunctionRef",
+                                                                        "operand" : [ {
+                                                                           "path" : "code",
+                                                                           "scope" : "qrOb",
+                                                                           "type" : "Property"
+                                                                        } ]
+                                                                     }, {
+                                                                        "type" : "ToConcept",
+                                                                        "operand" : {
+                                                                           "name" : "cortisone",
+                                                                           "type" : "CodeRef"
+                                                                        }
+                                                                     } ]
+                                                                  } ]
+                                                               }, {
+                                                                  "type" : "Equivalent",
+                                                                  "operand" : [ {
+                                                                     "name" : "ToConcept",
+                                                                     "libraryName" : "FHIRHelpers",
+                                                                     "type" : "FunctionRef",
+                                                                     "operand" : [ {
+                                                                        "path" : "code",
+                                                                        "scope" : "qrOb",
+                                                                        "type" : "Property"
+                                                                     } ]
+                                                                  }, {
+                                                                     "type" : "ToConcept",
+                                                                     "operand" : {
+                                                                        "name" : "nonOpioidMeds",
+                                                                        "type" : "CodeRef"
+                                                                     }
+                                                                  } ]
+                                                               } ]
+                                                            }, {
+                                                               "type" : "Equivalent",
+                                                               "operand" : [ {
+                                                                  "name" : "ToConcept",
+                                                                  "libraryName" : "FHIRHelpers",
+                                                                  "type" : "FunctionRef",
+                                                                  "operand" : [ {
+                                                                     "path" : "code",
+                                                                     "scope" : "qrOb",
+                                                                     "type" : "Property"
+                                                                  } ]
+                                                               }, {
+                                                                  "type" : "ToConcept",
+                                                                  "operand" : {
+                                                                     "name" : "medMarijuana",
+                                                                     "type" : "CodeRef"
+                                                                  }
+                                                               } ]
+                                                            } ]
+                                                         }, {
+                                                            "type" : "Equivalent",
+                                                            "operand" : [ {
+                                                               "name" : "ToConcept",
+                                                               "libraryName" : "FHIRHelpers",
+                                                               "type" : "FunctionRef",
+                                                               "operand" : [ {
+                                                                  "path" : "code",
+                                                                  "scope" : "qrOb",
+                                                                  "type" : "Property"
+                                                               } ]
+                                                            }, {
+                                                               "type" : "ToConcept",
+                                                               "operand" : {
+                                                                  "name" : "yogo",
+                                                                  "type" : "CodeRef"
+                                                               }
+                                                            } ]
+                                                         } ]
+                                                      }, {
+                                                         "type" : "Equivalent",
+                                                         "operand" : [ {
+                                                            "name" : "ToConcept",
+                                                            "libraryName" : "FHIRHelpers",
+                                                            "type" : "FunctionRef",
+                                                            "operand" : [ {
+                                                               "path" : "code",
+                                                               "scope" : "qrOb",
+                                                               "type" : "Property"
+                                                            } ]
+                                                         }, {
+                                                            "type" : "ToConcept",
+                                                            "operand" : {
+                                                               "name" : "massage",
+                                                               "type" : "CodeRef"
+                                                            }
+                                                         } ]
+                                                      } ]
+                                                   }, {
+                                                      "type" : "Equivalent",
+                                                      "operand" : [ {
+                                                         "name" : "ToConcept",
+                                                         "libraryName" : "FHIRHelpers",
+                                                         "type" : "FunctionRef",
+                                                         "operand" : [ {
+                                                            "path" : "code",
+                                                            "scope" : "qrOb",
+                                                            "type" : "Property"
+                                                         } ]
+                                                      }, {
+                                                         "type" : "ToConcept",
+                                                         "operand" : {
+                                                            "name" : "meditation",
+                                                            "type" : "CodeRef"
+                                                         }
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "type" : "Equivalent",
+                                                   "operand" : [ {
+                                                      "name" : "ToConcept",
+                                                      "libraryName" : "FHIRHelpers",
+                                                      "type" : "FunctionRef",
+                                                      "operand" : [ {
+                                                         "path" : "code",
+                                                         "scope" : "qrOb",
+                                                         "type" : "Property"
+                                                      } ]
+                                                   }, {
+                                                      "type" : "ToConcept",
+                                                      "operand" : {
+                                                         "name" : "relaxation",
+                                                         "type" : "CodeRef"
+                                                      }
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "type" : "Equivalent",
+                                                "operand" : [ {
+                                                   "name" : "ToConcept",
+                                                   "libraryName" : "FHIRHelpers",
+                                                   "type" : "FunctionRef",
+                                                   "operand" : [ {
+                                                      "path" : "code",
+                                                      "scope" : "qrOb",
+                                                      "type" : "Property"
+                                                   } ]
+                                                }, {
+                                                   "type" : "ToConcept",
+                                                   "operand" : {
+                                                      "name" : "groupIndividualTherapy",
+                                                      "type" : "CodeRef"
+                                                   }
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "type" : "Equivalent",
+                                             "operand" : [ {
+                                                "name" : "ToConcept",
+                                                "libraryName" : "FHIRHelpers",
+                                                "type" : "FunctionRef",
+                                                "operand" : [ {
+                                                   "path" : "code",
+                                                   "scope" : "qrOb",
+                                                   "type" : "Property"
+                                                } ]
+                                             }, {
+                                                "type" : "ToConcept",
+                                                "operand" : {
+                                                   "name" : "cognitiveTherapy",
+                                                   "type" : "CodeRef"
+                                                }
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "type" : "Equivalent",
+                                          "operand" : [ {
+                                             "name" : "ToConcept",
+                                             "libraryName" : "FHIRHelpers",
+                                             "type" : "FunctionRef",
+                                             "operand" : [ {
+                                                "path" : "code",
+                                                "scope" : "qrOb",
+                                                "type" : "Property"
+                                             } ]
+                                          }, {
+                                             "type" : "ToConcept",
+                                             "operand" : {
+                                                "name" : "acceptanceTherapy",
+                                                "type" : "CodeRef"
+                                             }
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "type" : "Equivalent",
+                                       "operand" : [ {
+                                          "name" : "ToConcept",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "operand" : [ {
+                                             "path" : "code",
+                                             "scope" : "qrOb",
+                                             "type" : "Property"
+                                          } ]
+                                       }, {
+                                          "type" : "ToConcept",
+                                          "operand" : {
+                                             "name" : "sleepManagement",
+                                             "type" : "CodeRef"
+                                          }
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "type" : "Equivalent",
+                                    "operand" : [ {
+                                       "name" : "ToConcept",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "operand" : [ {
+                                          "path" : "code",
+                                          "scope" : "qrOb",
+                                          "type" : "Property"
+                                       } ]
+                                    }, {
+                                       "type" : "ToConcept",
+                                       "operand" : {
+                                          "name" : "aromatherapy",
+                                          "type" : "CodeRef"
+                                       }
+                                    } ]
+                                 } ]
+                              }, {
+                                 "type" : "Equivalent",
+                                 "operand" : [ {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "code",
+                                       "scope" : "qrOb",
+                                       "type" : "Property"
+                                    } ]
+                                 }, {
+                                    "type" : "ToConcept",
+                                    "operand" : {
+                                       "name" : "crystals",
+                                       "type" : "CodeRef"
+                                    }
+                                 } ]
+                              } ]
+                           }, {
+                              "type" : "Equivalent",
+                              "operand" : [ {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
                                     "path" : "code",
                                     "scope" : "qrOb",
                                     "type" : "Property"
-                                 }
+                                 } ]
                               }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
+                                 "type" : "ToConcept",
+                                 "operand" : {
+                                    "name" : "essentialOils",
+                                    "type" : "CodeRef"
+                                 }
                               } ]
-                           }
-                        }
-                     }, {
-                        "type" : "List",
-                        "element" : [ {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mpq-1054",
-                           "type" : "Literal"
+                           } ]
                         }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mpq-1057",
-                           "type" : "Literal"
-                        }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "mpq-1059",
-                           "type" : "Literal"
+                           "type" : "Equivalent",
+                           "operand" : [ {
+                              "name" : "ToConcept",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "code",
+                                 "scope" : "qrOb",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "type" : "ToConcept",
+                              "operand" : {
+                                 "name" : "cbdOil",
+                                 "type" : "CodeRef"
+                              }
+                           } ]
                         } ]
+                     }, {
+                        "type" : "Equivalent",
+                        "operand" : [ {
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "code",
+                              "scope" : "qrOb",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "musicTherapy",
+                              "type" : "CodeRef"
+                           }
+                        } ]
+                     } ]
+                  }, {
+                     "type" : "Equivalent",
+                     "operand" : [ {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "code",
+                           "scope" : "qrOb",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "otherNewTreatments",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                },
                "return" : {
                   "expression" : {
-                     "type" : "List",
+                     "type" : "Tuple",
                      "element" : [ {
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "Treatment",
-                           "value" : {
-                              "name" : "QuestionTextByLinkId",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        }, {
-                           "name" : "Effectiveness",
-                           "value" : {
-                              "name" : "ObservationValue",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "name" : "qrOb",
-                                 "type" : "AliasRef"
-                              } ]
-                           }
-                        } ]
+                        "name" : "Treatment",
+                        "value" : {
+                           "type" : "Indexer",
+                           "operand" : [ {
+                              "type" : "Query",
+                              "source" : [ {
+                                 "alias" : "$this",
+                                 "expression" : {
+                                    "type" : "Indexer",
+                                    "operand" : [ {
+                                       "name" : "QuestionTextByLinkId",
+                                       "type" : "FunctionRef",
+                                       "operand" : [ {
+                                          "name" : "qrOb",
+                                          "type" : "AliasRef"
+                                       } ]
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "0",
+                                       "type" : "Literal"
+                                    } ]
+                                 }
+                              } ],
+                              "where" : {
+                                 "type" : "Not",
+                                 "operand" : {
+                                    "type" : "IsNull",
+                                    "operand" : {
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "$this",
+                                          "type" : "AliasRef"
+                                       }
+                                    }
+                                 }
+                              },
+                              "return" : {
+                                 "expression" : {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "$this",
+                                       "type" : "AliasRef"
+                                    }
+                                 }
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "0",
+                              "type" : "Literal"
+                           } ]
+                        }
+                     }, {
+                        "name" : "Effectiveness",
+                        "value" : {
+                           "name" : "ObservationValue",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
+                           } ]
+                        }
                      } ]
                   }
                }
