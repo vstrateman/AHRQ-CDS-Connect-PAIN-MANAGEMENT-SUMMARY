@@ -500,6 +500,22 @@
                "name" : "MyPAIN Questionnaire Codes"
             }
          }, {
+            "name" : "flatTiresVideo",
+            "id" : "mpq-1061",
+            "display" : "Did the patient view the 4 flat tires video",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
+            "name" : "cdcLink",
+            "id" : "mpq-1062",
+            "display" : "Did the patient access the US Chronic Pain website",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "MyPAIN Questionnaire Codes"
+            }
+         }, {
             "name" : "worstPain",
             "id" : "75262-6",
             "display" : "How intense was your pain at its worse in the past 7 days?",
@@ -9845,14 +9861,25 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "type" : "Equal",
+                     "type" : "Equivalent",
                      "operand" : [ {
-                        "name" : "linkId",
-                        "type" : "OperandRef"
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "code",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "qrOb",
+                              "type" : "OperandRef"
+                           }
+                        } ]
                      }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "14",
-                        "type" : "Literal"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "cdcLink",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   }
                },
@@ -9867,14 +9894,25 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "As",
                      "operand" : {
-                        "type" : "Equal",
+                        "type" : "Equivalent",
                         "operand" : [ {
-                           "name" : "linkId",
-                           "type" : "OperandRef"
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "code",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "qrOb",
+                                 "type" : "OperandRef"
+                              }
+                           } ]
                         }, {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "13",
-                           "type" : "Literal"
+                           "type" : "ToConcept",
+                           "operand" : {
+                              "name" : "flatTiresVideo",
+                              "type" : "CodeRef"
+                           }
                         } ]
                      }
                   },
@@ -9893,9 +9931,9 @@
                }
             },
             "operand" : [ {
-               "name" : "linkId",
+               "name" : "qrOb",
                "operandTypeSpecifier" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "{http://hl7.org/fhir}Observation",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
@@ -9916,96 +9954,40 @@
                "where" : {
                   "type" : "Or",
                   "operand" : [ {
-                     "type" : "Equal",
+                     "type" : "Equivalent",
                      "operand" : [ {
-                        "name" : "ToString",
+                        "name" : "ToConcept",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "strict" : false,
-                           "type" : "As",
-                           "operand" : {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "extension",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "path" : "extension",
-                                          "scope" : "qrOb",
-                                          "type" : "Property"
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           },
-                           "asTypeSpecifier" : {
-                              "name" : "{http://hl7.org/fhir}string",
-                              "type" : "NamedTypeSpecifier"
-                           }
+                           "path" : "code",
+                           "scope" : "qrOb",
+                           "type" : "Property"
                         } ]
                      }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "14",
-                        "type" : "Literal"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "flatTiresVideo",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   }, {
-                     "type" : "Equal",
+                     "type" : "Equivalent",
                      "operand" : [ {
-                        "name" : "ToString",
+                        "name" : "ToConcept",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "strict" : false,
-                           "type" : "As",
-                           "operand" : {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "path" : "extension",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "path" : "extension",
-                                          "scope" : "qrOb",
-                                          "type" : "Property"
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
-                                    }
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
-                           },
-                           "asTypeSpecifier" : {
-                              "name" : "{http://hl7.org/fhir}string",
-                              "type" : "NamedTypeSpecifier"
-                           }
+                           "path" : "code",
+                           "scope" : "qrOb",
+                           "type" : "Property"
                         } ]
                      }, {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "13",
-                        "type" : "Literal"
+                        "type" : "ToConcept",
+                        "operand" : {
+                           "name" : "cdcLink",
+                           "type" : "CodeRef"
+                        }
                      } ]
                   } ]
                },
@@ -10029,44 +10011,8 @@
                            "name" : "GetResourceURL",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "name" : "ToString",
-                              "libraryName" : "FHIRHelpers",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "strict" : false,
-                                 "type" : "As",
-                                 "operand" : {
-                                    "path" : "value",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "path" : "extension",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "type" : "Indexer",
-                                             "operand" : [ {
-                                                "path" : "extension",
-                                                "scope" : "qrOb",
-                                                "type" : "Property"
-                                             }, {
-                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                "value" : "0",
-                                                "type" : "Literal"
-                                             } ]
-                                          }
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
-                                    }
-                                 },
-                                 "asTypeSpecifier" : {
-                                    "name" : "{http://hl7.org/fhir}string",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ]
+                              "name" : "qrOb",
+                              "type" : "AliasRef"
                            } ]
                         }
                      }, {

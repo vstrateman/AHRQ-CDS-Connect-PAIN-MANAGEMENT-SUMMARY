@@ -223,6 +223,8 @@ code "painLocationLowerLegs": 'mpq-1050' from "MyPAIN Questionnaire Codes" displ
 code "painLocationFeet": 'mpq-1051' from "MyPAIN Questionnaire Codes" display 'Foot pain location'
 code "painLocationEverywhere": 'mpq-1052' from "MyPAIN Questionnaire Codes" display 'Everywhere pain location'
 code "painLocationOther": 'mpq-1053' from "MyPAIN Questionnaire Codes" display 'Other pain location'
+code "flatTiresVideo": 'mpq-1061' from "MyPAIN Questionnaire Codes" display 'Did the patient view the 4 flat tires video'
+code "cdcLink": 'mpq-1062' from "MyPAIN Questionnaire Codes" display 'Did the patient access the US Chronic Pain website'
 
 code "worstPain": '75262-6' from "LOINC" display 'How intense was your pain at its worse in the past 7 days?'
 code "averagePain": '75261-8' from "LOINC" display 'How intense was your average pain in the past 7 days'
@@ -1472,21 +1474,21 @@ define ReportPainIntensityAndInterference:
     Response: ObservationValue(qrOb)
   }
 
-  define function GetResourceURL(linkId String):
-    if linkId = '14' then 'https://uspainfoundation.org/living-with-pain/'
-    else if linkId = '13' then 'https://www.youtube.com/embed/QWcr9J3MLfo'
+  define function GetResourceURL(qrOb Observation):
+    if qrOb.code ~ cdcLink then 'https://uspainfoundation.org/living-with-pain/'
+    else if qrOb.code ~ flatTiresVideo then 'https://www.youtube.com/embed/QWcr9J3MLfo'
     else null
 
 // Data from the most recent "resources viewed" Observations
 define ReportResourcesProvidedInMyPAIN:
 (QuestionnaireObservations) qrOb where
-    qrOb.extension[0].extension[0].value as FHIR.string = '14'
-    or qrOb.extension[0].extension[0].value as FHIR.string = '13'
+    qrOb.code ~ flatTiresVideo
+    or qrOb.code ~ cdcLink
   return
   {
       Resource: qrOb.value.value,
-//      ResourceUrl: GetResourceURL(qrOb),
-      ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),
+      ResourceUrl: GetResourceURL(qrOb),
+//      ResourceUrl: GetResourceURL(qrOb.extension[0].extension[0].value as FHIR.string),
       ViewedOn: ObservationValue(qrOb)
   }
 
