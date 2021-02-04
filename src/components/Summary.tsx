@@ -490,7 +490,7 @@ export default class Summary extends Component<any, any> {
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
         let submitDate;
-        if (sharedDecisionSection.MyPAINSubmitDate.length > 0) {
+        if (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length > 0) {
             submitDate = this.formatitHelper.dateFormat('datishFormat ', sharedDecisionSection.MyPAINSubmitDate.toString());
             // submitDate = moment.parseZone(sharedDecisionSection.MyPAINSubmitDate.toString()).format('YYYY-MM-DD')
 
@@ -528,11 +528,11 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
-                                {((sharedDecisionSection.ActivityGoals.length === 0) &&
-                                    (sharedDecisionSection.ActivityBarriers.length === 0) &&
-                                    (sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
-                                    (sharedDecisionSection.PainLocations.length === 0) &&
-                                    (sharedDecisionSection.PainIntensityAndInterference.length === 0)) ?
+                                {((sharedDecisionSection.ActivityGoals && sharedDecisionSection.ActivityGoals.length === 0) &&
+                                    (sharedDecisionSection.ActivityBarriers && sharedDecisionSection.ActivityBarriers.length === 0) &&
+                                    (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
+                                    (sharedDecisionSection.PainLocations && sharedDecisionSection.PainLocations.length === 0) &&
+                                    (sharedDecisionSection.PainIntensityAndInterference && sharedDecisionSection.PainIntensityAndInterference.length === 0)) ?
                                     // (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     : (<div>
@@ -567,7 +567,7 @@ export default class Summary extends Component<any, any> {
                                                     })
                                                 }
                                                 </ul>
-                                            ) : ''}
+                                            ) : 'No resources recoreded.'}
                                         </div>
                                     </div>
                                     )}
