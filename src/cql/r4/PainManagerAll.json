@@ -961,31 +961,44 @@
                      }
                   }
                }, {
-                  "type" : "After",
+                  "type" : "Or",
                   "operand" : [ {
-                     "name" : "ToDateTime",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
-                     "operand" : [ {
+                     "type" : "IsNull",
+                     "operand" : {
                         "path" : "recordedDate",
                         "type" : "Property",
                         "source" : {
                            "name" : "Condition",
                            "type" : "OperandRef"
                         }
-                     } ]
-                  }, {
-                     "type" : "ToDateTime",
-                     "operand" : {
-                        "type" : "Subtract",
-                        "operand" : [ {
-                           "type" : "Today"
-                        }, {
-                           "value" : 1,
-                           "unit" : "year",
-                           "type" : "Quantity"
-                        } ]
                      }
+                  }, {
+                     "type" : "After",
+                     "operand" : [ {
+                        "name" : "ToDateTime",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "path" : "recordedDate",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "Condition",
+                              "type" : "OperandRef"
+                           }
+                        } ]
+                     }, {
+                        "type" : "ToDateTime",
+                        "operand" : {
+                           "type" : "Subtract",
+                           "operand" : [ {
+                              "type" : "Today"
+                           }, {
+                              "value" : 1,
+                              "unit" : "year",
+                              "type" : "Quantity"
+                           } ]
+                        }
+                     } ]
                   } ]
                } ]
             },
