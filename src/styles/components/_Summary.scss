@@ -311,12 +311,16 @@ main {
 .shared-decision-making-section {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     .sub-section {
         width: 47%;
         // .table {
             // width: 50%;
         // }
     }
+}
+.resources-section {
+    margin: 20px;
 }
 
 .no-mypain-shared {

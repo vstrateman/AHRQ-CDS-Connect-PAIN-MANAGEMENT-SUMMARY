@@ -490,8 +490,10 @@ export default class Summary extends Component<any, any> {
         const meetsInclusionCriteria = summary.Patient.MeetsInclusionCriteria;
         let sharedDecisionSection = this.props.summary["SharedDecisionMaking"];
         let submitDate;
-        if (sharedDecisionSection.MyPAINSubmitDate.length > 0) {
-            submitDate = this.formatitHelper.dateFormat('dateFormat', sharedDecisionSection.MyPAINSubmitDate);
+        if (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length > 0) {
+            submitDate = this.formatitHelper.dateFormat('datishFormat ', sharedDecisionSection.MyPAINSubmitDate.toString());
+            // submitDate = moment.parseZone(sharedDecisionSection.MyPAINSubmitDate.toString()).format('YYYY-MM-DD')
+
         } else {
             submitDate = '';
         }
@@ -526,11 +528,11 @@ export default class Summary extends Component<any, any> {
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
                             <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
-                                {((sharedDecisionSection.ActivityGoals.length === 0) &&
-                                    (sharedDecisionSection.ActivityBarriers.length === 0) &&
-                                    (sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
-                                    (sharedDecisionSection.PainLocations.length === 0) &&
-                                    (sharedDecisionSection.PainIntensityAndInterference.length === 0)) ?
+                                {((sharedDecisionSection.ActivityGoals && sharedDecisionSection.ActivityGoals.length === 0) &&
+                                    (sharedDecisionSection.ActivityBarriers && sharedDecisionSection.ActivityBarriers.length === 0) &&
+                                    (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
+                                    (sharedDecisionSection.PainLocations && sharedDecisionSection.PainLocations.length === 0) &&
+                                    (sharedDecisionSection.PainIntensityAndInterference && sharedDecisionSection.PainIntensityAndInterference.length === 0)) ?
                                     // (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     : (<div>
@@ -556,13 +558,24 @@ export default class Summary extends Component<any, any> {
                                         <div className="shared-decision-making-section">
                                             {this.renderSection("SharedDecisionMaking")}
                                         </div>
+                                        <div className="resources-section">
+                                            <h3>RESOURCES PROVIDED IN MyPAIN:</h3>
+                                            {sharedDecisionSection.ResourcesProvidedInMyPAIN ? (
+                                                <ul>
+                                                    {sharedDecisionSection.ResourcesProvidedInMyPAIN.map((resource) => {
+                                                        return <li key={resource.ResourceUrl}>{resource.ResourceUrl} viewed on {this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</li>
+                                                    })
+                                                }
+                                                </ul>
+                                            ) : 'No resources recoreded.'}
+                                        </div>
                                     </div>
                                     )}
                             </Collapsible>
                         </div>
                     }
 
-                    { this.state.appConfig ? (<div className="redcap-link">
+                    {this.state.appConfig ? (<div className="redcap-link">
                         <p>To provide comments on this release of PainManager, please complete the <a
                             href={this.state.appConfig.redcapSurveyLink}
                             data-alt="CDC Guideline for Prescribing Opioids for Chronic Pain"
@@ -570,13 +583,13 @@ export default class Summary extends Component<any, any> {
                             rel="noopener noreferrer">
                             REDCap survey
                         </a>.</p>
-                    </div>) : ('') }
+                    </div>) : ('')}
 
                     {this.state.appConfig ? (<Footer key={this.state.appConfig} receiveTools={this.showTools}>{this.state.appConfig}</Footer>) : (
                         <Footer key={this.state.appConfig} receiveTools={this.showTools}></Footer>
                     )}
 
-                    
+
                     {this.state.showDevTools ? <DevTools
                         collector={collector}
                         qrCollector={qrCollector}
