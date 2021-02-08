@@ -231,7 +231,7 @@ context Patient
  */
 define function IsEncounterDiagnosis(Condition Condition):
   exists (Condition.category C where C ~ "Encounter Diagnosis code")
-    and Condition.recordedDate after Today() - 1 year
+    and (Condition.recordedDate is null or Condition.recordedDate after Today() - 1 year)
 
 /**
  * Conditions that are confirmed. In FHIR R4, this is reflected by verificationStatus: 'confirmed'.
