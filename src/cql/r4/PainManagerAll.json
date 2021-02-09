@@ -963,15 +963,21 @@
                }, {
                   "type" : "Or",
                   "operand" : [ {
-                     "type" : "IsNull",
-                     "operand" : {
+                     "type" : "Equal",
+                     "operand" : [ {
                         "path" : "recordedDate",
                         "type" : "Property",
                         "source" : {
                            "name" : "Condition",
                            "type" : "OperandRef"
                         }
-                     }
+                     }, {
+                        "asType" : "{http://hl7.org/fhir}dateTime",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        }
+                     } ]
                   }, {
                      "type" : "After",
                      "operand" : [ {
