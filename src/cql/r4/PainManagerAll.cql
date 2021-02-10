@@ -348,7 +348,7 @@ context Patient
  */
 define function IsEncounterDiagnosis(Condition Condition):
   exists (Condition.category C where C ~ "Encounter Diagnosis code")
-    and (Condition.recordedDate = null or Condition.recordedDate after Today() - 1 year)
+    and (Condition.recordedDate is null or Condition.recordedDate after Today() - 1 year)
 
 /**
  * Conditions that are confirmed. In FHIR R4, this is reflected by verificationStatus: 'confirmed'.
@@ -555,12 +555,13 @@ define function Onset(c FHIR.Condition):
 // @returns {System.DateTime} the date of the Condition's onset or when it was recorded
 define function OnsetOrRecordedDate(c FHIR.Condition):
   Coalesce( List{
-    (c.onset as FHIR.dateTime).value,
-    //Patient.birthDate + AgeToQuantity(c.onset as FHIR.Age),
-    (c.onset as FHIR.Period)."start".value,
-    //Patient.birthDate + QuantityToQuantity((c.onset as FHIR.Range)."low"),
-    c.recordedDate.value
-  }) as DateTime
+    DateTimeText(c.onset as FHIR.dateTime),
+    //DateTimeText(Patient.birthDate + AgeToQuantity(c.onset as FHIR.Age)),
+    DateTimeText((c.onset as FHIR.Period)."start"),
+    //DateTimeText(Patient.birthDate + QuantityToQuantity((c.onset as FHIR.Range)."low")),
+    DateTimeText(c.recordedDate),
+    'unknown'
+  }) as String
 
 // Returns a text representation of a Condition's abatement, whether represented as a dateTime, Period, Quantity (Age),
 // Range (Age), string, or boolean.
@@ -649,7 +650,7 @@ define MeetsInclusionCriteria:
 
 // PERTINENT MEDICAL HISTORY
 
-define function UniqueConditionReports(reports List<Tuple{Name System.String, Status System.String, Onset System.Any, DateRecorded System.String, Date System.DateTime}>):
+define function UniqueConditionReports(reports List<Tuple{Name System.String, Status System.String, Onset System.Any, DateRecorded System.String, Date System.String}>):
   (reports R return R.Name) U
     return First(reports R where R.Name = U sort by Date desc)
 
@@ -750,7 +751,7 @@ define EncounterRiskFactorsForOpioidRelatedHarms:
 // NOTE: As a convention, if an expression's name starts with "Report", its purpose is to format data for the purpose
 // of building the final summary object.
 
-define function UniqueRiskFactorReports(reports List<Tuple{Name System.String, Status System.String, Onset System.Any, DateRecorded System.String, Abatement System.Any, Visit Tuple { Start System.String, End System.String }, Date System.DateTime}>):
+define function UniqueRiskFactorReports(reports List<Tuple{Name System.String, Status System.String, Onset System.Any, DateRecorded System.String, Abatement System.Any, Visit Tuple { Start System.String, End System.String }, Date System.String}>):
   (reports R return R.Name) U
     return First(reports R where R.Name = U sort by Date desc)
 
