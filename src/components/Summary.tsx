@@ -192,7 +192,7 @@ export default class Summary extends Component<any, any> {
         if (filteredEntries.length === 0) return null;
 
         const headers = Object.keys(table.headers);
-        const sortable = table.sortable || true;
+        const sortable = table.sortable ;
         const columns: Column[] = [];
         headers.forEach((header) => {
             const headerKey = table.headers[header];
