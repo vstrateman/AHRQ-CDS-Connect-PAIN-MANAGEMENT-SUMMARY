@@ -143,15 +143,15 @@
             },
             "Date Ended": {
               "key": "End",
-              "formatter":"datishFormat"
+              "formatter": "datishFormat"
             },
             "Sig": {
               "key": "Sig",
-              "formatter":"booleanFormat"
+              "formatter": "booleanFormat"
             },
             "Status": {
               "key": "Status",
-              "formatter":"booleanFormat"
+              "formatter": "booleanFormat"
             }
           },
           "flags": [
@@ -194,15 +194,15 @@
             },
             "Date Ended": {
               "key": "End",
-              "formatter":"datishFormat"
+              "formatter": "datishFormat"
             },
             "Sig": {
               "key": "Sig",
-              "formatter":"booleanFormat"
+              "formatter": "booleanFormat"
             },
             "Status": {
               "key": "Status",
-              "formatter":"booleanFormat"
+              "formatter": "booleanFormat"
             }
           },
           "flags": [
@@ -236,14 +236,14 @@
           "headers": {
             "Treatment": "Treatment",
             "Effectiveness": "Effectiveness"
-            
           },
           "flags": [
             {
               "flag": "ifNone",
               "flagText": "Absence of self-reported treatments from MyPAIN"
             }
-          ]
+          ],
+          "sortable": false
         }
       ]
     }
@@ -275,7 +275,7 @@
               "formatter": "datishFormat"
             },
             "Result": {
-              "key":"Result",
+              "key": "Result",
               "formatter": "datishFormat"
             }
           },
@@ -321,7 +321,10 @@
         {
           "headers": {
             "Name": "Location",
-            "Pain Y/N": {"key":"PainYesNo", "formatter": "quantityFormat"},
+            "Pain Y/N": {
+              "key": "PainYesNo",
+              "formatter": "quantityFormat"
+            },
             "Description": "Description"
           },
           "flags": [
