@@ -192,6 +192,7 @@ export default class Summary extends Component<any, any> {
         if (filteredEntries.length === 0) return null;
 
         const headers = Object.keys(table.headers);
+        const sortable = table.sortable ;
         const columns: Column[] = [];
         headers.forEach((header) => {
             const headerKey = table.headers[header];
@@ -213,7 +214,7 @@ export default class Summary extends Component<any, any> {
                     return value;
                 },
                 minWidth: 150,
-                sortable: headerKey.sortable !== false
+                sortable: sortable
             };
 
             if (column.sortable && headerKey.formatter) {
@@ -264,11 +265,13 @@ export default class Summary extends Component<any, any> {
                     defaultPageSize={filteredEntries.length}
                     resizable={false}
                     getProps={() => customProps}
-                    defaultSorted={[
+                    defaultSorted={ section === 'UrineDrugScreening' ? [
                         {
                             id: 'Result',
                             desc: true
                         }
+                    ] : [
+
                     ]}
                     getTheadThProps={(state, rowInfo, column, instance) => {
 
@@ -284,19 +287,10 @@ export default class Summary extends Component<any, any> {
                         };
 
                     }}
-                // getTdProps={(state, rowInfo, column, instance) => {
-
-                //     return{
-                //         style: {
-                //             color: ((rowInfo.row['Result'] === 'Presumptive Pos') ? 'red' : 'black')
-                //             // color: ((rowInfo.row['Result'] !== 'Negative' && rowInfo.row['Result'] !== '' && rowInfo.row['Result'] !== 'Not Detected') ? 'red' : 'black')
-                //         }
-                //     }
-                // }}
                 />
             </div>
         );
-        // }
+        
 
 
     }
@@ -538,7 +532,7 @@ export default class Summary extends Component<any, any> {
                                     : (<div>
 
                                         <div className="shared-top-section">
-                                            {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on {submitDate} using the MyPAIN application</p> : ''}
+                                            {submitDate.length > 0 ? <p className='submit-date-text'>The information below was provided by the patient on <strong>{submitDate}</strong> using the MyPAIN application</p> : ''}
 
                                             <div className="activity-section">
                                                 <div className="activity-goals">
@@ -563,7 +557,7 @@ export default class Summary extends Component<any, any> {
                                             {sharedDecisionSection.ResourcesProvidedInMyPAIN ? (
                                                 <ul>
                                                     {sharedDecisionSection.ResourcesProvidedInMyPAIN.map((resource) => {
-                                                        return <li key={resource.ResourceUrl}>{resource.ResourceUrl} viewed on {this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</li>
+                                                        return <li key={resource.ResourceUrl}>{resource.ResourceUrl} viewed on <strong>{this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</strong></li>
                                                     })
                                                 }
                                                 </ul>
