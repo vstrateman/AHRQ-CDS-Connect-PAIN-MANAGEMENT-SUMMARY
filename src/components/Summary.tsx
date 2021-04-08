@@ -507,21 +507,21 @@ export default class Summary extends Component<any, any> {
 
                     {meetsInclusionCriteria &&
                         <div className="sections">
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
+                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
                                 open={false}>
                                 {this.renderSection("PertinentConditions")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
+                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
                                 open={false}>
                                 {this.renderSection("CurrentPertinentTreatments")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
+                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
                                 {this.renderSection("UrineDrugScreening")}
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
+                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
                                 {((sharedDecisionSection.ActivityGoals && sharedDecisionSection.ActivityGoals.length === 0) &&
                                     (sharedDecisionSection.ActivityBarriers && sharedDecisionSection.ActivityBarriers.length === 0) &&
                                     (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
