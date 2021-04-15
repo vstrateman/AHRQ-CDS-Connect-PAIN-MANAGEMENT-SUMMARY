@@ -42,7 +42,7 @@ export default class InfoModal extends Component<any, any> {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
-            <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
+            <p aria-label={this.props.subSection.recommendationText}><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
 
           </div>
         );
@@ -53,7 +53,7 @@ export default class InfoModal extends Component<any, any> {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
-            <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
+            <p role="cell" aria-label={this.props.subSection.recommendationText}><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
 
           </div>
         );
@@ -123,7 +123,7 @@ export default class InfoModal extends Component<any, any> {
 
     return (
       <div className={`${modalRole}-modal`}>
-        <div className="info-modal__header">
+        <div className="info-modal__header" role="alert" aria-label={`More Information for ${subSection.name}`}>
           More Information for {subSection.name}
           <FontAwesomeIcon icon="times" title="close" className="close-icon" onClick={closeModal} />
         </div>

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Collapsible from 'react-collapsible';
 import ReactTooltip from 'react-tooltip';
-import ReactTable, { Column } from 'react-table';
+import { Column } from 'react-table';
+import AccessibleReactTable from 'accessible-react-table';
 import ReactModal from 'react-modal';
 
 // import summaryMap from './summary.json';
@@ -213,6 +214,7 @@ export default class Summary extends Component<any, any> {
 
                     return value;
                 },
+                // Cell: {},
                 minWidth: 150,
                 sortable: sortable
             };
@@ -256,7 +258,7 @@ export default class Summary extends Component<any, any> {
         return (
             <div key={index} className="table" role="table"
                 aria-label={subSection.name} aria-describedby={customProps.id}>
-                <ReactTable
+                <AccessibleReactTable
                     className="sub-section__table"
                     columns={columns}
                     data={filteredEntries}
@@ -440,7 +442,7 @@ export default class Summary extends Component<any, any> {
             }
 
             return (
-                <div key={subSection.dataKey} className="sub-section h3-wrapper">
+                <div role="group" key={subSection.dataKey} className="sub-section h3-wrapper">
                     {datatable}
 
                     {!hasEntries && this.renderNoEntries(section, subSection)}
@@ -496,7 +498,7 @@ export default class Summary extends Component<any, any> {
         }
 
         return (
-            <div className="summary">
+            <main className="summary">
 
                 <div className="summary__display" id="maincontent">
                     <div className="summary__display-title">
@@ -507,21 +509,21 @@ export default class Summary extends Component<any, any> {
 
                     {meetsInclusionCriteria &&
                         <div className="sections">
-                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
+                            <Collapsible contentHiddenWhenClosed={true} triggerElementProps={{role: "sectionhead"}} tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
                                 open={false}>
                                 {this.renderSection("PertinentConditions")}
                             </Collapsible>
 
-                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "sectionhead"}} tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
                                 open={false}>
                                 {this.renderSection("CurrentPertinentTreatments")}
                             </Collapsible>
 
-                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "sectionhead"}} tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
                                 {this.renderSection("UrineDrugScreening")}
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
-                            <Collapsible contentHiddenWhenClosed={true} tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "sectionhead"}} tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
                                 {((sharedDecisionSection.ActivityGoals && sharedDecisionSection.ActivityGoals.length === 0) &&
                                     (sharedDecisionSection.ActivityBarriers && sharedDecisionSection.ActivityBarriers.length === 0) &&
                                     (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
@@ -606,7 +608,7 @@ export default class Summary extends Component<any, any> {
                             modalRole={this.state.modalRole} />
                     </ReactModal>
                 </div>
-            </div>
+            </main>
         );
     }
 }
