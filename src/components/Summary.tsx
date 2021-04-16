@@ -375,7 +375,7 @@ export default class Summary extends Component<any, any> {
 
                 datatable = (
                     <>
-                        <div>
+                        <div tabIndex={0}>
                             *Self-reported medications are listed below when patients have provided this information via
                             MyPAIN.
                         <br />
