@@ -328,7 +328,7 @@ export default class Summary extends Component<any, any> {
                             tabIndex={0}
                         />
                         <div id="opioid-title">
-                            <h3 className="opioid-name">{subSection.name}
+                            <h3 tabIndex={0} className="opioid-name">{subSection.name}
                                 {subSection.info &&
                                     <div
                                         onClick={(event) => this.handleOpenModal(subSection, event, 'info')}
@@ -364,7 +364,7 @@ export default class Summary extends Component<any, any> {
                                         tabIndex={0}
                                     /> : ''}
                                 </div>) : ('')}
-                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
+                                <span tabIndex={0}>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
                             </div>
                         </div>
 
