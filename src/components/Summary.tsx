@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Collapsible from 'react-collapsible';
 import ReactTooltip from 'react-tooltip';
-import ReactTable, { Column } from 'react-table';
+import { Column } from 'react-table';
+import AccessibleReactTable from 'accessible-react-table';
 import ReactModal from 'react-modal';
 
 // import summaryMap from './summary.json';
@@ -149,7 +150,7 @@ export default class Summary extends Component<any, any> {
                         data-role="tooltip"
                         tabIndex={0}
                     />
-                    no entries found
+                    <span tabIndex={0}>no entries found</span>
                 </div>
             </div>
         );
@@ -213,6 +214,7 @@ export default class Summary extends Component<any, any> {
 
                     return value;
                 },
+                // Cell: {},
                 minWidth: 150,
                 sortable: sortable
             };
@@ -256,7 +258,7 @@ export default class Summary extends Component<any, any> {
         return (
             <div key={index} className="table" role="table"
                 aria-label={subSection.name} aria-describedby={customProps.id}>
-                <ReactTable
+                <AccessibleReactTable
                     className="sub-section__table"
                     columns={columns}
                     data={filteredEntries}
@@ -325,8 +327,8 @@ export default class Summary extends Component<any, any> {
                             title="flag"
                             tabIndex={0}
                         />
-                        <div id="opioid-title">
-                            <h3 className="opioid-name">{subSection.name}
+                        <div className="opioid-title">
+                            <h3 tabIndex={0} className="opioid-name">{subSection.name}
                                 {subSection.info &&
                                     <div
                                         onClick={(event) => this.handleOpenModal(subSection, event, 'info')}
@@ -362,7 +364,7 @@ export default class Summary extends Component<any, any> {
                                         tabIndex={0}
                                     /> : ''}
                                 </div>) : ('')}
-                                <span>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
+                                <span tabIndex={0}>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
                             </div>
                         </div>
 
@@ -373,7 +375,7 @@ export default class Summary extends Component<any, any> {
 
                 datatable = (
                     <>
-                        <div>
+                        <div tabIndex={0}>
                             *Self-reported medications are listed below when patients have provided this information via
                             MyPAIN.
                         <br />
@@ -387,7 +389,7 @@ export default class Summary extends Component<any, any> {
                                 icon={flagged ? 'exclamation-circle' : 'circle'}
                                 title="flag"
                                 tabIndex={0} />
-                            <div id="opioid-title">
+                            <div className="opioid-title">
                                 <h3 className="opioid-name">{subSection.name}
                                     {subSection.info ? (<div
                                         onClick={(event) => this.handleOpenModal(subSection, event, 'warning')}
@@ -440,7 +442,7 @@ export default class Summary extends Component<any, any> {
             }
 
             return (
-                <div key={subSection.dataKey} className="sub-section h3-wrapper">
+                <div role="group" key={subSection.dataKey} className="sub-section h3-wrapper">
                     {datatable}
 
                     {!hasEntries && this.renderNoEntries(section, subSection)}
@@ -496,7 +498,7 @@ export default class Summary extends Component<any, any> {
         }
 
         return (
-            <div className="summary">
+            <main className="summary">
 
                 <div className="summary__display" id="maincontent">
                     <div className="summary__display-title">
@@ -507,28 +509,28 @@ export default class Summary extends Component<any, any> {
 
                     {meetsInclusionCriteria &&
                         <div className="sections">
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
+                            <Collapsible contentHiddenWhenClosed={true} triggerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
                                 open={false}>
                                 {this.renderSection("PertinentConditions")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
                                 open={false}>
                                 {this.renderSection("CurrentPertinentTreatments")}
                             </Collapsible>
 
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
                                 {this.renderSection("UrineDrugScreening")}
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
-                            <Collapsible tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
                                 {((sharedDecisionSection.ActivityGoals && sharedDecisionSection.ActivityGoals.length === 0) &&
                                     (sharedDecisionSection.ActivityBarriers && sharedDecisionSection.ActivityBarriers.length === 0) &&
                                     (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
                                     (sharedDecisionSection.PainLocations && sharedDecisionSection.PainLocations.length === 0) &&
                                     (sharedDecisionSection.PainIntensityAndInterference && sharedDecisionSection.PainIntensityAndInterference.length === 0)) ?
                                     // (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
-                                    (<div className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
+                                    (<div tabIndex={0} className="no-mypain-shared">The patient has no data from MyPAIN to display here.</div>)
                                     : (<div>
 
                                         <div className="shared-top-section">
@@ -536,16 +538,16 @@ export default class Summary extends Component<any, any> {
 
                                             <div className="activity-section">
                                                 <div className="activity-goals">
-                                                    <h3>ACTIVITY GOALS</h3>
+                                                    <h3 tabIndex={0}>ACTIVITY GOALS</h3>
                                                     {(sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]] && sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value !== null) ? <div>
                                                         <div>{sharedDecisionSection.ActivityGoals[Object.keys(sharedDecisionSection.ActivityGoals)[0]].value}</div>
-                                                    </div> : "No activity goals submitted"}
+                                                    </div> : <span tabIndex={0}>No activity goals submitted.</span>}
                                                 </div>
                                                 <div className="activity-barriers">
-                                                    <h3>ACTIVITY BARRIERS</h3>
+                                                    <h3 tabIndex={0}>ACTIVITY BARRIERS</h3>
                                                     {(sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]] && sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value !== null) ? <div>
                                                         <div>{sharedDecisionSection.ActivityBarriers[Object.keys(sharedDecisionSection.ActivityBarriers)[0]].value}</div>
-                                                    </div> : "No activity barriers submitted"}
+                                                    </div> : <span tabIndex={0}>No activity barriers submitted.</span>}
                                                 </div>
                                             </div>
                                         </div>
@@ -553,15 +555,15 @@ export default class Summary extends Component<any, any> {
                                             {this.renderSection("SharedDecisionMaking")}
                                         </div>
                                         <div className="resources-section">
-                                            <h3>RESOURCES PROVIDED IN MyPAIN:</h3>
+                                            <h3 tabIndex={0}>RESOURCES PROVIDED IN MyPAIN:</h3>
                                             {sharedDecisionSection.ResourcesProvidedInMyPAIN ? (
                                                 <ul>
                                                     {sharedDecisionSection.ResourcesProvidedInMyPAIN.map((resource) => {
-                                                        return <li key={resource.ResourceUrl}>{resource.ResourceUrl} viewed on <strong>{this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</strong></li>
+                                                        return <li tabIndex={0} key={resource.ResourceUrl}>{resource.ResourceUrl} viewed on <strong>{this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</strong></li>
                                                     })
                                                 }
                                                 </ul>
-                                            ) : 'No resources recoreded.'}
+                                            ) : <span  tabIndex={0}>No resources recoreded.</span>}
                                         </div>
                                     </div>
                                     )}
@@ -606,7 +608,7 @@ export default class Summary extends Component<any, any> {
                             modalRole={this.state.modalRole} />
                     </ReactModal>
                 </div>
-            </div>
+            </main>
         );
     }
 }

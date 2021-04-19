@@ -10,6 +10,14 @@ import Root from './containers/Root';
 
 import './styles/App.scss';
 
+const ReactDOM = require('react-dom');
+
+// disable StrictMode to use this feature for Accessibilty testing
+if (process.env.NODE_ENV !== 'production') {
+    const axe = require('@axe-core/react');
+    axe(React, ReactDOM, 1000);
+}
+
 render(
   <Router basename={process.env.PUBLIC_URL}>
     <Root />

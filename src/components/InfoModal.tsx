@@ -2,7 +2,7 @@ import Markdown from 'markdown-to-jsx';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactTable from 'react-table';
+import AccessibleReactTable from 'accessible-react-table';
 
 export default class InfoModal extends Component<any, any> {
   elementsTableProps: { id: string; };
@@ -34,7 +34,7 @@ export default class InfoModal extends Component<any, any> {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
-            <Markdown>{this.props.subSection.warningText}</Markdown>
+            <Markdown tabIndex={0}>{this.props.subSection.warningText}</Markdown>
 
           </div>
         );
@@ -42,7 +42,7 @@ export default class InfoModal extends Component<any, any> {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
-            <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
+            <p tabIndex={0} aria-label={this.props.subSection.recommendationText}><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
 
           </div>
         );
@@ -53,7 +53,7 @@ export default class InfoModal extends Component<any, any> {
         return (
           <div className="element" role="table"
             aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
-            <p><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
+            <p role="cell" tabIndex={0} aria-label={this.props.subSection.recommendationText}><Markdown>{this.props.subSection.recommendationText}</Markdown></p>
 
           </div>
         );
@@ -63,7 +63,7 @@ export default class InfoModal extends Component<any, any> {
       <div className="element" role="table"
         aria-label={elements.description} aria-describedby={this.elementsTableProps.id}>
         <h4>{elements.description}</h4>
-        <ReactTable
+        <AccessibleReactTable
           className="elements__table"
           columns={columns}
           data={tableElements}
@@ -101,7 +101,7 @@ export default class InfoModal extends Component<any, any> {
     return (
       <div className="reference" role="table"
         aria-label="References" aria-describedby={this.referencesTableProps.id}>
-        <ReactTable
+        <AccessibleReactTable
           className="elements__table"
           columns={columns}
           data={data}
@@ -123,14 +123,14 @@ export default class InfoModal extends Component<any, any> {
 
     return (
       <div className={`${modalRole}-modal`}>
-        <div className="info-modal__header">
+        <div tabIndex={0} className="info-modal__header" role="alert" aria-label={`More Information for ${subSection.name}`}>
           More Information for {subSection.name}
           <FontAwesomeIcon icon="times" title="close" className="close-icon" onClick={closeModal} />
         </div>
 
         <div className="info-modal__body">
           {elements != null &&
-            <div className="elements">
+            <div tabIndex={0} className="elements">
               {this.renderElements(elements)}
             </div>
           }
