@@ -134,7 +134,7 @@ export default class Summary extends Component<any, any> {
                         size="2x"
                         tabIndex={0}
                     />
-                    <Markdown>{this.props.summary['UrineDrugScreening'].Recommendation10Text}</Markdown>
+                    <Markdown tabIndex={0}>{this.props.summary['UrineDrugScreening'].Recommendation10Text}</Markdown>
                 </div>
             );
         }
@@ -193,7 +193,7 @@ export default class Summary extends Component<any, any> {
         if (filteredEntries.length === 0) return null;
 
         const headers = Object.keys(table.headers);
-        const sortable = table.sortable ;
+        const sortable = table.sortable;
         const columns: Column[] = [];
         headers.forEach((header) => {
             const headerKey = table.headers[header];
@@ -267,7 +267,7 @@ export default class Summary extends Component<any, any> {
                     defaultPageSize={filteredEntries.length}
                     resizable={false}
                     getProps={() => customProps}
-                    defaultSorted={ section === 'UrineDrugScreening' ? [
+                    defaultSorted={section === 'UrineDrugScreening' ? [
                         {
                             id: 'Result',
                             desc: true
@@ -292,7 +292,7 @@ export default class Summary extends Component<any, any> {
                 />
             </div>
         );
-        
+
 
 
     }
@@ -323,29 +323,27 @@ export default class Summary extends Component<any, any> {
                     <div id={subSection.dataKey} className="sub-section__header">
                         <FontAwesomeIcon
                             className={'flag flag-nav ' + flaggedClass}
-                            icon={flagged ? 'exclamation-circle' : 'circle'}
+                            icon={flagged ? 'exclamation-circle' : 'info-circle'}
                             title="flag"
                             tabIndex={0}
                         />
                         <div className="opioid-title">
                             <h3 tabIndex={0} className="opioid-name">{subSection.name}
                                 {subSection.info &&
-                                    <div
+                                    subSection.recommendationText ? <div
                                         onClick={(event) => this.handleOpenModal(subSection, event, 'info')}
                                         onKeyDown={(event) => this.handleOpenModal(subSection, event, 'info')}
                                         role="button"
                                         tabIndex={0}
                                         aria-label={subSection.name}>
-                                        {subSection.recommendationText ? <FontAwesomeIcon
-                                            className='info-icon'
-                                            icon="info-circle"
-                                            title={'more info: ' + subSection.name}
-                                            data-tip="more info"
-                                            role="tooltip"
-                                            tabIndex={0}
-                                        /> : ''}
-                                    </div>
-                                }
+                                    <FontAwesomeIcon
+                                        className='info-icon'
+                                        icon="info-circle"
+                                        title={'more info: ' + subSection.name}
+                                        data-tip="more info"
+                                    />
+                                </div> : ''}
+
                             </h3>
                             <div className="total-mme-link">
                                 <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/url?q=http://build.fhir.org/ig/cqframework/opioid-mme-r4/Library-MMECalculator.html&sa=D&ust=1603413553690000&usg=AFQjCNHoWmeK3G7VrDkxD7MeJI6A3syYYA"> Total MME/Day: </a>
@@ -360,8 +358,6 @@ export default class Summary extends Component<any, any> {
                                         icon="exclamation-circle"
                                         title={'warning: ' + subSection.name}
                                         data-tip="warning"
-                                        role="tooltip"
-                                        tabIndex={0}
                                     /> : ''}
                                 </div>) : ('')}
                                 <span tabIndex={0}>{this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result !== null ? this.props.summary.CurrentPertinentTreatments.CurrentMME[0].Result : "N/A"}</span>
@@ -371,17 +367,17 @@ export default class Summary extends Component<any, any> {
 
                     </div>)
             } else if (subSection.dataKey === 'NonOpioidMedications') {
-                subSection.recommendationText = (this.props.summary.CurrentPertinentTreatments.Recommendation11Text || null);
+                subSection.recommendationText = (<span tabIndex={0}>{this.props.summary.CurrentPertinentTreatments.Recommendation11Text}</span> || null);
 
                 datatable = (
                     <>
-                        <div tabIndex={0}>
-                            *Self-reported medications are listed below when patients have provided this information via
-                            MyPAIN.
-                        <br />
-                            *Active prescriptions do not include locally compounded medications.
-                        <br />
-                            <h3> ACTIVE PRESCRIPTIONS</h3>
+                        <div>
+                            <p tabIndex={0}>*Self-reported medications are listed below when patients have provided this information via
+                            MyPAIN.</p>
+
+                            <p tabIndex={0}>*Active prescriptions do not include locally compounded medications.</p>
+
+                            <h3 tabIndex={0}> ACTIVE PRESCRIPTIONS</h3>
                         </div>
                         <div id={subSection.dataKey} className="sub-section__header">
                             <FontAwesomeIcon
@@ -397,13 +393,11 @@ export default class Summary extends Component<any, any> {
                                         role="button"
                                         tabIndex={0}
                                         aria-label={subSection.name}>
-                                        {subSection.recommendationText ? <FontAwesomeIcon
+                                        {subSection.warningText ? <FontAwesomeIcon
                                             className='warning-icon'
                                             icon="exclamation-circle"
                                             title={'warning: ' + subSection.name}
-                                            data-tip="warning"
-                                            role="tooltip"
-                                            tabIndex={0} /> : ''}
+                                            data-tip="warning" /> : ''}
                                     </div>) : ('')}
                                 </h3>
                             </div>
@@ -413,31 +407,30 @@ export default class Summary extends Component<any, any> {
                     </>)
             } else {
                 datatable = (<div id={subSection.dataKey} className="sub-section__header">
-                    <FontAwesomeIcon
+                    {/* <FontAwesomeIcon
                         className={'flag flag-nav ' + flaggedClass}
                         icon={flagged ? 'exclamation-circle' : 'circle'}
                         title="flag"
                         tabIndex={0}
-                    />
-                    <h3>{subSection.name}</h3>
+                    /> */}
+                    <h3 tabIndex={0}>{subSection.name}</h3>
 
                     {subSection.info &&
+                        subSection.recommendationText ?
                         <div
                             onClick={(event) => this.handleOpenModal(subSection, event, 'info')}
                             onKeyDown={(event) => this.handleOpenModal(subSection, event, 'info')}
                             role="button"
                             tabIndex={0}
                             aria-label={subSection.name}>
-                            {subSection.recommendationText ? <FontAwesomeIcon
+                            <FontAwesomeIcon
                                 className='info-icon'
                                 icon="info-circle"
                                 title={'more info: ' + subSection.name}
                                 data-tip="more info"
-                                role="tooltip"
-                                tabIndex={0}
-                            /> : ''}
-                        </div>
-                    }
+                            />
+                        </div> : ''}
+
                 </div>)
             }
 
@@ -509,21 +502,21 @@ export default class Summary extends Component<any, any> {
 
                     {meetsInclusionCriteria &&
                         <div className="sections">
-                            <Collapsible contentHiddenWhenClosed={true} triggerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
+                            <Collapsible contentHiddenWhenClosed={true} triggerElementProps={{ role: "group" }} tabIndex={0} trigger={this.renderSectionHeader("PertinentConditions")}
                                 open={false}>
                                 {this.renderSection("PertinentConditions")}
                             </Collapsible>
 
-                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{ role: "group" }} tabIndex={0} trigger={this.renderSectionHeader("CurrentPertinentTreatments")}
                                 open={false}>
                                 {this.renderSection("CurrentPertinentTreatments")}
                             </Collapsible>
 
-                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{ role: "group" }} tabIndex={0} trigger={this.renderSectionHeader("UrineDrugScreening")} open={summary.UrineDrugScreening.Recommendation10Text ? true : false}>
                                 {this.renderSection("UrineDrugScreening")}
                             </Collapsible>
                             {/* If there is Shared Decision Making data, default below to open, else Pertinent Medical History is open on launch */}
-                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{role: "group"}} tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
+                            <Collapsible contentHiddenWhenClosed={true} containerElementProps={{ role: "group" }} tabIndex={0} trigger={this.renderSectionHeader("SharedDecisionMaking")} open={true}>
                                 {((sharedDecisionSection.ActivityGoals && sharedDecisionSection.ActivityGoals.length === 0) &&
                                     (sharedDecisionSection.ActivityBarriers && sharedDecisionSection.ActivityBarriers.length === 0) &&
                                     (sharedDecisionSection.MyPAINSubmitDate && sharedDecisionSection.MyPAINSubmitDate.length === 0) &&
@@ -561,9 +554,9 @@ export default class Summary extends Component<any, any> {
                                                     {sharedDecisionSection.ResourcesProvidedInMyPAIN.map((resource) => {
                                                         return <li tabIndex={0} key={resource.ResourceUrl}>{resource.ResourceUrl} viewed on <strong>{this.formatitHelper.dateFormat('datishFormat ', resource.ViewedOn)}</strong></li>
                                                     })
-                                                }
+                                                    }
                                                 </ul>
-                                            ) : <span  tabIndex={0}>No resources recoreded.</span>}
+                                            ) : <span tabIndex={0}>No resources recoreded.</span>}
                                         </div>
                                     </div>
                                     )}

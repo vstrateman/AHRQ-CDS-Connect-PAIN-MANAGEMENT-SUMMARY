@@ -229,9 +229,6 @@ main {
                 font-weight: 600;
                 border: 0;
                 cursor: pointer;
-                &:focus {
-                    outline: none;
-                }
             }
             .cql-errors,
             .fhir-queries,
