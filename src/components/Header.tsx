@@ -12,7 +12,7 @@ export default class Header extends Component {
           <span className="header__logo-text"></span>
         </div>
         <div className="header-notice">
-          <p role="note">NOTE:  This summary is not intended for patients who are undergoing end-of-life care (hospice or palliative) or active cancer treatment.</p>
+          <p tabIndex={0} role="note">NOTE:  This summary is not intended for patients who are undergoing end-of-life care (hospice or palliative) or active cancer treatment.</p>
         </div>
       </header>
     );

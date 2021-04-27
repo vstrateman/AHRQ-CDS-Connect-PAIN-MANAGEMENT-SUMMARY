@@ -125,7 +125,7 @@ export default class InfoModal extends Component<any, any> {
       <div className={`${modalRole}-modal`}>
         <div tabIndex={0} className="info-modal__header" role="alert" aria-label={`More Information for ${subSection.name}`}>
           More Information for {subSection.name}
-          <FontAwesomeIcon icon="times" title="close" className="close-icon" onClick={closeModal} />
+          <FontAwesomeIcon icon="times" title="close" aria-label="Close" className="close-icon" onClick={closeModal} />
         </div>
 
         <div className="info-modal__body">

@@ -84,10 +84,10 @@ main {
             background-color: $color-blue;
             color: $color-white;
             text-align: center;
-            font-size: 1.5em;
             font-weight: 600;
             padding: 15px;
             margin-bottom: 4px;
+            margin-top: 0;
             svg {
                 margin-right: 20px;
             }
@@ -293,6 +293,7 @@ main {
 .shared-top-section {
     margin: 20px
 }
+
 .activity-section {
     display: flex;
     justify-content: center;
@@ -311,17 +312,14 @@ main {
     flex-wrap: wrap;
     .sub-section {
         width: 47%;
-        // .table {
-            // width: 50%;
-        // }
     }
 }
+
 .resources-section {
     margin: 20px;
 }
 
 .no-mypain-shared {
-    // display: flex;
     text-align: center;
     margin: 2rem 0;
 }

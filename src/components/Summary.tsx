@@ -491,12 +491,12 @@ export default class Summary extends Component<any, any> {
         }
 
         return (
-            <main className="summary">
+            <main role="main" className="summary">
 
                 <div className="summary__display" id="maincontent">
-                    <div className="summary__display-title">
+                    <h1 className="summary__display-title">
                         Factors to Consider in Managing Chronic Pain
-                    </div>
+                    </h1>
 
                     {!meetsInclusionCriteria && <InclusionBanner dismissible={meetsInclusionCriteria} />}
 
