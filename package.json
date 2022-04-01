@@ -5,9 +5,9 @@
   "homepage": "https://cloud.alphora.com/rti/pain-manager",
   "license": "Apache-2.0",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.26",
-    "@fortawesome/free-solid-svg-icons": "^5.12.0",
-    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
