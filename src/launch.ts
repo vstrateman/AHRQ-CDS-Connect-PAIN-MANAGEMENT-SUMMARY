@@ -4,6 +4,7 @@ require('fetch-everywhere');
 
 fetch(process.env.PUBLIC_URL + '/launch-context.json')
   .then(function (response) {
+    console.log('this is a test');
     return response.json()
   }).then(function (launchContext) {
     return FHIR.oauth2.authorize(launchContext);

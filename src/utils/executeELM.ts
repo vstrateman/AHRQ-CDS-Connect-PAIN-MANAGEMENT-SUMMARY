@@ -26,6 +26,7 @@ let cqlFhirModule: any = cqlfhir;
 function executeELM(collector: any) {
     let client: any, release: any, library: any;
     return new Promise((resolve: any) => {
+        console.log('In executeELM');
         // First get our authorized client and send the FHIR release to the next step
         const results = FHIR.oauth2.ready().then((clientArg) => {
             client = clientArg;

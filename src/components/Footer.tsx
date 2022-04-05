@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 // import summaryMap from './summary.json';
 import pkg from '../../package.json'
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 
 export default class Footer extends Component<any, any> {
@@ -35,7 +36,7 @@ export default class Footer extends Component<any, any> {
                 //     <p>This SGL version of PainManager does not support linking out from the application. If you need more information about the CDC Opioid Guideline referenced here, please visit: [<span>{this.appConfig.CDCLink}</span>].</p>
             //     <p> To provide comments on this release or PainManager, please complete this REDCap survey: [<span>{this.appConfig.redcapSurveyLink}</span>].</p>
             // </div> */}
-            <FontAwesomeIcon icon={faPlus} size="2x" title="toggle" className="dev-tools-icon" onClick={this.handleDevTools} />
+            <FontAwesomeIcon icon={faPlus as IconProp} size="2x" title="toggle" className="dev-tools-icon" onClick={this.handleDevTools} />
         </footer>
 
     }

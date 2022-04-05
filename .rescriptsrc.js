@@ -19,6 +19,7 @@ const path = require('path');
 //   }
 // In development, it is similar, but each array also contains a Webpack hotloader.
 const addLaunch = function (config) {
+    console.log('in rescript at the beginning');
   return edit(
     function (entries) {
       if (!Array.isArray(entries) || entries.filter(function (e) {
@@ -30,6 +31,8 @@ const addLaunch = function (config) {
       return {
         main: entries,
         launch: entries.map(function (e) {
+            console.log('in rescript replacing index.tsx');
+            console.log('e == ' + e.replace(/[\/\\]index.tsx$/, path.sep + 'launch.ts'));
             return e.replace(/[\/\\]index.tsx$/, path.sep + 'launch.ts');
           })
       };
