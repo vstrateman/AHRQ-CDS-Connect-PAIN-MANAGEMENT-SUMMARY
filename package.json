@@ -2,7 +2,7 @@
   "name": "pain-management-factors",
   "version": "0.4.17",
   "description": "Pain Management Factors SMART-on-FHIR App",
-  "homepage": "https://cloud.alphora.com/rti/pain-manager",
+  "homepage": "http://cloud.localhost/rti/pain-manager",
   "license": "Apache-2.0",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
