@@ -2,7 +2,7 @@ import './helpers/polyfill';
 import FHIR from 'fhirclient';
 require('fetch-everywhere');
 
-fetch(process.env.PUBLIC_URL + '/launch-context.json')
+fetch(process.env.REACT_APP_PUBLIC_URL + '/launch-context.json')
   .then(function (response) {
     return response.json()
   }).then(function (launchContext) {

@@ -11,7 +11,7 @@ import Root from './containers/Root';
 import './styles/App.scss';
 
 render(
-  <Router basename={process.env.PUBLIC_URL}>
+  <Router basename={process.env.REACT_APP_PUBLIC_URL}>
     <Root />
   </Router>,
   document.getElementById('root')

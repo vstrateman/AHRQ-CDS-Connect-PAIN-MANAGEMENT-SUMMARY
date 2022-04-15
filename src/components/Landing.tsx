@@ -191,7 +191,7 @@ export default class Landing extends Component<any, any> {
         });
 
         // Get the configured endpoint to use for POST for app analytics
-        fetch(process.env.PUBLIC_URL + '/config.json')
+        fetch(process.env.REACT_APP_PUBLIC_URL + '/config.json')
             .then((response: any) => {
                 return response.json();
             })

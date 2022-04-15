@@ -8,7 +8,7 @@ export default class Header extends Component {
     return (
       <header className="header">
         <div className="header__logo">
-          <img className="header__logo-img" src={`${process.env.PUBLIC_URL}/assets/images/Pain_Manager_LOGO.jpg`} alt="" />
+          <img className="header__logo-img" src={`${process.env.REACT_APP_PUBLIC_URL}/assets/images/Pain_Manager_LOGO.jpg`} alt="" />
           <span className="header__logo-text"></span>
         </div>
         <div className="header-notice">

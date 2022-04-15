@@ -48,7 +48,7 @@ export default class Summary extends Component<any, any> {
             this.setState({ appConfig })
         } else {
 
-            fetch(process.env.PUBLIC_URL + '/config.json')
+            fetch(process.env.REACT_APP_PUBLIC_URL + '/config.json')
                 .then((response: any) => { return response.json() })
                 .then((config: any) => {
                     this.setState({ appConfig: config })

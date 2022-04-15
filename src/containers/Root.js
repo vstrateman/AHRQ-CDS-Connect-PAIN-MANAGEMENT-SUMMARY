@@ -3,12 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import App from './App';
 import Landing from '../components/Landing';
-
-let pathPrefix = '';
-if (process.env.REACT_APP_PUBLIC_URL) {
-    const publicUrl = new URL(process.env.REACT_APP_PUBLIC_URL);
-    pathPrefix = publicUrl.pathname;
-}
+import pathPrefix from '../helpers/pathPrefix';
 
 const Root = (props) => {
   return (
